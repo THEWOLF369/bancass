@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d647594-2223-4a62-870d-64ab531ac223">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="253"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="numplc" class="java.lang.String"/>
+	<parameter name="numprop" class="java.lang.String"/>
+	<parameter name="nomclt" class="java.lang.String"/>
+	<parameter name="prenomclt" class="java.lang.String"/>
+	<parameter name="identifiant" class="java.lang.String"/>
+	<parameter name="duree" class="java.lang.String"/>
+	<parameter name="effDate" class="java.lang.String"/>
+	<parameter name="datefin" class="java.lang.String"/>
+	<parameter name="Mntbourse" class="java.lang.String"/>
+	<parameter name="Agesevice" class="java.lang.String"/>
+	<parameter name="Durservice" class="java.lang.String"/>
+	<parameter name="Dateservice" class="java.lang.String"/>
+	<parameter name="PrmEpargneb" class="java.lang.String"/>
+	<parameter name="PrmDecb" class="java.lang.String"/>
+	<parameter name="FraisinscON" class="java.lang.String"/>
+	<parameter name="Mtfrais" class="java.lang.String"/>
+	<parameter name="Mtpepargnfrais" class="java.lang.String"/>
+	<parameter name="Mtpdecfrais" class="java.lang.String"/>
+	<parameter name="RenteON" class="java.lang.String"/>
+	<parameter name="Mtrente" class="java.lang.String"/>
+	<parameter name="Mtrentedeces" class="java.lang.String"/>
+	<parameter name="Prmnetepargne" class="java.lang.String"/>
+	<parameter name="Prmnetdeces" class="java.lang.String"/>
+	<parameter name="Totprmnet" class="java.lang.String"/>
+	<parameter name="frais" class="java.lang.String"/>
+	<parameter name="Prmtot" class="java.lang.String"/>
+	<parameter name="ville_agence" class="java.lang.String"/>
+	<parameter name="datasource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="report" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="261" splitType="Stretch">
+			<image>
+				<reportElement uuid="22d6bbcf-b527-49bb-ba3c-4ff917d89cde" x="426" y="3" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="68f209ed-2708-4949-b3a2-583c17ef50e5" x="155" y="76" width="219" height="32"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Devis Avenir Jeunesse]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5d2fb5e4-943e-4df6-8576-f0fb08fd2bfa" x="238" y="105" width="95" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numplc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5052615c-2864-421d-af72-d2ef0bd2de4f" x="184" y="105" width="54" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Police :  ]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="aa7c4ea6-c64a-4b42-93a4-08464b0fab7d" x="10" y="3" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9eab8f45-6f8f-458f-8845-141b355a70e6" x="286" y="-121" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{numprop}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="11756d61-8c24-47ff-b3d6-c721502b3462" x="10" y="-81" width="40" height="20"/>
+				<textElement markup="none">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0b03fd2c-9664-4244-9906-3f069f5d16e1" x="10" y="-41" width="89" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'effet :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cbc24cf6-2c6d-45d2-903d-b31820b8632c" x="290" y="-41" width="65" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Fin :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="74d57d7d-e587-4533-87b5-a15d816f7376" x="50" y="-81" width="240" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f81e2cd7-d79a-4e2f-9b05-4fd5b38ad5a7" x="290" y="-61" width="65" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="77748572-49d0-4d34-8e05-d0a752aa1733" x="357" y="-61" width="168" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{duree}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6db77ba5-3072-4e05-a4c1-40a87406c19b" x="357" y="-39" width="100" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datefin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b48ef3fd-0c12-451a-b2d7-715f18193a72" x="290" y="-81" width="67" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prenom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a22f0ff8-e467-4a7c-84dc-c31df623b080" x="10" y="-61" width="89" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identifiant :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4de26b48-d2db-4d97-9ea0-87e15e903bde" x="184" y="-121" width="102" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposition n°:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c931b0d7-8b06-4f2b-a05c-718bb48580c0" x="357" y="-81" width="168" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prenomclt}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="4a755a5a-8e9d-45bb-8fcf-daa9c5496f87" x="99" y="-60" width="135" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{identifiant}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="0abd42d9-98ea-40f7-9520-21be8067492c" x="99" y="-39" width="133" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{effDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="313">
+			<staticText>
+				<reportElement uuid="5058dbfb-8fe8-4254-a68b-9140dc408bed" x="6" y="193" width="157" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Rente Immédiate T. Décès ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="9c75d5f8-4d65-43a7-9232-83c30c8ef2c3" x="0" y="49" width="554" height="26"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="9874e6f8-35b7-4b13-82c7-8a51507e2d73" x="1" y="128" width="553" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="9c04a56e-f386-4625-baab-3e23add77158" x="16" y="161" width="146" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Frais d’inscription cible]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7c1d9482-e965-42fd-9ac1-051fd6a84ca6" x="458" y="193" width="95" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Mtrentedeces}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="daf50738-92ae-4e21-8190-9cece4925663" x="459" y="49" width="1" height="51"/>
+			</line>
+			<textField>
+				<reportElement uuid="a0553c0c-49d3-4dc4-96f7-ae276d16dad7" x="458" y="164" width="93" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Mtpdecfrais}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="3f1b0132-9553-479d-9afd-fa3cdbafa555" x="356" y="49" width="1" height="51"/>
+			</line>
+			<line>
+				<reportElement uuid="eb798b8a-508b-4693-8419-3f81f1e40b30" x="70" y="49" width="1" height="52"/>
+			</line>
+			<line>
+				<reportElement uuid="6a3a8755-25ad-4327-b8da-6da3f3d86b8e" x="167" y="50" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement uuid="f92029dd-5293-44eb-b95e-375ff599c568" x="259" y="129" width="1" height="91"/>
+			</line>
+			<textField>
+				<reportElement uuid="292596be-4783-4a83-afff-42e509df6999" x="261" y="80" width="95" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{Dateservice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1906ccb6-c02e-45c7-bb0c-056c7ee3b0d5" x="462" y="80" width="89" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrmDecb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2b22a225-ee92-4575-8f35-7d157d3fd88f" x="73" y="80" width="91" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{Agesevice}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fe109062-c74f-4770-ab89-890b54bf4471" x="352" y="128" width="105" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Epargne]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="46545add-beab-49fc-80be-722ccec73d69" x="359" y="80" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrmEpargneb}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3bccdca3-1c0c-4244-9f4d-18b89fae778d" x="7" y="101" width="432" height="27"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Garanties Complémentaires :                  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="82d203fb-c07a-4876-9db4-e631991bb319" x="170" y="80" width="91" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{Durservice}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9994b0cb-4691-4c07-a811-9399bd587419" x="71" y="49" width="96" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Age de service de la Bourse ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c0d9466a-bcd8-45c3-8473-d1417de227d6" x="3" y="80" width="67" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Mntbourse}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="e154ef0a-3e19-43fb-b2ae-b5a5a84c4c43" x="554" y="75" width="1" height="145"/>
+			</line>
+			<line>
+				<reportElement uuid="eed9a634-6418-4b16-8f43-90d546e6c8f4" x="1" y="220" width="553" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="393d141c-ec32-41ef-9080-341f92a4a126" x="262" y="49" width="93" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date de service de la 1ère Bourse]]></text>
+			</staticText>
+			<frame>
+				<reportElement uuid="ddd3ae74-8285-42a3-974e-5c280de86854" mode="Opaque" x="1" y="235" width="553" height="58" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+			</frame>
+			<line>
+				<reportElement uuid="4b8c9b99-5ab3-40b3-93f3-a6e58b9806b1" x="351" y="130" width="1" height="90"/>
+			</line>
+			<staticText>
+				<reportElement uuid="724a6791-6280-4105-982d-e24fd53d4e4a" x="460" y="51" width="95" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Décès]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="29b1ee4a-ab0b-49c4-8f6f-777f4b787150" x="7" y="265" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Prmnetepargne}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="a758dda5-47a1-44f4-a7f3-cce05c34aab4" x="1" y="189" width="553" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="e29310d5-389d-4bb8-b28c-d92386b28e2f" x="270" y="164" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Mtfrais}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a9b2e88a-57af-4eea-a290-d2a722e7c1a4" mode="Opaque" x="0" y="0" width="554" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ Garanties et Primes:                                                                      ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="57167e0e-d329-4555-9293-ccf90738faba" x="457" y="128" width="1" height="93"/>
+			</line>
+			<textField>
+				<reportElement uuid="e22f94fb-5555-4dd8-92c0-8e49a3aa0acf" x="270" y="193" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Mtrente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e3f705c-8562-4fe7-ae69-7172ef1cb644" x="355" y="164" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Mtpepargnfrais}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9fa6566e-83b1-4909-8733-0e1272ac2818" x="261" y="129" width="90" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Montant Rente ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="66c1232e-8aa1-4e0c-9779-55a7a8d26ae9" x="0" y="50" width="71" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bourse Cible ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2a5c2d4e-4c64-490d-aef4-702f85f2ec14" x="170" y="129" width="91" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Souscription   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f8824021-fcc1-4d1f-b69c-bff93278a644" mode="Transparent" x="4" y="235" width="108" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Epargne]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="aaf5f824-fbf6-49b9-b024-38e301bf3757" x="245" y="265" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Totprmnet}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7f9c229d-765e-4f12-8371-d328e3881175" x="358" y="49" width="100" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Epargne]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="0bf24203-167e-4fda-844c-1e0340f60424" x="169" y="164" width="91" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{FraisinscON}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cf905a13-311e-4259-b007-77f0e025b043" x="169" y="193" width="91" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{RenteON}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9e697ea7-da66-4517-a161-2ea0649451b2" x="169" y="49" width="90" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée de service de la bourse]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="09d03788-9a13-49e6-970e-77d777aabac9" x="1" y="160" width="554" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="a73e61d6-aed2-49cc-9b8a-322b0f777b9b" x="0" y="100" width="552" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="0e9ad3f7-84ee-48f1-bc12-cb7eeec3078b" x="170" y="130" width="1" height="90"/>
+			</line>
+			<staticText>
+				<reportElement uuid="becac75f-6b1f-45d3-90f7-5329f8abd146" x="457" y="129" width="96" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Décès]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a3e58652-bf69-496b-b0aa-7384bc600318" x="130" y="25" width="110" height="24"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Bourse d'étude]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="ff37b297-627b-45a1-a794-68680aa592f5" x="260" y="50" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement uuid="d8a7371f-f128-4546-82c6-d49de5ca98f5" x="0" y="76" width="1" height="144"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="1f304616-b036-4154-8e40-64a96e77f9cf" x="0" y="25" width="554" height="24"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="c2199c42-cabd-482b-b896-bad805a54a1a" x="3" y="264" width="551" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="7f922133-5e94-49ec-987d-586678a7be17" x="460" y="265" width="91" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Prmtot}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="dd686827-3850-4576-affc-55d898895018" x="230" y="235" width="1" height="58"/>
+			</line>
+			<line>
+				<reportElement uuid="df28c1f5-634b-4a7d-8082-736f9221dd76" x="363" y="235" width="1" height="58"/>
+			</line>
+			<staticText>
+				<reportElement uuid="342afa11-e83c-49c5-95b0-32bc4fe956f4" x="4" y="25" width="130" height="24"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Garantie de base :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2cf2c823-23b6-44f8-a8c2-8a5e6b7eff71" x="365" y="235" width="90" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Frais du contrat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7b3ae269-d3b3-4225-ad22-a933ed73263d" x="230" y="235" width="133" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Prime nette]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6341e85e-d423-4aa7-9b1f-99f22661c7d2" x="364" y="265" width="91" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{frais}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="83e3bf7c-4082-4f36-be9f-87ae32676d2c" x="112" y="235" width="1" height="58"/>
+			</line>
+			<line>
+				<reportElement uuid="7d4ead2f-6478-4a14-ad68-4e62bed7c97c" x="455" y="235" width="1" height="58"/>
+			</line>
+			<staticText>
+				<reportElement uuid="593e4b67-6c19-4fe1-b455-5eb294752b19" x="456" y="235" width="95" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime Totale
+TTC
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="8d37ec88-486b-4488-9986-61d253a6c3d4" x="119" y="265" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Prmnetdeces}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="7e2f5218-d127-43b9-bb14-a3e505d8cb2a" x="113" y="235" width="117" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Décès]]></text>
+			</staticText>
+			<break>
+				<reportElement uuid="3e7b5d39-fa47-4c1c-a645-532e6d868613" x="0" y="301" width="100" height="1"/>
+			</break>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement uuid="0aa68688-fa45-4503-b14e-cce92572de7a" x="-15" y="0" width="585" height="50"/>
+				<subreportParameter name="imagesociete">
+					<subreportParameterExpression><![CDATA[$P{imagesociete}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="star">
+					<subreportParameterExpression><![CDATA[$P{star}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ville_agence">
+					<subreportParameterExpression><![CDATA[$P{ville_agence}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="datasource">
+					<subreportParameterExpression><![CDATA[$P{datasource}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{report}+"Proposition_avj_evol_gar.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement uuid="c5725adb-9cfb-4a63-8f7f-a1e1619a4095" x="431" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="912c3a6b-1f59-4c80-8cf0-5f01f3a38e5f" x="511" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

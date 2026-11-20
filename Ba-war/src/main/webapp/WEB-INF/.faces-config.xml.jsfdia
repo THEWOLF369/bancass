@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{login.connexion()}:#sec#acceil.xhtml" NAME="output"
+    PATH="/sec/acceil.xhtml" TARGET="rules:#sec#acceil.xhtml"
+    TITLE="#{login.connexion()}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="success:#{login.deconnexion()}:#index.xhtml"
+    NAME="output1" PATH="/index.xhtml" TARGET="rules:#index.xhtml"
+    TITLE="#{login.deconnexion()}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{devisBean.calculTarif()}:#sec#tarifTD.xhtml"
+    NAME="output2" PATH="/sec/tarifTD.xhtml"
+    TARGET="rules:#sec#tarifTD.xhtml"
+    TITLE="#{devisBean.calculTarif()}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{devisIncendieBean.calculTarif()}:#sec#TarifInc.xhtml"
+    NAME="output3" PATH="/sec/TarifInc.xhtml"
+    TARGET="rules:#sec#TarifInc.xhtml"
+    TITLE="#{devisIncendieBean.calculTarif()}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{devisBean.newDevis()}:#sec#Devis.xhtml" NAME="output4"
+    PATH="/sec/Devis.xhtml" TARGET="rules:#sec#Devis.xhtml"
+    TITLE="#{devisBean.newDevis()}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{devisBean.client()}:#sec#client11.xhtml"
+    NAME="output5" PATH="/sec/client11.xhtml"
+    TARGET="rules:#sec#client11.xhtml"
+    TITLE="#{devisBean.client()}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="assistanceVoyage::#sec#devis_Assistantvoyage.xhtml"
+    NAME="output8" PATH="/sec/devis_Assistantvoyage.xhtml"
+    TARGET="rules:#sec#devis_Assistantvoyage.xhtml"
+    TITLE="assistanceVoyage" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="devisAvenirJeunesse::#sec#devisAvenirJeunesse.xhtml"
+    NAME="output6" PATH="/sec/devisAvenirJeunesse.xhtml"
+    TARGET="rules:#sec#devisAvenirJeunesse.xhtml"
+    TITLE="devisAvenirJeunesse" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="devisAssistantvoyage:#{assistanceVoiyageController.returnToDevisAssistance()}:#sec#devis_Assistantvoyage.xhtml"
+    NAME="output9" PATH="/sec/devis_Assistantvoyage.xhtml"
+    TARGET="rules:#sec#devis_Assistantvoyage.xhtml"
+    TITLE="#{assistanceVoiyageController.returnToDevisAssistance()}:devisAssistantvoyage" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="devisAssistantvoyage:#{assistanceVoiyageController.navigateToDevisAssistanceVoiyage()}:#sec#devis_Assistantvoyage.xhtml"
+    NAME="output10" PATH="/sec/devis_Assistantvoyage.xhtml"
+    TARGET="rules:#sec#devis_Assistantvoyage.xhtml"
+    TITLE="#{assistanceVoiyageController.navigateToDevisAssistanceVoiyage()}:devisAssistantvoyage" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="devisIncendieTD:#{devisIncendieBean.navigateToDevisIncendie()}:#sec#DevisIncendie.xhtml"
+    NAME="output7" PATH="/sec/DevisIncendie.xhtml"
+    TARGET="rules:#sec#DevisIncendie.xhtml"
+    TITLE="#{devisIncendieBean.navigateToDevisIncendie()}:devisIncendieTD" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="true:#{devisBean.navigateToDevisTd()}:#sec#Devis.xhtml"
+    NAME="output11" PATH="/sec/Devis.xhtml"
+    TARGET="rules:#sec#Devis.xhtml"
+    TITLE="#{devisBean.navigateToDevisTd()}:true" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="devisIncendie:#{tarifIncBean.returnToDevisInced()}:#sec#DevisIncendie.xhtml"
+    NAME="output12" PATH="/sec/DevisIncendie.xhtml"
+    TARGET="rules:#sec#DevisIncendie.xhtml"
+    TITLE="#{tarifIncBean.returnToDevisInced()}:devisIncendie" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="devisAssistantvoyage:#{tariftdBean.returnToDevisAssistance()}:#sec#devis_Assistantvoyage.xhtml"
+    NAME="output13" PATH="/sec/devis_Assistantvoyage.xhtml"
+    TARGET="rules:#sec#devis_Assistantvoyage.xhtml"
+    TITLE="#{tariftdBean.returnToDevisAssistance()}:devisAssistantvoyage" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{mrhBean.newDevis()}:#sec#mrh.xhtml" NAME="output14"
+    PATH="/sec/mrh.xhtml" TARGET="rules:#sec#mrh.xhtml"
+    TITLE="#{mrhBean.newDevis()}:success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="304,337,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#tarifTD.xhtml" PATH="/sec/tarifTD.xhtml"
+  SHAPE="272,209,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#Devis.xhtml" PATH="/sec/Devis.xhtml"
+  SHAPE="288,353,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#client11.xhtml"
+  PATH="/sec/client11.xhtml" SHAPE="304,385,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#TarifInc.xhtml"
+  PATH="/sec/TarifInc.xhtml" SHAPE="304,417,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#devis_Assistantvoyage.xhtml"
+  PATH="/sec/devis_Assistantvoyage.xhtml" SHAPE="304,449,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#DevisIncendie.xhtml"
+  PATH="/sec/DevisIncendie.xhtml" SHAPE="304,545,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#acceil.xhtml" PATH="/sec/acceil.xhtml"
+  SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#devisAvenirJeunesse.xhtml"
+  PATH="/sec/devisAvenirJeunesse.xhtml" SHAPE="304,641,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#sec#mrh.xhtml" PATH="/sec/mrh.xhtml"
+  SHAPE="304,673,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

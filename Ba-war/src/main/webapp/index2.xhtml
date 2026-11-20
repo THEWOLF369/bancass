@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"     >
+    <h:head>
+        <meta charset="UTF-8" />
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+        <title>Connexion BancAssurance</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="images/favicon.ico"/> 
+        <link rel="stylesheet" type="text/css" href="css/demo1.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+   </h:head>
+    <h:body>
+        <div class="container">
+        
+            <div class="codrops-top">
+
+                <div class="clr"></div>
+            </div><!--/ Codrops top bar -->
+            <header>
+            <img src="images\star2018.png"  align="top" height="110px" width="210px"/>
+              <DIV style= "margin-left: 60px; font-weight: bold;">BancAssurance</DIV> 
+
+            </header>
+            <section>				
+                <div id="container_demo" >
+                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                            <h:form  autocomplete="off"> 
+                                <h1>Log in</h1> 
+                                <p> 
+                                    <label for="username" class="uname" data-icon="u" > Username </label>
+                                    <h:inputText id="username" required="true" autocomplete="off" placeholder="my username" value="#{login.login}" type="text"/>
+                                </p>
+                                <p> 
+                                    <label for="password" class="youpasswd" data-icon="p"> Password </label>
+                                    <h:inputSecret id="password"  required="true" type="password" autocomplete="off" value="#{login.password}" placeholder="eg. X8df!90EO"/> 
+                               </p>
+                                <p class="keeplogin"> 
+									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
+									<label for="loginkeeping">Keep me logged in</label>
+								</p>
+								
+                                <p >
+                                <p:commandButton  type="submit" value="Login" action="#{login.connexion()}" styleClass="login-button"/>
+                                </p> 
+                                     
+								
+								<p>
+								<h:panelGroup rendered="#{!login.loggedIn }">
+                                <div class="alert alert-danger">
+                                    <h4>Erreur:</h4>
+                                    Vérifiez votre nom d'utilisateur et/ou mot de passe.
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{login.nombreTentativeDepasser}">
+                                <div class="alert alert-danger">
+                                    <h4>Erreur:</h4>
+                                    Nombre de tentative autorisé dépassé de connexion Veuillez contacter l'administrateur
+                                 
+                                </div>
+                            </h:panelGroup>
+                             <h:panelGroup rendered="#{login.desactive}">
+                                <div class="alert alert-danger">
+                                    <h4>Erreur:</h4>
+                                   
+                                     Votre compte est désactivé. Veuillez contacter l'administrateur.
+                                </div>
+                            </h:panelGroup>
+								</p>
+                                <p class="change_link">
+									
+								</p>
+                            </h:form>
+                        </div>
+
+                        <div id="register" class="animate form">
+                            <form  action="index.xhtml" autocomplete="off"> 
+                                <h1> Sign up </h1> 
+                                <p> 
+                                    <label for="usernamesignup" class="uname" data-icon="u">Username</label>
+                                    <input id="usernamesignup" autocomplete="off" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                                </p>
+                                <p> 
+                                    <label for="emailsignup" class="youmail" data-icon="e" > Email</label>
+                                    <input id="emailsignup" autocomplete="off" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Password </label>
+                                    <input id="passwordsignup" autocomplete="off" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Confirm your password </label>
+                                    <input id="passwordsignup_confirm" autocomplete="off" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p>
+                                <p class="signin button"> 
+									<input type="submit" value="Sign up"/> 
+								</p>
+                                <p class="change_link">  
+									Already a member ?
+									<a href="#tologin" class="to_register"> Go and log in </a>
+								</p>
+                            </form>
+                        </div>
+						
+                    </div>
+                </div>  
+            </section>
+        </div>
+    </h:body>
+</html>

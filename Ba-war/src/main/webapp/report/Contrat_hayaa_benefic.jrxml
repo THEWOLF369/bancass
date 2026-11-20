@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Contrat_hayaa_benefic" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b8abb3c0-7dca-4029-a262-03de6ec73fa0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="datasetdeces" uuid="fe61e4cc-84fa-41c3-804f-9904e6a4dbbf">
+		<field name="nom" class="java.lang.String"/>
+		<field name="prenom" class="java.lang.String"/>
+		<field name="cin" class="java.lang.String"/>
+		<field name="lien" class="java.lang.String"/>
+		<field name="quote" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="nom_benef_d" class="java.lang.String"/>
+	<parameter name="cin_benef_d" class="java.lang.String"/>
+	<parameter name="parente_d" class="java.lang.String"/>
+	<parameter name="poucent_cap_d" class="java.lang.String"/>
+	<parameter name="datasdeces" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<columnHeader>
+		<band height="16" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="78" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="e7928152-d94e-49ff-b827-91b6a4551296" x="1" y="-16" width="554" height="15" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="63492c97-b039-4731-876d-1180f460e1f9" x="325" y="-16" width="224" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[في صورة وفاة المؤمن له :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="102547f6-4e97-4420-9708-a5e23cdce642" x="8" y="-18" width="148" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de décès  de l’assuré :]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement uuid="7fefe962-dba3-450e-a345-ea64ed074ce9" key="table" style="table" x="2" y="2" width="555" height="74"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="datasetdeces" uuid="0e3b94d4-864a-4500-add3-7e726e32f816">
+						<dataSourceExpression><![CDATA[$P{datasdeces}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="138" uuid="1c6a0b91-d349-4a58-a5eb-46b7b4e20235">
+						<jr:columnHeader style="table_CH" height="43" rowSpan="1">
+							<staticText>
+								<reportElement uuid="28304704-66e4-4cff-a089-2ff7fc47365c" x="0" y="0" width="138" height="21"/>
+								<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+									<font fontName="SansSerif"/>
+									<paragraph lineSpacing="Fixed"/>
+								</textElement>
+								<text><![CDATA[
+Nom prénom bénéficiaire
+]]></text>
+							</staticText>
+							<staticText>
+								<reportElement uuid="07c06983-5f2c-4afc-8a27-a9129a04f4e2" x="0" y="21" width="138" height="21"/>
+								<textElement textAlignment="Center">
+									<font fontName="Arial"/>
+								</textElement>
+								<text><![CDATA[اسم و لقب المستفيد]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="d1bea7eb-9fa0-4b7c-bf93-2441aee30287" x="0" y="0" width="138" height="20"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{nom}+" "+$F{prenom}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="138" uuid="7acc0397-e800-48de-9616-f1361c9ce776">
+						<jr:columnHeader style="table_CH" height="43" rowSpan="1">
+							<staticText>
+								<reportElement uuid="231bb818-148b-4fb0-86af-e1a4acbb1625" x="0" y="0" width="138" height="21"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[CIN]]></text>
+							</staticText>
+							<staticText>
+								<reportElement uuid="57a6dc53-ec38-408b-8c5d-067001a6a438" x="0" y="21" width="138" height="21"/>
+								<textElement textAlignment="Center">
+									<font fontName="Arial"/>
+								</textElement>
+								<text><![CDATA[ب.ت.و
+
+]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement uuid="7df8594e-26a1-4ded-8e63-d1d978d60dbf" x="0" y="0" width="138" height="20"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{cin}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="138" uuid="ec2a4702-9977-4d1a-9fb5-cc37898754c3">
+						<jr:columnHeader style="table_CH" height="43" rowSpan="1">
+							<staticText>
+								<reportElement uuid="1696b92b-b545-4ab8-9f9b-a01111b74c39" x="0" y="0" width="138" height="21"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Lien de parenté]]></text>
+							</staticText>
+							<staticText>
+								<reportElement uuid="22c2eee1-7763-4576-a8ab-574658629b5b" x="0" y="21" width="138" height="21"/>
+								<textElement textAlignment="Center">
+									<font fontName="Arial"/>
+								</textElement>
+								<text><![CDATA[صلة القرابة]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="803c107a-c49c-4d2c-8619-9136282b0283" x="0" y="0" width="138" height="20"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{lien}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="138" uuid="9a58e172-d96f-4d38-8424-18e052cdaeb2">
+						<jr:columnHeader style="table_CH" height="43" rowSpan="1">
+							<staticText>
+								<reportElement uuid="a1d0396a-bbca-4ef5-a5cf-3cca15975456" x="0" y="0" width="138" height="21"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[% du capital/Montant]]></text>
+							</staticText>
+							<staticText>
+								<reportElement uuid="5c9c5fe0-d2ac-4013-8ca0-1e6857d93ae9" x="0" y="21" width="138" height="21"/>
+								<textElement textAlignment="Center">
+									<font fontName="Arial"/>
+								</textElement>
+								<text><![CDATA[النسبة من رأس المال/المبلغ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="a2770344-7688-43ff-bed6-eea56c58767a" x="0" y="0" width="138" height="20"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{quote}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

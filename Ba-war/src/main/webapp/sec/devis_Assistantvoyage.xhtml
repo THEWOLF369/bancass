@@ -1,0 +1,260 @@
+<ui:composition template="/sec/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="body">
+
+
+		<style type="text/css">
+.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+</style>
+		<h:body style=" border: none;"
+			rendered="#{!gestionProfil.souscriptionAssistance}">
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Accès non autorisé</li>
+			</ul>
+			<ul class="page_info">
+				<center>
+					<img src="../images/autorisation.jpg" height="15%" width="15%" />
+				</center>
+			</ul>
+		</h:body>
+
+		<h:body style=" border: none;"
+			rendered="#{gestionProfil.souscriptionAssistance}">
+
+
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Assistance Voyage</li>
+				<li class="active"><img
+					src="${facesContext.externalContext.requestContextPath}/images/right.png"
+					width="17" height="17" /></li>
+				<li class="active">Adhesion</li>
+			</ul>
+
+			<ul class="page_info">
+				<h:form id="formDevis">
+
+					<p:growl id="growl" />
+					 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+					<h:panelGrid columns="3" id="assistanceDevis">
+
+
+						<label class="bold">Police : </label>
+						<p:selectOneMenu id="policeMessage" styleClass="form-control"
+							converter="#{assistanceVoiyageController.policeConverter}"
+							required="true"
+							value="#{assistanceVoiyageController.newAdhesion.police}">
+							<f:selectItems
+								value="#{assistanceVoiyageController.allPoliseByCodeAndConvention}"
+								var="police" itemLabel="#{police.libelle}"
+								itemValue="#{police.NPolice}" />
+						</p:selectOneMenu>
+						<p:message for="policeMessage" />
+
+						<label class="bold"> Identifiant client </label>
+						<h:panelGroup>
+							<h:inputText id="idcin" styleClass="form-control" required=""
+								value="#{clientBean.client.identifiant}" disabled="true" />
+							<p:commandButton value="Client" process="@this" ajax="true"
+								styleClass="orangeButton" style="margin-top: -10px;"
+								action="#{assistanceVoiyageController.navigateToClientAssitancePage()}">
+							</p:commandButton>
+						</h:panelGroup>
+						<p:message for="idcin" />
+						
+                       <label class="bold">Couverture : </label>
+						
+					   <p:selectOneMenu value="#{assistanceVoiyageController.newAdhesion.couverture}" id="couv">
+						    <f:selectItem itemValue="30000" itemLabel="30000" />
+							<f:selectItem itemValue="50000" itemLabel="50000" />
+						</p:selectOneMenu>
+                       <p:message for="couv" />
+						<label class="bold">Type contrat : </label>
+						<p:selectOneMenu id="typeAbonnementMessage"
+							styleClass="form-control"
+							converter="#{assistanceVoiyageController.natureAbonnementConverter}"
+							value="#{assistanceVoiyageController.newAdhesion.typeAbonnement}">
+
+							<p:ajax event="valueChange" update="nombrePersonne"
+								listener="#{assistanceVoiyageController.onNatureAbonnementChangeUpdateNomberPeronne()}" />
+
+							<f:selectItems
+								value="#{assistanceVoiyageController.allTypeAbonnement}"
+								var="typeAbonnement"
+								itemLabel="#{typeAbonnement.valTypeAbonnement}"
+								itemValue="#{typeAbonnement.valTypeAbonnement}" />
+						</p:selectOneMenu>
+						<p:message for="typeAbonnementMessage" />
+
+
+						<label class="bold">Duree (jour) </label>
+
+						<p:selectOneMenu id="dureeId" widgetVar="dureeId"
+							styleClass="form-control"
+							converter="#{assistanceVoiyageController.dureConverter}"
+							process="@this" required="true"
+							value="#{assistanceVoiyageController.selectedDuree}">
+
+
+							<f:selectItems value="#{assistanceVoiyageController.allDurees}"
+								var="duree" itemLabel="#{duree.valDuree}"
+								itemValue="#{duree.valDuree}" />
+							<p:ajax event="change" update=":#{p:component('dateFin')}"
+								listener="#{assistanceVoiyageController.onDureeSelect()}" />
+						</p:selectOneMenu>
+
+						<p:message for="dureeId" />
+
+
+						<h:outputLabel value="Date debut:" styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						<p:calendar widgetVar="datDebut" pattern="dd/MM/yyyy" size="5"
+							id="datDebut" rendered="true" required="true"
+							requiredMessage="Date d'effet est obligatoire"
+							value="#{assistanceVoiyageController.newAdhesion.datDebut}"
+							mindate="#{assistanceVoiyageController.aujourdhui}">
+
+
+							<p:ajax event="dateSelect" update=":#{p:component('dateFin')}"
+								listener="#{assistanceVoiyageController.onDateSelectDateFin()}" />
+
+						</p:calendar>
+
+
+						<p:message for="datDebut" />
+
+
+
+
+						<h:outputLabel value="Date fin:" styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						<p:calendar widgetVar="dateFin" pattern="dd/MM/yyyy" size="5"
+							disabled="true" required="true"
+							requiredMessage="Date fin est obligatoire"
+							styleClass="small-font"
+							value="#{assistanceVoiyageController.newAdhesion.datFin}"
+							id="dateFin">
+
+						</p:calendar>
+
+						<p:message for="dateFin" />
+
+
+
+
+
+
+						<h:outputLabel value="Nombre des personnes:"
+							styleClass="small-font" style="margin-top: 7px;" />
+
+						<p:inputText
+							value="#{assistanceVoiyageController.newAdhesion.nombrePersonne}"
+							id="nombrePersonne" widgetVar="nombrePersonne"
+							disabled="#{assistanceVoiyageController.maxnomberPersonneOne}"
+							validatorMessage="Nombre doit être comprise entre 2 et 5">
+							<f:validateDoubleRange
+								minimum="#{assistanceVoiyageController.nombrePersonneMin}"
+								maximum="#{assistanceVoiyageController.nomberPersonneMax}" />
+
+						</p:inputText>
+
+						<p:message for="nombrePersonne" />
+
+
+
+						<h:outputLabel value="Destination:" styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						<p:inputText
+							value="#{assistanceVoiyageController.newAdhesion.destination}"
+							id="destination"
+							required="true" requiredMessage="Destination is required.">
+
+						</p:inputText>
+
+						<p:message for="destination" />
+
+
+
+						<h:outputLabel value="Personne à prevenir:"
+							styleClass="small-font" style="margin-top: 7px;" />
+
+		<p:inputText id="personneAprevenir"  value="#{assistanceVoiyageController.newAdhesion.personnePrv}"
+		 required="true" requiredMessage="Personne à prevenir is required."/>
+                             
+							
+						<p:message for="personneAprevenir" />
+
+
+						<h:outputLabel value="Téléphone:" styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						<p:inputText
+							value="#{assistanceVoiyageController.newAdhesion.telphone}"
+							id="tel" validatorMessage="Tel doit être composé de 8 chiffres">
+							<f:validateRegex pattern="[0-9]{8,8}" />
+						</p:inputText>
+
+
+						<p:message for="tel" />
+
+
+
+					</h:panelGrid>
+					<center>
+						<div class="form-actions">
+							<p:commandLink value="Réinitialiser" styleClass="btn btn-danger"
+								update="assistanceDevis" ajax="true"
+								actionListener="#{assistanceVoiyageController.initialisationClientAndAdhesion()}" />
+
+
+
+							<p:commandLink type="idTarifier" ajax="true"
+								action="#{assistanceVoiyageController.calculTarif()}"
+								styleClass="btn btn-success" update="growl" value="Tarifier" />
+
+
+							<h:commandLink type="idTarifier"
+								action="#{assistanceVoiyageController.navigateToListAssuree()}"
+								styleClass="btn btn-success" update="growl"
+								value="Ajouter Assuré" />
+
+
+						</div>
+
+
+					</center>
+
+				</h:form>
+
+
+
+			</ul>
+		</h:body>
+	</ui:define>
+</ui:composition>

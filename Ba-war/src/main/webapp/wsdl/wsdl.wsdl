@@ -1,0 +1,27 @@
+<wsdl:definitions
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://agricole.impl.soap.ws.bna.com/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:ns2="http://schemas.xmlsoap.org/soap/http"
+    xmlns:ns1="http://agricole.soap.ws.bna.com/" 
+    name="DecisionCreditsAgrImplService" targetNamespace="http://agricole.impl.soap.ws.bna.com/">
+    <wsdl:import location="IDecisionCreditsAgr.wsdl" namespace="http://agricole.soap.ws.bna.com/"></wsdl:import>
+    <wsdl:binding name="DecisionCreditsAgrImplServiceSoapBinding" type="ns1:IDecisionCreditsAgr">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getDecisionCreditAgr">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getDecisionCreditAgr">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getDecisionCreditAgrResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="DecisionCreditsAgrImplService">
+        <wsdl:port binding="tns:DecisionCreditsAgrImplServiceSoapBinding" name="DecisionCreditsAgrImplPort">
+            <soap:address location="http://127.0.0.1:8080/cashWebService/services/WSDecisionCreditsAgr"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,661 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+    
+    <f:metadata>
+			<f:event type="preRenderView" listener="#{mrhBean.loadProposition()}" />
+		</f:metadata>
+      
+	<style type="text/css">
+	
+.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+.greenButton {
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #5bb75b !important;
+	background-image: -moz-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462),
+		to(#51a351)) !important;
+	background-image: -webkit-linear-gradient(top, #62c462, #51a351)
+		!important;
+	background-image: -o-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: linear-gradient(to bottom, #62c462, #51a351)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #51a351 #51a351 #387038 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+.redButton {
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #da4f49 !important;
+	background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b),
+		to(#bd362f)) !important;
+	background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f)
+		!important;
+	background-image: -o-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: linear-gradient(to bottom, #ee5f5b, #bd362f)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #bd362f #bd362f #802420 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+	</style>
+	
+     <h:body  style=" border: none;" >
+      <ul class="breadcrumb br_styled no_space">                              
+                <li class="active">Devis MultiRisques Habitation</li>
+                <li class="active">
+			       <img src="${facesContext.externalContext.requestContextPath}/images/right.png" width="17" height="17"/>
+			    </li>
+			    <li class="active">Adhesion</li>
+      </ul> 
+     <ul class="page_info"> 
+     <h:form id="form">
+<!--        ********************** -->
+       
+      
+                          <p:growl id="growl" sticky="true" showDetail="true"/>
+                          
+                          <p:wizard flowListener="#{mrhBean.onFlowProcess}" nextLabel="suivant" backLabel="précédent">
+                           
+                          <p:tab id="contrat" title="CONTRAT">
+                         <p:panel header=" DETAILS CONTRAT ">
+                          <p:messages />
+                           <br></br>
+                            <!--Contrat******************************************************************-->
+                           
+                          
+                            
+                             <h:panelGrid columns="3" cellpadding="3">
+                             
+                              <label class="bold">Police : </label>
+ 					<p:selectOneMenu id="policeMessage" styleClass="form-control"  converter="#{mrhBean.policeConverter}"
+ 					 required="true"
+ 						value="#{mrhBean.newAdhesion.police}"> 
+ 						<f:selectItems value="#{mrhBean.allPoliseByCodeAndConvention}" var="police"  
+ 						itemLabel="#{police.libelle}" itemValue="#{police.NPolice}"/> 
+ 					</p:selectOneMenu> 
+ 					
+ 					<p:message for="policeMessage" />
+                             
+                             
+                             
+                                   <label class="bold"> CIN client    </label>
+						        <h:inputText id="idcin" styleClass="form-control"
+							   value="#{clientBean.client.identifiant}" disabled="true" />
+						      <p:commandButton value="Client" process="@this" 
+							    styleClass="orangeButton" style="margin-top: -10px;"
+							    action="clientMrh?faces-redirect=true">
+						      </p:commandButton>
+						      
+						      
+                             </h:panelGrid>
+						  
+						 
+                                    
+                                    <h:panelGrid columns="2" cellpadding="1">
+
+                                        <h:outputLabel styleClass="bold" value="Type Contrat:" />
+                                         <h:panelGroup >
+                                            <h:selectOneMenu styleClass="form-control" id="console"  required="false" value="#{mrhBean.contractType}" >
+                                                <p:ajax event="change" update="@all" listener="#{mrhBean.updateDate()}"/>
+                                                <f:selectItem  itemLabel="Renouvelable" itemValue="Renouvelable" />
+                                                <f:selectItem itemLabel="Ferme" itemValue="Ferme" />
+                                            </h:selectOneMenu>
+                                        </h:panelGroup>
+                                       
+                                        <!--duréé-->
+                                        <label class="bold">Durée:</label>
+                                        <h:selectOneMenu disabled="#{mrhBean.contractType.equals('Renouvelable')}" id="selDuration" value="#{mrhBean.duration}"  styleClass="form-control">
+                                            <p:ajax event="change" update="@all"  />
+                                            <f:selectItem itemLabel="Annuelle" itemValue="Annuelle"/>
+                                            <f:selectItem itemLabel="Prorata" itemValue="Prorata"/>
+                                        </h:selectOneMenu>
+                                        <!--Date d'effet-->
+                                        <label class="bold">Date d'effet:</label>
+                                        <p:calendar id="calEffDate" styleClass="combo-style"  value="#{mrhBean.effDate}" mindate="#{mrhBean.aujourdhui}" pattern="dd/MM/yyyy"  showButtonPanel="true"   requiredMessage="La date ne doit pas être vide." >
+                                            <p:ajax event="dateSelect" update="@all" listener="#{mrhBean.updateDate()}" />
+                                        </p:calendar>
+                                        
+                                        
+                                        
+
+                                        <!--Fractionnement-->
+                                        <label class="bold">Fractionnement:</label>
+                                        <h:selectOneMenu styleClass="form-control" value="#{mrhBean.fractionnement}" disabled="#{mrhBean.contractType.equals('Ferme')}">
+                                            <p:ajax event="change" update="@all" listener="#{mrhBean.updateDate()}" />
+                                            <f:selectItem itemLabel="1" itemValue="1"/>
+                                        </h:selectOneMenu>
+                                        <h:outputLabel rendered="#{!mrhBean.contractType.equals('Ferme')}" styleClass="bold" value="Echéance:" ></h:outputLabel>
+                                        <h:outputText styleClass="form-control" rendered="#{!mrhBean.contractType.equals('Ferme')}" value="#{mrhBean.echeanceDate}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText>
+                                        <h:outputLabel rendered="#{mrhBean.contractType.equals('Ferme')}" styleClass="bold" value="Date extinction:" ></h:outputLabel>
+                                        <h:outputText styleClass="form-control" rendered="#{mrhBean.contractType.equals('Ferme')}" id="txtDateExtinction" value="#{mrhBean.extinction}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText>
+                                        <h:outputLabel styleClass="bold" value="Dernière écheance:" ></h:outputLabel>
+                                        <p:calendar styleClass="combo-style" id="dateLastEcheance" value="#{mrhBean.lastEcheanceDate}" disabled="#{mrhBean.duration.equals('Annuelle') or mrhBean.contractType.equals('Renouvelable') or mrhBean.contractType.equals('Renouvelable')}" pattern="dd/MM/yyyy"  mask="true" required="true" showButtonPanel="true"   requiredMessage="La date de dernière écheance ne doit pas etre vide.">
+                                            
+                                        </p:calendar>
+                                       
+                                    </h:panelGrid>
+                                    <p:messages id="msg"/>
+                                 
+                               
+                                 </p:panel>
+                                  </p:tab>
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  <p:tab id="risque" title="RISQUE">
+                                  <p:panel header=" DETAILS RISQUE ">
+                                <p:messages />
+                                
+                                  <br> </br>
+                                  <br> </br>
+                                  
+                                  
+                                     
+                                      <h:panelGrid columns="4" cellpadding="1" >
+                                      
+
+                                        <h:outputLabel styleClass="bold" value="Qualité:" />
+                                        <p:selectOneMenu styleClass="form-control" id="selQuality"  value="#{mrhBean.idQualite}" 
+                                            >
+                                         <f:selectItems  value ="#{mrhBean.allQualite}" var="qual" itemLabel="#{qual.qualite}" itemValue="#{qual.idQualite}"/>
+                                         <p:ajax event="change" process="@this" update="selQuality" listener ="#{mrhBean.updateQualiteActionListener()}" />
+                      
+                      
+                                        </p:selectOneMenu>
+
+                                        <h:outputLabel styleClass="bold" value="Nature du Risque:" />
+                                        <p:selectOneMenu styleClass="form-control" id="selRiskNature" value="#{mrhBean.idNatureRisque}"
+                                            >
+                                            <f:selectItems value="#{mrhBean.allnatrisk}" var="risq" itemLabel="#{risq.libelleNature}" itemValue="#{risq.idRiskMrh}"/>
+                                            <p:ajax event="change" process="@this" update="selRiskNature" listener ="#{mrhBean.updateNatureRisqueActionListener()}" />
+                                            
+                                        </p:selectOneMenu>
+
+                                        <h:outputLabel styleClass="bold" value="Nbr de piéce &lt; =25m²:" for="txtNbrPieceLess"/>
+                                        <p:inputNumber styleClass="form-control" id="txtNbrPieceLess" value="#{mrhBean.nbrPieceLess}" 
+                                       required="true" requiredMessage="Vous devez indiquer une valeur"
+                                       
+                                        onclick="this.focus();this.select()" thousandSeparator="" decimalSeparator="." decimalPlaces="0">
+                                            <f:validateLongRange minimum="0"/>
+                                        </p:inputNumber>
+
+                                        <h:outputLabel styleClass="bold" value="Valeur du mobilier:" />
+                                        <p:inputNumber styleClass="form-control" id="txtFurniturePrice" value="#{mrhBean.furniturePrice}" 
+                                        validatorMessage="Valeur de mobilier doit être un nombre positif." required="true" 
+                                        requiredMessage=" La Valeur du Mobilier est Obligatoire"
+                                        onclick="this.focus();this.select()" thousandSeparator="" decimalSeparator="." decimalPlaces="3">
+                                            <f:validateDoubleRange minimum="1" for="txtFurniturePrice"/>
+                                             
+                                        </p:inputNumber>
+                                        
+                                       
+                                        <h:outputLabel styleClass="bold" value="Nbr de piéce &gt; =25m²:" />
+                                        <p:inputNumber styleClass="form-control" id="txtNbrPieceMore" value="#{mrhBean.nbrPieceMore}" 
+                                           required="true" requiredMessage="Vous devez indiquer une valeur"
+                                         validator="#{mrhBean.validateNumber}"
+                                        onclick="this.focus();this.select()" thousandSeparator="" decimalSeparator="." decimalPlaces="0">
+                                            <f:validateLongRange minimum="0"/>
+                                          <f:attribute name="bbv_value" value="form:txtNbrPieceLess" />
+                                        </p:inputNumber>
+
+                                        <h:outputLabel styleClass="bold" value="Superficie du Garage/épendance en m²:"  />
+                                        <p:inputNumber styleClass="form-control" id="txtArea" value="#{mrhBean.area}" 
+                                        onclick="this.focus();this.select()" thousandSeparator="" decimalSeparator="." decimalPlaces="3">
+                                            <f:validateDoubleRange minimum="0.00" />
+                                            
+                                        </p:inputNumber>
+                                        
+                                       
+                                                            
+                                       <h:outputLabel styleClass="bold" value="Adresse Risque:"  />
+                                        <p:inputText styleClass="form-control" id="txtadrisq" value="#{mrhBean.adrisq}" >
+                                           
+                                        </p:inputText>
+                                         <p:outputLabel styleClass="bold" value="Gouvernorat:" for="txtGouver"/>
+                                        <p:selectOneMenu styleClass="form-control" id="txtGouver" value="#{mrhBean.newAdhesion.gouver}" 
+                                        
+						                 filter="true" filterMatchMode="contains" style="width:60px" required="true" >
+						
+							           <p:ajax event="itemSelect" process="@this" listener="#{mrhBean.updateListCodePostalActionListener()}" update="txtZipCode,txtLocalite"   />
+							            <f:selectItem itemLabel="Selectionnez gouvernorat..." itemValue="" noSelectionOption="true" />
+							           <f:selectItems value="#{mrhBean.allGouverneras}" />
+							           <p:message for="selCity" />
+                                        </p:selectOneMenu> 
+                                        
+						               <p:outputLabel value="Code postale:" for="txtZipCode" />
+							            <p:selectOneMenu id="txtZipCode" styleClass="form-control" value="#{mrhBean.selectedLocgouv.code}"  
+							            filter="true" filterMatchMode="contains" style="width:60px" >
+							           
+							       <p:ajax event="itemSelect" process="@this" listener="#{mrhBean.locgouvSelectListened}" update="txtLocalite"   />
+							       <f:selectItem itemLabel="Selectionnez code postal..." itemValue="" noSelectionOption="true" />
+							        <f:selectItems value="#{mrhBean.allCodePostalByGouvernera}" var="ojectCodePostal" 
+							        itemLabel="#{ojectCodePostal.codePosta} #{ojectCodePostal.localite}"  itemValue="#{ojectCodePostal.code}"/>
+							        
+					             	</p:selectOneMenu> 
+						 
+						
+						         <p:outputLabel value="Localite:" for="txtLocalite" />
+						         <h:inputText id="txtLocalite" styleClass="form-control"
+							     value="#{mrhBean.newAdhesion.localite}" disabled="true" />
+							       <h:outputLabel styleClass="bold" value="Résidence:" />
+                                         
+                                            <h:selectOneMenu styleClass="form-control" id="resid"  required="True" value="#{mrhBean.residence}" >
+                                                <p:ajax event="change" process="@this" update="selRedemption" listener ="#{mrhBean.updatecheckboxrachatActionListener()}" />
+                                                
+                                               
+                                                <f:selectItem  itemLabel="PRINCIPALE" itemValue="Principale" />
+                                                <f:selectItem itemLabel="SECONDAIRE" itemValue="Secondaire" />
+                                            </h:selectOneMenu>
+                                             <h:panelGroup>
+                                                  <p:selectBooleanCheckbox   id="selRedemption" value="#{mrhBean.redemption}"  disabled = "#{mrhBean.desabledrachatMRH}" >
+                                                  </p:selectBooleanCheckbox>
+                                                  <h:outputLabel class="bold"   value="Rachat d'inhabitation"  >
+                                                  </h:outputLabel>
+                                                  
+                                            </h:panelGroup>
+							   </h:panelGrid> 
+							     
+							                            
+
+                                </p:panel>
+                                </p:tab>
+                                
+                                
+                                
+                               <!--   Pack -->
+                                <p:tab id="garanties" title="garanties">
+                                  <p:panel header=" DETAILS DES GARANTIES  ">
+                                
+                                  
+                                  <br></br>
+                                  <br></br>
+                                  <br></br>
+                                
+                                
+
+                                    <table style="width: 100%">
+                                    
+                                    <tr>
+                                    <td style="width: 10px">
+                                           <h:outputLabel styleClass="bold" value="Pack:" />   
+                                    </td>
+                                         <td>
+                                         
+                                             <p:selectOneMenu styleClass="form-control" id="selPack"  value="#{mrhBean.selctedPack.idPack}"
+                                              >
+                                             
+                                                 <f:selectItems  value ="#{mrhBean.pack}" var="packs" itemLabel="#{packs.libelle}" itemValue="#{packs.idPack}">
+                                                 </f:selectItems> 
+                                             
+                                                 <p:ajax event="change" process="@this" update="@all" listener ="#{mrhBean.updatecheckboxObjetMultimediaActionListener()}" />
+                      
+                                                </p:selectOneMenu>
+                                                
+                                                 
+									           
+<!-- 									        </p:selectOneMenu> -->
+									        
+<!-- 									        <p:selectOneMenu styleClass="form-control" -->
+<!-- 							value="#{mrhBean.newAdhesion.pack}" id="txtVoie"> -->
+<!-- 							<f:selectItem itemLabel="Selectionnez voie..." value="#{null}" /> -->
+<!-- 							<f:selectItems value="#{mrhBean.pack}" var="packs" itemLabel="#{packs.libelle}" itemValue="#{packs.idPack}"/> -->
+<!-- 						</p:selectOneMenu> -->
+                                             
+                                             
+<!--                                           <p:selectOneMenu styleClass="form-control" converter="#{mrhBean.packConverter}"  -->
+<!--                                           value="#{mrhBean.newAdhesion.pack}" id="txtprofession"> -->
+<!-- 											<f:selectItems value="#{mrhBean.pack}" var="selctedPack"  -->
+<!-- 											itemLabel="#{selctedPack.libelle}" itemValue="#{selctedPack.idPack.toString()}" /> -->
+<!-- 											 <p:ajax immediate="true"  ajax="true" update="@all"/> -->
+<!-- 										</p:selectOneMenu> -->
+                                          
+                                                          
+                                        </td>
+                                                    </tr> 
+                                                    
+                                                     <tr>
+                                                        <td style="width: 10px">
+                                                            <p:selectBooleanCheckbox value="#{mrhBean.assh}" id="chkAssh" 
+                                                            rendered="#{mrhBean.newAdhesion.pack.idPack !=4 &amp;&amp; mrhBean.newAdhesion.pack.idPack !=5 
+                                                            &amp;&amp; mrhBean.newAdhesion.pack.idPack !=3}">
+                                                            <p:ajax event="change" global="false" />
+                                                            </p:selectBooleanCheckbox>
+                                                           
+                                                        </td>
+                                                        <td>
+                                                           <h:outputLabel class="bold"  value="Assistance Habitation" 
+                                                           rendered="#{mrhBean.newAdhesion.pack.idPack !=4 &amp;&amp; mrhBean.newAdhesion.pack.idPack !=5 
+                                                            &amp;&amp; mrhBean.newAdhesion.pack.idPack !=3}"/>
+                                                        </td>
+                                                    </tr> 
+                                                  
+                                               
+                                                    <tr>
+                                                        <td style="width: 10px">
+                                                            <p:selectBooleanCheckbox    value="#{mrhBean.SV}"  id="chkSv"  rendered="#{mrhBean.newAdhesion.pack.idPack == 3}"/>
+                                                        </td>
+                                                        <td>
+                                                            <h:outputLabel class="bold"   value="Sejours et Voyages"  rendered="#{mrhBean.newAdhesion.pack.idPack == 3}"/>
+                                                        </td>
+                                                    </tr> 
+                    
+                                                    <tr>
+                                                        <td style="width: 10px">
+                                                            <p:selectBooleanCheckbox    value="#{mrhBean.RCG}" id="chkRCG" rendered="#{mrhBean.newAdhesion.pack.idPack == 3}"/>
+                                                        </td>
+                                                        <td>
+                                                            <h:outputLabel class="bold"   value="R.C.Gens de Maison" rendered="#{mrhBean.newAdhesion.pack.idPack == 3}"/>
+                                                        </td>
+                                                    </tr> 
+                                                    <tr>
+                                                        <td style="width: 10px">
+                                                            <p:selectBooleanCheckbox    value="#{mrhBean.JP}" id="chkJP"  rendered="#{mrhBean.newAdhesion.pack.idPack == 3 || mrhBean.newAdhesion.pack.idPack == 5}"/>
+                                                        </td>
+                                                        <td>
+                                                            <h:outputLabel class="bold"   value="Jardin et Piscine"  rendered="#{mrhBean.newAdhesion.pack.idPack == 3 || mrhBean.newAdhesion.pack.idPack == 5}"/>
+                                                        </td>
+                                                    </tr> 
+                                                
+                                                
+                                                
+                                                       <tr>
+                                                            <td style="width: 10px">
+                                                            <p:selectBooleanCheckbox    value="#{mrhBean.AS}" id="chkAS"  rendered="#{mrhBean.newAdhesion.pack.idPack == 3}">
+                                                               <p:ajax   immediate="true"  ajax="true" update="@all"/>
+                                                            </p:selectBooleanCheckbox> 
+                                                            </td>  
+                                                             <td>
+                                                            <h:outputLabel class="bold" value="Assurance Scolaire (par enfant scolarise)"  rendered="#{mrhBean.newAdhesion.pack.idPack == 3}" />
+                                                            </td>
+                                                      
+                                                           <td>
+                                                            <h:outputLabel class="bold" value="Nombre Enfants: " for="txtNbrChild" rendered="#{mrhBean.AS &amp;&amp; mrhBean.newAdhesion.pack.idPack == 3}" /> 
+                                                       </td>
+                                                            <td>
+                                                            <p:inputText value="#{mrhBean.nbrChild}"  id="txtNbrChild" rendered="#{mrhBean.AS &amp;&amp; mrhBean.newAdhesion.pack.idPack == 3}" styleClass="form-control" validatorMessage="Le nombre d'enfant doit être > 0.">
+                                                                <f:validateLongRange minimum="1"/>
+                                                            </p:inputText>
+                                                            </td>
+                                                       </tr>
+                                                       
+                                                        
+                                                    <tr>
+                                                        <td style="width: 10px">
+                                                            <p:selectBooleanCheckbox value="#{mrhBean.objM}"  id="chobjm"  
+                                                            rendered="#{mrhBean.newAdhesion.pack.idPack == 3 || mrhBean.newAdhesion.pack.idPack == 4}"
+                                                            disabled = "#{mrhBean.desabledobjMultimediaMRH}">
+<!--                                                             <p:ajax   immediate="true"  ajax="true" update="@all"/> -->
+                                                            <p:ajax event="change" process="@this" update="@all" listener ="#{mrhBean.updateobjMultimediaActionListener()}" />
+                                                            </p:selectBooleanCheckbox>
+                                                        </td>
+                                                        <td>
+                                                            <h:outputLabel class="bold" value="Objets Multimédias"  
+                                                            rendered="#{mrhBean.newAdhesion.pack.idPack == 3 || mrhBean.newAdhesion.pack.idPack == 4}"/>
+                                                        </td>
+                                                        
+                                                         <td>
+                                                            <h:outputLabel class="bold"   value="Valeur des objets Multimédias: " for="txtobjmulti" 
+                                                            rendered="#{mrhBean.objM &amp;&amp; mrhBean.newAdhesion.pack.idPack == 3 || mrhBean.newAdhesion.pack.idPack == 4}"   
+                                                             validatorMessage="Valeur doit être > 0." required="true" /> 
+                                                           
+                                                               </td>
+                                                        
+                                                         <td>
+                                                            <h:inputText value="#{mrhBean.valmultim}"  id="txtobjmulti" 
+                                                            rendered="#{mrhBean.objM &amp;&amp; mrhBean.newAdhesion.pack.idPack == 3 || mrhBean.newAdhesion.pack.idPack == 4}" 
+                                                            styleClass="form-control" validatorMessage="Valeur doit être > 0." disabled = "true">
+                                                                <f:validateLongRange minimum="1"/>
+                                                            </h:inputText>
+                                                            </td>
+                                                    </tr> 
+                                                       
+                                                    
+                                              
+                                                       <tr>
+                                                            <td>
+                                                            <p:selectBooleanCheckbox    value="#{mrhBean.pansol}" id="chkPSol"  rendered="#{mrhBean.newAdhesion.pack.idPack != 4}">
+<!--                                                                <p:ajax   immediate="true"  ajax="true" update="@all"/> -->
+																<p:ajax event="change" process="@this" update="@all" listener ="#{mrhBean.updatePansolActionListener()}" />
+                                                            </p:selectBooleanCheckbox>   
+                                                            </td>
+                                                            
+                                                             <td>
+                                                            <h:outputLabel class="bold" value="Panneaux Solaires"  rendered="#{mrhBean.newAdhesion.pack.idPack != 4}" />
+                                                            </td>
+                                                            
+                                                            <td>
+                                                            <h:outputLabel class="bold"   value="Valeur des Panneaux Solaires: " for="txtvalsol" rendered="#{mrhBean.pansol &amp;&amp; mrhBean.newAdhesion.pack.idPack != 4}"  
+                                                             validatorMessage="Valeur des panneaux solaires doit être un nombre positif." required="true" /> 
+                                                           
+                                                               </td>
+                                                            
+                                                             <td>
+                                                            <p:inputText value="#{mrhBean.valsol}"  id="txtvalsol" rendered="#{mrhBean.pansol &amp;&amp; mrhBean.newAdhesion.pack.idPack != 4}" styleClass="form-control" validatorMessage="Valeur de mobilier doit être > 0.">
+                                                                <f:validateLongRange minimum="1"/>
+                                                            </p:inputText>
+                                                            </td>
+                                                      </tr>
+                                                    
+                                               </table>
+                                                     
+                                    
+                                    
+                                    
+                                     </p:panel>
+                                     </p:tab>
+                                
+                            
+
+                            <!-- Garanties*****************************-->
+                             <p:tab id="assure" title="Liste des enfants assurés" rendered="#{mrhBean.AS &amp;&amp; mrhBean.newAdhesion.pack.idPack == 3}">
+                                  <p:panel header=" Details des enfants assurés  ">
+                                 <p:messages showDetail="true" autoUpdate="true"/>
+                                  
+                               
+                                    <div class="panel panel-default">
+                                        <div id="collapseTwo" class="panel-collapse in" style="height: auto;">
+                                            <div class="panel-body"> 
+                                               <h:panelGrid columns="2"  >
+					                          <p:outputLabel value="Nombre des enfants à ajouter : " for="nombreEnfants" />
+                                              <p:outputLabel id="nombreEnfants" value="#{mrhBean.nombreBenificiaireAajouter}"/>  
+				                              </h:panelGrid>
+				                              
+					                          <h:panelGrid columns="3"  columnClasses="labelWidth, ui-grid-col-3">
+
+		                                      <p:outputLabel value="Nom:" for="txtNom" />
+						                      <p:inputText id="txtNom" styleClass="form-control"
+						                       value="#{mrhBean.newBeneficiaire.nom}"
+							                  required="#{mrhBean.nombreBenificiaireAajouter != 0}" requiredMessage="Le nom est obligatoire" />
+						                      <p:message for="txtNom" />
+
+						                      <p:outputLabel value="Prenom:" for="txtPrenom" />
+						                      <p:inputText id="txtPrenom" styleClass="form-control"
+							                 required="#{mrhBean.nombreBenificiaireAajouter != 0}" value="#{mrhBean.newBeneficiaire.prenom}"
+							               requiredMessage="Le prenom est obligatoire" />
+						                    <p:message for="txtPrenom" />
+
+						                     <p:outputLabel value="Date de naissance" for="txtBirthday" />
+						                     <p:calendar id="txtBirthday" styleClass="combo-style"
+							                 showButtonPanel="true" pattern="dd/MM/yyyy"
+							                  required="#{mrhBean.nombreBenificiaireAajouter != 0}" value="#{mrhBean.newBeneficiaire.dateNaiss}"
+							                 requiredMessage="La date de naissance est obligatoire" />
+						                    <p:message for="txtBirthday" />
+						                    
+                                              <p:outputLabel value="Niveau Scolaire:" id="txtnivscol" />
+                                                <h:selectOneMenu styleClass="form-control" id="selnivscol"  converter="#{mrhBean.niveauConverter}" process="@this" required="true"
+                                                value="#{mrhBean.newBeneficiaire.niveauScolaire}">
+                                                 <f:selectItems  value ="#{mrhBean.niveauscolaire}" var="niveaux" itemLabel="#{niveaux.niveauScol}" itemValue="#{niveaux.niveauScol}">
+                                                 </f:selectItems> 
+                                                 </h:selectOneMenu>
+                                                 
+                                              
+                                             <p:commandButton ajax="true" value="Ajouter"  action="#{mrhBean.addNewBeneficiaireTolist()}"
+								              styleClass="greenButton"  update="@all"></p:commandButton>
+
+                                        
+				                            </h:panelGrid>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                           
+
+                                    
+                               
+                          
+
+                                    
+                               
+                                
+                                <!--   ***************liste des assurés ***************--> 
+                                 
+                                 <p:dataTable var="enfants" reflow="true" 
+                                 rowStyleClass="#{(rowIndex mod 2) eq 0 ? 'row1' : 'row2'}"
+                                 styleClass="table" 
+                                  value="#{mrhBean.newAdhesion.beneficiaires}">
+
+                                 <p:column style="width:30px">
+                                 <p:rowToggler />
+                                 </p:column>
+
+                                <p:column headerText="Non"
+                                filterStyleClass="dateDebutFilter"
+                                filterBy="" filterStyle="display: none">
+                                 <h:outputLabel value="#{enfants.nom}" />
+                                </p:column>
+
+                              <p:column headerText="Prénon">
+                               <h:outputLabel value="#{enfants.prenom}" />
+                               </p:column>
+
+                        <p:column headerText="Date de naisance">
+                        <h:outputLabel value="#{enfants.dateNaiss}" >
+                        
+                         <f:convertDateTime  pattern="dd/MM/yyyy" /></h:outputLabel>
+                    </p:column>
+                    
+                      <p:column headerText="Niveau Scolaire">
+                        <h:outputLabel value="#{enfants.niveauScolaire.niveauScol}" />
+                        
+                         
+                    </p:column>
+                  
+                  <p:column headerText="supprimer" style="width: 10%">
+                           <p:commandLink   action="#{mrhBean.deleteBenificiaireFromList()}"  ajax="true" update="@all" immediate="true">
+                             <f:setPropertyActionListener value="#{enfants}" target="#{mrhBean.selectedBeneficiaireToUpdate}"/>
+                                 <img src="${facesContext.externalContext.requestContextPath}/images/delete_bleu.png" width="17" height="17"/>
+                                  </p:commandLink>
+                               
+                       </p:column>
+                    
+                </p:dataTable>
+           
+            
+               </p:panel>
+                       </p:tab>
+                       
+                       
+                       
+                       
+                       
+                           <!-- Tarif MRH*****************************-->
+                             <p:tab id="tarif" title="TARIF" >
+                                  <p:panel header=" Details de Tarification  ">
+                                 
+                                <div>  
+                                    <h:panelGrid columns="12" cellpadding="1">
+                                        <p:outputLabel  value="Prime nette: " for="primeglobal"/>
+                                        <h:outputText id="primeglobal" styleClass="label label-danger price"  value="#{mrhBean.primeNette}"  >
+                                            <f:convertNumber pattern="#0.000" />
+                                        </h:outputText>
+                                        <h:outputText/><h:outputText/>
+                                        <p:outputLabel value="Frais du contrat: " for="txtcost"/>
+                                                    <h:outputText styleClass="label label-info price" id="txtcost" value="#{mrhBean.cost}" >
+                                                        <f:convertNumber pattern="#0.000" />
+                                                    </h:outputText>
+                                         <p:outputLabel value="Taxe: " for="txtTax"/>
+                                                    <h:outputText styleClass="label label-info price" id="txtTax" value="#{mrhBean.tax}" >
+                                                        <f:convertNumber pattern="#0.000" />
+                                                    </h:outputText>
+                                        <h:outputText/><h:outputText/>            
+                                       <p:outputLabel value="Prime globale: " for="txttot"/>
+                                                    <h:outputText styleClass="label label-danger price" id="txttot" value="#{mrhBean.primeTotal}" >
+                                                        <f:convertNumber pattern="#0.000" />
+                                                    </h:outputText>
+                                                              
+                                    </h:panelGrid>
+                                </div>
+                                
+                                <p:messages  autoUpdate="false" showDetail="true"/>
+                                
+                                
+                                <div  class="form-actions">
+                                					
+						            
+								    <p:commandLink  id="devis" ajax="false" target="_blank" type="idImprimer=" action= "#{mrhBean.generateDevisMRH()}" update=":form" styleClass="btn btn-info"  value="Imprimer Devis"  disabled="#{!mrhBean.desabledGenerateNoticeMRH}"/>
+                                    <p:commandLink  id="prop" type="idvaliderPrposition=" action= "#{mrhBean.validerProposition()}" update="not,devis,prop" styleClass="btn btn-success"  value="Valider Proposition" disabled="#{!mrhBean.desabledGenerateNoticeMRH}"/>
+                                    <p:commandLink id="not" ajax="false" target="_blank" type="idImprimer=" action= "#{mrhBean.generateNoticeMRH()}" update="form" styleClass="btn btn-danger"  value="Imprimer Notice" disabled="#{mrhBean.desabledGenerateNoticeMRH}"/>
+                                </div>
+                               
+                                
+                            </p:panel>
+                       </p:tab>
+                       
+                       
+                       
+    </p:wizard>
+    
+    
+    
+     <p:blockUI block="txtZipCode" trigger="txtGouver">
+        Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+     <p:blockUI block="txtLocalite" trigger="txtZipCode">
+        Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+ 
+        </h:form>
+
+     </ul>
+   </h:body>
+  </ui:define>
+</ui:composition>

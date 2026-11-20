@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TEST" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1e8d6aa0-e224-420b-943c-ffcd2ffc0515">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="TableHeader" hAlign="Center" vAlign="Middle" isBold="true"/>
+	<style name="TableCell" hAlign="Center" vAlign="Middle"/>
+	<style name="TableFooter" hAlign="Right" vAlign="Middle"/>
+	<style name="Table">
+		<box>
+			<pen lineWidth="0.5"/>
+		</box>
+	</style>
+	<subDataset name="dataset1" uuid="bde6249c-8c9d-40a4-9b6b-fe14f74bd6cd">
+		<field name="annee" class="java.lang.String"/>
+		<field name="pcomm" class="java.math.BigDecimal"/>
+		<field name="ctmg" class="java.math.BigDecimal"/>
+		<field name="creel" class="java.math.BigDecimal"/>
+		<field name="benefice" class="java.math.BigDecimal"/>
+		<field name="participation" class="java.math.BigDecimal"/>
+		<field name="epargne" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="datasource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="agence" class="java.lang.String"/>
+	<parameter name="contrat" class="java.lang.String"/>
+	<parameter name="primeversee" class="java.math.BigDecimal"/>
+	<parameter name="epargneprev" class="java.math.BigDecimal"/>
+	<parameter name="gainfinancier" class="java.math.BigDecimal"/>
+	<parameter name="econimpot" class="java.math.BigDecimal"/>
+	<parameter name="gaintotal" class="java.math.BigDecimal"/>
+	<columnHeader>
+		<band height="206" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="15684bf0-5c93-4840-8883-2417adee8d8c" x="0" y="155" width="527" height="43"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="92e810b2-b195-48f5-a741-45c44267800c" x="32" y="157" width="462" height="41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Annexe :BILAN FINANCIER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="56767f7c-5bd6-47c7-b64b-e25bcfea9e3f" x="181" y="114" width="78" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[رمز النيابة :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5953592e-fc31-43e3-8ea0-136ccdf4d624" x="451" y="114" width="79" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[العقد  عدد:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6e4d72ad-2a28-4475-afb0-dd561f16c8ec" x="280" y="114" width="69" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contrat N° :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0e595b03-e18f-4f49-a9d1-437fa3a8782c" x="3" y="114" width="81" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code agence:]]></text>
+			</staticText>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="6056f958-7116-4618-af39-141c72c419a6" x="0" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="38598059-dd74-4bf4-8595-58fbcf25959a" x="418" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="5b93b956-f953-4be6-a768-b359144cfd4b" x="84" y="114" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{agence}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="76e1c460-684b-44b5-a366-2b672952be99" x="351" y="114" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{contrat}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="149">
+			<rectangle>
+				<reportElement uuid="2f48fa42-171a-4980-a946-ed4b9c1b1689" x="-13" y="12" width="554" height="54"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="049cda36-f260-40ea-bef8-5b0f9e4c330c" x="102" y="13" width="114" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Epargne prévisionnelle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0020dcac-5044-44e2-bd2c-3c08ef59b628" x="-12" y="13" width="114" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime versée]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="01ee42be-ef5a-4e25-abd2-829bd66c1d9b" x="217" y="13" width="98" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gain financier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d94b06b7-1595-49bf-a9b0-75d71ae60806" x="317" y="13" width="100" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Economie d'impôt]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9063d7c5-c3ec-414d-b80c-6ad92bed300b" x="102" y="11" width="1" height="54"/>
+			</line>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="b8f32826-6659-4736-a02c-2e63c4d5c00f" x="100" y="47" width="117" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{epargneprev}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="e11ab405-8042-42cb-a61b-dd6a9d401645" x="216" y="13" width="1" height="54"/>
+			</line>
+			<line>
+				<reportElement uuid="782bfb24-f330-4939-bce9-8e5af2a94701" x="419" y="11" width="1" height="54"/>
+			</line>
+			<line>
+				<reportElement uuid="3a65e550-370f-4198-a3bc-def2b96e43be" x="-12" y="44" width="553" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="62f40dbd-d392-4d75-8f09-90ced4003adf" x="315" y="12" width="1" height="54"/>
+			</line>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="41aa5de8-2386-4035-9586-7cff69339a65" x="217" y="47" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{gainfinancier}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="06b73834-45d7-4f15-abb7-921fe433e350" x="-12" y="45" width="117" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{primeversee}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="d360256d-72d9-494e-b61c-59a991d92560" x="316" y="47" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{econimpot}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="72f8dec3-47ee-44d6-90ab-7ffc366aa19c" x="428" y="47" width="113" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{gaintotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3d266932-3861-4bdc-b5ec-7cb6ff56841f" x="419" y="13" width="121" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gain total]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

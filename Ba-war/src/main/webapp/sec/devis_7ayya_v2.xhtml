@@ -1,0 +1,1920 @@
+<ui:composition template="/sec/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="body">
+
+<style>
+
+/* Fenêtre de confirmation */
+.modern-confirm {
+    border-radius: 12px !important;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* En-tête */
+.modern-confirm .ui-dialog-titlebar {
+    background: #f8f9fa !important;
+    border: none !important;
+    padding: 18px 22px !important;
+}
+
+.modern-confirm .ui-dialog-title {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: #343a40 !important;
+}
+
+/* Contenu */
+.modern-confirm .ui-dialog-content {
+    padding: 25px !important;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Icône */
+.modern-confirm .ui-confirm-dialog-severity {
+    color: #f0ad00 !important;
+    font-size: 35px !important;
+    margin-right: 15px;
+}
+
+/* Zone boutons */
+.modern-confirm .ui-dialog-buttonpane {
+    border: none !important;
+    padding: 15px 20px 20px !important;
+    text-align: center;
+}
+
+/* Annuler */
+.modern-cancel {
+    background: #e9ecef !important;
+    border: 1px solid #dee2e6 !important;
+    color: #495057 !important;
+    border-radius: 6px !important;
+    padding: 9px 20px !important;
+    margin-right: 10px !important;
+}
+
+/* Oui, valider */
+.modern-confirm-btn {
+    background: #28a745 !important;
+    border: 1px solid #28a745 !important;
+    color: white !important;
+    border-radius: 6px !important;
+    padding: 9px 20px !important;
+}
+
+/* Hover */
+.modern-confirm-btn:hover {
+    background: #218838 !important;
+    border-color: #218838 !important;
+}
+
+.modern-cancel:hover {
+    background: #dfe2e5 !important;
+}
+
+</style>
+
+		<style type="text/css">
+.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+.greenButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #5bb75b !important;
+	background-image: -moz-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462),
+		to(#51a351)) !important;
+	background-image: -webkit-linear-gradient(top, #62c462, #51a351)
+		!important;
+	background-image: -o-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: linear-gradient(to bottom, #62c462, #51a351)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #51a351 #51a351 #387038 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+.redButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #da4f49 !important;
+	background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b),
+		to(#bd362f)) !important;
+	background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f)
+		!important;
+	background-image: -o-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: linear-gradient(to bottom, #ee5f5b, #bd362f)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #bd362f #bd362f #802420 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+.ui-widget-content a {
+    color: #ffffff;
+}
+
+.alert {
+  padding: 20px;
+  background-color: #569e56;
+  width: 190px;
+  color: white;
+}
+
+
+
+.ui-widget-header .ui-state-default {
+
+    width: 200px;
+}
+
+.menu-visible .ui-state-disabled,
+.menu-visible.ui-state-disabled,
+.menu-visible.ui-state-disabled .ui-selectonemenu-label,
+.menu-visible.ui-state-disabled .ui-radiobutton-label {
+    opacity: 1 !important;
+    background-color: #e2d6de !important;
+    color: #700000 !important;
+}
+
+.menu-visible:disabled {
+    opacity: 1 !important;
+    background-color: #e2d6de !important;
+    color: #700000 !important;
+}
+
+.radio-compact {
+    width: auto !important;
+    display: inline-block;
+}
+
+.radio-compact td {
+    padding-right: 20px;   /* espace entre les options */
+}
+
+.radio-compact label {
+    color: #333;           /* texte plus lisible */
+    font-weight: normal;
+}
+
+.radio-compact .ui-radiobutton-box {
+    border-color: #888;    /* bordure plus claire */
+}
+ 
+</style>
+
+
+<style type="text/css">
+#grid1 table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#grid1 td, #grid1 th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+#grid1 tr:nth-child(even) {
+/*   background-color: #dddddd; */
+}
+
+.mtd{
+
+background-color: #dddddd;
+}
+
+#grid1 .ui-state-default, #grid1 .ui-widget-content .ui-state-default, #grid1 .ui-widget-header .ui-state-default {
+
+    width: 200px;
+}
+
+
+
+</style>
+
+
+
+
+
+		<h:body style=" border: none;"
+			rendered="#{!gestionProfil.souscription7ayya}">
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Accès non autorisé</li>
+			</ul>
+			<ul class="page_info">
+				<center>
+					<img src="../images/autorisation.jpg" height="15%" width="15%" />
+				</center>
+			</ul>
+		</h:body>
+
+		<h:body style=" border: none;"
+			rendered="#{gestionProfil.souscription7ayya}">
+			<div class="span12 no_space">
+				<div class="widget">
+					<ul class="breadcrumb br_styled no_space">
+						<li class="active"><h:outputLabel value="#{h7ayyaControllerV2.condition ? 'INVESTI' : 'FUTURE DREAMS'}"  /></li>
+						<li class="active"><img
+							src="${facesContext.externalContext.requestContextPath}/images/right.png"
+							width="17" height="17" /></li>
+						<li class="active">Adhesion</li>
+					</ul>
+					<ul class="page_info">
+
+
+
+						<h:form id="formAvj">
+						
+						<p:growl id="growl" sticky="true" showDetail="true" />
+						
+						<p:wizard
+								flowListener="#{h7ayyaControllerV2.onFlowProcess}" nextLabel="Suivant" backLabel="Précédent"
+								id="wizard">
+								
+								
+							<!-- tab 1 -->	
+							<p:tab id="devis" title="Devis">
+									<p:panel header="Devis">
+									
+									  <p:messages showDetail="true" autoUpdate="true" closable="true"/>
+										<h:panelGrid columns="3" cellpadding="1" id="assistanceDevis">
+
+
+						<label class="bold">Police : </label>
+						<p:selectOneMenu id="policeMessage" styleClass="form-control"
+							converter="#{h7ayyaControllerV2.policeConverter}"
+							required="true"
+							value="#{h7ayyaControllerV2.newAdhesion.police}">
+							<f:selectItems
+								value="#{h7ayyaControllerV2.allPoliseByCodeAndConvention}"
+								var="police" itemLabel="#{police.libelle}"
+								itemValue="#{police.NPolice}" />
+						</p:selectOneMenu>
+						<p:message for="policeMessage" />
+
+						<label class="bold"> Identifiant client : </label>
+						
+							<h:inputText id="idcin" styleClass="form-control menu-visible" required=""
+								value="#{clientBean.client.identifiant}" disabled="true" />
+							<p:commandButton value="Client" process="@this" ajax="true"
+								styleClass="orangeButton" style="margin-top: -10px;"
+								action="#{h7ayyaControllerV2.navigateToClientPage()}">
+							</p:commandButton>
+						
+						
+						
+
+						
+						
+						<h:outputLabel value="Age assuré :"
+							styleClass="small-font" style="margin-top: 7px;" />
+
+						<p:inputText styleClass="menu-visible"
+							value="#{h7ayyaControllerV2.ageAssure}"
+							id="ageAssure" widgetVar="ageAssure"
+							disabled="true" required="true"
+							requiredMessage="Age assuré est obligatoire"
+							>
+							
+
+						</p:inputText>
+
+						<p:message for="ageAssure" />
+						
+						
+						
+						<h:outputLabel value="Date d'effet :" styleClass="combo-style"
+							style="margin-top: 7px;" />
+
+						<p:calendar widgetVar="datEffet" pattern="dd/MM/yyyy" size="5"
+							id="datEffet" rendered="true" required="true"
+							requiredMessage="Date d'effet est obligatoire"
+							value="#{h7ayyaControllerV2.effDate}"
+							mindate="#{h7ayyaControllerV2.aujourdhui}" 
+							showButtonPanel="true"
+							 validator="#{h7ayyaControllerV2.validerDateEffet}">
+
+
+
+						</p:calendar>
+						
+						<p:message for="datEffet" />
+						
+						
+						
+						<label class="bold">Durée du contrat (année) :</label>
+						
+						<p:inputNumber id="duree"    styleClass="dataInputNumber"
+							value="#{h7ayyaControllerV2.duree}"  required="true"
+							validatorMessage="La durée ne doit pas être nulle et ne doit pas dépasser #{h7ayyaControllerV2.maxDureeContrat} ans" 
+							requiredMessage="La durée est obligatoire"
+							minValue="0" maxValue="#{h7ayyaControllerV2.maxDureeContrat}"
+							validator="#{h7ayyaControllerV2.validerDuree}" >
+							
+							<f:validateLongRange minimum="1" 
+							maximum="#{h7ayyaControllerV2.maxDureeContrat}"/>  
+							
+							<p:ajax event="blur" update="dureeInfoPanel" />
+						</p:inputNumber>
+						
+<h:panelGroup id="dureeInfoPanel">
+
+    <!-- info non bloquant si <8 avec style PrimeFaces info -->
+    <h:panelGroup layout="block"
+                  styleClass="ui-message ui-message-info ui-corner-all"
+                  rendered="#{h7ayyaControllerV2.afficherDureeInfo}">
+        <h:outputText value="Si la durée est &lt; à 8 ans, ce contrat ne donne pas droit à l’avantage fiscal." />
+    </h:panelGroup>
+
+    <!-- erreur bloquante si = 0 -->
+    <p:message for="duree" />
+</h:panelGroup>
+						
+						
+						
+						<label class="bold">Contribution de base : </label>
+						<p:inputNumber id="contrib" styleClass="form-control"
+							value="#{h7ayyaControllerV2.contrib}"  
+								thousandSeparator="" decimalSeparator="." decimalPlaces="3"
+							validatorMessage="Contribution de base différent de zéro ." required="true"
+							requiredMessage="Contribution de base est obligatoire"
+							 >
+							<f:validateDoubleRange  minimum="0.001" />
+						</p:inputNumber>
+						<p:message for="contrib" />
+						
+						
+						
+                       <label class="bold">Fractionnement de la prime : </label>
+						
+					   <p:selectOneMenu value="#{h7ayyaControllerV2.frac}" id="frac" required="true"
+					   requiredMessage="Fractionnement de la prime est obligatoire">
+					       <f:selectItem itemLabel="Selectionnez..." itemValue="" noSelectionOption="true" />
+						    <f:selectItem itemValue="1" itemLabel="Annuel" />
+							<f:selectItem itemValue="2" itemLabel="Semestriel" />
+							<f:selectItem itemValue="3" itemLabel="Trimestriel" />
+							<f:selectItem itemValue="4" itemLabel="Mensuel" />
+							<f:selectItem itemValue="5" itemLabel="PRIME UNIQUE" />
+							 
+						</p:selectOneMenu>
+                       <p:message for="frac" />
+                       
+                       
+                       
+                       <label class="bold">Croissance Versements : </label>
+						
+					   <p:selectOneMenu value="#{h7ayyaControllerV2.crois}" id="crois" required="true"
+					   requiredMessage="Croissance Versements est obligatoire">
+					       <f:selectItem itemLabel="Selectionnez..." itemValue="" noSelectionOption="true" />
+						    <f:selectItem itemValue="1" itemLabel="0%" />
+							<f:selectItem itemValue="2" itemLabel="1%" />
+							<f:selectItem itemValue="3" itemLabel="2%" />
+							<f:selectItem itemValue="4" itemLabel="3%" />
+							<f:selectItem itemValue="5" itemLabel="4%" />
+							<f:selectItem itemValue="6" itemLabel="5%" />
+							<f:selectItem itemValue="7" itemLabel="6%" />
+							<f:selectItem itemValue="8" itemLabel="7%" />
+							<f:selectItem itemValue="9" itemLabel="8%" />
+							<f:selectItem itemValue="10" itemLabel="9%" />
+							<f:selectItem itemValue="11" itemLabel="10%" />
+							<f:selectItem itemValue="12" itemLabel="15%" />
+							<f:selectItem itemValue="13" itemLabel="20%" />
+							<f:selectItem itemValue="14" itemLabel="25%" />
+							 
+						</p:selectOneMenu>
+                       <p:message for="crois" />
+                       
+                       
+                       
+                        <label class="bold">Revenu annuel imposable : </label>
+						
+<!-- 					   <p:selectOneMenu value="#{h7ayyaControllerV2.tranche}" id="tranche" required="true" -->
+<!-- 					   requiredMessage="Tranche de revenu annuel est obligatoire"> -->
+<!-- 					       <f:selectItem itemLabel="Selectionnez..." itemValue="" noSelectionOption="true" /> -->
+<!-- 						    <f:selectItem itemValue="1" itemLabel="0 - 5000" /> -->
+<!-- 							<f:selectItem itemValue="2" itemLabel="5001 - 20000" /> -->
+<!-- 							<f:selectItem itemValue="3" itemLabel="20001 - 30000" /> -->
+<!-- 							<f:selectItem itemValue="4" itemLabel="30001 - 50000" /> -->
+<!-- 							<f:selectItem itemValue="5" itemLabel="+ 50000" /> -->
+							
+							 
+<!-- 						</p:selectOneMenu> -->
+						<p:inputNumber id="tranche" styleClass="form-control" 
+							value="#{h7ayyaControllerV2.dtranche}"  
+								thousandSeparator="" decimalSeparator="." decimalPlaces="3"
+							validatorMessage="Tranche de revenu annuel est obligatoire" required="true"
+							requiredMessage="Tranche de revenu annuel est obligatoire"
+							 >
+							<f:validateDoubleRange minimum="0.001" />
+						</p:inputNumber>
+                       <p:message for="tranche" />
+                       
+                       
+                       
+                      
+                       
+                       
+                       
+                       
+                       
+                       
+                       
+                       <h:outputLabel value="Garantie epargne : " styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						 
+							<p:selectBooleanCheckbox id="epargne" value="#{h7ayyaControllerV2.epargne}" 
+							disabled="true" styleClass="menu-visible"/>
+
+						 
+
+						<p:message for="epargne" />
+						
+						
+						<h:outputLabel value="Contre assurance Décès : " styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						<p:selectBooleanCheckbox id="deces_" value="#{h7ayyaControllerV2.assurance_deces}" 
+							disabled="true" styleClass="menu-visible"/>
+
+						 
+
+						<p:message for="deces_" />
+						
+						
+						
+						<h:outputLabel value="Contre assurance IAD : " styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						<p:selectBooleanCheckbox id="iad" value="#{h7ayyaControllerV2.iad}" 
+							disabled="true" styleClass="menu-visible"/>
+
+						 
+						<p:message for="iad" />
+                        
+
+
+
+					</h:panelGrid>
+									
+									
+									
+							        </p:panel>
+							        
+							        
+							        
+					    </p:tab>
+							
+											
+						<!-- tab 2 -->	
+						<p:tab id="tarif" title="Tarif">
+						<p:panel header="Tarif">
+						
+				                    <div class="tab-content tab_content_light">
+                        <div  id="Tarif" class="tab-pane fade in active">
+                            
+                            <div>  
+                          
+								<p:tabView  dynamic="true" cache="true" effect="fold">
+								        <p:tab title="Résultat">
+								        
+								        <br> </br>
+								        
+								        <br> </br>
+								        
+                                <div>  
+                                    <h:panelGrid id="grid1" columns="2" cellpadding="5">
+                                        
+                                         <p:outputLabel  value="Prime comptant: " for="primecomptant" styleClass="label label-danger price"/>
+                                        <h:outputText id="primecomptant" styleClass="label label-important price"  value="#{h7ayyaControllerV2.primeComptant}"  >
+                                           <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>	
+                                        </h:outputText>  
+                                        
+                                        
+                                        <p:outputLabel  value="Date echeance: " for="dateEcheance" styleClass="label label-danger price"/>
+                                        <h:outputText id="dateEcheance" styleClass="label label-info price"  value="#{h7ayyaControllerV2.echDateString}"  >
+                                           
+                                        </h:outputText>  
+                                        
+                                        
+                                                
+                                    </h:panelGrid>
+                                </div>	
+                                
+                                
+                                
+                                <hr> </hr>							        	
+								        
+								        
+								            <h:panelGrid id="grid2" columns="2" cellpadding="10">
+								            
+								              <p:dataTable var="detail" value="#{h7ayyaControllerV2.detailsGaranties}">
+												    <p:column headerText="Garantie">
+												        <h:outputText value="#{detail.libelle}" />
+												    </p:column>
+												 
+												    <p:column headerText="Capital calculé au TMG">
+												        <h:outputText value="#{detail.capital}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												 
+												    <p:column headerText="Prime Ann.">
+												        <h:outputText value="#{detail.prime * h7ayyaControllerV2.nombrePeriodePourFract}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												 
+												    
+												</p:dataTable>  
+								                
+								                    
+								            </h:panelGrid>
+								            
+								            <hr> </hr>
+								            
+								            
+								             
+								            
+								            
+								            <p:fieldset legend="Total Annuel" style="margin-bottom:20px">
+									            
+												<table id="grid3">
+												  <tr>
+												    <th class="mtd"> <h:outputText value="Prime Nette" /></th>
+												    <th class="mtd"> <h:outputText value="Accésoires" /></th>
+												    <th class="mtd"> <h:outputText value="Taxes" /></th>
+												    <th class="mtd"> <h:outputText value="Total" /> </th>
+												  </tr>
+												  <tr>
+												    <td><h:outputText value="#{h7ayyaControllerV2.pnette_annuel}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </td>
+												    <td><h:outputText value="#{h7ayyaControllerV2.accessoires}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												     </td>
+												    <td><h:outputText value="#{h7ayyaControllerV2.taxes}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </td>
+												    <td><h:outputText value="#{h7ayyaControllerV2.total_annuel}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </td>
+												  </tr>
+												  
+												  
+												</table>
+
+
+									        </p:fieldset>
+									        
+									        
+									        <hr> </hr>
+									        
+								<div>  
+                                    <h:panelGrid id="grid4" columns="2" cellpadding="5">
+                                        
+                                         <p:outputLabel  value="Commission comptant: " for="commission" styleClass="label label-danger price"/>
+                                        <h:outputText id="commission"   value="#{h7ayyaControllerV2.accessoires}"  styleClass="label label-info price">
+			                             <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+										</h:outputText>  
+                                        
+                                        
+                                        <p:outputLabel  value="Détail de la taxe (FGA): " for="fa" styleClass="label label-danger price"/>
+                                        <h:outputText id="fa"   value="#{h7ayyaControllerV2.fga}"  styleClass="label label-info price">
+			                             <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>												 
+			                            </h:outputText>          
+                                    </h:panelGrid>
+                                </div>	
+									        
+									       
+						 
+								            
+								        </p:tab>
+								        
+								        
+								        
+								        <p:tab title="Evolution des garanties">
+								        
+								        <br></br>
+								            <h:panelGrid columns="2" cellpadding="10">
+								               
+								             
+								              <p:dataTable var="detailsE" value="#{h7ayyaControllerV2.detailsEvolutionGaranties}"
+								              scrollable="true" scrollWidth="700">
+												    <p:column headerText="Année">
+												        <h:outputText value="#{detailsE.annee}" >
+												        
+												        </h:outputText>
+												    </p:column>
+												 
+												    <p:column headerText="Prime commerciale">
+												        <h:outputText value="#{detailsE.prime_comm}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												 
+<!-- 												    <p:column headerText="Prime à capitaliser"> -->
+<!-- 												        <h:outputText value="#{detailsE.prime_capit}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+												    <p:column headerText="Capital constitué TMG">
+												        <h:outputText value="#{detailsE.capital_tmg}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+<!-- 												    <p:column headerText="Capital constitué au Taux Réel"> -->
+<!-- 												        <h:outputText value="#{detailsE.capital_taux_reel}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Bénéfices Réalisés"> -->
+<!-- 												        <h:outputText value="#{detailsE.benefices_realises}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+												    <p:column headerText="Participation aux Bénéfices">
+												        <h:outputText value="#{detailsE.participation_benef}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Epargne prévisionnelle avec PB">
+												        <h:outputText value="#{detailsE.epargne_fin_annee}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+<!-- 												    <p:column headerText="Gain Financier"> -->
+<!-- 												        <h:outputText value="#{detailsE.gain_financier}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+												    <p:column headerText="Gain fiscal Annuel">
+												        <h:outputText value="#{detailsE.gain_fisc_annuel}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Valeur rachat">
+												        <h:outputText value="#{detailsE.valeur_rachat}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												   <p:column headerText="Cumul Versements">
+												        <h:outputText value="#{detailsE.cumul_vers}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+												        </h:outputText>
+												    </p:column>
+												 
+												    
+												</p:dataTable>  
+								               
+
+								            </h:panelGrid>
+								        </p:tab>
+								        
+								        
+								     <p:tab title="Bilan Financier">
+								        
+								        <br></br> <br></br>
+								            
+								               
+								             
+								             	<table>
+												  <tr>
+												    <th class="mtd"> <h:outputText value="Prime Versée" /></th>
+												    <th class="mtd"> <h:outputText value="Epargne Prévisionnelle" /></th>
+												    <th class="mtd"> <h:outputText value="Gain Financier" /></th>
+												    <th class="mtd"> <h:outputText value="Economie D'impôt" /> </th>
+												    <th class="mtd"> <h:outputText value="Gain total" /> </th>
+												  </tr>
+												  <tr>
+												    <td><h:outputText value="#{h7ayyaControllerV2.bilanFinancierHayyaDTO.primeversee}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </td>
+												    <td><h:outputText value="#{h7ayyaControllerV2.bilanFinancierHayyaDTO.epargneprev}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												     </td>
+												    <td><h:outputText value="#{h7ayyaControllerV2.bilanFinancierHayyaDTO.gainfinancier}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </td>
+												    <td><h:outputText value="#{h7ayyaControllerV2.bilanFinancierHayyaDTO.econimpot}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </td>
+												    <td><h:outputText value="#{h7ayyaControllerV2.bilanFinancierHayyaDTO.gaintotal}" >
+												    <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </td>
+												  </tr>
+												  
+												  
+												</table>  
+								               
+
+								            
+								        </p:tab>
+								        
+								
+								        
+								        
+								    </p:tabView>
+    
+                                </div>
+                              <div  class="form-actions">
+                              <p:messages  autoUpdate="true" showDetail="true"/>
+                              
+                              <p:commandLink  type="idvaliderPrposition"  id="validerPrposition"  
+                              action= "#{h7ayyaControllerV2.generateDevis7ayya()}" 
+                              update="validerPrposition, generateDevis" 
+                              styleClass="btn btn-success"  value="Valider Proposition" 
+                              disabled="#{!h7ayyaControllerV2.disabledGenerateDevis}"
+                              />
+                              
+                              <p:commandLink  ajax="false" target="_blank"  type="idImprimer=" 
+                              action= "#{h7ayyaControllerV2.generateDevis()}" 
+                              id="generateDevis" update="formAvj"  
+                              styleClass="btn btn-info"  value="Imprimer Devis" 
+                              disabled="#{h7ayyaControllerV2.disabledGenerateDevis}" />
+                            
+                            
+                           
+                              
+                               </div> 
+                               
+                             
+                            
+                        </div>  
+                        
+                    </div>       		
+						
+						</p:panel>
+						</p:tab>
+						
+						
+						
+						<!-- tab 3 -->
+						<p:tab id="contrat" title="Contrat">
+						<p:panel header="Contrat">
+						
+<!-- 						<h:form id="form"> -->
+						  <div>  
+                          
+								 
+								        
+								        <p:messages  autoUpdate="true" showDetail="true"/>
+								        
+								        <br></br> 
+								        
+								          <p:fieldset legend="Bénéficiaires :" style="margin-bottom:20px">
+									            
+									            <label class="bold"> Bénéficiaires en cas de vie : </label>
+									            											
+										    
+											    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+											        
+											        <p:selectOneRadio id="vie" value="#{h7ayyaControllerV2.vie}" 
+											        unselectable="true" process="formAvj" update="formAvj" 
+											        disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+											        styleClass="radio-compact">
+											            <f:selectItem itemLabel="Assuré" itemValue="1" />
+											            <f:selectItem itemLabel="Enfant(s)" itemValue="2" />
+											            <f:selectItem itemLabel="Autres" itemValue="3" />
+											            <p:ajax event="change" process="@this" update="formAvj"/>
+											        </p:selectOneRadio>
+											        
+											    </h:panelGrid>
+											    
+			<p:outputPanel id="panelGridEnfant" rendered="#{h7ayyaControllerV2.vie eq '2'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			 
+            <p:panelGrid id="newEnfant" columns="3" cellpadding="7">
+                <p:outputLabel for="txt_lastname" value="Nom" />
+                <p:inputText id="txt_lastname" value="#{h7ayyaControllerV2.enfant.nom}" 
+                required="true" requiredMessage="Le nom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_lastname"/>
+                <p:outputLabel for="txt_name" value="Prénom" />
+                <p:inputText id="txt_name" value="#{h7ayyaControllerV2.enfant.prenom}" 
+                required="true" requiredMessage="Le prénom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_name"/>
+                <p:outputLabel for="txt_cin" value="CIN / Passeport" />
+                <p:inputText id="txt_cin" value="#{h7ayyaControllerV2.enfant.cin}"  disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_cin"/>
+                <p:outputLabel for="txt_lien" value="Lien de parenté" />
+                <p:inputText id="txt_lien" value="#{h7ayyaControllerV2.enfant.lien}" required="true" requiredMessage="Le lien de parenté est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_lien"/>
+                <p:outputLabel for="Quote_part" value="Quote-part" />
+                <p:inputNumber id="Quote_part" value="#{h7ayyaControllerV2.enfant.quote}" minValue="1" maxValue="100" 
+                decimalPlaces="0" required="true" requiredMessage="La quote-part est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                <f:validateLongRange minimum="1" />
+                </p:inputNumber>
+                <p:message for="Quote_part"/>
+                <p:commandButton id="btn_save" value="Enregistrer" action="#{h7ayyaControllerV2.saveEnfant}"
+                                 process="@this,newEnfant" styleClass="orangeButton"
+                                 update="formAvj:newEnfant formAvj:enfantList"
+                                 disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="enfantList" value="#{h7ayyaControllerV2.enfantList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="formAvj:newEnfant" styleClass="orangeButton" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        <f:setPropertyActionListener value="#{p}" target="#{h7ayyaControllerV2.enfant}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandButton value="Supprimer" styleClass="orangeButton" action="#{h7ayyaControllerV2.deleteEnfant(p)}"  process="@this" update="formAvj:enfantList" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			
+			
+			 <p:outputPanel id="panelGridAutre" rendered="#{h7ayyaControllerV2.vie eq '3'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			 
+            <p:panelGrid id="newAutre" columns="3" cellpadding="7">
+                <p:outputLabel for="txt_lastname_autre" value="Nom" />
+                <p:inputText id="txt_lastname_autre" value="#{h7ayyaControllerV2.autre.nom}" 
+                required="true" requiredMessage="Le nom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_lastname_autre"/>
+                <p:outputLabel for="txt_name_autre" value="Prénom" />
+                <p:inputText id="txt_name_autre" value="#{h7ayyaControllerV2.autre.prenom}" 
+                required="true" requiredMessage="Le prénom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_name_autre"/>
+                <p:outputLabel for="txt_cin_autre" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_autre" value="#{h7ayyaControllerV2.autre.cin}"  required="true" requiredMessage="Le cin est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_cin_autre"/>
+                <p:outputLabel for="txt_lien_autre" value="Lien de parenté" />
+                <p:inputText id="txt_lien_autre" value="#{h7ayyaControllerV2.autre.lien}" required="true" requiredMessage="Le lien de parenté est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_lien_autre"/>
+                <p:outputLabel for="Quote_part_autre" value="Quote-part" />
+                <p:inputNumber id="Quote_part_autre" value="#{h7ayyaControllerV2.autre.quote}" minValue="1" maxValue="100" 
+                decimalPlaces="0" required="true" requiredMessage="La quote-part est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                <f:validateLongRange minimum="1" />
+                </p:inputNumber>
+                <p:message for="Quote_part_autre"/>
+                <p:commandButton id="btn_save_autres" value="Enregistrer" action="#{h7ayyaControllerV2.saveAutre}"
+                                 process="@this,newAutre" styleClass="orangeButton"
+                                 update="formAvj:newAutre formAvj:autreList"
+                                 disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="autreList" value="#{h7ayyaControllerV2.autreList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="formAvj:newAutre" styleClass="orangeButton" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        <f:setPropertyActionListener value="#{p}" target="#{h7ayyaControllerV2.autre}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandButton value="Supprimer" styleClass="orangeButton" action="#{h7ayyaControllerV2.deleteAutre(p)}" process="@this" update="formAvj:autreList" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			<hr></hr>
+			
+												<label class="bold"> Bénéficiaires en cas de décès : </label>
+									            											
+										    
+											    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+											        
+											        <p:selectOneRadio id="deces" value="#{h7ayyaControllerV2.deces}" 
+											        unselectable="true" process="formAvj" update="formAvj" 
+											        disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+											        styleClass="radio-compact">
+											            <f:selectItem itemLabel="Le conjoint à défaut les enfants nés ou à naître à défaut les ayants droit" itemValue="1" />
+											            <f:selectItem itemLabel="Enfant(s)" itemValue="2" />
+											            <f:selectItem itemLabel="Conjoint" itemValue="3" />
+											            <f:selectItem itemLabel="Parent(s)" itemValue="4" />
+											            <f:selectItem itemLabel="Autres" itemValue="5" />
+											            <p:ajax event="change" process="@this" update="formAvj"/>
+											        </p:selectOneRadio>
+											        
+											    </h:panelGrid>
+											    
+											    
+			<p:outputPanel id="panelGridDefaut" rendered="#{h7ayyaControllerV2.deces eq '1'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			 
+            <p:panelGrid id="newDefaut" columns="3" cellpadding="7">
+                <p:outputLabel for="txt_lastname_defaut" value="Nom" />
+                <p:inputText id="txt_lastname_defaut" value="#{h7ayyaControllerV2.defaut.nom}" 
+                required="true" requiredMessage="Le nom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+                validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_lastname_defaut"/>
+                <p:outputLabel for="txt_name_defaut" value="Prénom" />
+                <p:inputText id="txt_name_defaut" value="#{h7ayyaControllerV2.defaut.prenom}" 
+                required="true" requiredMessage="Le prénom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_name_defaut"/>
+                <p:outputLabel for="txt_cin_defaut" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_defaut" value="#{h7ayyaControllerV2.defaut.cin}" required="true" requiredMessage="Le cin est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_cin_defaut"/>
+                <p:outputLabel for="txt_lien_defaut" value="Lien de parenté" />
+                <p:inputText id="txt_lien_defaut" value="#{h7ayyaControllerV2.defaut.lien}" required="true" requiredMessage="Le lien de parenté est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_lien_defaut"/>
+                <p:outputLabel for="Quote_part_defaut" value="Quote-part" />
+                <p:inputNumber id="Quote_part_defaut" value="#{h7ayyaControllerV2.defaut.quote}" minValue="1" maxValue="100" 
+                decimalPlaces="0" required="true" requiredMessage="La quote-part est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                <f:validateLongRange minimum="1" />
+                </p:inputNumber>
+                <p:message for="Quote_part_defaut"/>
+                <p:commandButton id="btn_save_defaut" value="Enregistrer" action="#{h7ayyaControllerV2.saveDefaut}"
+                                 process="@this,newDefaut" styleClass="orangeButton"
+                                 update="formAvj:newDefaut formAvj:defautList"
+                                 disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="defautList" value="#{h7ayyaControllerV2.defautList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="formAvj:newDefaut" styleClass="orangeButton" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        <f:setPropertyActionListener value="#{p}" target="#{h7ayyaControllerV2.defaut}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandButton value="Supprimer" styleClass="orangeButton" action="#{h7ayyaControllerV2.deleteDefaut(p)}" process="@this" update="formAvj:defautList" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                         
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+											    
+			
+			
+			
+		  <p:outputPanel id="panelGridEnfantd" rendered="#{h7ayyaControllerV2.deces eq '2'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			 
+            <p:panelGrid id="newEnfantd" columns="3" cellpadding="7">
+                <p:outputLabel for="txt_lastname_enfant_d" value="Nom" />
+                <p:inputText id="txt_lastname_enfant_d" value="#{h7ayyaControllerV2.enfantd.nom}" 
+                required="true" requiredMessage="Le nom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_lastname_enfant_d"/>
+                <p:outputLabel for="txt_name_enfant_d" value="Prénom" />
+                <p:inputText id="txt_name_enfant_d" value="#{h7ayyaControllerV2.enfantd.prenom}" 
+                required="true" requiredMessage="Le prénom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_name_enfant_d"/>
+                <p:outputLabel for="txt_cin_enfant_d" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_enfant_d" value="#{h7ayyaControllerV2.enfantd.cin}"  disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_cin_enfant_d"/>
+                <p:outputLabel for="txt_lien_enfant_d" value="Lien de parenté" />
+                <p:inputText id="txt_lien_enfant_d" value="#{h7ayyaControllerV2.enfantd.lien}" required="true" requiredMessage="Le lien de parenté est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_lien_enfant_d"/>
+                <p:outputLabel for="Quote_part_enfant_d" value="Quote-part" />
+                <p:inputNumber id="Quote_part_enfant_d" value="#{h7ayyaControllerV2.enfantd.quote}" minValue="1" maxValue="100" 
+                decimalPlaces="0" required="true" requiredMessage="La quote-part est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                <f:validateLongRange minimum="1" />
+                </p:inputNumber>
+                <p:message for="Quote_part_enfant_d"/>
+                <p:commandButton id="btn_save_enfant_d" value="Enregistrer" action="#{h7ayyaControllerV2.saveEnfantd}"
+                                 process="@this,newEnfantd" styleClass="orangeButton"
+                                 update="formAvj:newEnfantd formAvj:enfantdList"
+                                 disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="enfantdList" value="#{h7ayyaControllerV2.enfantdList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="formAvj:newEnfantd" styleClass="orangeButton" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        <f:setPropertyActionListener value="#{p}" target="#{h7ayyaControllerV2.enfantd}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandButton value="Supprimer" styleClass="orangeButton" action="#{h7ayyaControllerV2.deleteEnfantd(p)}" process="@this" update="formAvj:enfantdList" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                         
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			
+			
+			
+			
+			<p:outputPanel id="panelGridConjoint" rendered="#{h7ayyaControllerV2.deces eq '3'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			 
+            <p:panelGrid id="newConj" columns="3" cellpadding="7">
+                <p:outputLabel for="txt_lastname_conj" value="Nom" />
+                <p:inputText id="txt_lastname_conj" value="#{h7ayyaControllerV2.conjoint.nom}" 
+                required="true" requiredMessage="Le nom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_lastname_conj"/>
+                <p:outputLabel for="txt_name_conj" value="Prénom" />
+                <p:inputText id="txt_name_conj" value="#{h7ayyaControllerV2.conjoint.prenom}" 
+                required="true" requiredMessage="Le prénom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_name_conj"/>
+                <p:outputLabel for="txt_cin_conj" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_conj" value="#{h7ayyaControllerV2.conjoint.cin}" required="true" requiredMessage="Le cin est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_cin_conj"/>
+                <p:outputLabel for="txt_lien_conj" value="Lien de parenté" />
+                <p:inputText id="txt_lien_conj" value="#{h7ayyaControllerV2.conjoint.lien}" required="true" requiredMessage="Le lien de parenté est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_lien_conj"/>
+                <p:outputLabel for="Quote_part_conj" value="Quote-part" />
+                <p:inputNumber id="Quote_part_conj" value="#{h7ayyaControllerV2.conjoint.quote}" minValue="1" maxValue="100" 
+                decimalPlaces="0" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                <f:validateLongRange minimum="1" />
+                </p:inputNumber>
+                <p:message for="Quote_part_conj"/>
+                <p:commandButton id="btn_save_conj" value="Enregistrer" action="#{h7ayyaControllerV2.saveConj}"
+                                 process="@this,newConj" styleClass="orangeButton"
+                                 update="formAvj:newConj formAvj:conjList"
+                                 disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="conjList" value="#{h7ayyaControllerV2.conjList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="formAvj:newConj" styleClass="orangeButton" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        <f:setPropertyActionListener value="#{p}" target="#{h7ayyaControllerV2.conjoint}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandButton value="Supprimer" styleClass="orangeButton" action="#{h7ayyaControllerV2.deleteConj(p)}" process="@this" update="formAvj:conjList" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                         
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			
+			<p:outputPanel id="panelGridParent" rendered="#{h7ayyaControllerV2.deces eq '4'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			 
+            <p:panelGrid id="newParent" columns="3" cellpadding="7">
+                <p:outputLabel for="txt_lastname_parent" value="Nom" />
+                <p:inputText id="txt_lastname_parent" value="#{h7ayyaControllerV2.parent.nom}" 
+                required="true" requiredMessage="Le nom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_lastname_parent"/>
+                <p:outputLabel for="txt_name_parent" value="Prénom" />
+                <p:inputText id="txt_name_parent" value="#{h7ayyaControllerV2.parent.prenom}" 
+                required="true" requiredMessage="Le prénom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+                validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_name_parent"/>
+                <p:outputLabel for="txt_cin_parent" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_parent" value="#{h7ayyaControllerV2.parent.cin}" required="true" requiredMessage="Le cin est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_cin_parent"/>
+                <p:outputLabel for="txt_lien_parent" value="Lien de parenté" />
+                <p:inputText id="txt_lien_parent" value="#{h7ayyaControllerV2.parent.lien}" required="true" requiredMessage="Le lien de parenté est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_lien_parent"/>
+                <p:outputLabel for="Quote_part_parent" value="Quote-part" />
+                <p:inputNumber id="Quote_part_parent" value="#{h7ayyaControllerV2.parent.quote}" minValue="1" maxValue="100" 
+                decimalPlaces="0" required="true" requiredMessage="La quote-part est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                <f:validateLongRange minimum="1" />
+                </p:inputNumber>
+                <p:message for="Quote_part_parent"/>
+                <p:commandButton id="btn_save_parent" value="Enregistrer" action="#{h7ayyaControllerV2.saveParent}"
+                                 process="@this,newParent" styleClass="orangeButton"
+                                 update="formAvj:newParent formAvj:parentList"
+                                 disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="parentList" value="#{h7ayyaControllerV2.parentList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="formAvj:newParent" styleClass="orangeButton" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        <f:setPropertyActionListener value="#{p}" target="#{h7ayyaControllerV2.parent}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandButton value="Supprimer" styleClass="orangeButton" action="#{h7ayyaControllerV2.deleteParent(p)}" process="@this" update="formAvj:parentList" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                         
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			
+			
+			<p:outputPanel id="panelGridAutred" rendered="#{h7ayyaControllerV2.deces eq '5'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			 
+            <p:panelGrid id="newAutred" columns="3" cellpadding="7">
+                <p:outputLabel for="txt_lastname_autred" value="Nom" />
+                <p:inputText id="txt_lastname_autred" value="#{h7ayyaControllerV2.autred.nom}" 
+                required="true" requiredMessage="Le nom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_lastname_autred"/>
+                <p:outputLabel for="txt_name_autred" value="Prénom" />
+                <p:inputText id="txt_name_autred" value="#{h7ayyaControllerV2.autred.prenom}" 
+                required="true" requiredMessage="Le prénom est requis" 
+                disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"
+				validatorMessage="Veuillez supprimer les caractères spéciaux">
+                <f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+                <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/></p:inputText>
+                <p:message for="txt_name_autred"/>
+                <p:outputLabel for="txt_cin_autred" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_autred" value="#{h7ayyaControllerV2.autred.cin}" required="true" requiredMessage="Le cin est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_cin_autred"/>
+                <p:outputLabel for="txt_lien_autred" value="Lien de parenté" />
+                <p:inputText id="txt_lien_autred" value="#{h7ayyaControllerV2.autred.lien}" required="true" requiredMessage="Le lien de parenté est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+                <p:message for="txt_lien_autred"/>
+                <p:outputLabel for="Quote_part_autred" value="Quote-part" />
+                <p:inputNumber id="Quote_part_autred" value="#{h7ayyaControllerV2.autred.quote}" minValue="1" maxValue="100" 
+                decimalPlaces="0" required="true" requiredMessage="La quote-part est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                <f:validateLongRange minimum="1" />
+                </p:inputNumber>
+                <p:message for="Quote_part_autred"/>
+                <p:commandButton id="btn_save_autreds" value="Enregistrer" action="#{h7ayyaControllerV2.saveAutred}"
+                                 process="@this,newAutred" styleClass="orangeButton"
+                                 update="formAvj:newAutred formAvj:autredList"
+                                 disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="autredList" value="#{h7ayyaControllerV2.autredList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="formAvj:newAutred" styleClass="orangeButton" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                        <f:setPropertyActionListener value="#{p}" target="#{h7ayyaControllerV2.autred}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandButton value="Supprimer" styleClass="orangeButton" action="#{h7ayyaControllerV2.deleteAutred(p)}" process="@this" update="formAvj:autredList" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+                         
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+				
+			
+
+									        </p:fieldset>
+									        
+		
+								        
+							<p:fieldset legend="Mode de paiement :" style="margin-bottom:20px" rendered="#{h7ayyaControllerV2.rendredModepaie}">
+							
+							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" process="formAvj" update="formAvj">
+						        <p:outputLabel for="@next" value="Fractionnement :" />
+						        <p:selectOneMenu id="Fractionnement" value="#{h7ayyaControllerV2.frac}" style="width:425px"
+						        disabled="true" styleClass="menu-visible">
+						            <f:selectItem itemLabel="FRACTIONNEMENT ANNUEL" itemValue="1" />
+						            <f:selectItem itemLabel="FRACTIONNEMENT SEMESTRIEL" itemValue="2" />
+						            <f:selectItem itemLabel="FRACTIONNEMENT TRIMESTRIEL" itemValue="3" />
+						           <f:selectItem itemLabel="FRACTIONNEMENT MENSUEL" itemValue="4" />
+						           <f:selectItem itemLabel="PRIME UNIQUE" itemValue="5" />
+						           
+						           
+						        </p:selectOneMenu>
+						     
+						        
+						        
+						         
+						        <p:outputLabel for="@next" value="Mode de Paiement :" />
+						        <p:selectOneRadio id="Mode" value="#{h7ayyaControllerV2.modepaie}" 
+						        disabled="#{h7ayyaControllerV2.disabledValidationAdhesion || 
+						        h7ayyaControllerV2.disabledModepaie}"
+						        styleClass="menu-visible radio-compact">
+						            <f:selectItem itemLabel="Direct" itemValue="1" />
+						            <f:selectItem itemLabel="Prélèvements bancaires" itemValue="2" />
+<!-- 						            <f:selectItem itemLabel="Domicilié" itemValue="2" /> -->
+<!-- 						            <p:ajax event="change" process="@this" update="form"/> -->
+<!-- 						        <p:ajax event="change" update="Mode" /> -->
+									<p:ajax event="change"
+									            listener="#{h7ayyaControllerV2.onModeChange}"
+									            update="formAvj"
+									            process="@this" />
+						        </p:selectOneRadio>
+						        
+ 
+						        </h:panelGrid>
+						        
+						        
+						        
+						        <h:panelGroup id="jourBlock" rendered="#{h7ayyaControllerV2.afficherJourBlock}">
+
+								    <h:panelGrid columns="2">
+								
+								        <p:outputLabel for="jourPrelevement"
+								                       value="Jour de prélèvement :" />
+								
+								        <p:selectOneMenu id="jourPrelevement"
+								                         value="#{h7ayyaControllerV2.jourPrelevement}"
+								                         styleClass="menu-visible" 
+								                         disabled="#{h7ayyaControllerV2.disabledValidationAdhesion }">
+								
+								            <f:selectItem itemLabel="-- Sélectionner --" itemValue="" noSelectionOption="true" />
+								            <f:selectItems value="#{h7ayyaControllerV2.joursDisponibles}" />
+								            
+								            <p:ajax event="change" 
+								            listener="#{h7ayyaControllerV2.onJourChange}"
+								            process="@this" update="jourBlock"/>
+								
+								        </p:selectOneMenu>
+								
+								    </h:panelGrid>
+								
+								</h:panelGroup>						        
+						        
+						        
+						          <h:panelGroup id="moisBlock" rendered="#{h7ayyaControllerV2.afficherMois}">
+						          
+							        <h:panelGrid columns="2">
+							        
+							            <p:outputLabel for="moisPrelevement" value="Mois de prélèvement :" />
+							            
+							            <p:selectOneMenu id="moisPrelevement"
+							                             value="#{h7ayyaControllerV2.moisPrelevement}"
+							                             styleClass="menu-visible" 
+							                             disabled="true">
+							                             
+							                <f:selectItem itemLabel="-- Sélectionner --" itemValue="" noSelectionOption="true" />
+							                <f:selectItems value="#{h7ayyaControllerV2.moisDisponibles}" />
+							                
+							                <p:ajax event="change" 
+							                listener="#{h7ayyaControllerV2.onMoisChange}"
+							                process="@this" update="moisBlock"/>
+							                
+							            </p:selectOneMenu>
+							            
+							        </h:panelGrid>
+							        
+							    </h:panelGroup>
+						        
+						        <p:outputPanel id="panelModePaie" rendered="#{h7ayyaControllerV2.modepaie eq '22'}" >	
+						        
+						         
+						        
+						        <h:panelGrid id="mode_paiement" columns="3"   style="margin-bottom:5px" cellpadding="15" >
+						        
+						        <p:outputLabel for="@next" value="Banque :" />
+						        <p:selectOneMenu id="banque" value="#{h7ayyaControllerV2.banque}" style="width:125px" 
+						        required="true" requiredMessage="La banque est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+						        <f:selectItem itemLabel="AMEN BANK" itemValue="1"/>
+								<f:selectItem itemLabel="ATB" itemValue="2"/>
+								<f:selectItem itemLabel="ABC" itemValue="3"/>
+								<f:selectItem itemLabel="BIAT" itemValue="4"/>
+								<f:selectItem itemLabel="BNA" itemValue="5"/>
+								<f:selectItem itemLabel="BT" itemValue="6"/>
+								<f:selectItem itemLabel="BFT" itemValue="7"/>
+								<f:selectItem itemLabel="BH" itemValue="8"/>
+								<f:selectItem itemLabel="CITI GROUP" itemValue="9"/>
+								<f:selectItem itemLabel="STB" itemValue="10"/>
+								<f:selectItem itemLabel="UIB" itemValue="11"/>
+								<f:selectItem itemLabel="UBCI" itemValue="12"/>
+								<f:selectItem itemLabel="ATTIJARI BANK" itemValue="13"/>
+								<f:selectItem itemLabel="TQB" itemValue="14"/>
+								<f:selectItem itemLabel="LA POSTE TUNISIENNE" itemValue="15"/>
+								<f:selectItem itemLabel="BANQUE ZITOUNA" itemValue="16"/>
+								<f:selectItem itemLabel="BTK" itemValue="17"/>
+								<f:selectItem itemLabel="AL BARAKA BANK" itemValue="18"/>
+								<f:selectItem itemLabel="BTE" itemValue="19"/>
+								<f:selectItem itemLabel="BTL" itemValue="20"/>
+								<f:selectItem itemLabel="CITIBANK Tunisian Branch onshore" itemValue="21"/>
+								<f:selectItem itemLabel="NAIB BANK" itemValue="22"/>
+								<f:selectItem itemLabel="TSB" itemValue="23"/>
+								<f:selectItem itemLabel="UNION BANCAIRE POUR LE COMMERCE ET L'INDUSTRIE (UBCI) (groupe BNP Paribas)" itemValue="24"/>
+								<f:selectItem itemLabel="BTS" itemValue="25"/>
+								<f:selectItem itemLabel="QNB" itemValue="26"/>
+								<f:selectItem itemLabel="TIB" itemValue="27"/>
+								<f:selectItem itemLabel="WIFAK BANK" itemValue="28"/>
+						        </p:selectOneMenu>
+						        <p:message for="banque"/>
+						        
+						        
+						        <p:outputLabel for="@next" value="Agence :" />
+						        <p:inputText id="agence" value="#{h7ayyaControllerV2.agence}" required="true"
+						        requiredMessage="L'agence est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+						        <p:message for="agence"/>
+						        
+						         
+						        <p:outputLabel for="@next" value="RIB :" />
+						        <p:inputText id="rib" value="#{h7ayyaControllerV2.rib}" required="true"
+						        requiredMessage="Le rib est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+						         <p:message for="rib"/>
+						        
+						         
+						        <p:outputLabel for="@next" value="Payeur de prime :" />
+						        <p:selectOneRadio id="payeur" value="#{h7ayyaControllerV2.payeur}" unselectable="true" 
+						        disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}">
+						            <f:selectItem itemLabel="Assuré" itemValue="1" />
+						            <f:selectItem itemLabel="Autre" itemValue="2" />
+						            <p:ajax event="change" process="@this" update="formAvj"/>
+						        </p:selectOneRadio>
+						        
+						        </h:panelGrid>
+						        
+						        
+						        <p:outputPanel id="panelPayeur" rendered="#{h7ayyaControllerV2.payeur eq '2'}" styleClass="noBorders" cellpadding="2" cellspacing="5">							        
+						        <h:panelGrid id="payeur_de_prime" columns="4" style="margin-bottom:10px" cellpadding="5" >
+						        
+						        <p:outputLabel value=""  />
+						        <p:outputLabel for="@next" value="Nom Payeur :" />
+						        <p:inputText id="nomPayeur" value="#{h7ayyaControllerV2.nomPayeur}" required="true"
+						        requiredMessage="Le nom payeur est requis" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+						        <p:message for="nomPayeur"/>
+						        
+						        <p:outputLabel value=""  />
+						        <p:outputLabel for="@next" value="CIN Payeur :" />
+						        <p:inputText id="cinPayeur" value="#{h7ayyaControllerV2.cinPayeur}" required="true"
+						        requiredMessage="La cin payeur est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+						        <p:message for="cinPayeur"/>
+						        
+						        <p:outputLabel value=""  />
+						        <p:outputLabel for="@next" value="Adresse Payeur :" />
+						        <p:inputText id="adressePayeur" value="#{h7ayyaControllerV2.adressePayeur}" required="true"
+						        requiredMessage="L'adresse payeur est requise" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/>
+						        <p:message for="adressePayeur"/>
+						        
+						        </h:panelGrid>
+						        </p:outputPanel>
+						        
+						        
+						        
+						        
+						        
+						         
+						        
+						        </p:outputPanel>
+        
+							
+							
+							
+							
+							</p:fieldset>							        
+									        
+						
+							
+<!-- 							<p:fieldset legend="Dispositions Spéciales :" style="margin-bottom:20px" rendered="false">		 -->
+							
+<!-- 							<p:inputTextarea rows="5" cols="50"  value="#{h7ayyaControllerV2.dispoSpec}"  autoResize="false"  -->
+<!-- 							disabled="#{h7ayyaControllerV2.disabledValidationAdhesion}"/> -->
+							
+							
+<!-- 							</p:fieldset>         -->
+									         
+    
+                                </div>
+                              <div  class="form-actions">
+                              <p:messages  autoUpdate="true" showDetail="true"/>
+                              
+                              
+                              <p:commandLink id="Contrat1" value="Valider En Contrat" styleClass="btn btn-danger"
+								update="formAvj" ajax="true" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion || h7ayyaControllerV2.disabledall}"
+								actionListener="#{h7ayyaControllerV2.ValiderProposition()}" 
+								rendered="#{(h7ayyaControllerV2.modepaie eq '-1' || h7ayyaControllerV2.modepaie eq '1' 
+								|| h7ayyaControllerV2.modepaie eq '2') and
+								(h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('002707PPM000') ||  
+								(  h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('qnb_non_022671FPM000')))}"
+								process="@this" oncomplete='$("#loader_cont").fadeOut();'/>
+								
+								
+                              <p:commandLink id="Contrat_qnb" value="Valider En Contrat" styleClass="btn btn-danger"
+								update="formAvj" ajax="true" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion || h7ayyaControllerV2.disabledall}"
+								actionListener="#{h7ayyaControllerV2.ValiderProposition()}" 
+								rendered="#{(h7ayyaControllerV2.modepaie eq '-1' || h7ayyaControllerV2.modepaie eq '1' 
+								|| h7ayyaControllerV2.modepaie eq '2') and
+								(h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('stb_non_002707PPM000') ||  
+								(  h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('022671FPM000')))}"
+								process="@this" 
+								oncomplete='$("#loader_cont").fadeOut();'>
+								
+<p:confirm header="Confirmation"
+        message="Merci de confirmer que la prime doit être encaissée par chèque, en espèces ou par virement."
+        icon="ui-icon-alert" />
+
+</p:commandLink>							
+								
+								
+								
+								<p:commandLink id="Contrat2" value="Valider En Contrat" styleClass="btn btn-danger"
+								update="formAvj" ajax="true" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion || h7ayyaControllerV2.disabledall}"
+								actionListener="#{h7ayyaControllerV2.ValiderProposition()}" 
+								rendered="#{h7ayyaControllerV2.modepaie eq '22' and h7ayyaControllerV2.payeur eq '1' and
+								(!h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('002707PPM000') ||  
+								(  h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('002707PPM000') ) )}"
+								process="@this,mode_paiement"/>
+								
+								
+								<p:commandLink id="Contrat3" value="Valider En Contrat" styleClass="btn btn-danger"
+								update="formAvj" ajax="true" disabled="#{h7ayyaControllerV2.disabledValidationAdhesion || h7ayyaControllerV2.disabledall}"
+								actionListener="#{h7ayyaControllerV2.ValiderProposition()}" 
+								rendered="#{h7ayyaControllerV2.modepaie eq '22' and h7ayyaControllerV2.payeur eq '2' and
+								(!h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('002707PPM000') ||  
+								(  h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('002707PPM000')  ) )}"
+								process="@this,mode_paiement,payeur_de_prime"/>
+                              
+                              <p:commandLink id="enc"   type="idEnc=" actionListener= "#{h7ayyaControllerV2.Encaissement_Global()}" 
+                              update="formAvj" ajax="true"
+                              styleClass="btn btn-danger"  value="Encaissement"  
+                              disabled="#{!h7ayyaControllerV2.disabledValidationAdhesion || h7ayyaControllerV2.disabledall}" 
+                              rendered="#{h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('002707PPM000') 
+                              and (!clientBean.client.ncompte.equals('') and clientBean.client.ncompte !=null)}"
+                              process="@this,mode_paiement,payeur_de_prime"/> 
+                              
+                              <p:commandLink  type="idvaliderAdhesion"  id="validerAdhesion"  action= "#{h7ayyaControllerV2.imprimer()}" 
+                              update="formAvj"  ajax="false" target="_blank"
+                              styleClass="btn btn-success"  value="Imprimer le Contrat" 
+                              disabled="#{!h7ayyaControllerV2.testImpression}"  
+                               
+                              process="@this"/>
+                              
+                             <p:commandLink  type="idvaliderNotice"  id="validerNotice"  action= "#{h7ayyaControllerV2.imprimer_notice()}" 
+                              update="formAvj"  ajax="false" target="_blank"
+                              styleClass="btn btn-success"  value="Imprimer la Notice" 
+                              disabled="#{!h7ayyaControllerV2.testImpression}"  
+                              process="@this"/>
+                              
+                              <p:commandLink  type="idvaliderQuit"  id="validerQuit"  action= "#{h7ayyaControllerV2.imprimer_quit()}" 
+                              update="formAvj"  ajax="false" target="_blank"
+                              styleClass="btn btn-success"  value="Imprimer la Quittance" 
+                              disabled="#{!h7ayyaControllerV2.testImpression}"  
+                              process="@this"/>
+  
+                                <p:commandLink  style="color: #fff !important;"
+                                type="idgenerateAttestImpot"  id="generateAttestImpot"  action= "#{h7ayyaControllerV2.imprimer_impot_V2()}" 
+                              update="formAvj"  ajax="false" target="_blank"
+                              styleClass="btn btn-primary"  value="Imprimer Attestation" 
+                              disabled="#{!h7ayyaControllerV2.testImpression}"  
+                              process="@this"/>                            
+                                                      
+                              
+
+							
+	                    <p:commandLink  type="idvaliderAutoPrel"  id="validerAutoPrel"  action= "#{h7ayyaControllerV2.printAutoPrel()}" 
+                              update="formAvj"  ajax="false" target="_blank"
+                              styleClass="btn btn-success"  value="Imprimer l'autorisation de prélèvements" 
+                              disabled="#{!h7ayyaControllerV2.testImpression}"  
+                              rendered="#{h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('xx022671FPM000') ||
+                              h7ayyaControllerV2.utilisateur.agence.societe.codSociet.equals('xx002707PPM000')}" 
+                              process="@this"/>	     						
+							
+                   
+                               </div> 
+                               
+                               
+         
+        <p:dialog header="ATTESTATION D'ASSURANCE VIE" showEffect="fade" modal="true" position="left,bottom"
+                  widgetVar="manageProductDialog" responsive="true" id="manage-product-content" width="650">
+            <p:outputPanel  id="manage-product-content-bis">
+                <p:outputPanel >
+                    
+                    <p class="ui-widget">
+                    </p>
+                    
+					<p class="ui-widget">
+                        Veuillez saisir une date pour imprimer l'attestation d'assurance vie.
+                    </p>
+                    
+                    <p class="ui-widget">
+                    </p>
+                    
+                    <div class="p-field">
+                        <p:outputLabel for="date_impot">Date: </p:outputLabel>
+                        
+                      
+						
+						<p:calendar
+							value="#{h7ayyaControllerV2.dateImpot}"
+							id="date_impot"  pattern="dd/MM/yyyy" size="5"							
+							styleClass="small-font"
+							validatorMessage="La date n'est pas valide!" 
+							requiredMessage="La date est obligatoire!">
+							<p:ajax event="dateSelect"
+							update="validerImpot"
+							listener="#{h7ayyaControllerV2.updateValiderImpot()}" />
+							
+							<p:ajax event="keyup" update="validerImpot" 
+							listener="#{h7ayyaControllerV2.updateValiderImpot()}"/>
+													
+							<p:ajax event="blur" update="validerImpot" 
+							listener="#{h7ayyaControllerV2.updateValiderImpot()}"/>
+							
+							<p:ajax event="change"  update="validerImpot"
+							listener="#{h7ayyaControllerV2.updateValiderImpot()}"/>
+							
+							</p:calendar>						
+						
+						<p:message for="date_impot" />
+						<p:messages  autoUpdate="true" showDetail="true" closable="true"/>
+         				<p:growl id="messages" showDetail="true"/>
+                    </div>
+                     
+                     
+                     
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+               
+                              
+                              
+                  <p:commandLink  type="validerImpot"  id="validerImpot"  action= "#{h7ayyaControllerV2.imprimer_impot()}" 
+                              update="formAvj"  ajax="false" target="_blank" style="color:#ffffff"
+                              styleClass="btn btn-success"  value="Imprimer l'attestation" 
+                              disabled="#{!h7ayyaControllerV2.valider_impot}"
+                              process="@this"/>                             
+                                 
+                
+            </f:facet>
+        </p:dialog>
+        
+<!--         </h:form> -->
+						
+						</p:panel>
+						</p:tab>
+						
+						
+						
+						</p:wizard>
+						
+						
+						
+<p:confirmDialog
+    global="true"
+    styleClass="modern-confirm"
+    showEffect="fade"
+    hideEffect="fade"
+    width="480">
+
+    <p:commandButton
+        value="Annuler"
+        type="button"
+        styleClass="ui-confirmdialog-no modern-cancel"
+        icon="ui-icon-close" />
+
+    <p:commandButton
+        value="Oui, valider"
+        type="button"
+        styleClass="ui-confirmdialog-yes modern-confirm-btn"
+        icon="ui-icon-check" />
+
+</p:confirmDialog>
+						
+						
+			 				<p:blockUI block="formAvj" trigger="wizard,validerPrposition, generateDevis,
+			 				validerAdhesion,validerNotice,validerQuit,enc,
+			 				Contrat1,Contrat2,Contrat3,Contrat_qnb">
+						        Chargement...<br />
+						        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+					    	</p:blockUI>			
+						
+						</h:form>
+						
+						
+
+					</ul>
+				</div>
+			</div>
+		</h:body>
+	</ui:define>
+</ui:composition>						

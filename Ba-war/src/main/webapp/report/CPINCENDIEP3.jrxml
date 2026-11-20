@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CPINCENDIE" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c718e77-4767-4f1e-9ae4-3e413c044302">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="463"/>
+	<parameter name="Contrat" class="java.lang.String"/>
+	<parameter name="DateEffet" class="java.lang.String"/>
+	<parameter name="Expiration" class="java.lang.String"/>
+	<parameter name="Echeance" class="java.lang.String"/>
+	<parameter name="Avenant" class="java.lang.String"/>
+	<parameter name="Fractionnement" class="java.lang.String"/>
+	<parameter name="PtVente" class="java.lang.String"/>
+	<parameter name="DateDeb" class="java.lang.String"/>
+	<parameter name="DateFin" class="java.lang.String"/>
+	<parameter name="Assure" class="java.lang.String"/>
+	<parameter name="Adresse" class="java.lang.String"/>
+	<parameter name="Cin" class="java.lang.String"/>
+	<parameter name="mfS2" class="java.lang.String"/>
+	<parameter name="PrimeNette" class="java.lang.String"/>
+	<parameter name="Cout" class="java.lang.String"/>
+	<parameter name="Taxes" class="java.lang.String"/>
+	<parameter name="frais" class="java.lang.String"/>
+	<parameter name="capital" class="java.lang.String"/>
+	<parameter name="PrimeTotale" class="java.lang.String"/>
+	<parameter name="QSouscripteur" class="java.lang.String"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="contratautre" class="java.lang.String"/>
+	<parameter name="adresseagence" class="java.lang.String"/>
+	<parameter name="franchise" class="java.lang.String"/>
+	<parameter name="situation" class="java.lang.String"/>
+	<field name="nomParcelle" class="java.lang.String"/>
+	<field name="superficie" class="java.lang.String"/>
+	<field name="natureRecoltes" class="java.lang.String"/>
+	<field name="prixUnitaire" class="java.lang.String"/>
+	<field name="localisation" class="java.lang.String"/>
+	<field name="rendement" class="java.lang.String"/>
+	<field name="nbrPieds" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue()==1]]></printWhenExpression>
+			<rectangle radius="0">
+				<reportElement uuid="54059613-f765-472c-92b1-b1ef49ff30b0" x="10" y="94" width="535" height="463"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="50e3512b-6288-4269-a628-d753dd09a24b" x="13" y="105" width="85" height="95"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="647a436b-88bc-4dfa-bf6f-ceec7fde5de7" x="194" y="105" width="89" height="95"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="d8a5bc65-0f1b-4f8a-bb39-548604c594e1" x="101" y="105" width="90" height="95"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="0d1d4c1b-d5e5-43f5-9a9e-43f7e318e41d" x="428" y="105" width="114" height="94"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="bc8dc752-52fa-4cba-8247-6315c8ccca46" x="286" y="105" width="68" height="95"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="41e711c3-c73d-4666-a32a-891c60a846d0" x="357" y="105" width="69" height="94"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="93e04245-9394-4ec3-a568-85c12109d237" x="13" y="209" width="155" height="80"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="da934329-2f2e-4d78-9ff7-9edea65fcba7" x="172" y="209" width="190" height="80"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="acf84860-362d-49ba-8fa9-1a2dfe86a000" x="367" y="209" width="173" height="80"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="f8f1374a-54a1-4d3d-ba1b-512e454c6c37" x="13" y="292" width="527" height="113"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a62dca0b-ff5f-45ff-8190-009d81dc89d3" x="13" y="412" width="176" height="63"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="60311fe2-fe53-4ce3-aa64-ff1b6672fa15" x="376" y="412" width="164" height="63"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="a971fb82-b855-40fc-b1e6-852b1443144b" x="194" y="412" width="102" height="63"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="142747d8-c3dd-494a-8315-5901a9070c1a" x="300" y="412" width="73" height="63"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="84929802-de86-46a8-8878-cd43817095be" x="13" y="477" width="176" height="80"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6a917034-e7fe-4dae-9d55-e8f91096b23d" x="194" y="477" width="346" height="80"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="ac5d6de1-67ac-4015-8cea-4bd84e620974" x="269" y="486" width="189" height="17"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CATEGORIE D’ASSURANCE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df78879f-9823-467b-a747-4d4ca26de13f" x="258" y="504" width="229" height="21"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INCENDIE RISQUE AGRICOLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fa41d4f3-2c3d-4f84-8d42-8bdf162ba1ac" x="16" y="114" width="82" height="17"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRAT N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4fcb65f0-7ac8-4315-87b2-973fae0fd370" x="108" y="114" width="93" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE D’EFFET]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7cbb0fa4-2fca-4500-a71c-1d1b2ef919cb" x="199" y="114" width="95" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXPIRATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a8cc0d5c-2f31-46de-8af6-5d077b62d6f5" x="361" y="114" width="65" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AVENANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="741a5daa-0ff2-4747-8493-d42d88c7e5fa" x="289" y="114" width="70" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ECHEANCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e8a8014-8d52-4188-833c-2098267c47aa" x="437" y="112" width="124" height="26"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FRACTIONNEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cc5fd08f-1b54-43d2-a21b-339f82dc2dbc" x="32" y="216" width="114" height="17"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POINT DE VENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="78731eeb-6da0-4e49-b5bc-bf54f7574b59" x="188" y="211" width="165" height="17"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERIODE D'ASSURANCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b964eef-1ec6-43dd-87f7-e1ed9200452a" x="385" y="216" width="146" height="17"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODE DE PAIEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cc37b5a2-8f51-488b-b2d9-4df9a918c46f" x="18" y="340" width="66" height="17"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSURE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cc37b5a2-8f51-488b-b2d9-4df9a918c46f" x="18" y="373" width="70" height="17"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adresse :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28c03ed1-8bb2-4f2b-b676-be884557cd81" x="17" y="419" width="184" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIME NETTE AU COMPTANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1d668176-e64d-4b11-b5ea-1b966bb9171f" isPrintRepeatedValues="false" x="139" y="447" width="26" height="17"/>
+				<textElement>
+					<font size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ab4242f4-48c1-41c9-9531-b90657690dbd" isPrintRepeatedValues="false" x="252" y="448" width="21" height="17"/>
+				<textElement>
+					<font size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="17eef574-1778-4267-92be-121f169d04c8" x="198" y="417" width="93" height="27"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COÛT + FGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d50ef987-c4c1-4647-812c-e1485a7426d3" x="387" y="416" width="141" height="34"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIME TOTALE AU COMPTANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a8e3ef98-82e1-4e54-a98a-f0dc5c9a9fe9" x="313" y="419" width="48" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TAXES]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d0ece299-8bfd-4462-812d-f79a769c547d" x="16" y="149" width="79" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Contrat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="29d9ec78-ea32-4c6a-b471-f3088b8cad6c" x="108" y="149" width="83" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateEffet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3ab94894-8464-4e31-b186-5b64e0cebb01" x="196" y="148" width="85" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Expiration}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e5693f26-1ec1-4f3a-ad2c-c5a7d87b62b5" x="359" y="147" width="68" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Avenant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a07f67c9-8f6a-4aae-8193-3cf4da74c6d3" x="446" y="147" width="88" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Fractionnement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f2070514-9e90-4008-93c0-554533a4bd20" x="20" y="246" width="148" height="29"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PtVente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d813c4a3-11d2-43b3-ae9e-d0bb516ebf21" x="194" y="233" width="27" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Du]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ec7a39a-d2df-4b2b-b536-76b22196ebae" x="195" y="253" width="27" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Au]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6180785b-104a-4ce6-acd3-0bd199c5bf2e" x="230" y="233" width="121" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateDeb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9b9c6b61-70e2-496a-bb07-307ad0c2cdae" x="233" y="255" width="120" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateFin}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="115745ae-ca05-4f42-9a53-5d112315d44b" x="89" y="339" width="226" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Assure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="55e7ba52-7de2-4a7c-80d2-f2527fa07280" x="396" y="339" width="148" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Cin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3561b508-0f85-4a05-90bd-30bf2d5c077e" x="37" y="447" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrimeNette}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b69d3ff-f3e0-40a9-9754-1104905464e7" x="385" y="451" width="91" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrimeTotale}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f7fedfd1-2431-4388-98a6-e23b16f3cca4" isPrintRepeatedValues="false" x="480" y="452" width="26" height="17"/>
+				<textElement>
+					<font size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[DT]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="79ed61eb-16d6-4e93-9427-06260b5f3702" x="304" y="447" width="68" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Taxes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ce63ca56-4a87-42f7-8774-63898c941fb3" x="206" y="449" width="41" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Cout}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ed37da6e-5525-4560-a9a3-ad9d6a4f9807" x="139" y="25" width="281" height="27"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="18"/>
+				</textElement>
+				<text><![CDATA[CONDITIONS PARTICULIERES]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="7599b887-d8c3-4a70-8073-f7cd9ee46bef" x="93" y="373" width="440" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Adresse}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="082307f2-c15e-4163-a0e1-5f0cef083339" x="33" y="294" width="495" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSUREUR : SOCIETE TUNISIENNE D’ASSURANCE ET DE REASSURANCE /STAR ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="526c0fda-cac2-4a4d-a9a0-bdd2ffe56cf8" x="32" y="311" width="422" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRACTANT : LA BANQUE NATIONALE AGRICOLE/ BNA   ]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="d666cb26-68e7-43ed-aa04-1981e8a4ff86" x="454" y="29" width="90" height="61"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="0cc73e02-9e33-422d-b4c5-fb96c16a7514" x="15" y="25" width="90" height="61"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="e8cf41db-367d-4b75-99e2-00b233aa515f" x="334" y="340" width="60" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mfS2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ad96159a-2052-44e9-b464-b296057c131b" x="76" y="634" width="105" height="20"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Cin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="47ca7f94-c432-4522-8936-4d390984795b" x="15" y="597" width="529" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Conformément aux présentes conditions particulières ainsi qu’aux conditions Générales d’assurances]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4b863b26-d8cf-4f1a-95b9-e04b419671dd" x="16" y="634" width="60" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Identifiant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="85ffc9d5-a227-4727-b828-f7e2e301fd89" x="16" y="615" width="216" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[d’assurances «INCENDIE » dont l’assuré :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40d7c57e-4f2a-4495-9790-8c74c7f1be93" x="181" y="635" width="242" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[reconnaît avoir reçu un exemplaire, ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="da5c542c-767f-478d-ba74-a30ba46f709c" x="235" y="615" width="248" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Assure}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f4223a47-b90d-4321-a98c-c91a5c3ea75b" x="30" y="575" width="183" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="13" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[I/ OBJET DE LA GARANTIE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1853c9a4-feed-440b-b3fa-44c1abdcf95c" x="18" y="661" width="521" height="30"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[la Société Tunisienne d’Assurance et de Réassurance STAR dont le siège est à Tunis, Square Avenue de Paris, garantit contre le risque INCENDIE RISQUES AGRICOLES, ce qui suit :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="067fe65d-ff54-4cd0-a331-75207bddde2e" x="412" y="246" width="125" height="17"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPTANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7852774a-f4c2-4afa-949d-7b090e2190bd" x="326" y="528" width="90" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Pack 3 : BNA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d6de2a0d-0af4-4a3d-9043-768f6218d35e" x="21" y="737" width="144" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[SITUATION DU RISQUE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f7b37990-4207-4351-afd7-f8c4ac7893d9" x="19" y="703" width="146" height="20"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[ACTIVITE DE L’ASSURE : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4065f269-f018-4db5-890a-b2a9fe6cf6b9" x="135" y="737" width="112" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{situation}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="802">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue()==1]]></printWhenExpression>
+			<staticText>
+				<reportElement uuid="d833b60a-691f-44c1-ae5e-1c5b60756c8c" x="16" y="90" width="521" height="130"/>
+				<textElement>
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[L'Assuré déclare vouloir déléguer, transporter et céder au profit de LA BANQUE NATIONALE AGRICOLE, le montant du capital pouvant être dû par la Société Tunisienne d'Assurances et de Réassurances en cas de sinistre couvert par le présent contrat. Cependant,  il est  convenu  que  l'organisme  prêteur ne sera bénéficiaire que du montant dû  par  l'assuré  au  moment  du  sinistre,  le restant du capital garanti sera remboursé à ce dernier ou à ses ayants droit. La présente garantie continuera à courir vis-à-vis DeLA BANQUE NATIONALE AGRICOLE, tant que Société Tunisienne d'Assurances et de Réassurances n'aura pas préalablement à toute suspension de garantie, informé LA BANQUE NATIONALE AGRICOLE, par lettre recommandée avec accusé de réception.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5097e76f-309d-40fd-b165-a12e53e04915" x="12" y="52" width="246" height="21"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[II/ DELEGATION DE GARANTIE :
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="b60443af-33b7-4822-80a0-98800e11034b" x="7" y="232" width="534" height="218"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="af819340-936c-4b2c-b543-4029c3714563" x="7" y="232" width="534" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="0f34f33e-6880-4d6b-a33c-149341660659" x="21" y="235" width="62" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Risques]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dc205198-911d-46e9-ba0b-2ca58643c7a3" x="278" y="235" width="87" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capital Assuré]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="517ef65f-dd17-4b13-a6c2-6f60fa95c0d2" x="428" y="235" width="87" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P.N Comptant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="35c2b0c0-b5be-4033-830a-aced126885f8" x="34" y="345" width="192" height="31"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOUTES EXPLOSIONS RISQUES DIRECTES (voir annexe) :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c66e9f50-82b0-46b5-ac27-b03ed2ddb3dd" x="352" y="342" width="20" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[DT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e85a364-ef84-46d3-99f7-5df91888d60b" x="505" y="342" width="19" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[DT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c437ee4c-f177-4b8f-b5bb-5c560029a3fb" x="15" y="386" width="233" height="53"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Deux dépôts de stockage de balles de foin et de paille se trouvant ou pouvant se trouver dans la parcelle BREGUIG sis à ROKOB, GHAZELLE – MATEUR.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c2615f0f-bd7b-4916-8d6c-5b4541cd89c4" x="445" y="342" width="60" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrimeNette}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="88856155-925e-4cd2-84b1-3ce42898270a" x="288" y="342" width="61" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{capital}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3d128685-256d-4aa1-9e70-cac11050257b" x="118" y="19" width="195" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[INTERCALAIRE AU CONTRAT N°]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="545d2030-5da8-4c0e-8da1-5c3f02421558" x="305" y="19" width="74" height="17"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Contrat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="42cc550d-0e46-4220-aa21-258394ad230a" x="14" y="454" width="85" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="13" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[III/ PRIME :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="996dbace-fb5d-47da-9c44-c2867a70b7ef" x="19" y="500" width="57" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrimeNette}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2458a295-37b2-458d-9d48-b1bee7359f1b" x="18" y="475" width="534" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[La garantie du présent contrat est consentie moyennant une prime nette au comptant de ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ce975eef-b4d7-41b6-bb52-a2d36ff733f1" x="72" y="500" width="21" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[DT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89720256-48f5-4698-8c90-bd20e6d871d6" x="89" y="500" width="117" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[plus frais et taxes.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c507b97d-fdec-48c9-95bc-0986a0820c3d" x="281" y="526" width="23" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[DT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2c309894-9d08-49f0-9025-5d2d606c6282" x="175" y="526" width="35" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[DT =
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="40d07ece-e0de-4b4e-ac64-2a0a5e05b243" x="132" y="526" width="41" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Cout}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="11c74e38-5c40-4c18-be8a-1c25df7f779d" x="204" y="499" width="348" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[Décompte de la prime : Prime Nette + Frais+ FGA + Taxe
+						]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e88a272d-e7fc-4456-b526-a51338494efd" x="106" y="526" width="32" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[DT +
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="55da616c-c7a5-4b77-8e83-23256fcf214a" x="60" y="526" width="43" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrimeNette}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="09282c11-e6da-4a0c-9422-733b9421413a" x="210" y="526" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrimeTotale}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4768982f-c9dc-46db-a149-cda6ce5a6d8d" x="18" y="564" width="214" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="13" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[IV/ EFFET DE LA GARANTIE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1101f95c-1d5a-4483-9aba-51377dcb36e5" x="12" y="589" width="529" height="31"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[ l’effet de la garantie est subordonné au paiement de la prime.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="26e4847a-f1c2-4d06-8209-3989bee89e7f" x="24" y="623" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="13" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[V- CLAUSES :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74b817aa-fbdd-4b21-bfb8-8b6c509e87a2" x="20" y="650" width="438" height="34"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[1- INTERDICTION DE FUMER :
+L'assuré déclare :
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d621cd1c-fc22-49bc-b1d4-064ca8c335d5" x="20" y="686" width="518" height="104"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[1/ Qu'il est formellement interdit de fumer dans toutes les parties du bâtiment dans lequel se trouvent la marchandise assurée.
+2/ Cette interdiction est signalée par des écriteaux judicieusement répartis à l'intérieur et à l'extérieur des bâtiments.
+   L'assuré s'engage à prendre toutes les mesures en son pouvoir pour faire respecter cette interdiction.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="869fdcbe-7a1e-4d8a-8a8a-168b95ee144f" x="14" y="260" width="123" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1/Garantie de base :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="818fc8c0-4a90-4e9f-8dde-d3bd85baf021" x="33" y="284" width="92" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marchandises :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f91d0692-7f9d-4f88-9c45-b651e6cc1f06" x="12" y="304" width="233" height="38"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Marchandises se trouvant ou pouvant se trouver dans ledépôt assuré et consistant en aliment pour élevage]]></text>
+			</staticText>
+		</band>
+		<band height="4"/>
+	</detail>
+	<summary>
+		<band height="802" splitType="Stretch">
+			<textField>
+				<reportElement uuid="2084fd7c-ae48-4f08-9f33-1c5279cb1ec7" x="19" y="181" width="227" height="21"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Assure}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b37cefb8-3ce3-4d09-a50c-457dc444f792" x="13" y="93" width="531" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[L’ensemble des garanties du présent contrat est accordée pour une durée ferme prenant effet le ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec694159-2f8e-4cad-90cb-611f4f301108" x="17" y="73" width="81" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="13" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[VI- DUREE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="065fe9bc-6b5f-408c-996a-174aa1523814" x="6" y="150" width="249" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[L'ASSURE :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="b4866a64-666c-4124-9d9d-3779bcf57516" x="433" y="150" width="119" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a32913c3-d9b6-4d47-9cae-fa70835c8baf" x="265" y="111" width="137" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateFin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3726f755-6e1e-4e38-9732-714620a79c58" x="86" y="110" width="179" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[et expirant de plein droit le]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6927385f-4abc-4842-8864-846b7e35fd4b" x="12" y="110" width="80" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DateDeb}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e8cf5c60-65b1-4280-92ae-06c5015d72e6" x="291" y="110" width="9" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="13" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93c3325d-eb48-4da0-b42c-65fcc5a971a3" x="259" y="150" width="45" height="21"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fait à :
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4e3af693-c09e-4f43-af63-d90f130a842b" x="306" y="182" width="211" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[p/La Banque Nationale Agricole]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e7b1b9b3-e104-4dde-8a78-319d5bccdf2a" x="136" y="17" width="195" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[INTERCALAIRE AU CONTRAT N°]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="9c1e3b62-28ea-455b-9d09-bfe413651fe8" x="328" y="17" width="74" height="17"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Contrat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="31bcfc2e-d8cb-4444-8b3b-4d29aa550890" x="300" y="150" width="112" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{adresseagence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="56a818e1-2c79-499f-8ee6-c921df7963fe" x="412" y="150" width="26" height="21"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Le :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

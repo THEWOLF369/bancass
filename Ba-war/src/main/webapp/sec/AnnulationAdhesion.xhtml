@@ -1,0 +1,161 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+        <style type="text/css">
+            .ui-fieldset-legend {
+                width: auto;
+                line-height: 0;
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+
+            .ui-datepicker-trigger {
+                top: -5px;
+                margin-left: 3px;
+            }
+
+            .ui-inputtext {
+                width: 100px;
+            }
+
+            .ui-inputfield.hasDatepicker {
+                width: 75px;
+            }
+
+            .ui-grid-responsive {
+                border: 0;
+            }
+
+            .NPolice-label {
+                width: 128px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .NPolice-input {
+                width: 150px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .Calendar-label {
+                width: 90px;
+                padding-right: 0 !important;
+            }
+
+            .CIN-label {
+                padding-right: 0 !important;
+                padding-left: 15px !important;
+                width: 50px;
+            }
+
+            .calendar-width {
+                width: 200px;
+            }
+
+            .etat-select {
+                width: 93px;;
+            }
+
+            @media ( max-width : 980px) {
+                .ui-grid .ui-grid-row {
+                    display: block;
+                }
+                .ui-panelgrid .ui-panelgrid-cell {
+                    float: none;
+                }
+                .ui-inputtext {
+                    width: 90%;
+                }
+                .ui-inputfield.hasDatepicker {
+                    width: 90%;
+                }
+                .etat-select {
+                    width: 90%;
+                }
+            }
+
+            .ui-panelgrid-cell label {
+                color: black;
+            }
+
+            .panel-label-col-width {
+                width: 130px;
+            }
+
+            .transparent .ui-panelgrid-content {
+                background: transparent !important;
+            }
+
+            .ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+            {
+                background: 0 !important;
+                background-color: white !important;
+                box-shadow: none !important;
+            }
+
+            .small-font {
+                font-size: 12px;
+                line-height: 12px;
+            }
+
+            .row1 {
+                background: 0;
+                background-color: #f3f3f3;
+            }
+
+            .row2 {
+                background: 0;
+                background-color: #d9f2e6;
+            }
+
+            .ui-datatable.table th {
+                background: url('../img/bg/bg_vert.png');
+                color: white;
+            }
+
+            .table th {
+                font-weight: 100;
+            }
+            .alabel{
+                width: 30px;
+            }
+            .dateCol{
+                width: auto;
+            }
+        </style>
+<h:body style=" border: none;" rendered="#{!gestionProfil.annulationContrat}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+ <h:body style=" border: none;" rendered="#{gestionProfil.annulationContrat}">  
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Annulation Contrat</li>
+        </ul>
+        <ul class="page_info">
+           
+            <h:form>
+                    
+                <p:pickList id="pickList" widgetVar="pickList" value="#{annulcontratBean.adhesions}" var="adhesions" itemLabel="#{adhesions}" itemValue="#{adhesions}" 
+                 showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"/>  
+                 <p:messages autoUpdate="true" showDetail="true"/> 
+                  <div class="form-actions">
+                  <p:commandButton value="Annuler" action="#{annulcontratBean.Annuler()}" ajax="false" update="pickList"  styleClass="greenButton"/>
+                  </div>
+            </h:form>
+        </ul>
+        </h:body>
+    </ui:define>
+</ui:composition>

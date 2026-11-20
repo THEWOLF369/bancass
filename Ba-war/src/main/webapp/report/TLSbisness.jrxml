@@ -1,0 +1,1226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TLS_BISNESS" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="4c51af45-44e1-4aae-8b69-0aa918b50bcf">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="2550"/>
+	<subDataset name="Table Dataset 1" uuid="97e07ccc-4b8c-459b-bb2a-5bf4c26161b3"/>
+	<parameter name="nadhesion" class="java.lang.String"/>
+	<parameter name="libelle_societe" class="java.lang.String"/>
+	<parameter name="codagc" class="java.lang.String"/>
+	<parameter name="libelle_pack" class="java.lang.String"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="Datdeff" class="java.lang.String"/>
+	<parameter name="duree" class="java.lang.String"/>
+	<parameter name="Datexp" class="java.lang.String"/>
+	<parameter name="nomclt" class="java.lang.String"/>
+	<parameter name="adrlt" class="java.lang.String"/>
+	<parameter name="codpclt" class="java.lang.String"/>
+	<parameter name="vilclt" class="java.lang.String"/>
+	<parameter name="gouvclt" class="java.lang.String"/>
+	<parameter name="identifiant" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\convention TLS\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nomass" class="java.lang.String"/>
+	<parameter name="datnaisass" class="java.lang.String"/>
+	<parameter name="adrass" class="java.lang.String"/>
+	<parameter name="codpass" class="java.lang.String"/>
+	<parameter name="vilass" class="java.lang.String"/>
+	<parameter name="gouvass" class="java.lang.String"/>
+	<parameter name="prfass" class="java.lang.String"/>
+	<parameter name="sexass" class="java.lang.String"/>
+	<parameter name="identifiantass" class="java.lang.String"/>
+	<parameter name="prmnet" class="java.lang.String"/>
+	<parameter name="frais" class="java.lang.String"/>
+	<parameter name="prmtot" class="java.lang.String"/>
+	<parameter name="vilagc" class="java.lang.String"/>
+	<parameter name="datjour" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="200" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e1b07e41-e533-485e-8188-a97a6f988ca7" x="0" y="100" width="112" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branche d'assurance :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f7f7b198-a2ab-44ce-a6d9-fa3bcfb18a9c" x="0" y="120" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produit:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8e406238-2eff-416d-8c34-9a90d9ef3d90" x="0" y="140" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code agence:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7ed4b3a4-c7ea-4712-abe4-e80d6c1a1b8d" x="0" y="160" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contrat N°:]]></text>
+			</staticText>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="66e3a215-983f-462f-a52a-6377bae2f407" x="0" y="3" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="db27ec2e-524c-4e5c-9816-3c2b8c9c20a8" x="0" y="180" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Formule:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2178261a-e496-4f20-8b85-6db8465072db" x="127" y="100" width="226" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Risques des Particuliers]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="14c8b91d-777d-40e4-86a1-42a4afee449f" x="127" y="120" width="194" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Assistance aux personnes en voyage]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="41942c57-f686-4cad-96ef-111f8e75d7cb" x="127" y="160" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nadhesion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="768f12ae-d80e-413a-bdf0-d24ce8c565a9" x="127" y="140" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{codagc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="513a477c-5b9a-4fdd-8d2c-e3e63316708a" x="127" y="180" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{libelle_pack}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="cf994913-0aa6-4014-afe5-6634a10f5836" x="423" y="3" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="309">
+			<staticText>
+				<reportElement uuid="744fd3a8-26ab-4e07-b02a-779b9f060066" x="113" y="10" width="241" height="37"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conditions Particulières]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b961c74e-d2a5-4d84-8809-6e7a68c58733" x="1" y="47" width="555" height="91"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Aux Conditions Générales du contrat d’assurances « Assistance aux personnes en voyage » et aux Conditions Particulières qui suivent, et ses avenants, dont l’assuré reconnait avoir pris connaissance et reçu un exemplaire, la STAR prend l’engagement de mettre immédiatement une aide à la disposition du bénéficiaire lorsque celui-ci se trouve  en difficulté par suite d’un événement fortuit dans les cas et les conditions prévus par le présent contrat.
+Cette aide sera réalisée par les services du réseau International de MUTUAIDE ASSISTANCE (9-14 Avenue des frères Lumière 94368 Bry-sur-Marne –France  Tél : 0033 1 45166600)
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="71ef3fea-0490-4f7c-87cc-c52b01a49174" x="63" y="138" width="430" height="62"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="bba3619a-a747-49e2-8d9d-7050210de2c7" x="63" y="170" width="430" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="0420a060-2611-4936-a57e-b975f30ad666" x="175" y="138" width="1" height="62"/>
+			</line>
+			<line>
+				<reportElement uuid="e177ed7a-909a-4092-8c7d-5e93390babea" x="384" y="138" width="1" height="62"/>
+			</line>
+			<line>
+				<reportElement uuid="4d9fc762-7d63-4625-986a-9a2233fa02d0" x="282" y="139" width="1" height="62"/>
+			</line>
+			<staticText>
+				<reportElement uuid="7e283f30-db63-4cf2-b4d2-558427da5ac8" x="63" y="139" width="112" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'effet]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="671e8588-1464-44c5-b738-474e50d0e08d" x="176" y="139" width="106" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type du contrat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="175cebcf-756b-4831-93b6-e5f5c7cb9b6e" x="283" y="138" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée du contrat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="508ebeca-4b6c-4243-b7c5-bb692880ebc3" x="383" y="139" width="110" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'expiration]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="334c748d-1042-48b3-a1b1-9febcf7d0e33" x="63" y="170" width="112" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Datdeff}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="06459e8e-fbbb-48ce-b765-ca0861dba665" x="176" y="171" width="106" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Ferme]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="887e5a9e-5a73-4a19-a12c-3154a58db374" x="285" y="171" width="64" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{duree}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5bc1ae7e-9146-413f-92c7-2b165e553fbd" x="1" y="207" width="188" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[I. Souscripteur :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6738ef86-df31-47e6-a3db-ef79ad401ffd" x="385" y="171" width="108" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Datexp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="92d3b151-3526-4cc2-999b-41437f17b8e2" x="1" y="227" width="72" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Souscripteur  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ace51533-f36e-4e49-895e-ba5fde6b3cb6" x="1" y="246" width="72" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Adresse  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f7db3f47-2589-4934-926b-8ca1ffcb6894" x="1" y="285" width="72" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Identifiant :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="73e533fa-ecb6-4c73-a1b1-ed472aa7d01e" x="73" y="226" width="483" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomclt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2f9067dd-b5ad-405a-aa18-1b03b48bb0d2" x="73" y="245" width="249" height="40"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{adrlt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2e1570c3-08eb-45ed-bea8-9989f6a62133" x="344" y="245" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{codpclt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="08f23927-f648-4a05-af92-2f38ddaa85b7" x="444" y="247" width="112" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vilclt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="12fcb559-1805-4955-9e27-7d753926480c" x="444" y="268" width="112" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{gouvclt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ba7e41d5-cbb2-47b0-ac1c-95a1263f22a1" x="73" y="286" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{identifiant}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c2c54132-99a6-4c9a-8f09-63473437667c" x="354" y="171" width="29" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Jours]]></text>
+			</staticText>
+		</band>
+		<band height="289">
+			<staticText>
+				<reportElement uuid="4daacdde-b45c-4845-935a-de786b421fa1" x="10" y="32" width="62" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Type Client :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="82fac9da-75fe-4a67-8c33-3720d91e039b" x="10" y="52" width="62" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Assuré: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="072998d6-3283-40e2-8dcb-1ceba8121642" x="10" y="72" width="152" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Date de naissance de l’assuré  : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1a5ffc59-8214-4a4b-9c7e-6c8c47844c2a" x="10" y="91" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Adresse de l'assuré:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="84b90616-f2d1-4fdc-9e58-05a6cd469676" x="10" y="111" width="112" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Identifiant de l’assuré : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="1e67ab87-ab0b-4bce-866b-44dbcdc50c62" x="122" y="112" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{identifiantass}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d9a7b8dc-8672-4cfa-a76f-f23260097a0d" x="10" y="131" width="112" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Profession de l’assuré :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9ac77d0e-b453-4870-9a2e-0eddbd0a38f8" x="10" y="150" width="82" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Sexe de l’assuré:
+
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="43f8d36e-59f8-40f3-9a75-90004910fc30" x="122" y="131" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prfass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e9c10fcf-4859-407e-bdc9-18ff2debe542" x="122" y="148" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sexass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8ac705d-41ae-4a47-89de-d86d7691b029" x="122" y="91" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{adrass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8a1feea9-b2e1-4797-a778-b2ab3cf1d579" x="162" y="72" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datnaisass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="74c50aa6-d40f-42ba-96d5-a32d701138ed" x="72" y="53" width="190" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b21459e9-7ee1-44cc-a58c-6d91975379d9" x="355" y="94" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{codpass}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f2230bab-759e-47da-9b49-d0159ff52ab4" x="455" y="94" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vilass}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3bbec929-22a3-448a-9702-d64d893b795d" x="8" y="208" width="545" height="55"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[
+Les prestations d’Assistance garanties par la STAR  à l’étranger sont accordées aux personnes en cas de sinistre survenant au-delà des frontières tunisiennes dans : Les pays de la Communauté Européenne, la Suisse, Monaco, Andorre,
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ef3947af-e2b7-4bf0-b533-6fd415f7b960" x="8" y="12" width="142" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[II. Assuré :                                                                             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cf8048b6-d71c-46d7-b5e0-3b328dc698db" x="10" y="188" width="445" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[III. Champ d’application territorial:]]></text>
+			</staticText>
+		</band>
+		<band height="802">
+			<staticText>
+				<reportElement uuid="2f889830-cad8-49a6-a789-1811555a9c38" x="10" y="0" width="197" height="21"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IV. Garanties et Primes :                                                                                                                                   ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="a69ec82e-c4a9-4581-a110-e18e62d3bc60" x="10" y="442" width="519" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="a2205afe-9a49-40f8-8b35-dc3337be564d" x="17" y="442" width="187" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de vol ou de perte de documents]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="ccf5ffbb-9deb-4376-8d82-342bfe62d268" x="9" y="220" width="521" height="15" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="1198d4f3-c5ff-40ee-b732-1aab340e2977" x="15" y="486" width="224" height="21"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des coûts de réfection du passeport]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="81d0098b-f5bd-4f77-8de7-45c28c48774b" x="16" y="86" width="245" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Présence d'un proche en cas d'hospitalisation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a3ab33f0-3907-4df0-a02f-361294f502cd" x="399" y="67" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais réels]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f0be0cee-78a5-4ded-b760-f79bfe06934e" x="10" y="146" width="522" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="885307cd-b477-486b-9be6-9c65072e30f0" x="9" y="285" width="522" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c7e1f67c-97f9-49eb-b768-561a1feb18d1" x="411" y="29" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Limites]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="719e1ef0-cfa4-4beb-8503-5d64d7f29be4" x="386" y="29" width="1" height="195"/>
+			</line>
+			<staticText>
+				<reportElement uuid="67796d40-275b-46fd-a7e4-4b9bb17926a5" x="298" y="131" width="44" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cbb68c59-cf7e-43f2-9b24-b6212df46b01" x="298" y="201" width="44" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="629b06b7-097a-4e8a-9e67-f24296d575e4" x="400" y="325" width="100" height="24"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[1.000 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbb09e43-a8b3-4ac2-8a21-66ed46902a1d" x="298" y="188" width="44" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="2764bf8c-03e1-4489-82d7-e07cc1b94833" x="10" y="47" width="520" height="19" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="6b7c27c0-f8b3-422c-9694-4ad15b6f9d36" x="298" y="102" width="46" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="001c85a6-f782-4dc7-82f8-fc0f6a53d9d5" x="16" y="160" width="147" height="13"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Avance sur frais d’hospitalisation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c640d9ee-0185-4016-9123-fa3d312b7250" x="17" y="325" width="203" height="23"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des honoraires d'avocat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="77a35867-fdcc-4dd8-a685-d636911e586c" x="16" y="67" width="145" height="16"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Transfert / Rapatriement]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0289624b-c5f9-4ec8-98fc-99553e0e02cb" x="261" y="31" width="1" height="673"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="9ce9afd5-784e-4f58-840b-a4c460166df2" x="11" y="616" width="519" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="fde88837-eeb2-4111-aaa0-71aeea82c8be" x="298" y="367" width="49" height="26"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="533b837b-44fb-488b-b931-58195b055030" x="298" y="174" width="44" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="27bc639b-c7c2-4c22-828c-0cc73769dedd" x="261" y="28" width="1" height="192"/>
+			</line>
+			<staticText>
+				<reportElement uuid="3087c024-55b4-4a2d-9015-0b394e99d4a5" x="15" y="220" width="101" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de décès]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f6435dd0-7ec2-4d81-9510-b449a38de0a3" x="16" y="285" width="167" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de poursuites judiciaires]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e781bd1c-58bb-49c3-8c93-51b3a9eee90e" x="399" y="270" width="99" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[1 billet Aller/Retour]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a7a59b94-3e51-42a1-af60-5bdc661d04fe" x="15" y="235" width="144" height="16"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Rapatriement de corps]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="fafd2c20-fc20-4c79-a4b5-9b51305696e5" x="386" y="29" width="1" height="675"/>
+			</line>
+			<staticText>
+				<reportElement uuid="bed1c3a1-e955-4152-a028-2c489036ddb4" x="400" y="488" width="100" height="22"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[200 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="195891e1-c0ef-46d2-a129-f7706e9a3360" x="399" y="103" width="100" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[100 €/nuit ; 7 nuits]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f7d773a7-759e-4bd4-b796-1c08d4650b75" x="298" y="145" width="44" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd96fc0c-7c50-4fa4-9610-6cd8a3cfa482" x="17" y="147" width="104" height="13"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais dentaires d’urgence]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8725d8c8-f2be-4c2b-86ec-49c493bf950f" x="18" y="305" width="93" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Avance de la caution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="48451c61-e7f2-44b1-9144-e332ce99ee36" x="300" y="635" width="44" height="25"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e9d6032-d7c1-4a97-8853-ca8d8933a7c0" x="402" y="510" width="97" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[2. 000 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6d32220f-8166-46a2-aa21-638aea2efc0a" x="399" y="235" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais réels]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a72f845a-dc26-4cbf-a279-e0a69f8a52a2" x="16" y="510" width="226" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Avance de frais sur place]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca9857a1-bd11-4e9a-9e6d-6e1475e49230" x="298" y="85" width="47" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9d79c520-590f-4f46-bcc9-2bc89d36e908" x="298" y="116" width="44" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18260015-6559-4b98-a9be-5d7f8eea0098" x="20" y="270" width="119" height="15"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Retour anticipé]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="a24d504f-e544-4ce9-9b9e-417a712390d6" x="10" y="201" width="520" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="ca2b2e49-4176-4ea9-a6fb-e593a4955361" x="399" y="85" width="100" height="17"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais réels]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="dba1b87c-5fd9-4ab0-a321-bd85ceb39e41" x="16" y="116" width="516" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="0d251d6d-d29b-41a5-be6c-4a6a08acace9" x="298" y="159" width="44" height="12"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ab0b13fb-fa2d-4190-96e2-9c169aa3fe0e" x="17" y="118" width="226" height="13"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais de prolongation de séjour de l'assuré]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a0823753-8061-460a-a972-a8622e3c411a" x="10" y="51" width="127" height="0"/>
+				<textElement/>
+				<text><![CDATA[Rapatriement de corps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bf8942ae-8ef2-41d1-ad94-d90782d9c90a" x="15" y="462" width="227" height="23"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Assistance aux démarches administratives]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c4571717-2b5b-47e8-91d4-108b3c9a2806" x="298" y="66" width="46" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b716e2a7-b991-45d8-984a-9dd444e6b18e" x="301" y="235" width="44" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="040d401b-bb8b-42da-a3c2-ae66a327b9dd" x="298" y="395" width="46" height="23"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="cd6c4bd2-af8c-4b9b-a226-30b985f45952" x="8" y="572" width="522" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="edf8d98d-b0e6-4f51-a562-9cd02600a2b7" x="399" y="146" width="100" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[150 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="887e1c7e-5cf2-456f-882c-efdd1095ef99" x="399" y="133" width="100" height="12"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[40 000 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c57423ce-3c8c-4912-911d-d4cbcb5b5d59" x="16" y="132" width="104" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais médicaux]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f617f02b-2c82-40f7-b900-5f574a7b5f3c" x="75" y="27" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Garanties]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d449de8c-1274-4627-a971-c34eda03a987" x="16" y="102" width="245" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des frais d’hébergement du proche]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="13902831-7b90-40a5-bd25-6e6754cc6ee2" x="11" y="131" width="519" height="1"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="d8f43dd6-05d1-49aa-bcb7-b70a655e5ca5" x="9" y="348" width="521" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="57fe6075-8c2f-4d6c-8884-1d280528af0b" x="298" y="418" width="49" height="24"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="34944335-bc78-484d-83d0-48fb19172584" x="301" y="304" width="48" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6baeec6b-ab25-4070-960a-1fd5a9c320fd" x="298" y="552" width="49" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="506b460d-999b-410f-8484-94c7c46821c4" x="400" y="307" width="100" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[5.000 €]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1849c374-f61d-4afc-9ff4-e42835bf9270" x="7" y="84" width="525" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="25e6aed6-7231-4636-ab1a-23e1bab883a9" x="18" y="394" width="225" height="24"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Acheminement de médicaments]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="63582baf-ec38-4885-b691-f7fd3fe45e4d" x="10" y="101" width="522" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="a2bfe9d4-6847-428c-b32e-8bf90f458955" x="16" y="368" width="206" height="25"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Acheminement de dossiers]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="3b97f1c9-ebdb-45a1-88cd-dca140ad06dd" x="10" y="530" width="521" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="059fedf6-cd2d-4e5f-aaab-0806c358e27c" x="298" y="681" width="46" height="24"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3c2a8fc8-26a7-440b-83b9-da32a6109585" x="398" y="118" width="100" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[150 €/nuit ;10 nuits]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="644ee95d-ca19-4ffa-95bd-0428890da790" x="15" y="418" width="239" height="24"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Acheminement de lunettes, de lentilles ou de prothèses auditives]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bc423881-0bf3-4cb3-be97-3655e455b1c8" x="18" y="552" width="238" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des frais d’hébergement et de repas imprévus]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="75a5b3b8-ee46-4049-aa58-aff9a485393d" x="301" y="591" width="46" height="25"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c3cd234b-323e-4597-b286-7370b28fddd7" x="17" y="635" width="228" height="25"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge de la valeur de remboursement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6600963f-7fc8-45ff-8517-96f1a0af005c" x="17" y="616" width="200" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de perte, vol ou détérioration des bagages]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="13d3d248-8fbd-4a3e-8c83-0879bd161cbd" x="15" y="681" width="264" height="24"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Remboursement des frais non récupérables]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="983a8e23-210c-45a4-be99-35bbdaaa1c11" x="301" y="323" width="48" height="24"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8d1dcc8f-6d90-4eb0-969e-1cf35e603369" x="400" y="681" width="99" height="23"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[2.000  €]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="ae20ef19-33c2-4b9f-b1bf-eeab7212a744" x="9" y="251" width="521" height="19" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="afdd2074-d2d3-4b6e-9bbb-38ed26f11c04" x="272" y="29" width="100" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Souscription]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b93729ab-d049-4ab7-a563-c6b2c5fc01f8" x="17" y="47" width="131" height="19"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas d’atteinte corporelle]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="dc43033c-427f-4b3d-9a2d-21b5237d674a" x="10" y="27" width="520" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e3c0a1e0-0ac4-4db7-a456-790aa2b30e03" x="12" y="159" width="517" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="2729e637-d26b-428a-ac86-3298379c254d" x="10" y="173" width="522" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="44f58f25-5a06-4212-ad7d-16a353c2eb8c" x="17" y="174" width="112" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Chauffeur de remplacement]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="c5c2e666-4b2c-425d-9a0f-f16a88db1f0c" x="11" y="187" width="522" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="1465fe30-d708-4385-b5f5-83b2cfb0aa81" x="15" y="187" width="192" height="13"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Transmission de messages urgents]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7135fddc-6d68-415e-a982-066b93b66d35" x="15" y="203" width="197" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Envoi d'un collaborateur de remplacement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3e5a9ee2-c4a0-4f48-9f55-616749f7c954" x="400" y="204" width="100" height="17"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[1 billet Aller simple]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f3e730d7-d152-4ce8-8c99-6935a7ef5ebc" x="8" y="393" width="522" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="54365e86-f9fb-4114-8ee7-7a21d298023f" x="9" y="324" width="520" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="869ef2f8-f54c-4350-90a5-6b90743d1956" x="19" y="251" width="237" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas d’hospitalisation ou de décès d’un membre de la famille]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="94b74b35-b5e9-45f5-ac01-452a1dc60a15" x="301" y="270" width="46" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3af3f9fc-a3ee-4e73-a4f8-3971d6f7db45" x="14" y="347" width="230" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de perte ou de vol d’effets personnels]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="bf806a95-dcd1-40d2-bbba-e231fa645bd8" x="12" y="417" width="517" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="574ba2e6-e86d-4b50-9549-a658a6c58dd3" x="7" y="485" width="523" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="ebe736a0-3d7c-4d42-ba45-f1a7ef49222a" x="8" y="509" width="521" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="9d98c905-10ef-4e6b-8e60-a0a6949d5274" x="6" y="704" width="523" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="8574bc55-3f6f-4dd1-9a43-e51113212690" x="300" y="462" width="44" height="23"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="db7a0ea0-4604-41db-8a3b-b4f7638f5c50" x="300" y="488" width="45" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9a0feabc-e949-4503-9a05-eeb324db9294" x="298" y="510" width="49" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a4c5b0a-64ea-4eaf-a12a-e9f3f2db9838" x="20" y="530" width="169" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de retard d’avion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a2de84ea-1a74-4411-ac33-dbffd595ec85" x="402" y="552" width="96" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[200 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e50817b2-dcd8-4469-8116-c82d95aaed96" x="20" y="572" width="228" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de retard de livraison de bagages]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4dad3f33-8889-4b7b-a69b-4489e231343c" x="18" y="591" width="258" height="25"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des achats d'urgence]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="79d8036b-51d1-4b9e-9590-e9f8ac4162f0" x="9" y="660" width="522" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="45d4cd7f-710a-422d-9a6b-0195e5e69977" x="17" y="660" width="106" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Annulation de voyage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a02847d-1b74-41e3-b530-d9934ae4a7a2" x="402" y="635" width="97" height="25"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[750  €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f934b436-85cf-49b0-b6a1-75894a9ffa7f" x="402" y="591" width="98" height="25"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[200 €]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="d509eaeb-96c9-4702-ba31-91297f4b9930" x="9" y="27" width="1" height="677"/>
+			</line>
+			<line>
+				<reportElement uuid="3d527505-65ef-4074-8a36-79846adb1e6f" x="530" y="27" width="1" height="677"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="ca761f53-f31d-40a5-943b-9e2f760f7657" x="67" y="718" width="410" height="55"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="5ebaa67c-7a4e-4084-bb80-ab3a806eae34" x="67" y="745" width="410" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e1030c6a-2e6c-4d48-b74b-80181f8c0f72" x="338" y="718" width="1" height="55"/>
+			</line>
+			<line>
+				<reportElement uuid="dd83485c-3c0d-4484-8eb0-ef5c54479f50" x="212" y="718" width="1" height="55"/>
+			</line>
+			<staticText>
+				<reportElement uuid="f2513fcd-b9de-4517-84e9-5df2bca0abb8" x="67" y="725" width="146" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Prime nette]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="660b4b69-d413-48b8-b098-07e093abd770" x="212" y="726" width="126" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Frais du contrat + FGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8b518077-f203-4dc8-9088-c7efcf0fb607" x="338" y="725" width="139" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime Totale]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3278f81c-bfdf-47bf-9159-fd3894adf5c2" x="67" y="746" width="146" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prmnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="82fead63-54c5-4585-9dc5-5a95ee6f6324" x="340" y="745" width="137" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prmtot}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="79342ec0-3e63-4e35-a4ab-26ca542f948d" x="212" y="745" width="126" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{frais}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band height="324" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="52011305-e8c3-4b96-a2b8-51a914a0edb4" x="1" y="30" width="552" height="85"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Afin de bénéficier des garanties prévues au contrat, l’Assuré doit impérativement contacter, ou faire contacter,l’Assisteur dès qu’il a connaissance d’un événement susceptible d’entraîner la mise en œuvre d’une garantie :
+•	par téléphone, 7j/7 24h/24, en appelant le + 33 1 45 16 66 00,
+•	par courrier électronique : assistance@mutuaide.fr
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="edeb79d9-61ce-4264-b755-65ee13cf1930" x="77" y="152" width="40" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Fait à]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="644bc8a0-8683-45a3-b756-f19f6f143af6" x="260" y="152" width="13" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Le]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df7e711e-4ebc-4a3f-abef-de7f2acb9975" x="399" y="152" width="15" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[à]]></text>
+			</staticText>
+			<textField pattern="HH.mm.ss">
+				<reportElement uuid="eb8215d7-0219-4c85-ad2f-f73edbbd90c6" x="414" y="152" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e10c691b-5c2c-4271-a6d8-d91159845978" x="117" y="152" width="144" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vilagc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f5da7652-6ad2-4b46-972a-5822b8af97e9" x="19" y="233" width="44" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[L’Assuré]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="262c838d-bfca-4f64-afe1-efa064ad570e" x="158" y="234" width="81" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ Le souscripteur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d73c126a-e4fb-492e-831f-61b345049ff3" x="342" y="228" width="213" height="36"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[   P/ LA SOCIETE TUNISIENNE
+ D’ASSURANCES ET DE  REASSURANCES
+]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="fb779005-3b9a-40ef-bcea-ecc0c500e7f8" x="273" y="152" width="100" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

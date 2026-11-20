@@ -1,0 +1,1319 @@
+<ui:composition template="/sec/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="body">
+<f:metadata>
+			<f:event type="preRenderView" listener="#{avenirJeunesseController.loadProposition()}" />
+		</f:metadata>
+
+		<style type="text/css">
+.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+.greenButton {
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #5bb75b !important;
+	background-image: -moz-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462),
+		to(#51a351)) !important;
+	background-image: -webkit-linear-gradient(top, #62c462, #51a351)
+		!important;
+	background-image: -o-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: linear-gradient(to bottom, #62c462, #51a351)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #51a351 #51a351 #387038 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+.redButton {
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #da4f49 !important;
+	background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b),
+		to(#bd362f)) !important;
+	background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f)
+		!important;
+	background-image: -o-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: linear-gradient(to bottom, #ee5f5b, #bd362f)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #bd362f #bd362f #802420 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+.alert {
+  padding: 20px;
+  background-color: #569e56;
+  width: 190px;
+  color: white;
+}
+
+
+
+.ui-widget-header .ui-state-default {
+
+    width: 200px;
+}
+
+
+.menu-visible .ui-state-disabled,
+.menu-visible.ui-state-disabled,
+.menu-visible.ui-state-disabled .ui-selectonemenu-label,
+.menu-visible.ui-state-disabled .ui-radiobutton-label,
+.menu-visible input.ui-state-disabled {
+    opacity: 1 !important;
+    background-color: #e2d6de !important;
+    color: #700000 !important;
+}
+
+.menu-visible:disabled {
+    opacity: 1 !important;
+    background-color: #e2d6de !important;
+    color: #700000 !important;
+}
+
+.radio-compact {
+    width: auto !important;
+    display: inline-block;
+}
+
+.radio-compact td {
+    padding-right: 20px;   /* espace entre les options */
+}
+
+.radio-compact label {
+    color: #333;           /* texte plus lisible */
+    font-weight: normal;
+}
+
+.radio-compact .ui-radiobutton-box {
+    border-color: #888;    /* bordure plus claire */
+}
+ 
+</style>
+		<h:body style=" border: none;"
+			rendered="#{!gestionProfil.souscriptionAvenirJeunesse}">
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Accès non autorisé</li>
+			</ul>
+			<ul class="page_info">
+				<center>
+					<img src="../images/autorisation.jpg" height="15%" width="15%" />
+				</center>
+			</ul>
+		</h:body>
+
+		<h:body style=" border: none;"
+			rendered="#{gestionProfil.souscriptionAvenirJeunesse}">
+			<div class="span12 no_space">
+				<div class="widget">
+					<ul class="breadcrumb br_styled no_space">
+						<li class="active">UNIVERSITY</li>
+						<li class="active"><img
+							src="${facesContext.externalContext.requestContextPath}/images/right.png"
+							width="17" height="17" /></li>
+						<li class="active">Adhesion</li>
+					</ul>
+					<ul class="page_info">
+
+
+
+						<h:form id="formAvj">
+
+							<p:growl id="growl" sticky="true" showDetail="true" />
+
+							<p:wizard
+								flowListener="#{avenirJeunesseController.onFlowProcess}" nextLabel="Suivant" backLabel="Précédent"
+								id="wizard">
+								<p:tab id="personal" title="Contrat">
+									<p:panel header="Détails Contrat">
+										<p:messages showDetail="true" autoUpdate="true" closable="true"/>
+										<h:panelGrid id="gridContrat" columns="3" cellpadding="1">
+
+											<label class="bold">Police: </label>
+											<h:selectOneMenu id="numpol" styleClass="form-control"
+												value="#{avenirJeunesseController.numplc}">
+												<f:selectItems
+													value="#{avenirJeunesseController.listnumplc}" />
+											</h:selectOneMenu>
+											<p:outputLabel />
+											<label class="bold"> Identifiant client: </label>
+											<h:inputText id="idcin" styleClass="form-control menu-visible"
+												required="true" value="#{clientBean.client.identifiant}"
+												disabled="true" />
+											<p:commandButton value="Client" process="@this"
+												styleClass="orangeButton" style="margin-top: -10px;"
+												action="#{avenirJeunesseController.navigateToClientPage()}">
+											</p:commandButton>
+
+
+											<p:outputLabel value="Date effet:" styleClass="small-font"
+												style="margin-top: 7px;font-size: 14px;" for="datDebut" />
+
+											<p:calendar
+												value="#{avenirJeunesseController.newAdhesion.datDebut}"
+												id="datDebut" required="true" pattern="dd/MM/yyyy" size="5"
+												mindate="#{avenirJeunesseController.aujourdhui}"
+												maxdate="#{avenirJeunesseController.maxdate}"
+												styleClass="small-font"
+												validator="#{avenirJeunesseController.validerDateEffet}">
+												<p:ajax event="dateSelect"
+													update="tauxIntere,dateFin,dureeContract, dureeInfoPanel"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+											</p:calendar>
+
+
+											<h:outputLabel />
+
+
+
+											<p:outputLabel value="Date naissance Assuré:"
+												for="datNaissAdherent" styleClass="small-font"
+												style="margin-top: 7px;font-size: 14px;" />
+
+											<p:calendar
+												value="#{avenirJeunesseController.newAdherent.datNaiss}"
+												navigator="true"
+												maxdate="#{avenirJeunesseController.minageAssure}"
+												required="true" id="datNaissAdherent" pattern="dd/MM/yyyy"
+												size="5" styleClass="small-font">
+												<p:ajax event="dateSelect"
+													update="tauxIntere,dateFin,dureeContract, dureeInfoPanel"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+
+
+											</p:calendar>
+
+
+											<h:outputLabel />
+
+
+
+											<p:outputLabel value="Date naissance bénéficiaire:"
+												for="dateNaissBeneficiaire" styleClass="small-font"
+												style="margin-top: 7px;font-size: 14px;" />
+
+											<p:calendar
+												value="#{avenirJeunesseController.newBeneficiaire.dateNaiss}"
+												navigator="true" required="true"
+												maxdate="#{assistanceVoiyageController.toDays}"
+												mindate="#{avenirJeunesseController.newAdherent.datNaiss}"
+												id="dateNaissBeneficiaire" pattern="dd/MM/yyyy" size="5"
+												styleClass="small-font">
+
+												<p:ajax event="dateSelect"
+													update="tauxIntere,dateFin,dureeContract, dureeInfoPanel"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+
+											</p:calendar>
+
+
+											<h:outputLabel />
+
+
+											<p:outputLabel value="Bourse mensuelle:"
+												for="bourseMensuelle" styleClass="small-font"
+												style="margin-top: 7px;font-size: 14px;" />
+
+											<p:inputNumber
+												value="#{avenirJeunesseController.bourseMensuelle}"
+												id="bourseMensuelle" required="true"
+												thousandSeparator="" decimalSeparator="." decimalPlaces="3"
+												validatorMessage="La bourse doit etre comprise entre 100 et 5000 dt">
+												<f:validateDoubleRange minimum="100" maximum="5000" />
+											</p:inputNumber>
+											<h:outputLabel />
+
+											<h:outputLabel value="Age de service bourse:"
+												styleClass="small-font" style="margin-top: 7px;font-size: 14px;" />
+											<p:selectOneMenu id="ageServiceBourse"
+												styleClass="form-control"
+												value="#{avenirJeunesseController.selectedAgeServiceBourse}"
+												converter="#{avenirJeunesseController.ageServiceBoursesConverter}">
+												<f:selectItems
+													value="#{avenirJeunesseController.allAgeServiceBourses}"
+													var="ageServiceBourse"
+													itemLabel="#{ageServiceBourse.ageServiceBourse.toString()}"
+													itemValue="#{ageServiceBourse.toString()}" />
+												<p:ajax event="valueChange"
+													update="tauxIntere,dateFin,dureeContract, dureeInfoPanel"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+											</p:selectOneMenu>
+
+
+											<h:outputLabel />
+
+
+											<h:outputLabel value="Durée de service bourse:"
+												styleClass="small-font" style="margin-top: 7px;font-size: 14px;" />
+
+											<p:selectOneMenu id="dureServiceBourse"
+												styleClass="form-control"
+												converter="#{avenirJeunesseController.dureServiceBourseConverter}"
+												value="#{avenirJeunesseController.selectedDureServiceBourse}">
+												<f:selectItems
+													value="#{avenirJeunesseController.allDureServiceBourses}"
+													var="dureServiceBourse"
+													itemLabel="#{dureServiceBourse.dure.toString()}"
+													itemValue="#{dureServiceBourse.toString()}" />
+
+											</p:selectOneMenu>
+
+											<h:outputLabel />
+
+											<h:outputLabel value="Date Fin:" styleClass="small-font"
+												style="margin-top: 7px;font-size: 14px;" />
+
+											<p:calendar id="dateFin" disabled="true"
+												value="#{avenirJeunesseController.newAdhesion.datFin}"
+												pattern="dd/MM/yyyy" size="5" styleClass="small-font menu-visible"/>
+
+
+											<h:outputLabel />
+
+											<label class="bold">Fractionnement: </label>
+
+											<p:selectOneMenu id="fractionnementId"
+												styleClass="form-control"
+												value="#{avenirJeunesseController.fractionnement}">
+												<f:selectItems
+													value="#{avenirJeunesseController.allFractionnements}"
+													var="fractionnement" itemLabel="#{fractionnement.libelle}"
+													itemValue="#{fractionnement.idFrc}" />
+											</p:selectOneMenu>
+											<h:outputLabel />
+											<label class="bold">Taux d'évolution de la prime:</label>
+											<p:selectOneMenu id="tauxEvolutionPrimeId"
+												styleClass="form-control"
+												value="#{avenirJeunesseController.tauxCroissancePrimes}">
+												<f:selectItems
+													value="#{avenirJeunesseController.allTauxCroissancePrimes}"
+													var="tauxCroissancePrime"
+													itemLabel="#{tauxCroissancePrime.tauxPrime.toString()}"
+													itemValue="#{tauxCroissancePrime.tauxPrime}" />
+
+											</p:selectOneMenu>
+											<h:outputLabel />
+											
+											
+											
+											<p:outputLabel value="Taux d'évolution de la bourse:"
+												for="tauxCroissBourse" styleClass="small-font"
+												style="margin-top: 7px;font-size: 14px;" />
+											<p:inputNumber
+												value="#{avenirJeunesseController.tauxCroissBourse}"
+												id="tauxCroissBourse" required="false" 
+												thousandSeparator="" decimalSeparator="." decimalPlaces="3">
+												
+											</p:inputNumber>
+											<h:outputLabel />
+											
+											
+											<p:outputLabel value="Revenu annuel imposable:"
+												for="tranche" styleClass="small-font"
+												style="margin-top: 7px;font-size: 14px;" />
+											<p:inputNumber
+												value="#{avenirJeunesseController.dtranche}"
+												id="tranche" required="true" 
+												thousandSeparator="" decimalSeparator="." decimalPlaces="3"
+												requiredMessage="La Tranche est obligatoire!"
+												validatorMessage="La Tranche est obligatoire!">
+												
+												<f:validateDoubleRange  minimum="0.001" />
+											</p:inputNumber>
+											<h:outputLabel />
+											
+
+											<h:outputLabel value="Taux d'intérêt:" rendered="false"
+												styleClass="small-font" style="margin-top: 7px;" />
+
+											<h:inputText id="tauxIntere" rendered="false"
+												value="#{avenirJeunesseController.selectedTauxInteret}"
+												widgetVar="tauxIntere" disabled="true" />
+											<h:outputLabel  rendered="false"/>
+
+											<h:outputLabel value="Durée contrat:" styleClass="small-font"
+												style="margin-top: 7px;" for="dureeContract" />
+
+											<h:inputText id="dureeContract" required="true" styleClass="menu-visible"
+												value="#{avenirJeunesseController.dureeContract}"
+												widgetVar="tauxIntere" disabled="true"
+												requiredMessage="La durée est obligatoire"
+            									 validatorMessage="La durée doit être supérieure à 0">
+												<f:validateLongRange minimum="1" />  
+											</h:inputText>
+											<h:outputLabel />
+									 <h:outputLabel value=" "/>
+											<h:panelGroup id="dureeInfoPanel">
+											
+
+
+
+    <!-- info non bloquant si <8 avec style PrimeFaces info -->
+    <h:panelGroup layout="block"
+                  styleClass="ui-message ui-message-info ui-corner-all"
+                  rendered="#{avenirJeunesseController.afficherDureeInfo}">
+        <h:outputText value="Si la durée est &lt; à 8 ans, ce contrat ne donne pas droit à l’avantage fiscal." />
+    </h:panelGroup>
+
+ 
+</h:panelGroup>
+											
+										</h:panelGrid>
+
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="address" title="Garantie">
+									<p:panel header="Garanties Complémentaires">
+										<p:messages />
+										<h:panelGrid columns="2" cellpadding="1">
+											<h:outputText value="Frais d'inscription annuel: "
+												styleClass="small-font" />
+											<p:inputNumber
+												value="#{avenirJeunesseController.fraisInscriptionAnnuel}" 
+												thousandSeparator="" decimalSeparator="." decimalPlaces="3"/>
+
+											<h:outputText value="Rente Mensuelle en cas décès: "
+												styleClass="small-font" />
+											<p:inputNumber
+												value="#{avenirJeunesseController.renteMonsuelleEnCasDeces}" 
+												thousandSeparator="" decimalSeparator="." decimalPlaces="3"/>
+
+
+										</h:panelGrid>
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="contact" title="Assuré">
+									<p:panel header="Détails Assuré">
+										<p:messages />
+										<h:panelGrid columns="2" cellpadding="1" id="gridass">
+											<p:outputLabel value="Type de document:" for="docType" />
+											
+											<h:panelGroup>
+												<p:selectOneMenu styleClass="menu-visible"
+													value="#{avenirJeunesseController.newAdherent.typeDoc}"
+													id="docType" disabled="true">
+													<f:selectItem itemValue="CIN" itemLabel="CIN" />
+													<f:selectItem itemValue="Passport" itemLabel="Passport" />
+													<f:selectItem itemValue="CarteSejour"
+														itemLabel="Carte Séjour" />
+												</p:selectOneMenu>
+												<p:commandButton value="Réinitialiser" update="gridass"  rendered="false"
+													 process="@this" styleClass="redButton" style="margin-left:120px;margin-top:-25px;"
+													oncomplete='$("#loader_cont").fadeOut();'
+													actionListener="#{avenirJeunesseController.reinitialiserAdherent()}" />
+												<p:commandButton value="" process="gridass @this" update="gridass"
+													oncomplete='$("#loader_cont").fadeOut();' id="btnSearch" rendered="false"
+													style="margin-left:120px;margin-top:-10px;height: 35px;width: 35px;
+													background-image: url(${facesContext.externalContext.requestContextPath}/images/website.png)"
+													
+													action="#{avenirJeunesseController.rechercherDepuisWS()}"></p:commandButton>	
+											</h:panelGroup>
+											
+											<p:outputLabel value="Identifiant:" for="identifiant" />
+											<p:inputText id="identifiant" disabled="true" required="true" styleClass="menu-visible"
+												value="#{avenirJeunesseController.newAdherent.identifiant}" />
+											<p:outputLabel value="N° Compte:" for="txtNcompte" rendered="false"/>
+											<p:inputText id="txtNcompte" disabled="false" required="false" styleClass="menu-visible"
+												value="#{avenirJeunesseController.ncompte}" rendered="false"
+											requiredMessage="Le numero de compte est obligatoire"
+												validatorMessage="Le numéro de compte doit être composé de 20 chiffres">
+												<f:validateRegex pattern="[0-9]{20,20}" />
+											</p:inputText>
+											
+											<p:outputLabel value="Nom:" for="nomAssu" />
+											<h:inputText id="nomAssu" disabled="true" styleClass="menu-visible"
+												value="#{avenirJeunesseController.newAdherent.nomAdherent}" />
+											<p:outputLabel value="Prénom:" for="prenomAuss" />
+											<h:inputText id="prenomAuss" disabled="true" styleClass="menu-visible"
+												value="#{avenirJeunesseController.newAdherent.prenomAdherent}" />
+											<p:outputLabel value="Date de naissance:" for="naissAssu" />
+											<p:calendar id="naissAssu" pattern="dd/MM/yyyy" styleClass="menu-visible"
+												value="#{avenirJeunesseController.newAdherent.datNaiss}" 
+												disabled="true"/>
+											<p:outputLabel value="Sexe:" for="sexAssur" />
+											<h:selectOneMenu id="sexAssur" styleClass="form-control menu-visible"
+												value="#{avenirJeunesseController.newAdherent.sexe}"
+												disabled="true">
+												<f:selectItem itemLabel="F" itemValue="Feminin" />
+												<f:selectItem itemLabel="M" itemValue="Masculin" />
+											</h:selectOneMenu>
+
+											<p:outputLabel value="N° Adresse" for="txtAdrNum" />
+											<p:inputNumber id="txtAdrNum" styleClass="form-control menu-visible"
+												value="#{avenirJeunesseController.newAdherent.numAdr}"
+												required="false" thousandSeparator="" decimalPlaces="0" 
+												disabled="true"/>
+
+
+											<p:outputLabel value="Type de voie:" for="txtVoie" />
+											<h:selectOneMenu styleClass="form-control  menu-visible" disabled="true"
+												value="#{avenirJeunesseController.newAdherent.typeVoie}"
+												converter="#{avenirJeunesseController.typeVoieConverter}" id="txtVoie">
+												<f:selectItem itemLabel="Selectionnez voie..."
+													value="#{null}" />
+												
+												<f:selectItems value="#{avenirJeunesseController.typeVoies}" var="typeVoie" 
+													itemLabel="#{typeVoie.libelle}" itemValue="#{typeVoie.code.toString()}"/>
+											</h:selectOneMenu>
+
+
+											<p:outputLabel value="Adresse:" for="adresseAssur" />
+											<h:inputText id="adresseAssur" disabled="true" styleClass="menu-visible"
+												value="#{avenirJeunesseController.newAdherent.adresse}" />
+
+
+											<p:outputLabel value="Gouvernorat:" for="gouvernerat" />
+											<p:selectOneMenu id="gouvernerat" styleClass="form-control menu-visible"
+												value="#{avenirJeunesseController.newAdherent.gouver}"
+												filter="true" filterMatchMode="contains" 
+												disabled="true">
+												
+												<p:ajax event="itemSelect" process="@this"
+													listener="#{avenirJeunesseController.updateListCodePostalActionListener()}"
+													update="txtZipCode" />
+												
+												<f:selectItem itemLabel="Selectionnez gouvernorat..."
+													value="#{null}" />
+												<f:selectItems
+													value="#{avenirJeunesseController.allGouverneras}" />
+
+											</p:selectOneMenu>
+
+
+											<p:outputLabel value="Code postale:" for="txtZipCode" />
+											<p:selectOneMenu id="txtZipCode" styleClass="form-control menu-visible"
+												value="#{avenirJeunesseController.selectedLocgouv}"
+												filter="true" filterMatchMode="contains" 
+												disabled="true">
+												
+												<p:ajax event="itemSelect" process="@this"
+													listener="#{avenirJeunesseController.locgouvSelectListened}"
+													update="txtLocalite" />
+												
+												<f:selectItem itemLabel="Selectionnez code postal..."
+													value="#{null}" />
+												<f:selectItems
+													value="#{avenirJeunesseController.allCodePostalByGouvernera}"
+													var="ojectCodePostal"
+													itemLabel="#{ojectCodePostal.codePosta} #{ojectCodePostal.localite}" />
+
+											</p:selectOneMenu>
+
+
+
+											<p:outputLabel value="Localite:" for="txtLocalite" />
+											<h:inputText id="txtLocalite" styleClass="form-control menu-visible"
+												value="#{avenirJeunesseController.newAdherent.localite}"
+												disabled="true"
+												requiredMessage="La localité est obligatoire" />
+
+
+											<p:outputLabel value="Téléphone:" for="telAssur" />
+											<h:inputText id="telAssur" disabled="true" styleClass="menu-visible"
+												value="#{avenirJeunesseController.newAdherent.tel}" />
+											<p:outputLabel value="Profession:" />
+
+											<p:selectOneMenu styleClass="form-control menu-visible" disabled="true"
+												converter="#{avenirJeunesseController.professionConverter}"
+												value="#{avenirJeunesseController.newAdherent.profession}"
+												id="txtprofession">
+												<f:selectItem itemLabel="Selectionnez Profession..."
+													value="#{null}" />
+												<f:selectItems 
+													value="#{avenirJeunesseController.allProfessions}"
+													var="profession"
+													itemLabel="#{profession.libelleProfession}"
+													itemValue="#{profession.idProfession.toString()}" />
+											</p:selectOneMenu>
+
+
+										</h:panelGrid>
+
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="beneficiaire" title="Bénéficiaire">
+									<p:panel header="Bénéficiaire en Cas de Vie">
+										<p:messages />
+										<h:panelGrid id="confirmation" columns="2" cellpadding="1">
+
+											<p:outputLabel value="Nom:" for="nomBenef" />
+											<p:inputText id="nomBenef"
+												value="#{avenirJeunesseController.newBeneficiaire.nom}"> 
+												
+												<f:validateRequired/>
+
+								            <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/>
+								            </p:inputText>
+												 
+											<p:outputLabel value="Prénom:" for="raisonSoc" />
+											<p:inputText id="raisonSoc"
+												value="#{avenirJeunesseController.newBeneficiaire.prenom}" >
+												
+												<f:validateRequired/>
+
+								            <p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/>
+								            </p:inputText>
+											<p:outputLabel value="Date de naissance:" for="dateNaiss" />
+											<p:calendar id="dateNaiss" pattern="dd/MM/yyyy"
+												value="#{avenirJeunesseController.newBeneficiaire.dateNaiss}">
+												
+												<p:ajax event="dateSelect"
+													update="tauxIntere,dateFin,dureeContract, dureeInfoPanel"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+												
+												</p:calendar>
+											<p:outputLabel value="Sexe:" for="sex" />
+											<h:selectOneMenu id="sex" styleClass="form-control"
+												required="true"
+												value="#{avenirJeunesseController.newBeneficiaire.sexe}">
+												<f:selectItem itemLabel="F" itemValue="Feminin" />
+												<f:selectItem itemLabel="M" itemValue="Masculin" />
+											</h:selectOneMenu>
+											<p:outputLabel value="Adresse:" for="adresse" />
+											<p:inputText id="adresse"
+												value="#{avenirJeunesseController.newBeneficiaire.adresse}" />
+
+
+
+
+
+										</h:panelGrid>
+
+
+									</p:panel>
+									<br/>
+									<p:panel header="Bénéficiaire en Cas de Décès">
+							
+        							<div class="input-group">
+									  
+									  <input type="radio" class="form-control"  checked="checked"/>
+									  <span class="input-group-addon">Souscripteur</span>
+									</div>
+        							
+        							
+									</p:panel>
+								</p:tab>
+
+
+								<p:tab id="tarif" title="Tarif">
+								
+								<br/>
+								
+								<p:panel header="Evolution des garanties">	
+								<p:accordionPanel multiple="true" activeIndex="2">
+           
+						            <p:tab title="Tableau d'évolution des garanties">
+						                								             
+								              <p:dataTable var="detailsE" value="#{avenirJeunesseController.detailsEvolutionGarantiesDTO}"
+								              scrollable="true" scrollWidth="700">
+												    <p:column headerText="Année">
+												        <h:outputText value="#{detailsE.annee}" >
+												        
+												        </h:outputText>
+												    </p:column>
+												 
+												    <p:column headerText="Cumul Versements">
+												        <h:outputText value="#{detailsE.cumul_vers}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												 
+												    <p:column headerText="Prime épargnée Bourse">
+												        <h:outputText value="#{detailsE.prime_epar_bourse}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Prime épargné frais">
+												        <h:outputText value="#{detailsE.prime_epar_frais}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Epargne constituée Bourse (4%)">
+												        <h:outputText value="#{detailsE.epar_cons_bourse}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Participation aux Bénéfices Bourse">
+												        <h:outputText value="#{detailsE.particip_benef_bourse}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Epargne prévisionnelle Bourse avec PB">
+												        <h:outputText value="#{detailsE.epar_cons_fannee_bourse}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Epargne constituée Frais (4%)">
+												        <h:outputText value="#{detailsE.epar_cons_frais}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Participation aux Bénéfices Frais">
+												        <h:outputText value="#{detailsE.particip_benef_frais}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Epargne prévisionnelle Frais avec PB">
+												        <h:outputText value="#{detailsE.epar_cons_fannee_frais}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Avantage financier">
+												        <h:outputText value="#{detailsE.avantage_financier}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+												    <p:column headerText="Avantage fiscal Annuel">
+												        <h:outputText value="#{detailsE.avantage_fisc_annuel}" >
+												        <f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+												        </h:outputText>
+												    </p:column>
+												    
+
+												 
+												    
+												</p:dataTable>  
+								               
+						            </p:tab>
+						            
+						        </p:accordionPanel>
+								</p:panel>
+								
+								<br/>								
+								
+									<p:panel header="Tarif">
+									
+																			
+										
+									
+										<div class="ui-messages-info ui-corner-all">
+										<span class="ui-messages-info-icon">
+										</span><ul><li><span class="ui-messages-info-summary">
+										Prime annuelle: <h:outputText id="pannu" 
+												
+												value="#{avenirJeunesseController.total_nette_annuelle}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR"/>
+											</h:outputText>
+										</span>
+										<span class="ui-messages-info-detail"> </span></li></ul>
+										</div>
+									
+									
+									
+									
+										<div class="ui-messages-info ui-corner-all">
+										<span class="ui-messages-info-icon">
+										</span><ul><li><span class="ui-messages-info-summary">
+										 Examens médicaux demandés: 
+										</span>
+										<span class="ui-messages-info-detail"> </span></li></ul>
+										<ul>
+										 <ui:repeat value="#{avenirJeunesseController.medicals}" var="item">
+										  <li><h:outputText value="#{item.document}"/></li>
+										 </ui:repeat>
+										</ul>
+										</div>
+										
+									<br />
+
+										<label class="bold" style="color: black;"><u>Garantie
+												de Base:</u></label>
+										<h:panelGrid columns="6"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Prime Nette Epargne" for="prEpargne" />
+
+											<h:outputText id="prEpargne"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.basePrimeNetteEpargne}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+											<p:outputLabel value="Prime Nette Décès" for="prDeces"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="prDeces"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.prime_Nette_Deces_base}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Total" for="total"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="total" styleClass="label label-info price"
+												value="#{avenirJeunesseController.total_base}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+
+										</h:panelGrid>
+
+
+										<br />
+
+										<label class="bold" style="color: black;"><u>Garanties
+												Complémentaires:</u></label>
+										<label class="bold" style="color: Green;">Frais
+											d'inscription:</label>
+										<h:panelGrid columns="6"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Prime Nette Epargne" for="prEpargneFr" />
+
+											<h:outputText id="prEpargneFr"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.prime_Nette_Epargne_Inscription}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Prime Nette Décès" for="prDecesFr"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="prDecesFr"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.prime_Nette_Deces_Inscription}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Total" for="totalins"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="totalins"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.total_inscription}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+
+										</h:panelGrid>
+
+										<br />
+
+										<label class="bold" style="color: Green;">Rente En Cas Du Décès:</label>
+										<h:panelGrid columns="6"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Prime Nette Epargne" for="prEpargneRd" />
+
+											<h:outputText id="prEpargneRd"
+												styleClass="label label-info price" value="0">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Prime Nette Décès" for="prDecesRd"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="prDecesRd"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.prime_Nette_Deces_Rente}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+
+											<p:outputLabel value="Total" for="totalrente"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="totalrente"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.total_rente}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+
+										</h:panelGrid>
+
+
+
+
+
+
+										<br />
+
+										<label class="bold" style="color: black;"><u>Prime
+												Totale:</u></label>
+
+										<h:panelGrid columns="6"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Prime nette totale" for="totalnette" />
+
+											<h:outputText id="totalnette"
+												styleClass="label label-important price"
+												value="#{avenirJeunesseController.total_nette}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+											<p:outputLabel value="FGA" for="frais"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="frais"
+												styleClass="label label-important price"
+												value="#{avenirJeunesseController.fraisContrat}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+											<p:outputLabel value="Prime totale" for="primeTotale"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="primeTotale"
+												styleClass="label label-important price"
+												value="#{avenirJeunesseController.prime_totale}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+										</h:panelGrid>
+										
+										
+										<br />
+
+										<label class="bold" style="color: black;">
+										<u>Surprime:</u>
+										</label>
+										
+										<h:panelGrid columns="4" id="gridsupp"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Surprime" for="surprime" />
+
+											<p:inputText 
+												value="#{avenirJeunesseController.surprime}"
+												id="surprime" required="false" thousandSeparator=""
+												decimalSeparator="." decimalPlaces="3" styleClass="menu-visible"
+												disabled="#{!avenirJeunesseController.desabledGenerateNotice ||
+													avenirJeunesseController.desabledEncaiss}">
+												
+												
+												<p:keyFilter mask="num" />
+												<p:ajax event="keyup" update="primeTotaleSurprime" 
+													listener="#{avenirJeunesseController.handleKeyEvent_total_with_suprime}"/>
+												<p:ajax event="blur" update="primeTotaleSurprime" />
+												
+											</p:inputText>
+
+										
+
+											<p:outputLabel value="Prime totale avec surprime" for="primeTotaleSurprime"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="primeTotaleSurprime"
+												styleClass="label label-important price"
+												value="#{avenirJeunesseController.prime_totale_with_surprime_for_affichage}">
+												<f:convertNumber pattern="#,##0.000" locale="fr_FR" />
+											</h:outputText>
+
+
+										</h:panelGrid>	
+										
+										<br />
+<p:fieldset  style="margin-bottom:20px" rendered="#{avenirJeunesseController.rendredModepaie}">
+										<label class="bold" style="color: black;">
+										<u>Mode de paiement:</u>
+										</label>										
+										
+<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" >	
+
+<p:outputLabel for="@next" value="Fractionnement :" />
+
+        <p:selectOneMenu id="fractionnementId_" style="width:425px"
+		styleClass="form-control menu-visible" disabled="true"  
+		value="#{avenirJeunesseController.fractionnement}">
+		<f:selectItems
+		value="#{avenirJeunesseController.allFractionnements}"
+		var="fractionnement" itemLabel="#{fractionnement.libelle}"
+		itemValue="#{fractionnement.idFrc}" />
+		</p:selectOneMenu>
+		
+		<p:outputLabel for="@next" value="Mode de Paiement :" />
+		
+		<p:selectOneRadio id="Mode" value="#{avenirJeunesseController.modepaie}" 
+			disabled="#{avenirJeunesseController.desabledEncaiss || avenirJeunesseController.disabledModepaie}"
+			styleClass="menu-visible radio-compact">
+			<f:selectItem itemLabel="Direct" itemValue="1" />
+			<f:selectItem itemLabel="Prélèvements bancaires" itemValue="2" />
+
+<!--             <p:ajax event="change" update="Mode" /> -->
+			<p:ajax event="change"
+					listener="#{avenirJeunesseController.onModeChange}"
+					update="formAvj"
+					process="@this" />
+		</p:selectOneRadio>
+	
+</h:panelGrid>	
+
+
+
+						        
+	        <h:panelGroup id="jourBlock" rendered="#{avenirJeunesseController.afficherJourBlock}">
+
+			    <h:panelGrid columns="2">
+			
+			        <p:outputLabel for="jourPrelevement"
+			                       value="Jour de prélèvement :" />
+			
+			        <p:selectOneMenu id="jourPrelevement"
+			                         value="#{avenirJeunesseController.jourPrelevement}"
+			                         styleClass="menu-visible" 
+			                         disabled="#{avenirJeunesseController.desabledEncaiss }">
+			
+			            <f:selectItem itemLabel="-- Sélectionner --" itemValue="" noSelectionOption="true" />
+			            <f:selectItems value="#{avenirJeunesseController.joursDisponibles}" />
+			            
+			            <p:ajax event="change" 
+			            listener="#{avenirJeunesseController.onJourChange}"
+			            process="@this" update="jourBlock"/>
+			
+			        </p:selectOneMenu>
+			
+			    </h:panelGrid>
+			
+			</h:panelGroup>						        
+	        
+	        
+	          <h:panelGroup id="moisBlock" rendered="#{avenirJeunesseController.afficherMois}">
+	          
+		        <h:panelGrid columns="2">
+		        
+		            <p:outputLabel for="moisPrelevement" value="Mois de prélèvement :" />
+		            
+		            <p:selectOneMenu id="moisPrelevement"
+		                             value="#{avenirJeunesseController.moisPrelevement}"
+		                             styleClass="menu-visible" 
+		                             disabled="true">
+		                             
+		                <f:selectItem itemLabel="-- Sélectionner --" itemValue="" noSelectionOption="true" />
+		                <f:selectItems value="#{avenirJeunesseController.moisDisponibles}" />
+		                
+		                <p:ajax event="change" 
+		                listener="#{avenirJeunesseController.onMoisChange}"
+		                process="@this" update="moisBlock"/>
+		                
+		            </p:selectOneMenu>
+		            
+		        </h:panelGrid>
+		        
+		    </h:panelGroup>
+						        
+
+																
+</p:fieldset>
+
+
+<!-- 										<table id="ctl00_ctl00_Main_Main_dlSurprime_ctl00_Datas_tab" -->
+<!-- 											cellpadding="0" cellspacing="0" border="0" width="350px"> -->
+<!-- 											<tbody> -->
+<!-- 												<tr align="left"> -->
+<!-- 													<td -->
+<!-- 														id="ctl00_ctl00_Main_Main_dlSurprime_ctl00_Datas_td_Libelle" -->
+<!-- 														nowrap="nowrap" width="50px" align="right"><span -->
+<!-- 														id="ctl00_ctl00_Main_Main_dlSurprime_ctl00_Datas_LabLibelle" -->
+<!-- 														title="Surprime">Surprime </span></td> -->
+<!-- 													<td -->
+<!-- 														id="ctl00_ctl00_Main_Main_dlSurprime_ctl00_Datas_inputTD" -->
+<!-- 														nowrap="nowrap" style="z-index: 0;"><p:inputNumber -->
+<!-- 															value="#{avenirJeunesseController.surprime}" -->
+<!-- 															id="surprime_" required="false" thousandSeparator="" -->
+<!-- 															decimalSeparator="." decimalPlaces="3"> -->
+
+<!-- 														</p:inputNumber></td> -->
+<!-- 												</tr> -->
+<!-- 											</tbody> -->
+<!-- 										</table> -->
+
+
+
+										<center>
+
+											<div class="form-actions">
+												<p:messages autoUpdate="true" showDetail="true" />
+
+												<p:commandLink style="color: #fff !important;" ajax="false"
+													target="_blank" type="idImprimer="
+													action="#{avenirJeunesseController.generateDevisAvenirJeunesse()}"
+													id="generateDevisAvj" styleClass="btn btn-info"
+													value="Imprimer Devis"
+													disabled="#{!avenirJeunesseController.desabledGenerateNotice ||
+													avenirJeunesseController.desabledEncaiss}" />
+
+												<p:commandLink style="color: #fff !important;" 
+													type="idvaliderPrposition" id="validerPrposition"
+													action="#{avenirJeunesseController.Encaissement_Global()}"
+													styleClass="btn btn-success" value="Encaissement"
+													disabled="#{!avenirJeunesseController.desabledGenerateNotice ||
+													avenirJeunesseController.desabledEncaiss}"
+													update="Mode, jourBlock, moisBlock, generateDevisAvj,validerPrposition,generateNoticeAvj,generatequittance,generateContratAvj,generateAttestImpot,surprime" />
+
+												<p:commandLink style="color: #fff !important;" ajax="false"
+													target="_blank" id="generateContratAvj" type="idImprimer="
+													action="#{avenirJeunesseController.imprimerContratAvj()}"
+													styleClass="btn btn-danger" value="Imprimer Contrat"
+													disabled="#{avenirJeunesseController.desabledGenerateNotice}" />
+													
+												<p:commandLink style="color: #fff !important;" ajax="false"
+													target="_blank" id="generateNoticeAvj" type="idImprimer="
+													action="#{avenirJeunesseController.imprimerNoticeAvj()}"
+													styleClass="btn btn-danger" value="Imprimer Notice"
+													disabled="#{avenirJeunesseController.desabledGenerateNotice}" />													
+													
+												<p:commandLink style="color: #fff !important;" ajax="false"
+													target="_blank" id="generatequittance" type="idImprimer="
+													action="#{avenirJeunesseController.imprimer_quit()}"
+													styleClass="btn btn-primary" value="Imprimer Quittance"
+													disabled="#{avenirJeunesseController.desabledGenerateNotice}" />
+													
+												<p:commandLink style="color: #fff !important;" ajax="false"
+													target="_blank" id="generateAttestImpot" type="idImprimer="
+													action="#{avenirJeunesseController.imprimer_impot_V2()}"
+													styleClass="btn btn-primary" value="Imprimer Attestation"
+													disabled="#{avenirJeunesseController.desabledGenerateNotice}" />													
+													
+
+													
+											</div>
+										</center>
+										
+										
+                
+        <p:dialog header="ATTESTATION D'ASSURANCE VIE" showEffect="fade" modal="true" position="left,bottom"
+                  widgetVar="manageProductDialog" responsive="true" id="manage-product-content" width="650">
+            <p:outputPanel  id="manage-product-content-bis">
+                <p:outputPanel >
+                    
+                    <p class="ui-widget">
+                    </p>
+                    
+					<p class="ui-widget">
+                        Veuillez saisir une date pour imprimer l'attestation d'assurance vie.
+                    </p>
+                    
+                    <p class="ui-widget">
+                    </p>
+                    
+                    <div class="p-field">
+                        <p:outputLabel for="date_impot">Date: </p:outputLabel>
+                        
+                      
+						
+						<p:calendar
+							value="#{avenirJeunesseController.dateImpot}"
+							id="date_impot"  pattern="dd/MM/yyyy" size="5"							
+							styleClass="small-font"
+							validatorMessage="La date n'est pas valide!" 
+							requiredMessage="La date est obligatoire!">
+							<p:ajax event="dateSelect"
+							update="validerImpot"
+							listener="#{avenirJeunesseController.updateValiderImpot()}" />
+							
+							<p:ajax event="keyup" update="validerImpot" 
+							listener="#{avenirJeunesseController.updateValiderImpot()}"/>
+													
+							<p:ajax event="blur" update="validerImpot" 
+							listener="#{avenirJeunesseController.updateValiderImpot()}"/>
+							
+							<p:ajax event="change"  update="validerImpot"
+							listener="#{avenirJeunesseController.updateValiderImpot()}"/>
+							
+							</p:calendar>						
+						
+						<p:message for="date_impot" />
+						<p:messages  autoUpdate="true" showDetail="true" closable="true"/>
+         				<p:growl id="messages" showDetail="true"/>
+                    </div>
+                     
+                     
+                     
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+               
+                              
+                              
+                  <p:commandLink  type="validerImpot"  id="validerImpot"  action= "#{avenirJeunesseController.imprimer_impot()}" 
+                              update="form"  ajax="false" target="_blank" style="color:#ffffff"
+                              styleClass="btn btn-success"  value="Imprimer la Quittance" 
+                              disabled="#{!avenirJeunesseController.valider_impot}"
+                              process="@this"/>                             
+                                 
+                
+            </f:facet>
+        </p:dialog>
+                
+        										
+										
+										
+										
+
+
+									</p:panel>
+								
+	
+									
+								</p:tab>
+
+
+<!-- 								<p:tab id="evol_gar" title="Tableau d'évolution des garanties"> -->
+<!-- 									<p:panel header="Tableau d'évolution des garanties"> -->
+									
+									
+<!-- 									   <h:panelGrid columns="2" cellpadding="10"> -->
+								             
+<!-- 								              <p:dataTable var="detailsE" value="#{avenirJeunesseController.detailsEvolutionGarantiesDTO}" -->
+<!-- 								              scrollable="true" scrollWidth="700"> -->
+<!-- 												    <p:column headerText="Année"> -->
+<!-- 												        <h:outputText value="#{detailsE.annee}" > -->
+												        
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												 
+<!-- 												    <p:column headerText="Cumul Versements"> -->
+<!-- 												        <h:outputText value="#{detailsE.cumulvers}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												 
+<!-- 												    <p:column headerText="Prime épargnée Bourse"> -->
+<!-- 												        <h:outputText value="#{detailsE.pepbourse}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Prime épargné frais"> -->
+<!-- 												        <h:outputText value="#{detailsE.pepfrais}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Epargne constituée Bourse (4%)"> -->
+<!-- 												        <h:outputText value="#{detailsE.econstbourse}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Epargne constituée Frais (4%)"> -->
+<!-- 												        <h:outputText value="#{detailsE.econstfrais4}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Avantage financier"> -->
+<!-- 												        <h:outputText value="#{detailsE.avfinancier}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Avantage fiscal Annuel"> -->
+<!-- 												        <h:outputText value="#{detailsE.avfiscannuel}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Epargne constituée (6%)"> -->
+<!-- 												        <h:outputText value="#{detailsE.epconstituee}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Epargne constituée 6% Frais"> -->
+<!-- 												        <h:outputText value="#{detailsE.econstfrais6}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="VBénéfices Réalisés"> -->
+<!-- 												        <h:outputText value="#{detailsE.benefrealises}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Participation aux Bénéfices"> -->
+<!-- 												        <h:outputText value="#{detailsE.particpbenefices}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												    
+<!-- 												    <p:column headerText="Epargne Constituée en fin d'année"> -->
+<!-- 												        <h:outputText value="#{detailsE.econstfin}" > -->
+<!-- 												        <f:convertNumber pattern="#,##0.000" /> -->
+<!-- 												        </h:outputText> -->
+<!-- 												    </p:column> -->
+												 
+												    
+<!-- 												</p:dataTable>   -->
+								               
+<!-- 									</h:panelGrid> -->
+									
+<!-- 									</p:panel> -->
+<!-- 								</p:tab> -->
+								
+
+							</p:wizard>
+							
+							
+							
+							    <p:blockUI block="formAvj" trigger="validerPrposition, wizard, btnSearch">
+						        Chargement...<br />
+						        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+					    	</p:blockUI>
+
+						</h:form>
+
+
+
+
+
+
+					</ul>
+				</div>
+			</div>
+		</h:body>
+	</ui:define>
+</ui:composition>

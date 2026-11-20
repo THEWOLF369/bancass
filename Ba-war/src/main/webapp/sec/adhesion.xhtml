@@ -1,0 +1,936 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+
+
+        <style type="text/css">
+            .ui-fieldset-legend {
+                width: auto;
+                line-height: 0;
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+
+            .ui-datepicker-trigger {
+                top: -5px;
+                margin-left: 3px;
+            }
+
+            .ui-inputtext {
+                width: 100px;
+            }
+
+            .ui-inputfield.hasDatepicker {
+                width: 75px;
+            }
+
+            .ui-grid-responsive {
+                border: 0;
+            }
+
+            .NPolice-label {
+                width: 128px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .NPolice-input {
+                width: 150px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .Calendar-label {
+                width: 90px;
+                padding-right: 0 !important;
+            }
+
+            .CIN-label {
+                padding-right: 0 !important;
+                padding-left: 15px !important;
+                width: 50px;
+            }
+
+            .calendar-width {
+                width: 200px;
+            }
+
+            .etat-select {
+                width: 160px;
+            }
+
+            @media ( max-width : 980px) {
+                .ui-grid .ui-grid-row {
+                    display: block;
+                }
+                .ui-panelgrid .ui-panelgrid-cell {
+                    float: none;
+                }
+                .ui-inputtext {
+                    width: 90%;
+                }
+                .ui-inputfield.hasDatepicker {
+                    width: 90%;
+                }
+                .etat-select {
+                    width: 90%;
+                }
+            }
+
+            .ui-panelgrid-cell label {
+                color: black;
+            }
+
+            .panel-label-col-width {
+                width: 130px;
+            }
+
+            .transparent .ui-panelgrid-content {
+                background: transparent !important;
+            }
+
+            .ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+            {
+                background: 0 !important;
+                background-color: white !important;
+                box-shadow: none !important;
+            }
+
+            .small-font {
+                font-size: 12px;
+                line-height: 12px;
+            }
+
+            .row1 {
+                background: 0;
+                background-color: #f3f3f3;
+            }
+
+            .row2 {
+                background: 0;
+                background-color: #d9f2e6;
+            }
+
+            .ui-datatable.table th {
+                background: url('../img/bg/bg_vert.png');
+                color: white;
+            }
+
+            .table th {
+                font-weight: 100;
+            }
+        </style>
+
+
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Consultation des Adhesions</li>
+        </ul>
+        <ul class="page_info">
+            <h:form id="form">
+			
+			 <p:panelGrid columns="8" layout="grid" columnClasses="alabel, dateCol, alabel, dateCol"
+                             styleClass="transparent">
+
+                  
+
+Date création
+Du: 
+<p:calendar id="startDate" value="#{consultationBean.from}" showOn="button" navigator="true"
+    popupIconOnly="false" pattern ="dd/MM/yyyy" locale="en" 
+    required="false" requiredMessage="bbb"
+    label="#{ui['calendar.start']}">
+    <p:ajax event="dateSelect" update="endDate" />
+</p:calendar>
+ 
+Au:
+<p:calendar id="endDate" value="#{consultationBean.to}" showOn="button" navigator="true"
+    mindate="#{consultationBean.from}" popupIconOnly="false" pattern="dd/MM/yyyy"
+    locale="en" required="false" label="#{ui['calendar.end']}"
+    requiredMessage="bbb">
+    
+</p:calendar>
+
+                   
+                    
+                    <p:commandLink  action="#{consultationBean.Chercher}" update="form" ajax="true" id="searchBtn" oncomplete="filtrerGlobal()">
+                     <img src="${facesContext.externalContext.requestContextPath}/images/research.png" width="32" height="32"/>
+                    </p:commandLink>
+                    
+                    
+                    
+                </p:panelGrid>
+			
+			  <p:panelGrid columns="8" layout="grid"
+                                     styleClass="transparent">
+                                     
+                            <h:outputLabel value="Produit:" styleClass="small-font" 
+							 rendered="#{!login.utilisateur.profil.code.equals('IST') and
+    !login.utilisateur.profil.code.equals('TDST') and !login.utilisateur.profil.code.equals('VST') and 
+    !login.utilisateur.profil.code.equals('AST') and !login.utilisateur.profil.code.equals('VTST') and
+     !login.utilisateur.profil.code.equals('HST') and !login.utilisateur.profil.code.equals('HQST') and
+     !login.utilisateur.profil.code.equals('MSTA')}"
+                                           style="margin-top: 7px;" />                           
+                            <h:selectOneMenu class="etat-select" onchange="filterEtat('policeFilter', this)" 
+							 rendered="#{!login.utilisateur.profil.code.equals('IST') and
+    !login.utilisateur.profil.code.equals('TDST') and !login.utilisateur.profil.code.equals('VST') and 
+    !login.utilisateur.profil.code.equals('AST') and !login.utilisateur.profil.code.equals('VTST') and 
+    !login.utilisateur.profil.code.equals('HST') and !login.utilisateur.profil.code.equals('HQST') and
+    !login.utilisateur.profil.code.equals('MSTA')}">
+                              <f:selectItem itemLabel="Choisir un produit..."  /> 
+							   <f:selectItems value="#{consultationBean.produits}" var="produits" itemLabel="#{produits.libelleProduit}" itemValue="#{produits.libelleProduit}"/>
+						    </h:selectOneMenu>
+						    
+						    
+						    
+                            <h:outputLabel value="Produit:" styleClass="small-font" 
+							 rendered="#{login.utilisateur.profil.code.equals('MSTA')}"
+                                           style="margin-top: 7px;" />                           
+                            <h:selectOneMenu class="etat-select" value="#{consultationBean.codeProduit}" 
+                            onchange="filterEtat('produitFilter', this)" 
+							 rendered="#{login.utilisateur.profil.code.equals('MSTA')}">
+                              <f:selectItem itemLabel="Choisir un produit."  /> 
+							   <f:selectItems value="#{consultationBean.produits}" var="produits" itemLabel="#{produits.libelleProduit}" itemValue="#{produits.idProduit}"/>
+						    </h:selectOneMenu>						    
+						    
+						    
+						    
+						    <br/>
+                            
+                            <h:outputLabel value="N° adhesion:" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:inputText onkeyup="filterTable(this, 'adhesionFilter')" size="5"
+                                         style="background: 0; background-color: white!important"
+                                         styleClass="small-font" 
+                                         value="#{consultationBean.nadhesion}"/>
+                                         
+                                         
+                            <br/>             
+                                          
+                             <h:outputLabel value="Identifiant Client:" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:inputText onkeyup="filterTable(this, 'cinFilter')"
+                                         styleClass="small-font" value="#{consultationBean.cin}"/>
+
+                            
+                            
+                            
+                            
+                            
+                            
+                           
+
+                            <h:outputLabel value="Etat:" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                           <h:selectOneMenu class="etat-select" style="width: 100px;"
+								onchange="filterEtat('etatFilter', this)" id="idSelectionEtat">
+								<f:selectItem itemLabel="Tous" />
+							<f:selectItem itemValue="V" itemLabel="En Vigeur" />
+							<f:selectItem itemValue="E" itemLabel="éteint" />
+							<f:selectItem itemValue="A" itemLabel="Annulé" />
+							<f:selectItem itemValue="N" itemLabel="Non validé" />
+							</h:selectOneMenu>
+                            
+                            
+                            <p:outputLabel for="numsoc" value="Société:" 
+							  rendered="#{login.utilisateur.profil.code.equals('IST') || login.utilisateur.profil.code.equals('AST') || 
+    login.utilisateur.profil.code.equals('TDST')  ||  login.utilisateur.profil.code.equals('VST')  ||  
+    login.utilisateur.profil.code.equals('ASI')  ||  login.utilisateur.profil.code.equals('VTST') ||
+    login.utilisateur.profil.code.equals('HST') || login.utilisateur.profil.code.equals('HQST')
+    || login.utilisateur.profil.code.equals('MSTA')}" /> 
+     <p:selectOneMenu id="numsoc" styleClass="form-control" value="#{consultationBean.codeSociete}"     filter="true" filterMatchMode="contains"
+          style="width:60px" 
+		     rendered="#{login.utilisateur.profil.code.equals('IST') || login.utilisateur.profil.code.equals('AST') || 
+    login.utilisateur.profil.code.equals('TDST')  ||  login.utilisateur.profil.code.equals('VST')  ||  
+    login.utilisateur.profil.code.equals('ASI')  ||  login.utilisateur.profil.code.equals('VTST') ||
+    login.utilisateur.profil.code.equals('HST') || login.utilisateur.profil.code.equals('HQST')
+    || login.utilisateur.profil.code.equals('MSTA')}">
+							 
+							<f:selectItems value="#{consultationBean.listSociete}" />
+							 
+						</p:selectOneMenu>
+                            
+                            
+                            
+                            <h:outputLabel value="Code agence:" styleClass="small-font"
+                                           style="margin-top: 7px;" rendered="#{login.utilisateur.profil.code.equals('AST') || login.utilisateur.profil.code.equals('AS')}"/>
+                            <p:inputText onkeyup="filterTable(this, 'agenceFilter')" size="5"
+                                         style="background: 0; background-color: white!important"
+                                         styleClass="small-font" rendered="#{login.utilisateur.profil.code.equals('AST') || login.utilisateur.profil.code.equals('AS')}"/>
+                           
+                        </p:panelGrid>
+                <h:commandLink   >
+                     <img src="${facesContext.externalContext.requestContextPath}/images/icon/excel.png" width="32" height="32"/>
+                      <p:dataExporter type="xls" target="dataTable" fileName="Adhesions-STAR" />
+                    </h:commandLink>
+ 				<h:commandLink   >
+                     <img src="${facesContext.externalContext.requestContextPath}/images/icon/pdf.png" width="32" height="32"/>
+                      <p:dataExporter type="pdf" target="dataTable" fileName="Adhesions-STAR" />
+                    </h:commandLink>
+				 <h:commandLink   >
+                     <img src="${facesContext.externalContext.requestContextPath}/images/icon/csv.png" width="32" height="32"/>
+                      <p:dataExporter type="csv" target="dataTable" fileName="Adhesions-STAR" />
+                    </h:commandLink>
+ 
+  				<h:commandLink   >
+  	                   <img src="${facesContext.externalContext.requestContextPath}/images/icon/xml.png" width="32" height="32"/>
+                      <p:dataExporter type="xml" target="dataTable" fileName="Adhesions-STAR" />
+                    </h:commandLink>
+                <p:dataTable var="consultation" reflow="true" id="dataTable"
+                             rowStyleClass="#{(rowIndex mod 2) eq 0 ? 'row1' : 'row2'}"
+                             styleClass="table" rowIndexVar="rowIndex"
+                             value="#{consultationBean.adhesions}" paginator="true" rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                  >
+					
+                 
+
+                    <p:column style="width:10px" exportable="false">
+                        <p:rowToggler />
+                    </p:column>
+
+
+					<p:column headerText="Produit" filterStyleClass="produitFilter"
+						filterBy="#{consultation.police.codProdui.idProduit.toString()}"
+						filterValue="#{consultationBean.codeProduit}"
+						filterStyle="display: none" style="width:90px"
+						rendered="#{login.utilisateur.profil.code.equals('MSTA')}">
+						<h:outputLabel
+							value="#{consultation.police.codProdui.libelleProduit}" />
+					</p:column>	
+ 
+                    
+                    <p:column headerText="Produit" filterStyleClass="policeFilter"
+                              filterBy="#{consultation.police.codProdui.libelleProduit}"
+                              filterStyle="display: none" style="width:90px"
+                              rendered="#{!login.utilisateur.profil.code.equals('MSTA')}">
+                        <h:outputLabel value="#{consultation.police.codProdui.libelleProduit}" />
+                    </p:column>                     
+                    
+                   <p:column headerText="N° adhesion" filterStyleClass="adhesionFilter"
+                              filterBy="#{consultation.nadhesion}"
+                              filterStyle="display: none" visible="true" style="width:80px">
+                        <h:outputLabel value="#{consultation.nadhesion}" visible="true"/>
+                    </p:column>
+
+                    <p:column headerText="Code Agence" filterStyleClass="agenceFilter"
+                              filterBy="#{consultation.utilisateur.agence.codeAgence}"
+                              style="width:80px"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('AST') || login.utilisateur.profil.code.equals('AS')}">
+                        <h:outputLabel value="#{consultation.utilisateur.agence.codeAgence}" rendered="#{login.utilisateur.profil.code.equals('AST') || login.utilisateur.profil.code.equals('AS')}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Identifiant Client" filterStyleClass="cinFilter"
+                              filterBy="#{consultation.client.identifiant}"
+                              filterStyle="display: none" style="width:70px">
+                        <h:outputLabel value="#{consultation.client.identifiant}" />
+                    </p:column>
+
+                   
+                    <p:column headerText="Capital" style="width:80px">
+                        <h:outputLabel value="#{consultation.capital}" />
+                    </p:column>
+
+                    
+                    <p:column headerText="Montant Prime (TND)" style="width:80px">
+                        <h:outputLabel value="#{consultation.mtPrime+consultation.taxe+consultation.cout}">
+                        <f:convertNumber pattern="#0.000" />
+							</h:outputLabel>
+                    </p:column>
+      
+                    
+                    <p:column headerText="Etat" filterStyleClass="etatFilter" style="width: 40px;"
+						filterBy="#{consultation.etat}"
+						filterStyle="display: none">
+						<h:outputLabel
+							value="#{consultation.etat}" />
+					</p:column>
+                   
+                    <p:column headerText="Date Creation"
+                              filterStyleClass="dateCreaFilter" sortBy="#{consultation.datcreation}"
+                              filterBy="#{consultation.datcreation}" filterStyle="display: none" 
+                              style="width:90px">
+                        <h:outputLabel value="#{consultation.datcreation}" />
+                    </p:column>
+                    <p:column headerText="Contrat" style="width:40px;text-align: center"
+                              filterBy="#{consultation.etat}" filterStyle="display: none"
+                              filterStyleClass="etatFilter" rendered="#{login.utilisateur.profil.code.equals('G') || login.utilisateur.profil.code.equals('AA')}">
+
+                        <p:commandLink title="Print" ajax="false" 
+                                       action="#{consultationBean.print(consultation)}" target="_blank"
+                                       disabled="#{consultation.etat.equals('N')||consultation.etat.equals('A')}">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                    
+                    <p:column headerText="Notice" style="width:40px;text-align: center"
+                              filterBy="#{consultation.etat}" filterStyle="display: none"
+                              filterStyleClass="etatFilter" rendered="#{login.utilisateur.profil.code.equals('G') || login.utilisateur.profil.code.equals('AA')}">
+
+                        <p:commandLink title="Print" ajax="false" 
+                                       action="#{consultationBean.print_notice(consultation)}" target="_blank"
+                                       disabled="#{(!consultation.police.codProdui.libelleProduit.contains('INVESTI') 
+                                       &amp;&amp; !consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS')
+                                       &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('UNIVERSITY'))
+                                       || consultation.etat.equals('N') ||consultation.etat.equals('A')}">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>                    
+                    
+                    <p:column headerText="FDR/ QTC" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('G') || login.utilisateur.profil.code.equals('AA')}">
+
+                        <p:commandLink title="Print" ajax="false" disabled="#{(!consultation.police.codProdui.libelleProduit.equals('Incendie')
+                        &amp;&amp; !consultation.police.codProdui.libelleProduit.contains('INVESTI')
+                        &amp;&amp; !consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS')
+                        &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+                        &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('TLSAssistV')) || consultation.etat.equals('N') ||consultation.etat.equals('A')}"
+                                       action="#{consultationBean.printFDR(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="Attestation d'impôt" style="width:70px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('G') || login.utilisateur.profil.code.equals('AA')}">
+
+                <p:commandLink title="impôt" update=":form:manage-product-content"
+                                 oncomplete="PF('manageProductDialog').show()"
+                                 
+                   disabled="#{(
+                         !consultation.police.codProdui.libelleProduit.contains('INVESTI')
+                        &amp;&amp; !consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS')
+                        &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+                        &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('TLSAssistV')) || consultation.etat.equals('N') ||consultation.etat.equals('A')}"
+                                       
+                                 styleClass="edit-button rounded-button ui-button-success" process="@this">
+                    <f:setPropertyActionListener value="#{consultation}" 
+                    target="#{consultationBean.selectedAdhesion}"/>
+                    <f:setPropertyActionListener value="#{consultationBean.dateImpot_init}" 
+                    target="#{consultationBean.dateImpot}"/>
+                    <p:resetInput target=":form:manage-product-content-bis"/>
+                    <i class="fa fa-fw fa-print"></i>
+                </p:commandLink>
+                
+           
+                    </p:column>  
+                    
+                    
+                     <p:column headerText="Autorisation de prélèvements" style="width:120px;text-align: center"
+                              filterStyle="display: none" rendered="#{(login.utilisateur.agence.societe.codSociet.equals('xx022671FPM000') ||
+                              login.utilisateur.agence.societe.codSociet.equals('002707PPM000stb'))
+                              and 
+                              (login.utilisateur.profil.code.equals('G') || login.utilisateur.profil.code.equals('AA'))}">
+
+                        <p:commandLink title="Print" ajax="false" disabled="#{(!consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS') 
+                        and !consultation.police.codProdui.libelleProduit.contains('INVESTI') 
+                        and !consultation.police.codProdui.libelleProduit.contains('UNIVERSITY') )
+                        || (empty consultation.modePaiementHayya) 
+                        || ( not empty consultation.modePaiementHayya and consultation.modePaiementHayya.get(0).modep != '1' and consultation.modePaiementHayya.get(0).modep != '2')
+                         || consultation.etat.equals('N') ||consultation.etat.equals('A')}"
+                                       action="#{consultationBean.printAutoPrel(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>                                     
+                    
+                     <p:column headerText="FDR" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}">
+
+                        <p:commandLink title="Print" ajax="false" disabled="#{!consultation.police.codProdui.libelleProduit.equals('Grele')}"
+                                       action="#{packBean.imprimerFDRconsult(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                    <!-- <p:column headerText="FDRIncAL" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}">
+
+                        <p:commandLink title="Print" ajax="false" disabled="#{!consultation.police.codProdui.libelleProduit.equals('Incendie Alim')}"
+                                       action="#{packBean.imprimerFDRAlconsult(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>-->
+                      <p:column headerText="CpGrele" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}">
+
+                        <p:commandLink title="Print" ajax="false"  disabled="#{!consultation.police.codProdui.libelleProduit.equals('Grele')}"
+                                       action="#{packBean.imprimerCPGreleconsul(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                    
+                      <p:column headerText="CpInc" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}">
+
+                        <p:commandLink title="Print" ajax="false"  disabled="#{!consultation.police.codProdui.libelleProduit.equals('Incendie Agricole')}"
+                                       action="#{packBean.imprimerCPIncendieconsul(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                    
+                     <p:column headerText="CpIncAl" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}">
+
+                        <p:commandLink title="Print" ajax="false"  disabled="#{!consultation.police.codProdui.libelleProduit.equals('Incendie Alim')}"
+                                       action="#{packBean.imprimerCPIncendieAlconsul(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                      <p:column headerText="TD" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}">
+
+                        <p:commandLink title="Print" ajax="false"  disabled="#{!consultation.police.codProdui.libelleProduit.equals('TD')}"
+                                       action="#{packBean.imprimerTDconsul(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                    
+                       <p:column headerText="Quit" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}">
+
+                        <p:commandLink title="Print" ajax="false"  disabled="#{!consultation.police.codProdui.libelleProduit.equals('Grele')}"
+                                       action="#{packBean.imprimerQuittanceconsul(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                    
+                    <p:column headerText="QuitIA" style="width:40px;text-align: center"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}">
+
+                        <p:commandLink title="Print" ajax="false"  disabled="#{!consultation.police.codProdui.libelleProduit.equals('Incendie Alim')}"
+                                       action="#{packBean.imprimerQuittanceconsul(consultation)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                    
+                    <p:rowExpansion>
+                        <p:panelGrid columns="4" layout="grid"  columnClasses="ui-grid-col-2, ui-grid-col-5, ui-grid-col-2, ui-grid-col-5">
+
+                            <p:outputLabel value="N° Police:" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.police.NPolice}" />
+                            
+                            <p:outputLabel value="N° adhesion:" style="font-weight: bold;" />
+							<p:outputLabel value="#{consultation.nadhesion}" />
+
+                            <p:outputLabel value="Client:" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.client.nomClient} #{consultation.client.prenomClient}" />
+
+                            <p:outputLabel value="Capital:" style="font-weight: bold;" 
+                            rendered="#{!consultation.police.codProdui.libelleProduit.equals('Assistance voyage') 
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('TLSAssistV')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.contains('INVESTI')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS')}"/>
+                            <p:outputLabel value="#{consultation.capital}" 
+                            rendered="#{!consultation.police.codProdui.libelleProduit.equals('Assistance voyage') 
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('TLSAssistV')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.contains('INVESTI')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS')}"/>
+
+                            <p:outputLabel value="Date debut" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.datDebut}" />
+
+                            <p:outputLabel value="Date Fin" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.datFin}" />
+
+                            <p:outputLabel value="Duree" style="font-weight: bold;" rendered="#{!consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')
+                            &amp;&amp; !login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}"/>
+                            <p:outputLabel value="#{consultation.duree}" rendered="#{!consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')
+                            &amp;&amp; !login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}"/>
+
+                            <p:outputLabel value="Adresse du risque:" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+                            <p:outputLabel value="#{consultation.adresse}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+
+                            <p:outputLabel value="Code Postal du risque:" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+                            <p:outputLabel value="#{consultation.codeP}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+
+                            <p:outputLabel value="Localité du risque:" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+                            <p:outputLabel value="#{consultation.localite}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+
+                            <p:outputLabel value="Gouvernorat du risque:" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+                            <p:outputLabel value="#{consultation.gouver}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+
+                            <p:outputLabel value="Etat" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.etat}" />
+
+                            <p:outputLabel value="Taux Prime" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.tauxPrime}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                                                                               
+                            <p:outputLabel value="Taux SPRIM" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.tauxSprim}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+
+                            <p:outputLabel value="Majoration" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.majoration}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+
+                            <p:outputLabel value="Taux Inter" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.tauxInter}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+
+                            <p:outputLabel value="Franchise" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.franchise}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+
+                            <p:outputLabel value="Montant Prime (sans Surprime):" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />
+							<p:outputLabel value="Montant Prime:" style="font-weight: bold;" rendered="#{!consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />
+							<p:outputLabel value="#{consultation.mtPrime+consultation.taxe+consultation.cout}" >
+							<f:convertNumber pattern="#0.000" />
+							</p:outputLabel>
+							
+							<p:outputLabel value="Fractionnement" style="font-weight: bold;"
+								rendered="#{consultation.police.codProdui.libelleProduit.contains('INVESTI') || consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS')}" />
+							<p:outputLabel value="Annuel"
+								rendered="#{(consultation.police.codProdui.libelleProduit.contains('INVESTI') || consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS'))
+								and consultation.fraPolice == '1'}" />
+							<p:outputLabel value="Semestriel"
+								rendered="#{(consultation.police.codProdui.libelleProduit.contains('INVESTI') || consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS'))
+								and consultation.fraPolice == '2'}" />
+							<p:outputLabel value="Trimestriel"
+								rendered="#{(consultation.police.codProdui.libelleProduit.contains('INVESTI') || consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS'))
+								and consultation.fraPolice == '3'}" />
+							<p:outputLabel value="Mensuel"
+								rendered="#{(consultation.police.codProdui.libelleProduit.contains('INVESTI') || consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS'))
+								and consultation.fraPolice == '4'}" />
+							<p:outputLabel value="Prime Unique"
+								rendered="#{(consultation.police.codProdui.libelleProduit.contains('INVESTI') || consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS'))
+								and consultation.fraPolice == '5'}" />
+								
+							<p:outputLabel value="Mode de Paiement:" style="font-weight: bold;"
+								rendered="#{(consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS') ||
+								consultation.police.codProdui.libelleProduit.contains('INVESTI') ||
+								consultation.police.codProdui.libelleProduit.contains('UNIVERSITY')
+								)
+								and consultation.etat.contains('V') and 
+								(not empty consultation.modePaiementHayya) and 
+								(consultation.modePaiementHayya.get(0).modep == '1' || consultation.modePaiementHayya.get(0).modep == '2')}" />
+							<p:outputLabel value="Directe"
+								rendered="#{(consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS') ||
+								consultation.police.codProdui.libelleProduit.contains('INVESTI') ||
+								consultation.police.codProdui.libelleProduit.contains('UNIVERSITY')
+								)
+								and not empty consultation.modePaiementHayya and consultation.etat.contains('V') and consultation.modePaiementHayya.get(0).modep == '1'}" />
+								
+								<p:outputLabel value="Prélèvements bancaires"
+								rendered="#{(consultation.police.codProdui.libelleProduit.contains('FUTURE DREAMS') ||
+								consultation.police.codProdui.libelleProduit.contains('INVESTI') ||
+								consultation.police.codProdui.libelleProduit.contains('UNIVERSITY')
+								)
+								and not empty consultation.modePaiementHayya and consultation.etat.contains('V') and consultation.modePaiementHayya.get(0).modep == '2'}" />	
+					
+					
+							 <p:outputLabel value="Jour et Mois de Paiement:" style="font-weight: bold;"
+								rendered="#{(
+								consultation.police.codProdui.libelleProduit.contains('INVESTI') ||
+								consultation.police.codProdui.libelleProduit.contains('UNIVERSITY')
+								)
+								and consultation.etat.contains('V') and 
+								(not empty consultation.modePaiementHayya) and 
+								(consultation.modePaiementHayya.get(0).modep == '2') and 
+								(consultation.fraPolice == '1' or consultation.fraPolice == 'A')}" />
+							 <p:outputLabel value="Jour de Paiement:" style="font-weight: bold;"
+								rendered="#{(
+								consultation.police.codProdui.libelleProduit.contains('INVESTI') ||
+								consultation.police.codProdui.libelleProduit.contains('UNIVERSITY')
+								)
+								and consultation.etat.contains('V') and 
+								(not empty consultation.modePaiementHayya) and 
+								(consultation.modePaiementHayya.get(0).modep == '2') and 
+								(consultation.fraPolice != '1' and consultation.fraPolice != 'A')}" />								
+								
+								<p:outputLabel   
+								value="#{consultation.modePaiementHayya.get(0).jourPrelevement}
+								 #{consultationBean.nomMois(consultation.modePaiementHayya.get(0).moisPrelevement)}"
+								rendered="#{( 
+								consultation.police.codProdui.libelleProduit.contains('INVESTI') ||
+								consultation.police.codProdui.libelleProduit.contains('UNIVERSITY')
+								)
+								and not empty consultation.modePaiementHayya and consultation.etat.contains('V') and consultation.modePaiementHayya.get(0).modep == '2'}" />	
+					
+								
+							
+							<p:outputLabel value="Prime nette:" style="font-weight: bold;" 
+							rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}"/>
+							<p:outputLabel
+								value="#{consultation.mtPrime}"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}">
+								<f:convertNumber pattern="#0.000" />
+							</p:outputLabel>
+							
+							<p:outputLabel value="Taxe:" style="font-weight: bold;" 
+							rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}"/>
+							<p:outputLabel
+								value="#{consultation.taxe}"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}">
+								<f:convertNumber pattern="#0.000" />
+							</p:outputLabel>
+							
+							<p:outputLabel value="Frais du contrat:" style="font-weight: bold;" 
+							rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}"/>
+							<p:outputLabel
+								value="#{consultation.cout}"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}">
+								<f:convertNumber pattern="#0.000" />
+							</p:outputLabel>
+
+                            <p:outputLabel value="Type Contrat" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage')}"/>
+                            <p:outputLabel value="#{consultation.typeAbonnement.valTypeAbonnement}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage')}"/>
+                            
+                            <p:outputLabel value="Destination" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') ||
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            <p:outputLabel value="#{consultation.destination}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            
+                            <p:outputLabel value="Personne à prévenir" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            <p:outputLabel value="#{consultation.personnePrv}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            
+                            <p:outputLabel value="téléphone" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            <p:outputLabel value="#{consultation.telphone}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            
+                            <p:outputLabel value="Bourse mensuelle" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}"/>
+                            <p:outputLabel value="#{consultation.detailAvj.mtBourse}" rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}"/>
+							
+							<p:outputLabel value="Age de service bourse"	style="font-weight: bold;"	rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />
+							<p:outputLabel value="#{consultation.detailAvj.ageServiceBourse}" rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}"/>
+
+                            <p:outputLabel value="Durée de service bourse"	style="font-weight: bold;"	rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />
+							<p:outputLabel value="#{consultation.detailAvj.dureeBourse}" rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}"/>
+                            
+                            <p:outputLabel value="Fractionnement"	style="font-weight: bold;"	rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />							
+							<p:outputLabel value="Annuel"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+								and consultation.fraPolice == 'A'}" />
+							<p:outputLabel value="Semestriel"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+								and consultation.fraPolice == 'S'}" />
+							<p:outputLabel value="Trimestriel"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+								and consultation.fraPolice == 'T'}" />
+							<p:outputLabel value="Mensuel"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+								and consultation.fraPolice == 'M'}" />
+							<p:outputLabel value="Prime Unique"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')
+								and consultation.fraPolice == 'P'}" />
+                            
+							<p:outputLabel value="Surprime"	style="font-weight: bold;"	rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />
+							<p:outputLabel value="#{consultation.detailAvj.surprime}" rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}"/>
+                            
+
+                        </p:panelGrid>
+                    </p:rowExpansion>
+                </p:dataTable>
+                
+ 										
+                
+        <p:dialog header="ATTESTATION D'ASSURANCE VIE" showEffect="fade" modal="true" position="center,bottom"
+                  widgetVar="manageProductDialog_X" responsive="true" id="manage-product-content_X" width="650">
+            <p:outputPanel  id="manage-product-content-bis_X">
+                <p:outputPanel >
+                    
+                    <p class="ui-widget">
+                    </p>
+                    
+					<p class="ui-widget">
+                        Veuillez saisir une date pour imprimer l'attestation d'assurance vie.
+                    </p>
+                    
+                    <p class="ui-widget">
+                    </p>
+                    
+                    <div class="p-field">
+                        <p:outputLabel for="date_impot_X">Date: </p:outputLabel>
+                        
+                      
+						
+						<p:calendar
+						navigator="true"
+							value="#{consultationBean.dateImpot}"
+							id="date_impot_X"  pattern="dd/MM/yyyy" size="5"							
+							styleClass="small-font"
+							validatorMessage="La date n'est pas valide!" 
+							requiredMessage="La date est obligatoire!">
+							<p:ajax event="dateSelect"
+							update="validerImpot"
+							listener="#{consultationBean.updateValiderImpot()}" />
+							
+							<p:ajax event="keyup" update="validerImpot" 
+							listener="#{consultationBean.updateValiderImpot()}"/>
+													
+							<p:ajax event="blur" update="validerImpot" 
+							listener="#{consultationBean.updateValiderImpot()}"/>
+							
+							<p:ajax event="change"  update="validerImpot"
+							listener="#{consultationBean.updateValiderImpot()}"/>
+							
+							</p:calendar>						
+						
+						<p:message for="date_impot_X" />
+						<p:messages  autoUpdate="true" showDetail="true" closable="true"/>
+         				<p:growl id="messages_X" showDetail="true"/>
+                    </div>
+                     
+                     
+                     
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+               
+                              
+                              
+                  <p:commandLink  type="validerImpot_X"  id="validerImpot_X"  action= "#{consultationBean.imprimer_impot()}" 
+                              update="form"  ajax="false" target="_blank" style="color:#ffffff"
+                              styleClass="btn btn-success"  value="Imprimer l'attestation" 
+                              disabled="#{!consultationBean.valider_impot}"
+                              process="@this"/>                             
+                                 
+                
+            </f:facet>
+        </p:dialog>
+                
+        										
+ <p:dialog header="ATTESTATION D'ASSURANCE VIE" showEffect="fade" modal="true" position="center,bottom"
+          widgetVar="manageProductDialog" responsive="true" id="manage-product-content" width="650">
+
+    <p:outputPanel id="manage-product-content-bis">
+        <p:outputPanel>
+            <p class="ui-widget">
+                Veuillez saisir une période pour imprimer l'attestation d'assurance vie.
+            </p>
+
+            <!-- Date de début -->
+            <div class="p-field">
+                <p:outputLabel for="date_debut">Date de début :</p:outputLabel>
+                <p:calendar
+                    id="date_debut"
+                    value="#{consultationBean.dateImpotDebut}"
+                    pattern="dd/MM/yyyy"
+                    navigator="true"
+                    required="false"
+                    showButtonPanel="true"
+                    styleClass="small-font"
+                    requiredMessage="La date de début est obligatoire !">
+                    <p:ajax event="dateSelect" update="date_fin validerImpot"
+                            listener="#{consultationBean.updateValiderImpot_V2()}" />
+                            
+                            <p:ajax event="keyup" update="date_fin validerImpot" 
+							listener="#{consultationBean.updateValiderImpot_V2()}"/>
+													
+							<p:ajax event="blur" update="date_fin validerImpot" 
+							listener="#{consultationBean.updateValiderImpot_V2()}"/>
+							
+							<p:ajax event="change"  update="date_fin validerImpot"
+							listener="#{consultationBean.updateValiderImpot_V2()}"/>
+                </p:calendar>
+                <p:message for="date_debut" />
+            </div>
+
+            <!-- Date de fin -->
+            <div class="p-field">
+                <p:outputLabel for="date_fin">Date de fin :</p:outputLabel>
+                <p:calendar
+                    id="date_fin"
+                    value="#{consultationBean.dateImpotFin}"
+                    pattern="dd/MM/yyyy"
+                    navigator="true"
+                    required="false"
+                    showButtonPanel="true"
+                    mindate="#{consultationBean.dateImpotDebut}"
+                    styleClass="small-font"
+                    requiredMessage="La date de fin est obligatoire !">
+                    <p:ajax event="dateSelect" update="validerImpot"
+                            listener="#{consultationBean.updateValiderImpot_V2()}" />
+                            
+                            <p:ajax event="keyup" update="validerImpot" 
+							listener="#{consultationBean.updateValiderImpot_V2()}"/>
+													
+							<p:ajax event="blur" update="validerImpot" 
+							listener="#{consultationBean.updateValiderImpot_V2()}"/>
+							
+							<p:ajax event="change"  update="validerImpot"
+							listener="#{consultationBean.updateValiderImpot_V2()}"/>
+                </p:calendar>
+                <p:message for="date_fin" />
+            </div>
+
+            <p:messages autoUpdate="true" showDetail="true" closable="true"/>
+            <p:growl id="messages" showDetail="true"/>
+        </p:outputPanel>
+    </p:outputPanel>
+
+    <!-- Footer avec bouton -->
+    <f:facet name="footer">
+        <p:commandLink id="validerImpot"
+                       action="#{consultationBean.imprimer_impot_V2()}"
+                       update="form"
+                       ajax="false"
+                       target="_blank"
+                       style="color:#ffffff"
+                       styleClass="btn btn-success"
+                       value="Imprimer l'attestation"
+                       disabled="#{!consultationBean.valider_impot}"
+                       process="@this"/>
+    </f:facet>
+</p:dialog>
+				               
+                
+                
+                
+
+ <p:blockUI block="dataTable" trigger="dataTable">
+        Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+    <p:blockUI block="dataTable" trigger="searchBtn" >
+    Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+            </h:form>
+        </ul>
+
+        <script>
+            function filterTable(input, className) {
+                console.log(input);
+                filterInput = $("." + className);
+                filterInput.val(input.value);
+                filterInput.trigger("keyup");
+            }
+
+            function filterTableDate(className) {
+                dateValue = PF('filterDate').input.val();
+                filterInput = $("." + className);
+                filterInput.val(dateValue);
+                filterInput.trigger("keyup");
+            }
+
+            function filtrerGlobal() {
+                filterEtat('etatFilter', document.getElementById('form:idSelectionEtat'));
+                
+            }
+           
+            
+            function filterEtat(className, etat) {
+                filterInput = $("." + className);
+                etat = etat.options[etat.selectedIndex].value;
+                if (etat === 'a') {
+                    etat = "";
+                }
+                filterInput.val(etat);
+                filterInput.trigger("keyup");
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="jquery">
+    </ui:define>
+</ui:composition>

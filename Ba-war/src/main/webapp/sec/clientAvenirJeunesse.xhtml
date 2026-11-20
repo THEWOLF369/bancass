@@ -1,0 +1,322 @@
+<ui:composition template="/sec/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="body">
+
+		<style type="text/css">
+.labelWidth {
+	width: 150px;
+}
+
+.ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+	{
+	background: 0 !important;
+	background-color: white !important;
+	box-shadow: none !important;
+	
+}
+
+label {
+	color: black;
+}
+
+.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+.redButton {
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #da4f49 !important;
+	background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b),
+		to(#bd362f)) !important;
+	background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f)
+		!important;
+	background-image: -o-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: linear-gradient(to bottom, #ee5f5b, #bd362f)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #bd362f #bd362f #802420 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+.greenButton {
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #5bb75b !important;
+	background-image: -moz-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462),
+		to(#51a351)) !important;
+	background-image: -webkit-linear-gradient(top, #62c462, #51a351)
+		!important;
+	background-image: -o-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: linear-gradient(to bottom, #62c462, #51a351)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #51a351 #51a351 #387038 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="time"]:focus,input[type="week"]:focus,input[type="number"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="color"]:focus,.uneditable-input:focus
+	{
+	border: 1px solid #d5d5d5 !important;
+}
+
+.ui-autocomplete {
+	background: 0 !important;
+	border: 0 !important;
+}
+
+.ui-autocomplete .ui-autocomplete-dropdown {
+	height: 29px;
+}
+
+.ui-inputfield:disabled {
+      cursor: not-allowed!important;
+    background-color: #eee!important;
+       color: black!important;
+    font-weight: bold;
+}
+</style>
+
+		<ul class="breadcrumb br_styled no_space">
+			<li class="active">UNIVERSITY</li>
+			<li class="active"><img
+				src="${facesContext.externalContext.requestContextPath}/images/right.png"
+				width="17" height="17" /></li>
+			<li class="active">Client</li>
+		</ul>
+		<ul class="page_info">
+			<p:growl autoUpdate="true" />
+			<h:panelGroup id="Client">
+				<h:form id="formClient">
+					<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+					<h:panelGrid  id="for-ws" columns="3" 
+						columnClasses="labelWidth, ui-grid-col-3">
+
+						<p:outputLabel value="Type de document:" for="docType" />
+						<p:selectOneMenu value="#{clientBean.client.typeDoc}" id="docType">
+							<f:selectItem itemValue="CIN" itemLabel="CIN" />
+							<f:selectItem itemValue="Passport" itemLabel="Passport" />
+							<f:selectItem itemValue="CarteSejour" itemLabel="Carte Séjour" />
+						</p:selectOneMenu>
+
+						<p:message for="docType" />
+
+						<p:outputLabel value="N° Document" for="txtCin" />
+						<h:panelGrid columns="2">
+							<p:inputText value="#{clientBean.client.identifiant}" id="txtCin"
+								required="true"
+								validator="#{clientBean.identificationValidator}" 
+								requiredMessage="Le numéro de document est obligatoire"
+								disabled="#{clientBean.cinWS}"/>
+							<p:commandButton value="Rechercher" process="for-ws @this" id="btnCin"
+								oncomplete='$("#loader_cont").fadeOut();'
+								styleClass="orangeButton" update="formClient"
+								style="margin-top: -10px;" action="#{clientBean.rechercher()}"></p:commandButton>
+						</h:panelGrid>
+						<p:message for="txtCin" />
+
+						<p:outputLabel value="N° Compte:" for="txtNcompte" />
+						<h:panelGrid columns="2">
+							<p:inputText id="txtNcompte" styleClass="form-control"
+								value="#{clientBean.client.ncompte}" required="true"
+								requiredMessage="Le numéro de compte est obligatoire"
+								validatorMessage="Le numéro de compte doit être composé de 20 chiffres"
+								disabled="#{clientBean.ribWS}">
+								<f:validateRegex pattern="[0-9]{20,20}" />
+							</p:inputText>
+							<p:commandButton value="" process="for-ws @this" id="btnNcompte"
+								oncomplete='$("#loader_cont").fadeOut();' update="formClient"
+								style="height: 35px;width: 35px; margin-top: -10px; background-image: url(${facesContext.externalContext.requestContextPath}/images/website.png)"
+								action="#{assistanceVoiyageController.rechercherDepuisWS()}"></p:commandButton>
+						</h:panelGrid>
+						<p:message for="txtNcompte" />
+						
+						
+						</h:panelGrid>
+						
+						
+						<h:panelGrid columns="3" 
+						columnClasses="labelWidth, ui-grid-col-3">
+
+						<p:outputLabel value="Nom:" for="txtNom" />
+						<p:inputText id="txtNom" styleClass="form-control"
+							style="text-transform: uppercase"
+							value="#{clientBean.client.nomClient}" required="true"
+							requiredMessage="Le nom est obligatoire" 
+							validatorMessage="Veuillez supprimer les caractères spéciaux"
+							disabled="#{clientBean.nomWS}">
+							<f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+							<p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/>
+						</p:inputText>	
+						<p:message for="txtNom" />
+
+						<p:outputLabel value="Prenom:" for="txtPrenom" />
+						<p:inputText id="txtPrenom" styleClass="form-control"
+							style="text-transform: uppercase"
+							value="#{clientBean.client.prenomClient}" required="true"
+							requiredMessage="Le prenom est obligatoire" 
+							validatorMessage="Veuillez supprimer les caractères spéciaux"
+							disabled="#{clientBean.prenomWS}">
+							<f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+"/>
+							<p:keyFilter regEx="/[a-zA-ZÀ-ú\\s\\' ]+/"/>
+						</p:inputText>	
+						<p:message for="txtPrenom" />
+
+						<p:outputLabel value="Date de naissance" for="txtBirthday" />
+						<p:calendar id="txtBirthday" styleClass="combo-style"
+							showButtonPanel="true" pattern="dd/MM/yyyy"
+							value="#{clientBean.client.datNaiss}" required="true"
+							maxdate="#{clientBean.maxDate}"
+							requiredMessage="La date de naissance est obligatoire" 
+							disabled="#{clientBean.dateNaisWS}"/>
+						<p:message for="txtBirthday" />
+
+						<p:outputLabel value="Profession:" for="txtprofession" />
+						<p:selectOneMenu styleClass="form-control"
+							converter="#{clientBean.professionConverter}"
+							value="#{clientBean.client.profession}" id="txtprofession"
+							required="true" requiredMessage="La Profession est obligatoire">
+							<f:selectItem itemLabel="Selectionnez Profession..." value="#{null}" />
+							<f:selectItems value="#{clientBean.professions}" var="profession"
+								itemLabel="#{profession.libelleProfession}"
+								itemValue="#{profession.idProfession.toString()}" />
+						</p:selectOneMenu>
+						<p:message for="txtprofession" />
+						<p:outputLabel value="Sexe:" for="sexAssur" />
+						<p:selectOneMenu id="sexAssur" styleClass="form-control"
+							value="#{clientBean.client.sexe}">
+							<f:selectItem itemLabel="F" itemValue="F" />
+							<f:selectItem itemLabel="M" itemValue="M" />
+						</p:selectOneMenu>
+						<p:message for="sexAssur" />
+
+						<p:outputLabel value="N° Adresse" for="txtAdrNum" />
+						<p:inputText id="txtAdrNum" styleClass="form-control"
+							value="#{clientBean.client.numAdr}" required="false"/>
+						<p:message for="txtAdrNum" />
+
+						<p:outputLabel value="Type de voie:" for="txtVoie" />
+						<p:selectOneMenu styleClass="form-control" required="true"
+						 requiredMessage="le type voie est obligatoire" converter="#{clientBean.typeVoieConverter}"
+							value="#{clientBean.client.typeVoie}" id="txtVoie">
+							<f:selectItem itemLabel="Selectionnez voie..." value="#{null}" />
+							<f:selectItems value="#{clientBean.typeVoies}" var="typeVoie" itemLabel="#{typeVoie.libelle}" itemValue="#{typeVoie.code.toString()}"/>
+						</p:selectOneMenu>
+						<p:message for="txtVoie" />
+
+						<p:outputLabel value="Adresse:" for="txtAdr" />
+						<p:inputText id="txtAdr" styleClass="form-control"
+							value="#{clientBean.client.adrClient}" required="true"
+							requiredMessage="L'Adresse est obligatoire" />
+						<p:message for="txtAdr" />
+
+						<p:outputLabel value="Gouvernorat:" for="gouvernerat" />
+						<p:selectOneMenu id="gouvernerat" styleClass="form-control"
+							value="#{clientBean.client.gouver}" filter="true"
+							filterMatchMode="contains" style="width:60px"
+							required="true" requiredMessage="Le Gouvernorat est obligatoire">
+
+							<p:ajax event="itemSelect" process="@this"
+								listener="#{clientBean.updateListCodePostalActionListener()}"
+								update="txtZipCode" />
+							<f:selectItem itemLabel="Selectionnez gouvernorat..."
+								value="#{null}" />
+							<f:selectItems value="#{clientBean.allGouverneras}" />
+
+						</p:selectOneMenu>
+
+						<p:message for="gouvernerat" />
+
+
+						<p:outputLabel value="Code postal:" for="txtZipCode" />
+						<p:selectOneMenu id="txtZipCode" styleClass="form-control"
+							value="#{clientBean.selectedLocgouv.code}" filter="true"
+							filterMatchMode="contains" style="width:60px" required="true">
+
+							<p:ajax event="itemSelect" process="@this"
+								listener="#{clientBean.locgouvSelectListened}"
+								update="txtLocalite" />
+								<f:selectItem itemLabel="Selectionnez gouvernorat..." itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{clientBean.allCodePostalByGouvernera}"
+								var="ojectCodePostal"
+								itemLabel="#{ojectCodePostal.codePosta} #{ojectCodePostal.localite}" itemValue="#{ojectCodePostal.code}"/>
+
+						</p:selectOneMenu>
+
+						<p:message for="txtZipCode" />
+
+						<p:outputLabel value="Localite:" for="txtLocalite" />
+						<h:inputText id="txtLocalite" styleClass="form-control"
+							value="#{clientBean.client.localite}" disabled="true"
+							required="true" requiredMessage="La localité est obligatoire" />
+						<p:message for="txtLocalite" />
+
+
+						<p:outputLabel value="Telephone:" for="txtTelephone" />
+						<p:inputNumber id="txtTelephone" styleClass="form-control"
+							value="#{clientBean.client.tel}" required="true"
+							validatorMessage="Le numéro de téléphone doit être composé de 8 chiffres"
+							requiredMessage="Le numéro de téléphone portable est obligatoire"
+							thousandSeparator="" decimalPlaces="0" />
+						<p:message for="txtTelephone" />
+
+						<p:outputLabel value="E-mail:" for="txtMail" />
+						<p:inputText id="txtMail" styleClass="form-control"
+							value="#{clientBean.client.mail}"
+							validatorMessage="format de l'adresse email invalide"
+							required="false">
+
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:message for="txtMail" />
+
+					</h:panelGrid>
+					<div class="form-actions">
+						<p:commandButton value="Réinitialiser" update="formClient"
+							styleClass="redButton" process="@this"
+							oncomplete='$("#loader_cont").fadeOut();'
+							actionListener="#{clientBean.cancel()}" />
+						<p:commandButton ajax="false" value="suivant"
+							styleClass="greenButton"
+							action="#{avenirJeunesseController.remplirAssure()}"
+							process="txtCin"></p:commandButton>
+					</div>
+					
+					
+					<p:blockUI block="formClient" trigger="btnNcompte,btnCin,gouvernerat">
+					        Chargement des données...<br />
+					        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+					    </p:blockUI>
+
+				</h:form>
+			</h:panelGroup>
+		</ul>
+	</ui:define>
+</ui:composition>

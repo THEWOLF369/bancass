@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TEST" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1e8d6aa0-e224-420b-943c-ffcd2ffc0515">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="TableHeader" hAlign="Center" vAlign="Middle" isBold="true"/>
+	<style name="TableCell" hAlign="Center" vAlign="Middle"/>
+	<style name="TableFooter" hAlign="Right" vAlign="Middle"/>
+	<style name="Table">
+		<box>
+			<pen lineWidth="0.5"/>
+		</box>
+	</style>
+	<subDataset name="dataset1" uuid="bde6249c-8c9d-40a4-9b6b-fe14f74bd6cd">
+		<field name="annee" class="java.lang.String"/>
+		<field name="cumul_vers" class="java.math.BigDecimal"/>
+		<field name="prime_epar_bourse" class="java.math.BigDecimal"/>
+		<field name="prime_epar_frais" class="java.math.BigDecimal"/>
+		<field name="epar_cons_bourse" class="java.math.BigDecimal"/>
+		<field name="particip_benef_bourse" class="java.math.BigDecimal"/>
+		<field name="epar_cons_fannee_bourse" class="java.math.BigDecimal"/>
+		<field name="epar_cons_frais" class="java.math.BigDecimal"/>
+		<field name="particip_benef_frais" class="java.math.BigDecimal"/>
+		<field name="epar_cons_fannee_frais" class="java.math.BigDecimal"/>
+		<field name="avantage_financier" class="java.math.BigDecimal"/>
+		<field name="avantage_fisc_annuel" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="datasource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="ville_agence" class="java.lang.String"/>
+	<columnHeader>
+		<band height="113" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement uuid="6056f958-7116-4618-af39-141c72c419a6" x="0" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="38598059-dd74-4bf4-8595-58fbcf25959a" x="418" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="214">
+			<componentElement>
+				<reportElement uuid="8fd8d916-d5b6-4499-894d-45c1d58e78aa" style="Table" x="44" y="53" width="450" height="150">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+				</reportElement>
+				<c:table xmlns:c="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset1" uuid="4bcf3c00-f626-47fd-9636-13d988a336a5">
+						<dataSourceExpression><![CDATA[$P{datasource}]]></dataSourceExpression>
+					</datasetRun>
+					<c:column width="30" uuid="0e02781d-c894-4dfe-a737-9174ea7b71b7">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<pen lineColor="#000000"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="5838d3e5-4d1a-4a69-acea-d804d6da7d3c" style="TableHeader" x="5" y="0" width="20" height="30"/>
+								<textElement/>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement uuid="3a36e246-a7f0-439c-9852-62af0bf7720e" style="TableCell" x="5" y="0" width="20" height="25"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{annee}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="50" uuid="97439e48-0182-46b0-bd81-f60fc57e3b10">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="65f15950-062d-460c-9690-b58e7684b6be" style="TableHeader" x="0" y="0" width="50" height="91"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<text><![CDATA[Cumul Versements]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="4aab74e9-1281-478f-a8e2-8b45db2d7f1f" style="TableCell" x="0" y="0" width="45" height="25"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cumul_vers}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="50" uuid="a640774a-24d9-470b-831c-c2906ff242de">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="31792c7a-4dcc-4033-b9a2-58138dfe2fff" style="TableHeader" x="0" y="0" width="50" height="91"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<text><![CDATA[Epargne constituée Bourse (4%)]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="9db75503-8141-47cd-b0a1-ac7ff93bfad7" x="0" y="0" width="45" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{epar_cons_bourse}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="50" uuid="a640774a-24d9-470b-831c-c2906ff242de">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="31792c7a-4dcc-4033-b9a2-58138dfe2fff" style="TableHeader" x="0" y="0" width="50" height="91"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<text><![CDATA[Participation aux Bénéfices Bourse]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="9db75503-8141-47cd-b0a1-ac7ff93bfad7" x="0" y="0" width="45" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{particip_benef_bourse}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="50" uuid="a640774a-24d9-470b-831c-c2906ff242de">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5" lineColor="#000000"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement uuid="31792c7a-4dcc-4033-b9a2-58138dfe2fff" style="TableHeader" x="0" y="0" width="50" height="91"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<text><![CDATA[Epargne prévisionnelle Bourse avec PB]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="9db75503-8141-47cd-b0a1-ac7ff93bfad7" x="0" y="0" width="45" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{epar_cons_fannee_bourse}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="50" uuid="046f90cd-656a-4764-91f0-b5f30ef2570b">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="7dc94298-36dc-4c62-ba11-afcf0171d15d" style="TableHeader" x="0" y="0" width="50" height="91"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<text><![CDATA[Epargne constituée Frais (4%)]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<pen lineWidth="0.0"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="223888a6-6ec4-49cc-a303-641d58dd8677" x="0" y="0" width="45" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{epar_cons_frais}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="50" uuid="9e60d7fe-d35b-4899-b4af-470e49c81bd0">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="04ca9737-ca76-4487-a541-9b2567ab5362" style="TableHeader" x="0" y="0" width="50" height="91"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<text><![CDATA[Participation aux Bénéfices Frais]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5" lineStyle="Solid"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="614d8996-15a6-469d-b169-00043ac47f30" x="0" y="0" width="45" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{particip_benef_frais}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="50" uuid="ddf6820f-1fc1-47f9-8ed5-66153b91a44f">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="e98fa96f-3eb2-4945-b8bb-e3f32832b565" style="TableHeader" x="0" y="0" width="50" height="91"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<text><![CDATA[Epargne prévisionnelle Frais avec PB]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5" lineColor="#000000"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="6c5efb23-6b30-4097-89c1-63cc71fe7416" x="0" y="0" width="45" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{epar_cons_fannee_frais}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="50" uuid="660f759e-c795-4d42-a258-90415072cc9f">
+						<c:columnHeader height="91" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="8a72191a-2459-440a-babd-38a46c31bab8" style="TableHeader" x="0" y="0" width="50" height="91"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="8"/>
+								</textElement>
+								<text><![CDATA[Avantage fiscal Annuel]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="dd9692fd-adb3-4c69-91f3-2431233fe766" x="0" y="0" width="45" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{avantage_fisc_annuel}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+				</c:table>
+			</componentElement>
+			<staticText>
+				<reportElement uuid="2e5166e7-a908-43ba-ad39-568346f93cc8" x="32" y="23" width="462" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evolution prévisionnelle du plan d'assurance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="92e810b2-b195-48f5-a741-45c44267800c" x="32" y="3" width="462" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Annexe]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="58">
+			<staticText>
+				<reportElement uuid="3f0087c0-c5c3-4276-b4cd-4e81e60ec106" x="9" y="35" width="34" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fait à:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="3367b6e0-17e8-4aeb-9936-050723233f70" x="233" y="35" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6595bce3-f460-4034-901e-b287e64e5193" x="43" y="35" width="144" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{ville_agence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3dbf529d-3cca-43c5-830d-d6316629fbea" x="209" y="35" width="22" height="20"/>
+				<textElement/>
+				<text><![CDATA[,Le:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

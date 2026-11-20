@@ -1,0 +1,786 @@
+<ui:composition
+    template="/sec/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    
+
+
+    <ui:define name="body">
+    
+ <style type="text/css">
+ 
+ 
+
+
+</style>
+    
+    
+<h:body style=" border: none;" rendered="#{!gestionProfil.souscription7ayya}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+    <h:body style=" border: none;" rendered="#{gestionProfil.souscription7ayya}">
+        <div class="span12 no_space">
+
+            <div class="widget">
+                <header>
+                    <h3 class="active">Contrat</h3>
+                    <ul class="toggle_content">                         
+                        <li class="arrow"><a href="#">Toggle Content</a></li>
+                    </ul>
+                </header>
+                <section class="welly"> 
+
+                    <ul class="nav nav-tabs tab_styled_light">
+                       
+                      
+                    </ul>
+
+                    <div class="tab-content tab_content_light">
+                        <div  id="Tarif" class="tab-pane fade in active">
+                            <h:form id="form">
+                            <div>  
+                          
+								 
+								        <br></br> 
+								        
+								        <p:messages  autoUpdate="true" showDetail="true"/>
+								        
+								        <br></br> 
+								        
+								          <p:fieldset legend="Bénéficiaires :" style="margin-bottom:20px">
+									            
+									            <label class="bold"> Bénéficiaires en Cas de Vie : </label>
+									            											
+										    
+											    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+											        
+											        <p:selectOneRadio id="vie" value="#{contrat7ayyaBean.vie}" unselectable="true" process="form" update="form">
+											            <f:selectItem itemLabel="Assuré" itemValue="1" />
+											            <f:selectItem itemLabel="Enfant(s)" itemValue="2" />
+											            <f:selectItem itemLabel="Autres" itemValue="3" />
+											            <p:ajax event="change" process="form" update="form"/>
+											        </p:selectOneRadio>
+											        
+											    </h:panelGrid>
+											    
+			<p:outputPanel id="panelGridEnfant" rendered="#{contrat7ayyaBean.vie eq '2'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			<p:messages id="messages" />
+            <p:panelGrid id="newEnfant" columns="2">
+                <p:outputLabel for="txt_lastname" value="Nom" />
+                <p:inputText id="txt_lastname" value="#{contrat7ayyaBean.enfant.nom}" />
+                <p:outputLabel for="txt_name" value="Prénom" />
+                <p:inputText id="txt_name" value="#{contrat7ayyaBean.enfant.prenom}" />
+                <p:outputLabel for="txt_cin" value="CIN / Passeport" />
+                <p:inputText id="txt_cin" value="#{contrat7ayyaBean.enfant.cin}" />
+                <p:outputLabel for="txt_lien" value="Lien de parenté" />
+                <p:inputText id="txt_lien" value="#{contrat7ayyaBean.enfant.lien}" />
+                <p:outputLabel for="Quote_part" value="Quote-part" />
+                <p:inputNumber id="Quote_part" value="#{contrat7ayyaBean.enfant.quote}" minValue="0" maxValue="100" decimalPlaces="3"/>
+                <p:commandButton id="btn_save" value="Enregistrer" action="#{contrat7ayyaBean.saveEnfant}"
+                                 process="form:newEnfant"
+                                 update="form:newEnfant form:enfantList">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="enfantList" value="#{contrat7ayyaBean.enfantList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="form:newEnfant">
+                        <f:setPropertyActionListener value="#{p}" target="#{contrat7ayyaBean.enfant}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandLink action="#{contrat7ayyaBean.deleteEnfant(p)}" process="@this" update="form:enfantList">
+                        <h:outputText value="X" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			
+			
+			 <p:outputPanel id="panelGridAutre" rendered="#{contrat7ayyaBean.vie eq '3'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			<p:messages id="messages2" />
+            <p:panelGrid id="newAutre" columns="2">
+                <p:outputLabel for="txt_lastname_autre" value="Nom" />
+                <p:inputText id="txt_lastname_autre" value="#{contrat7ayyaBean.autre.nom}" />
+                <p:outputLabel for="txt_name_autre" value="Prénom" />
+                <p:inputText id="txt_name_autre" value="#{contrat7ayyaBean.autre.prenom}" />
+                <p:outputLabel for="txt_cin_autre" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_autre" value="#{contrat7ayyaBean.autre.cin}" />
+                <p:outputLabel for="txt_lien_autre" value="Lien de parenté" />
+                <p:inputText id="txt_lien_autre" value="#{contrat7ayyaBean.autre.lien}" />
+                <p:outputLabel for="Quote_part_autre" value="Quote-part" />
+                <p:inputNumber id="Quote_part_autre" value="#{contrat7ayyaBean.autre.quote}" minValue="0" maxValue="100" decimalPlaces="3"/>
+                <p:commandButton id="btn_save_autres" value="Enregistrer" action="#{contrat7ayyaBean.saveAutre}"
+                                 process="form:newAutre"
+                                 update="form:newAutre form:autreList">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="autreList" value="#{contrat7ayyaBean.autreList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="form:newAutre">
+                        <f:setPropertyActionListener value="#{p}" target="#{contrat7ayyaBean.autre}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandLink action="#{contrat7ayyaBean.deleteAutre(p)}" process="@this" update="form:autreList">
+                        <h:outputText value="X" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			<hr></hr>
+			
+												<label class="bold"> Bénéficiaires en Cas de Décès : </label>
+									            											
+										    
+											    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+											        
+											        <p:selectOneRadio id="deces" value="#{contrat7ayyaBean.deces}" unselectable="true" process="form" update="form">
+											            <f:selectItem itemLabel="Le conjoint à défaut les enfants nés ou à naître à défaut les ayants droit" itemValue="1" />
+											            <f:selectItem itemLabel="Enfant(s)" itemValue="2" />
+											            <f:selectItem itemLabel="Conjoint" itemValue="3" />
+											            <f:selectItem itemLabel="Parent(s)" itemValue="4" />
+											            <f:selectItem itemLabel="Autres" itemValue="5" />
+											            <p:ajax event="change" process="form" update="form"/>
+											        </p:selectOneRadio>
+											        
+											    </h:panelGrid>
+											    
+											    
+			<p:outputPanel id="panelGridDefaut" rendered="#{contrat7ayyaBean.deces eq '1'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			<p:messages id="messages3" />
+            <p:panelGrid id="newDefaut" columns="2">
+                <p:outputLabel for="txt_lastname_defaut" value="Nom" />
+                <p:inputText id="txt_lastname_defaut" value="#{contrat7ayyaBean.defaut.nom}" />
+                <p:outputLabel for="txt_name_defaut" value="Prénom" />
+                <p:inputText id="txt_name_defaut" value="#{contrat7ayyaBean.defaut.prenom}" />
+                <p:outputLabel for="txt_cin_defaut" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_defaut" value="#{contrat7ayyaBean.defaut.cin}" />
+                <p:outputLabel for="txt_lien_defaut" value="Lien de parenté" />
+                <p:inputText id="txt_lien_defaut" value="#{contrat7ayyaBean.defaut.lien}" />
+                <p:outputLabel for="Quote_part_defaut" value="Quote-part" />
+                <p:inputNumber id="Quote_part_defaut" value="#{contrat7ayyaBean.defaut.quote}" minValue="0" maxValue="100" decimalPlaces="3"/>
+                <p:commandButton id="btn_save_defaut" value="Enregistrer" action="#{contrat7ayyaBean.saveDefaut}"
+                                 process="form:newDefaut"
+                                 update="form:newDefaut form:defautList">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="defautList" value="#{contrat7ayyaBean.defautList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="form:newDefaut">
+                        <f:setPropertyActionListener value="#{p}" target="#{contrat7ayyaBean.defaut}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandLink action="#{contrat7ayyaBean.deleteDefaut(p)}" process="@this" update="form:defautList">
+                        <h:outputText value="X" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+											    
+			
+			
+			
+		  <p:outputPanel id="panelGridEnfantd" rendered="#{contrat7ayyaBean.deces eq '2'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			<p:messages id="messages4" />
+            <p:panelGrid id="newEnfantd" columns="2">
+                <p:outputLabel for="txt_lastname_enfant_d" value="Nom" />
+                <p:inputText id="txt_lastname_enfant_d" value="#{contrat7ayyaBean.enfantd.nom}" />
+                <p:outputLabel for="txt_name_enfant_d" value="Prénom" />
+                <p:inputText id="txt_name_enfant_d" value="#{contrat7ayyaBean.enfantd.prenom}" />
+                <p:outputLabel for="txt_cin_enfant_d" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_enfant_d" value="#{contrat7ayyaBean.enfantd.cin}" />
+                <p:outputLabel for="txt_lien_enfant_d" value="Lien de parenté" />
+                <p:inputText id="txt_lien_enfant_d" value="#{contrat7ayyaBean.enfantd.lien}" />
+                <p:outputLabel for="Quote_part_enfant_d" value="Quote-part" />
+                <p:inputNumber id="Quote_part_enfant_d" value="#{contrat7ayyaBean.enfantd.quote}" minValue="0" maxValue="100" decimalPlaces="3"/>
+                <p:commandButton id="btn_save_enfant_d" value="Enregistrer" action="#{contrat7ayyaBean.saveEnfantd}"
+                                 process="form:newEnfantd"
+                                 update="form:newEnfantd form:enfantdList">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="enfantdList" value="#{contrat7ayyaBean.enfantdList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="form:newEnfantd">
+                        <f:setPropertyActionListener value="#{p}" target="#{contrat7ayyaBean.enfantd}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandLink action="#{contrat7ayyaBean.deleteEnfantd(p)}" process="@this" update="form:enfantdList">
+                        <h:outputText value="X" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			
+			
+			
+			
+			<p:outputPanel id="panelGridConjoint" rendered="#{contrat7ayyaBean.deces eq '3'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			<p:messages id="messages5" />
+            <p:panelGrid id="newConj" columns="2">
+                <p:outputLabel for="txt_lastname_conj" value="Nom" />
+                <p:inputText id="txt_lastname_conj" value="#{contrat7ayyaBean.conjoint.nom}" />
+                <p:outputLabel for="txt_name_conj" value="Prénom" />
+                <p:inputText id="txt_name_conj" value="#{contrat7ayyaBean.conjoint.prenom}" />
+                <p:outputLabel for="txt_cin_conj" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_conj" value="#{contrat7ayyaBean.conjoint.cin}" />
+                <p:outputLabel for="txt_lien_conj" value="Lien de parenté" />
+                <p:inputText id="txt_lien_conj" value="#{contrat7ayyaBean.conjoint.lien}" />
+                <p:outputLabel for="Quote_part_conj" value="Quote-part" />
+                <p:inputNumber id="Quote_part_conj" value="#{contrat7ayyaBean.conjoint.quote}" minValue="0" maxValue="100" decimalPlaces="3"/>
+                <p:commandButton id="btn_save_conj" value="Enregistrer" action="#{contrat7ayyaBean.saveConj}"
+                                 process="form:newConj"
+                                 update="form:newConj form:conjList">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="conjList" value="#{contrat7ayyaBean.conjList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="form:newConj">
+                        <f:setPropertyActionListener value="#{p}" target="#{contrat7ayyaBean.conjoint}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandLink action="#{contrat7ayyaBean.deleteConj(p)}" process="@this" update="form:conjList">
+                        <h:outputText value="X" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			
+			<p:outputPanel id="panelGridParent" rendered="#{contrat7ayyaBean.deces eq '4'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			<p:messages id="messages6" />
+            <p:panelGrid id="newParent" columns="2">
+                <p:outputLabel for="txt_lastname_parent" value="Nom" />
+                <p:inputText id="txt_lastname_parent" value="#{contrat7ayyaBean.parent.nom}" />
+                <p:outputLabel for="txt_name_parent" value="Prénom" />
+                <p:inputText id="txt_name_parent" value="#{contrat7ayyaBean.parent.prenom}" />
+                <p:outputLabel for="txt_cin_parent" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_parent" value="#{contrat7ayyaBean.parent.cin}" />
+                <p:outputLabel for="txt_lien_parent" value="Lien de parenté" />
+                <p:inputText id="txt_lien_parent" value="#{contrat7ayyaBean.parent.lien}" />
+                <p:outputLabel for="Quote_part_parent" value="Quote-part" />
+                <p:inputNumber id="Quote_part_parent" value="#{contrat7ayyaBean.parent.quote}" minValue="0" maxValue="100" decimalPlaces="3"/>
+                <p:commandButton id="btn_save_parent" value="Enregistrer" action="#{contrat7ayyaBean.saveParent}"
+                                 process="form:newParent"
+                                 update="form:newParent form:parentList">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="parentList" value="#{contrat7ayyaBean.parentList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="form:newParent">
+                        <f:setPropertyActionListener value="#{p}" target="#{contrat7ayyaBean.parent}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandLink action="#{contrat7ayyaBean.deleteParent(p)}" process="@this" update="form:parentList">
+                        <h:outputText value="X" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+			
+			
+			
+			
+			<p:outputPanel id="panelGridAutred" rendered="#{contrat7ayyaBean.deces eq '5'}" styleClass="noBorders" cellpadding="2" cellspacing="5">	
+										    
+			<p:messages id="messages7" />
+            <p:panelGrid id="newAutred" columns="2">
+                <p:outputLabel for="txt_lastname_autred" value="Nom" />
+                <p:inputText id="txt_lastname_autred" value="#{contrat7ayyaBean.autred.nom}" />
+                <p:outputLabel for="txt_name_autred" value="Prénom" />
+                <p:inputText id="txt_name_autred" value="#{contrat7ayyaBean.autred.prenom}" />
+                <p:outputLabel for="txt_cin_autred" value="CIN / Passeport" />
+                <p:inputText id="txt_cin_autred" value="#{contrat7ayyaBean.autred.cin}" />
+                <p:outputLabel for="txt_lien_autred" value="Lien de parenté" />
+                <p:inputText id="txt_lien_autred" value="#{contrat7ayyaBean.autred.lien}" />
+                <p:outputLabel for="Quote_part_autred" value="Quote-part" />
+                <p:inputNumber id="Quote_part_autred" value="#{contrat7ayyaBean.autred.quote}" minValue="0" maxValue="100" decimalPlaces="3"/>
+                <p:commandButton id="btn_save_autreds" value="Enregistrer" action="#{contrat7ayyaBean.saveAutred}"
+                                 process="form:newAutred"
+                                 update="form:newAutred form:autredList">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="autredList" value="#{contrat7ayyaBean.autredList}" var="p">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom" />
+                    </f:facet>
+                    <h:outputText value="#{p.nom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prénom" />
+                    </f:facet>
+                    <h:outputText value="#{p.prenom}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIN / Passeport" />
+                    </f:facet>
+                    <h:outputText value="#{p.cin}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lien de parenté" />
+                    </f:facet>
+                    <h:outputText value="#{p.lien}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Quote-part" />
+                    </f:facet>
+                    <h:outputText value="#{p.quote}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modifier" />
+                    </f:facet>
+                    <p:commandButton value="Modifier" process="@this" update="form:newAutred">
+                        <f:setPropertyActionListener value="#{p}" target="#{contrat7ayyaBean.autred}" />
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Supprimer" />
+                    </f:facet>
+                    <p:commandLink action="#{contrat7ayyaBean.deleteAutred(p)}" process="@this" update="form:autredList">
+                        <h:outputText value="X" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+            
+			</p:outputPanel>
+				
+			
+
+									        </p:fieldset>
+									        
+									        
+									        
+		<br></br>
+								        
+							<p:fieldset legend="Mode de paiement :" style="margin-bottom:20px">
+							
+							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" process="form" update="form">
+						        <p:outputLabel for="@next" value="Fractionnement :" />
+						        <p:selectOneMenu id="Fractionnement"  style="width:125px">
+						            <f:selectItem itemLabel="PRIME ANNUELLE" itemValue="1" />
+						           
+						        </p:selectOneMenu>
+						     
+						        
+						        
+						         
+						        <p:outputLabel for="@next" value="Mode de Paiement :" />
+						        <p:selectOneRadio id="Mode" value="#{contrat7ayyaBean.modepaie}" unselectable="true">
+						            <f:selectItem itemLabel="Direct" itemValue="1" />
+						            <f:selectItem itemLabel="Domicilié" itemValue="2" />
+						            <p:ajax event="change" process="form" update="form"/>
+						        </p:selectOneRadio>
+						        
+						        </h:panelGrid>
+						        
+						        
+						        <p:outputPanel id="panelModePaie" rendered="#{contrat7ayyaBean.modepaie eq '2'}" >	
+						        
+						         
+						        
+						        <h:panelGrid columns="2"   style="margin-bottom:5px" cellpadding="15" >
+						        
+						        <p:outputLabel for="@next" value="Banque :" />
+						        <p:selectOneMenu id="banque" value="#{contrat7ayyaBean.banque}" style="width:125px">
+						        <f:selectItem itemLabel="AMEN BANK" itemValue="1"/>
+								<f:selectItem itemLabel="ATB" itemValue="2"/>
+								<f:selectItem itemLabel="ABC" itemValue="3"/>
+								<f:selectItem itemLabel="BIAT" itemValue="4"/>
+								<f:selectItem itemLabel="BNA" itemValue="5"/>
+								<f:selectItem itemLabel="BT" itemValue="6"/>
+								<f:selectItem itemLabel="BFT" itemValue="7"/>
+								<f:selectItem itemLabel="BH" itemValue="8"/>
+								<f:selectItem itemLabel="CITI GROUP" itemValue="9"/>
+								<f:selectItem itemLabel="STB" itemValue="10"/>
+								<f:selectItem itemLabel="UIB" itemValue="11"/>
+								<f:selectItem itemLabel="UBCI" itemValue="12"/>
+								<f:selectItem itemLabel="ATTIJARI BANK" itemValue="13"/>
+								<f:selectItem itemLabel="TQB" itemValue="14"/>
+								<f:selectItem itemLabel="LA POSTE TUNISIENNE" itemValue="15"/>
+								<f:selectItem itemLabel="BANQUE ZITOUNA" itemValue="16"/>
+								<f:selectItem itemLabel="BTK" itemValue="17"/>
+								<f:selectItem itemLabel="AL BARAKA BANK" itemValue="18"/>
+								<f:selectItem itemLabel="BTE" itemValue="19"/>
+								<f:selectItem itemLabel="BTL" itemValue="20"/>
+								<f:selectItem itemLabel="CITIBANK Tunisian Branch onshore" itemValue="21"/>
+								<f:selectItem itemLabel="NAIB BANK" itemValue="22"/>
+								<f:selectItem itemLabel="TSB" itemValue="23"/>
+								<f:selectItem itemLabel="UNION BANCAIRE POUR LE COMMERCE ET L'INDUSTRIE (UBCI) (groupe BNP Paribas)" itemValue="24"/>
+								<f:selectItem itemLabel="BTS" itemValue="25"/>
+								<f:selectItem itemLabel="QNB" itemValue="26"/>
+								<f:selectItem itemLabel="TIB" itemValue="27"/>
+								<f:selectItem itemLabel="WIFAK BANK" itemValue="28"/>
+						        </p:selectOneMenu>
+						        
+						        
+						        <p:outputLabel for="@next" value="Agence :" />
+						        <p:inputText id="agence" value="#{contrat7ayyaBean.agence}" />
+						        
+						        
+						         
+						        <p:outputLabel for="@next" value="RIB :" />
+						        <p:inputText id="rib" value="#{contrat7ayyaBean.rib}" />
+						         
+						        
+						         
+						        <p:outputLabel for="@next" value="Payeur de prime :" />
+						        <p:selectOneRadio id="payeur" value="#{contrat7ayyaBean.payeur}" unselectable="true" >
+						            <f:selectItem itemLabel="Assuré" itemValue="1" />
+						            <f:selectItem itemLabel="Autre" itemValue="2" />
+						            <p:ajax event="change" process="form" update="form"/>
+						        </p:selectOneRadio>
+						        
+						        </h:panelGrid>
+						        
+						        
+						        <p:outputPanel id="panelPayeur" rendered="#{contrat7ayyaBean.payeur eq '2'}" styleClass="noBorders" cellpadding="2" cellspacing="5">							        
+						        <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5" >
+						        
+						        <p:outputLabel value=""  />
+						        <p:outputLabel for="@next" value="Nom Payeur :" />
+						        <p:inputText id="nomPayeur" value="#{contrat7ayyaBean.nomPayeur}" />
+						        
+						        <p:outputLabel value=""  />
+						        <p:outputLabel for="@next" value="CIN Payeur :" />
+						        <p:inputText id="cinPayeur" value="#{contrat7ayyaBean.cinPayeur}" />
+						        
+						        <p:outputLabel value=""  />
+						        <p:outputLabel for="@next" value="Adresse Payeur :" />
+						        <p:inputText id="adressePayeur" value="#{contrat7ayyaBean.adressePayeur}" />
+						        
+						        </h:panelGrid>
+						        </p:outputPanel>
+						        
+						        
+						        
+						        
+						        
+						         
+						        
+						        </p:outputPanel>
+        
+							
+							
+							
+							
+							</p:fieldset>							        
+									        
+								
+								
+							<br></br>
+							
+							<p:fieldset legend="Dispositions Spéciales :" style="margin-bottom:20px">		
+							
+							<p:inputTextarea rows="5" cols="50"  value="#{contrat7ayyaBean.dispoSpec}"  autoResize="false" />
+							
+							
+							</p:fieldset>        
+									         
+    
+                                </div>
+                              <div  class="form-actions">
+                              <p:messages  autoUpdate="true" showDetail="true"/>
+                              
+                              <p:commandLink  type="idvaliderPrposition"  id="validerPrposition"  action= "#{contrat7ayyaBean.imprimer()}" 
+                              update="form"  ajax="false" target="_blank"
+                              styleClass="btn btn-success"  value="Valider En Contrat" 
+                              
+                              />
+                              
+                              <p:commandLink  type="idvaliderQuit"  id="validerQuit"  action= "#{contrat7ayyaBean.imprimer_quit()}" 
+                              update="form"  ajax="false" target="_blank"
+                              styleClass="btn btn-success"  value="Quittance" 
+                              
+                              />
+                              
+                               </div> 
+                               
+                               
+                               <p:blockUI block="form" trigger="validerPrposition validerQuit">
+						        Chargement...<br />
+						        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+					    	</p:blockUI>
+                               
+                               
+                            </h:form>
+                            <h:form>
+                            
+                            
+                            
+                            <h:commandLink  action="#{contrat7ayyaBean.returnToDevis7ayya()}"  value="Retour" >
+                             <img src="${facesContext.externalContext.requestContextPath}/images/back.png" width="25" height="25"/>
+                            
+                            </h:commandLink>
+                            
+                            
+                            
+                            
+                            
+                            
+                        </h:form>
+                        </div>  
+                        
+                    </div>       
+                </section> 
+            </div>  
+        </div> 
+        </h:body>                  
+    </ui:define>
+</ui:composition>

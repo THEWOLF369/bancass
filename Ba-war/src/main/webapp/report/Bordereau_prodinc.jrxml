@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bordereau_prod" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3db3d9e5-799c-491c-a87f-7dde49bce4f3">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="datdeb" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="datfin" class="java.lang.String"/>
+	<parameter name="libelle_agence" class="java.lang.String"/>
+	<parameter name="codagc" class="java.lang.String"/>
+	<parameter name="produit" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="cod_societ" class="java.lang.String"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="typecontrat" class="java.lang.String"/>
+	<parameter name="duree" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="somme" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     distinct ADHESION.ID_ADHESION,
+     AGENCE.CODE_AGENCE,
+     ADHESION.DAT_DEBUT AS ADHESION_DAT_DEBUT,
+     ADHESION.DAT_FIN AS ADHESION_DAT_FIN,
+     ADHESION.DUREE AS ADHESION_DUREE,
+     ADHESION.MT_PRIME AS ADHESION_MT_PRIME,
+     ADHESION.DATE_CREATION AS ADHESION_DATE_CREATION,
+     ADHESION.NADHESION AS ADHESION_NADHESION,
+     ADHESION.MT_PRIME + ADHESION.TAXE AS ADHESION_PRIMETOT,
+     CLIENT.NOM_CLIENT || ' ' || CLIENT.PRENOM_CLIENT AS      CLIENT_NOM_CLIENT,CLIENT.NCOMPTE AS NUM_COMPTE,
+     (TARIF_INCENDIE.COMMISSION * ADHESION.MT_PRIME)  AS COMMISSION_PRMNET
+FROM
+     CLIENT,ADHESION,POLICE,PRODUIT ,UTILISATEURS,AGENCE,TYPE_ABONNEMENT,SOCIETE,TARIF_INCENDIE
+
+WHERE
+     CLIENT.ID_CLIENT = ADHESION.ID_CLIENT
+ and
+     ADHESION.N_POLICE = POLICE.N_POLICE
+ and
+    POLICE.COD_PRODUI = PRODUIT.ID_PRODUIT
+ and AGENCE.ID_AGENCE =  UTILISATEURS.ID_AGENCE
+and UTILISATEURS.ID_UTILISATEURS = ADHESION.ID_UTILISATEURS
+AND AGENCE.COD_SOCIET = SOCIETE.COD_SOCIET
+and  to_date(to_char(ADHESION.DATE_CREATION,'mm/dd/yyyy'),'mm/dd/yyyy')  between to_date($P{datdeb},'dd/mm/yyyy') and to_date($P{datfin},'dd/mm/yyyy')
+and PRODUIT.LIBELLE_PRODUIT = $P{produit}
+and ADHESION.ETAT ='V'
+and SOCIETE.COD_SOCIET = $P{cod_societ}
+and TARIF_INCENDIE.POLICE = POLICE.N_POLICE]]>
+	</queryString>
+	<field name="ID_ADHESION" class="java.math.BigDecimal"/>
+	<field name="CODE_AGENCE" class="java.lang.String"/>
+	<field name="ADHESION_DAT_DEBUT" class="java.sql.Timestamp"/>
+	<field name="ADHESION_DAT_FIN" class="java.sql.Timestamp"/>
+	<field name="ADHESION_DUREE" class="java.math.BigDecimal"/>
+	<field name="ADHESION_MT_PRIME" class="java.math.BigDecimal"/>
+	<field name="ADHESION_DATE_CREATION" class="java.sql.Timestamp"/>
+	<field name="ADHESION_NADHESION" class="java.lang.String"/>
+	<field name="ADHESION_PRIMETOT" class="java.math.BigDecimal"/>
+	<field name="CLIENT_NOM_CLIENT" class="java.lang.String"/>
+	<field name="COMMISSION_PRMNET" class="java.math.BigDecimal"/>
+	<field name="NUM_COMPTE" class="java.lang.String"/>
+	<variable name="somprmtot" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ADHESION_PRIMETOT}]]></variableExpression>
+	</variable>
+	<variable name="somcom" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{COMMISSION_PRMNET}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="123" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5c9b6e0e-d14e-41b0-9387-e46b917236cb" x="206" y="36" width="369" height="40"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bordereau des affaires réalisées]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="5a8d1c2a-93a6-4157-a0fe-1447cd13f849" x="293" y="77" width="212" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{produit}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="b4a1310f-7220-4b2c-b3fb-b610e8916ebd" x="675" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="820d674f-6f14-40fa-84df-6ea315fc1079" x="14" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="56b67cc3-80e7-4885-b4b6-6f5a281a9d8e" x="412" y="97" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datfin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5fb89339-38e8-4512-8de9-810536028b55" x="263" y="97" width="30" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Du]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="57bbcb8d-66b8-4d49-9ef0-1b94b3d680aa" x="388" y="97" width="20" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Au]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6bd8ca63-2426-4795-9247-8b7e053ccec3" x="296" y="97" width="92" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datdeb}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="fdc35452-9b08-439e-83ad-55ba0766eaac" x="2" y="1" width="800" height="27"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="e6aba85e-f9e5-486d-a8f1-0b05ae3628ec" x="204" y="0" width="208" height="27"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Assuré]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea86e367-55b0-4b34-b433-a52a7d4edf91" x="511" y="2" width="85" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'effet]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="caa34204-c419-406e-a50f-15085c8981ea" x="597" y="1" width="93" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="409d05da-815e-4d06-8855-7206974860e4" x="691" y="2" width="75" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime totale]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="02659873-3582-46df-9b15-d1f290870d3e" x="596" y="2" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement uuid="eecc3575-6490-428b-84e7-171f4fcdfa04" x="690" y="0" width="1" height="26"/>
+			</line>
+			<staticText>
+				<reportElement uuid="5b60a821-6a3b-4b25-a223-0f6bdd69fd97" x="430" y="4" width="84" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Adhésion]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="409d050a-a8dd-45b6-984d-dff2d677b651" x="426" y="-1" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement uuid="25c011c0-c8c0-4663-bb5e-3089fb051dc6" x="88" y="0" width="1" height="25"/>
+			</line>
+			<staticText>
+				<reportElement uuid="e30b1333-8064-4814-b801-ab6a123fdac2" x="6" y="1" width="80" height="24"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code Agence ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9b3ee03d-1bc3-48b8-8c2e-7f4d76465b7a" x="512" y="2" width="1" height="23"/>
+			</line>
+			<line>
+				<reportElement uuid="0cc4b1c2-efde-49c3-9e81-a7736604896b" x="766" y="1" width="1" height="24"/>
+			</line>
+			<staticText>
+				<reportElement uuid="6259fa9b-6658-498a-9b34-977e002a0c94" x="767" y="4" width="36" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4ea4930a-22be-4765-a5fe-da1b8c8c37d8" x="92" y="0" width="80" height="24"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N°Compte]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="e7d82fbc-99df-4346-a11e-25b991cce736" x="185" y="2" width="1" height="25"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement uuid="21ab9fc9-cbd6-493c-b8e8-576b0b92e3ba" x="426" y="-2" width="1" height="27"/>
+			</line>
+			<textField>
+				<reportElement uuid="741f912e-2867-42df-b86d-09f19060e2b6" stretchType="RelativeToTallestObject" x="427" y="1" width="81" height="22" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ADHESION_NADHESION}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="a4caf5cc-e797-4939-b3fe-0ae2285b59f6" x="511" y="-2" width="1" height="27"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="7517fcf0-ca0d-4d95-8a57-8e7c3b3fd7ae" stretchType="RelativeToTallestObject" x="511" y="1" width="84" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ADHESION_DAT_DEBUT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="14d532b8-67cf-40a9-8f8a-b7150c5bf4ef" x="690" y="-2" width="1" height="27"/>
+			</line>
+			<textField>
+				<reportElement uuid="3ac0e959-8a15-4cad-8602-b385ea571c00" stretchType="RelativeToTallestObject" x="691" y="1" width="64" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ADHESION_PRIMETOT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="d2c621bb-9317-4c3c-ba01-202f10324746" x="1" y="1" width="1" height="22"/>
+			</line>
+			<line>
+				<reportElement uuid="d5b1a247-5b34-4911-8875-b469146b3fd5" x="89" y="0" width="1" height="25"/>
+			</line>
+			<textField>
+				<reportElement uuid="9e162781-b445-4276-99cc-71c0a4bab76e" x="12" y="3" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CODE_AGENCE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d359256b-266f-4c50-b268-8ab063b04f8d" stretchType="RelativeToTallestObject" mode="Transparent" x="204" y="3" width="222" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CLIENT_NOM_CLIENT}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="424928d3-e5f0-42c9-8044-24f97763a1b7" x="802" y="0" width="1" height="25"/>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="e442abcb-fb93-4ed7-ba68-473a9782d129" stretchType="RelativeToTallestObject" x="597" y="3" width="93" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ADHESION_DAT_FIN}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="9bcee801-7266-4a1c-8ca8-020d96b9cc25" x="596" y="-2" width="1" height="27"/>
+			</line>
+			<line>
+				<reportElement uuid="9fc21ba5-12d4-4a59-b673-bf32eba92225" x="766" y="0" width="1" height="25"/>
+			</line>
+			<textField>
+				<reportElement uuid="0fc5fb70-283c-49b1-b5f8-25637876443f" x="767" y="1" width="32" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{COMMISSION_PRMNET}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="2f42c74f-3aeb-4303-877b-74af6227fa21" x="185" y="0" width="1" height="25"/>
+			</line>
+			<textField>
+				<reportElement uuid="982b17ad-23f2-48f2-a86d-918fde5fd116" x="92" y="3" width="93" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NUM_COMPTE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="6">
+			<line>
+				<reportElement uuid="38530c76-4c6c-44c4-b585-d28131495743" x="0" y="2" width="802" height="1" isPrintInFirstWholeBand="true"/>
+			</line>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="50">
+			<textField pattern="###0.000">
+				<reportElement uuid="c9fa7f3e-e54d-4875-9033-8a85c2f71a2e" isPrintRepeatedValues="false" x="699" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{somprmtot}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="41176fb1-4002-4d67-ac1f-4fc62c1a25f9" x="613" y="0" width="86" height="20"/>
+				<textElement markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime totale :]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="399fe9ae-0e72-46bf-9ea9-bff2480f3915" x="2" y="0" width="797" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="f9b4dc16-302f-4ce5-9231-5898f325d07a" x="613" y="20" width="86" height="20"/>
+				<textElement markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Commission :]]></text>
+			</staticText>
+			<textField pattern="###0.000">
+				<reportElement uuid="ebffc89e-bcb3-4f43-ad1b-03c8b7fd3c90" x="699" y="20" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{somcom}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

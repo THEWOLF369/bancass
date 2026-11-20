@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TEST" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1e8d6aa0-e224-420b-943c-ffcd2ffc0515">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="TableHeader" hAlign="Center" vAlign="Middle" isBold="true"/>
+	<style name="TableCell" hAlign="Center" vAlign="Middle"/>
+	<style name="TableFooter" hAlign="Right" vAlign="Middle"/>
+	<style name="Table">
+		<box>
+			<pen lineWidth="0.5"/>
+		</box>
+	</style>
+	<subDataset name="dataset1" uuid="bde6249c-8c9d-40a4-9b6b-fe14f74bd6cd">
+		<field name="annee" class="java.lang.String"/>
+		<field name="prime_comm" class="java.math.BigDecimal"/>
+		<field name="capital_tmg" class="java.math.BigDecimal"/>
+		<field name="participation_benef" class="java.math.BigDecimal"/>
+		<field name="epargne_fin_annee" class="java.math.BigDecimal"/>
+		<field name="gain_financier" class="java.math.BigDecimal"/>
+		<field name="gain_fisc_annuel" class="java.math.BigDecimal"/>
+		<field name="valeur_rachat" class="java.math.BigDecimal"/>
+		<field name="cumul_vers" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="datasource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="agence" class="java.lang.String"/>
+	<parameter name="contrat" class="java.lang.String"/>
+	<parameter name="primeversee" class="java.math.BigDecimal"/>
+	<parameter name="epargneprev" class="java.math.BigDecimal"/>
+	<parameter name="gainfinancier" class="java.math.BigDecimal"/>
+	<parameter name="econimpot" class="java.math.BigDecimal"/>
+	<parameter name="gaintotal" class="java.math.BigDecimal"/>
+	<parameter name="adresseagence" class="java.lang.String"/>
+	<parameter name="raison_soc" class="java.lang.String"/>
+	<columnHeader>
+		<band height="135" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement uuid="6056f958-7116-4618-af39-141c72c419a6" x="0" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="38598059-dd74-4bf4-8595-58fbcf25959a" x="418" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="e39c4972-7312-4025-8a88-8ed283964504" x="358" y="115" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{contrat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a97fd2a3-aef2-4982-8eeb-970246ad4c45" x="10" y="115" width="81" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code agence:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bfec7398-cb8c-49e8-9388-550d83069863" x="287" y="115" width="69" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contrat N° :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7090bbb4-04b6-4768-8bd6-dce5cf3af050" x="91" y="115" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{agence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="951bf6e1-ae5f-4a2e-9385-aa9a77f2b78c" x="188" y="115" width="78" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[رمز النيابة :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d273640c-40bf-4832-af69-031f9100165c" x="458" y="115" width="79" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[العقد  عدد:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="188">
+			<componentElement>
+				<reportElement uuid="7a87818e-1ab7-43be-ae63-46c01a25e751" style="Table" x="6" y="54" width="600" height="110">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+				</reportElement>
+				<c:table xmlns:c="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dataset1" uuid="13d2cf23-4d31-4617-b7f4-4eb710c14f01">
+						<dataSourceExpression><![CDATA[$P{datasource}]]></dataSourceExpression>
+					</datasetRun>
+					<c:column width="30" uuid="d87082ee-9ba5-4609-966c-b9fd3e43cc41">
+						<c:columnHeader height="71" rowSpan="1">
+							<box>
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Dashed"/>
+								<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+							</box>
+							<staticText>
+								<reportElement uuid="42733e63-87d5-4247-b520-6395b1c1b27e" style="TableHeader" x="5" y="0" width="20" height="30"/>
+								<textElement/>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement uuid="57aa6161-9877-45af-84f3-5998029a9754" style="TableCell" x="5" y="0" width="20" height="25"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{annee}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="70" uuid="3e26541c-6c2a-47ef-8dc9-b3956491ca15">
+						<c:columnHeader height="71" rowSpan="1">
+							<box>
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="581d7cba-f9d0-44f6-b1ad-8d83e80833d6" style="TableHeader" x="0" y="0" width="70" height="71"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<text><![CDATA[Prime commerciale]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="0a101cc8-27a6-4a43-b33a-e23555fcb842" style="TableCell" x="0" y="0" width="68" height="25"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{prime_comm}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="70" uuid="0b25cfe9-1c45-412d-a70d-00bd2de116fe">
+						<c:columnHeader height="71" rowSpan="1">
+							<box>
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="2dc9cf90-210c-4ae9-9722-faad6f4d9852" style="TableHeader" x="0" y="0" width="70" height="71"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<text><![CDATA[Capital consttué au TMG]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="18057893-0122-4873-be19-768c524a48bc" x="0" y="0" width="65" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{capital_tmg}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="70" uuid="1f17ccda-6c65-4343-9026-db5fcfd4cab4">
+						<c:columnHeader height="71" rowSpan="1">
+							<box>
+								<pen lineColor="#000000"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="116926fe-b656-45ae-a3d1-519ecd6b31b3" style="TableHeader" x="0" y="0" width="70" height="71"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<text><![CDATA[Partcipaton aux Bénéfces]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="f2318e2d-138c-4466-a300-cff93f3f4bfb" x="0" y="0" width="65" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{participation_benef}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="70" uuid="7adf58bb-56fb-4e3e-8ce7-45ab41092371">
+						<c:columnHeader height="71" rowSpan="1">
+							<box>
+								<pen lineWidth="0.0" lineColor="#000000"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement uuid="c5081ada-2ed1-4451-aabf-218556464893" style="TableHeader" x="0" y="0" width="70" height="71"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<text><![CDATA[Epargne prévisionnelle avec PB]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box rightPadding="5">
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="c4e8bf2d-b5f5-428e-9871-e3586ad7b4a6" x="0" y="0" width="65" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{epargne_fin_annee}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="70" uuid="2e2fa524-6583-4dbe-895b-433be2983b14">
+						<c:columnHeader height="71" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement uuid="25383fb0-88d2-4c8e-bd53-8c3190e199e2" style="TableHeader" x="0" y="0" width="70" height="71"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<text><![CDATA[Gain fiscal Annuel]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="5b16632c-7bbd-479c-9595-646660b56931" x="0" y="0" width="65" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{gain_fisc_annuel}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="70" uuid="1fcb04bc-c410-435e-91f5-704bcd2b4796">
+						<c:columnHeader height="71" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="96d9dfda-ca84-4784-92e5-bb096f13e5d7" style="TableHeader" x="0" y="0" width="70" height="71"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<text><![CDATA[Valeur rachat]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="1661584b-286f-418c-a8ae-85f87becdda1" x="0" y="0" width="65" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valeur_rachat}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+					<c:column width="70" uuid="d5825aa5-d5a1-468f-9468-6f314c9deb1f">
+						<c:columnHeader height="71" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement uuid="18413478-a8e1-405d-a465-9daaff1e1644" style="TableHeader" x="0" y="0" width="70" height="71"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+								<textElement>
+									<font fontName="Arial" size="9"/>
+								</textElement>
+								<text><![CDATA[Cumul Versements]]></text>
+							</staticText>
+						</c:columnHeader>
+						<c:detailCell height="25" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+							</box>
+							<textField pattern="#,##0.000">
+								<reportElement uuid="651a4103-d91e-4c15-8c89-212724965cab" x="0" y="0" width="65" height="25"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{cumul_vers}]]></textFieldExpression>
+							</textField>
+						</c:detailCell>
+					</c:column>
+				</c:table>
+			</componentElement>
+			<rectangle>
+				<reportElement uuid="c927bc93-161d-4f6f-8cf7-05751b746a5f" x="1" y="5" width="527" height="43"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="3d9e6ac7-5899-47a5-b15f-b27fd7f40b8a" x="33" y="7" width="462" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Annexe : EVOLUTION PREVISIONNELLE DE L'EPARGNE CONSITITUEE ET VALEUR DE RACHAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1a62b5a4-27a6-4472-9b7a-da56f848528d" x="33" y="27" width="462" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ملحق:  تطور الادخار المكون وقيمة إعادة الشراء]]></text>
+			</staticText>
+		</band>
+		<band height="119">
+			<rectangle>
+				<reportElement uuid="995ccbb2-a139-4bfb-81c1-a92124a614f4" x="-16" y="59" width="554" height="54"/>
+			</rectangle>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="7be20054-ee5e-4697-8b49-ffe92fe84a1b" x="214" y="94" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{gainfinancier}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="560b3f13-5b75-4020-a477-cf9e625d2dd0" x="99" y="58" width="1" height="54"/>
+			</line>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="49c7d8d5-9be6-41b9-825f-02c01744d5a4" x="425" y="94" width="113" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{gaintotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="bc3dc9df-7f93-4ad8-8c2a-1e9c272c3e55" x="-15" y="60" width="114" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime versée]]></text>
+			</staticText>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="e29a3935-07f3-4147-b0c8-93a3c5647072" x="313" y="94" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{econimpot}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="615fc678-92a3-41c0-8cbe-34f430469d46" x="213" y="60" width="1" height="54"/>
+			</line>
+			<line>
+				<reportElement uuid="4eac6772-e95e-4fb9-aae6-6928417bb9b8" x="312" y="59" width="1" height="54"/>
+			</line>
+			<line>
+				<reportElement uuid="5d48c994-8d99-4ef6-9b7b-6048a82dee75" x="-15" y="91" width="553" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="fc064df1-50b1-45b1-9369-8ac26e9bf93b" x="416" y="58" width="1" height="54"/>
+			</line>
+			<staticText>
+				<reportElement uuid="4ec0a0c6-5661-4994-9e0a-2aa4e5927b85" x="314" y="60" width="100" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Economie d'impôt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fd534616-767b-4c14-ab19-fbe01f09fc85" x="214" y="60" width="98" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gain financier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5c051ec7-f6a1-4794-a9e0-07f0d42b00ef" x="99" y="60" width="114" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Epargne prévisionnelle]]></text>
+			</staticText>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="c706fb02-2591-4d55-983e-9a786a45d2f9" x="97" y="94" width="117" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{epargneprev}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="77db7ef8-a69a-4f01-959e-d995e55e4642" x="416" y="60" width="121" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gain total]]></text>
+			</staticText>
+			<textField pattern="#,##0.000">
+				<reportElement uuid="3ef5f98c-6fa4-4421-b3ec-d75315150c91" x="-15" y="92" width="117" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{primeversee}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="6a3e0b03-767f-4bb4-9566-88df56e4293b" x="1" y="4" width="527" height="43"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="33566267-97df-4b19-8ca4-8a69be9e60c5" x="33" y="6" width="462" height="41"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Annexe :BILAN FINANCIER]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="94">
+			<textField>
+				<reportElement uuid="4f5eabde-3d60-48e6-b75e-abf490754f86" x="341" y="33" width="205" height="33"/>
+				<textElement textAlignment="Center" markup="none">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["P/ LA "+$P{raison_soc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c991f48e-ed8c-4d2d-b891-cdbe08dd3a5d" x="7" y="33" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[L’Assuré]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="efd35d0a-86fa-43fb-9b70-c137973340f1" x="7" y="53" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[المؤمن له]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="11014332-de2d-483f-925e-a8975fc9d63a" x="184" y="33" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Le souscripteur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="77ee00de-4e40-4593-8d3d-82c8d193c375" x="184" y="53" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[المكتتب]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="b0f508c5-ccc0-42a6-89aa-499eec38f0ac" x="11" y="5" width="433" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Fait à " + $P{adresseagence} + ", Le " +
+
+new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

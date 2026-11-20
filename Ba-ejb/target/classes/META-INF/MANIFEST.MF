@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Built-By: HoussemA
+Build-Jdk: 17.0.6
+Implementation-Title: Ba-ejb
+Implementation-Vendor-Id: com.star
+Created-By: Maven Integration for Eclipse
+Implementation-Version: ${bioweb.version}_2026-04-16
+

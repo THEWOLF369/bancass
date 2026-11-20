@@ -1,0 +1,1852 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+<h:head>
+
+<script type="text/javascript">
+
+
+function buildOtp(){
+
+
+    var otp =
+          document.getElementById('otpForm:otp1').value
+        + document.getElementById('otpForm:otp2').value
+        + document.getElementById('otpForm:otp3').value
+        + document.getElementById('otpForm:otp4').value
+        + document.getElementById('otpForm:otp5').value
+        + document.getElementById('otpForm:otp6').value;
+
+
+
+    document.getElementById('otpForm:otp').value = otp;
+
+
+}
+
+
+
+
+
+function moveOtp(current,next){
+
+
+    if(current.value.length === 1){
+
+
+        document.getElementById(
+            'otpForm:' + next
+        ).focus();
+
+
+    }
+
+
+}
+
+
+
+</script>
+
+
+<meta charset="UTF-8"/>
+
+<title>Réinitialisation mot de passe</title>
+
+
+<link rel="stylesheet"
+      type="text/css"
+      href="css/demo1.css"/>
+
+
+<link rel="stylesheet"
+      type="text/css"
+      href="css/style.css"/>
+
+
+<link rel="stylesheet"
+      type="text/css"
+      href="css/animate-custom.css"/>
+
+
+<link rel="shortcut icon"
+      href="images/favicon.ico"/>
+
+
+
+<style>
+
+.ui-messages {
+
+    margin:15px 0 !important;
+
+    border-radius:8px !important;
+
+    font-size:13px;
+
+}
+
+/* ================================= */
+/* OTP INPUT BANK STYLE              */
+/* ================================= */
+
+
+.otp-container {
+
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    margin:25px 0;
+
+
+}
+
+
+
+.otp-box {
+
+
+    width:45px!important;
+
+    height:50px!important;
+
+
+    text-align:center!important;
+
+
+    font-size:22px!important;
+
+
+    font-weight:600;
+
+
+    border-radius:10px!important;
+
+
+    border:1px solid #cfd8d3!important;
+
+
+}
+
+
+
+
+.otp-box:focus {
+
+
+    border-color:#0c5232!important;
+
+
+    box-shadow:
+    0 0 0 3px rgba(12,82,50,.15)!important;
+
+
+}
+
+
+/* ================================= */
+/* MODERN BANK STEPS                 */
+/* ================================= */
+
+
+.bank-steps {
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:25px auto 35px;
+
+    width:100%;
+
+
+}
+
+
+
+
+
+.step-item {
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    color:#aaa;
+
+    font-size:12px;
+
+    font-weight:600;
+
+
+}
+
+
+
+
+.step-circle {
+
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+
+    background:#e5ebe8;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    margin-bottom:7px;
+
+
+    font-size:18px;
+
+
+}
+
+
+
+
+.step-item.active {
+
+
+    color:#0c5232;
+
+
+}
+
+
+
+.step-item.active .step-circle {
+
+
+    background:#0c5232;
+
+    color:white;
+
+
+    box-shadow:
+    0 5px 15px rgba(12,82,50,.35);
+
+
+}
+
+
+
+
+
+.step-line {
+
+
+    width:55px;
+
+    height:3px;
+
+
+    background:#ddd;
+
+
+    margin:0 8px;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+.step-line.completed {
+
+
+    background:#0c5232;
+
+
+}
+
+/* ================================================= */
+/* RESPONSIVE DESIGN */
+/* ================================================= */
+
+
+@media screen and (max-width:600px){
+
+
+.bank-card {
+
+
+    width:90%;
+
+    padding:25px;
+
+
+}
+
+
+
+.bank-title {
+
+
+    font-size:20px;
+
+
+}
+
+
+
+.bank-description {
+
+
+    font-size:13px;
+
+
+}
+
+
+}
+
+
+
+
+/* PrimeFaces steps modernisation */
+
+
+.ui-steps {
+
+
+    margin-bottom:25px!important;
+
+
+}
+
+
+
+.ui-steps .ui-steps-item .ui-menuitem-link {
+
+
+    background:transparent!important;
+
+
+}
+
+
+
+
+.ui-steps .ui-steps-number {
+
+
+    background:#0c5232!important;
+
+    color:white!important;
+
+}
+
+
+
+
+.ui-steps .ui-steps-title {
+
+
+    color:#0c5232!important;
+
+    font-size:12px!important;
+
+
+}
+
+
+
+
+
+
+/* Remove old PrimeFaces panel aspect */
+
+
+.ui-panel {
+
+
+    border:none!important;
+
+    background:transparent!important;
+
+
+}
+
+
+
+.ui-panel-content {
+
+
+    padding:0!important;
+
+
+}
+
+
+
+
+
+/* Command button text */
+
+
+.ui-button-text {
+
+
+    font-size:14px!important;
+
+
+}
+
+/* ================================================= */
+/*                 BANKING MODERN STYLE              */
+/* ================================================= */
+
+
+body {
+
+    background:#f4f7f6;
+
+    font-family:"Segoe UI",
+                Arial,
+                sans-serif;
+
+}
+
+
+
+
+/* CENTER */
+
+.bank-container {
+
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+
+/* HEADER */
+
+.bank-header {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:25px;
+
+    margin-bottom:25px;
+
+}
+
+
+.bank-logo {
+
+    width:180px;
+
+    height:100px;
+
+    object-fit:contain;
+
+}
+
+
+
+/* CARD */
+
+.bank-card {
+
+
+    width:430px;
+
+
+    background:#ffffff;
+
+
+    padding:35px 40px;
+
+
+    border-radius:18px;
+
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.10);
+
+
+    border-top:6px solid #0c5232;
+
+
+    animation:showCard .35s ease;
+
+
+}
+
+
+
+@keyframes showCard {
+
+
+from {
+
+    opacity:0;
+
+    transform:translateY(15px);
+
+}
+
+
+to {
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+}
+
+
+
+/* TITLE */
+
+
+.bank-title {
+
+
+    text-align:center;
+
+
+    color:#0c5232;
+
+
+    font-size:24px;
+
+
+    font-weight:600;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+/* ICON */
+
+
+.bank-icon {
+
+
+    width:75px;
+
+
+    height:75px;
+
+
+    margin:0 auto 15px;
+
+
+    border-radius:50%;
+
+
+    background:#e8f2ed;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    color:#0c5232;
+
+
+    font-size:34px;
+
+
+}
+
+
+
+
+/* DESCRIPTION */
+
+
+.bank-description {
+
+
+    text-align:center;
+
+
+    color:#666;
+
+
+    font-size:14px;
+
+
+    line-height:1.6;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+/* INPUT */
+
+
+.bank-field {
+
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.bank-field label {
+
+
+    display:block;
+
+
+    margin-bottom:7px;
+
+
+    font-size:13px;
+
+
+    font-weight:600;
+
+
+    color:#344;
+
+
+}
+
+
+
+.bank-field .ui-inputfield {
+
+
+    width:100%!important;
+
+
+    height:42px;
+
+
+    border-radius:10px!important;
+
+
+    border:1px solid #d6ddd9!important;
+
+
+    padding:10px!important;
+
+
+    box-sizing:border-box;
+
+
+}
+
+
+
+
+.bank-field .ui-inputfield:focus {
+
+
+    border-color:#0c5232!important;
+
+
+    box-shadow:
+    0 0 0 3px rgba(12,82,50,.15)!important;
+
+
+}
+
+
+
+/* BUTTONS */
+
+
+.bank-actions {
+
+
+    margin-top:25px;
+
+
+}
+
+
+
+.bank-primary {
+
+
+    width:100%;
+
+
+    height:45px;
+
+
+    background:#0c5232!important;
+
+
+    border:none!important;
+
+
+    border-radius:10px!important;
+
+
+    color:white!important;
+
+
+    font-weight:600;
+
+
+}
+
+
+
+.bank-primary:hover {
+
+
+    background:#083d25!important;
+
+
+}
+
+
+
+.bank-secondary {
+
+
+    width:100%;
+
+
+    height:42px;
+
+
+    margin-top:12px;
+
+
+    background:white!important;
+
+
+    border:1px solid #0c5232!important;
+
+
+    border-radius:10px!important;
+
+
+    color:#0c5232!important;
+
+
+}
+
+
+
+
+
+/* PASSWORD */
+
+
+.password-wrapper {
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+}
+
+
+.password-wrapper .ui-inputfield {
+
+
+    flex:1;
+
+
+}
+
+
+
+.password-wrapper button {
+
+
+    margin-left:8px;
+
+
+    width:42px;
+
+
+    height:40px;
+
+
+}
+
+
+
+
+/* LOADING */
+
+
+.bank-loading {
+
+
+    width:320px;
+
+
+    padding:35px;
+
+
+    background:white;
+
+
+    border-radius:15px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+.bank-loading i {
+
+
+    font-size:40px;
+
+    color:#0c5232;
+
+
+    animation:pulse 1s infinite;
+
+
+}
+
+
+
+@keyframes pulse {
+
+
+0%{
+
+transform:scale(1);
+
+}
+
+
+50%{
+
+transform:scale(1.15);
+
+}
+
+
+100%{
+
+transform:scale(1);
+
+}
+
+
+}
+
+
+</style>
+
+
+</h:head>
+
+
+
+
+
+<f:metadata>
+
+    <f:viewParam name="mode"
+                 value="#{otpResetBean.mode}" />
+
+</f:metadata>
+
+
+
+
+
+<h:body>
+
+
+
+<div class="bank-container">
+
+
+<div>
+
+
+
+<header class="bank-header">
+
+    <img src="images/star2018.png"
+         class="bank-logo"/>
+
+
+    <h:panelGroup rendered="#{login.alyssaLogoPresent}">
+
+        <img src="images/logoALYSSA.png"
+             class="bank-logo"/>
+
+    </h:panelGroup>
+
+</header>
+
+
+
+
+
+
+<h:form id="otpForm">
+
+
+
+
+
+<!-- ================= BLOCK UI ================= -->
+
+
+<p:blockUI block="otpForm"
+           widgetVar="loadingBlock">
+
+
+<div class="bank-loading">
+
+
+<i class="fa fa-envelope"></i>
+
+
+<h3>
+Envoi de votre code OTP
+</h3>
+
+
+<p>
+Votre demande est en cours de traitement.
+<br/>
+Merci de patienter...
+</p>
+
+
+</div>
+
+
+</p:blockUI>
+
+
+
+
+
+<p:blockUI block="otpForm"
+           widgetVar="loadingAction">
+
+
+<div class="bank-loading">
+
+
+<i class="fa fa-spinner"></i>
+
+
+<h3>
+Traitement en cours
+</h3>
+
+
+<p>
+Veuillez patienter...
+</p>
+
+
+</div>
+
+
+</p:blockUI>
+
+
+
+
+
+<!-- TITLE -->
+
+<h1 class="bank-title">
+
+<h:outputText value="#{otpResetBean.flowType.label}"/>
+
+</h1>
+
+
+
+
+
+<p:growl autoUpdate="true"/>
+
+
+<!-- <p:messages autoUpdate="true" -->
+<!--             showDetail="true" -->
+<!--             escape="false"/> -->
+
+
+
+
+
+
+<!-- ================= STEPS ================= -->
+
+
+<!-- ============================= -->
+<!-- MODERN STEP INDICATOR -->
+<!-- ============================= -->
+
+<div class="bank-steps">
+
+
+    <!-- STEP 1 -->
+
+    <div class="step-item #{otpResetBean.step >= 1 ? 'active' : ''}">
+
+
+        <div class="step-circle">
+
+            <i class="fa fa-user"></i>
+
+        </div>
+
+
+        <span>
+            Identification
+        </span>
+
+
+    </div>
+
+
+
+
+
+    <div class="step-line 
+        #{otpResetBean.step > 1 ? 'completed' : ''}">
+    </div>
+
+
+
+
+
+    <!-- STEP 2 -->
+
+
+    <div class="step-item #{otpResetBean.step >= 2 ? 'active' : ''}">
+
+
+        <div class="step-circle">
+
+            <i class="fa fa-envelope"></i>
+
+        </div>
+
+
+        <span>
+            OTP
+        </span>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="step-line 
+        #{otpResetBean.step > 2 ? 'completed' : ''}">
+    </div>
+
+
+
+
+
+
+
+    <!-- STEP 3 -->
+
+
+    <div class="step-item #{otpResetBean.step >= 3 ? 'active' : ''}">
+
+
+        <div class="step-circle">
+
+            <i class="fa fa-key"></i>
+
+        </div>
+
+
+        <span>
+            <h:outputText value="#{otpResetBean.step3Label}"/>
+        </span>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<br/>
+
+
+
+
+
+
+<!-- ================= STEP 1 ================= -->
+
+
+
+<p:panel rendered="#{otpResetBean.step eq 1}">
+
+
+
+<div class="bank-card">
+
+
+
+
+
+<div class="bank-icon">
+
+<i class="fa fa-user-circle"></i>
+
+</div>
+
+
+
+
+
+<div class="bank-title">
+
+Identification
+
+</div>
+
+
+
+    <p:messages id="messages"
+                autoUpdate="true"
+                showDetail="true"
+                escape="false"/>
+
+
+
+<div class="bank-description">
+
+
+Saisissez votre identifiant afin de recevoir
+un code de sécurité OTP.
+
+
+</div>
+
+
+
+
+
+
+<div class="bank-field">
+
+
+<p:outputLabel value="Identifiant"
+               for="login"/>
+
+
+
+<p:inputText id="login"
+
+             value="#{otpResetBean.login}"
+             requiredMessage="Le champ Identifiant est obligatoire." 
+             required="true"/>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="bank-actions">
+
+
+<p:commandButton id="btnSendOtp"
+
+                 value="Envoyer le code OTP"
+
+                 action="#{otpResetBean.sendOtp}"
+
+                 update="otpForm"
+
+                 onstart="PF('loadingBlock').show();"
+
+                 oncomplete="PF('loadingBlock').hide();"
+
+                 styleClass="bank-primary"/>
+
+
+
+
+
+<p:commandButton
+
+                 value="Retour à la connexion"
+
+                 action="#{otpResetBean.goToLogin}"
+
+                 ajax="false"
+
+                 immediate="true"
+
+                 styleClass="bank-secondary"/>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</p:panel>
+
+<!-- ================================================= -->
+<!-- ================= STEP 2 : OTP ================== -->
+<!-- ================================================= -->
+
+
+<p:panel rendered="#{otpResetBean.step eq 2}">
+
+
+<div class="bank-card">
+
+
+
+    <div class="bank-icon">
+
+        <i class="fa fa-envelope-open"></i>
+
+    </div>
+
+
+
+    <div class="bank-title">
+
+        Vérification OTP
+
+    </div>
+    
+    
+        <p:messages id="messagesOtp1"
+                autoUpdate="true"
+                showDetail="true"
+                escape="false"/>
+
+
+
+    <div class="bank-description">
+
+        Un code de sécurité a été envoyé à votre adresse email.
+        <br/>
+        Veuillez saisir le code reçu afin de continuer.
+
+    </div>
+
+
+
+
+    <div class="bank-field">
+
+
+        <p:outputLabel value="Code OTP"
+                       for="otp"/>
+
+
+
+<!-- ================= OTP BOX ================= -->
+
+
+<div class="otp-container">
+
+
+    <p:inputText id="otp1"
+                 maxlength="1"
+                 styleClass="otp-box"
+                 onkeyup="buildOtp();moveOtp(this,'otp2')"/>
+
+
+
+    <p:inputText id="otp2"
+                 maxlength="1"
+                 styleClass="otp-box"
+                 onkeyup="buildOtp();moveOtp(this,'otp3')"/>
+
+
+
+    <p:inputText id="otp3"
+                 maxlength="1"
+                 styleClass="otp-box"
+                 onkeyup="buildOtp();moveOtp(this,'otp4')"/>
+
+
+
+    <p:inputText id="otp4"
+                 maxlength="1"
+                 styleClass="otp-box"
+                 onkeyup="buildOtp();moveOtp(this,'otp5')"/>
+
+
+
+    <p:inputText id="otp5"
+                 maxlength="1"
+                 styleClass="otp-box"
+                 onkeyup="buildOtp();moveOtp(this,'otp6')"/>
+
+
+
+    <p:inputText id="otp6"
+                 maxlength="1"
+                 styleClass="otp-box"
+                 onkeyup="buildOtp();"/>
+
+
+</div>
+
+
+<!-- Valeur réelle envoyée au Bean -->
+
+<p:inputText id="otp"
+             value="#{otpResetBean.otp}"
+             style="display:none"/>
+
+
+ 
+
+
+
+    </div>
+
+
+
+
+
+    <div class="bank-actions">
+
+
+
+        <p:commandButton
+
+                value="Valider le code"
+
+                action="#{otpResetBean.validateOtp}"
+
+                update="otpForm"
+
+                onstart="PF('loadingAction').show();"
+
+                oncomplete="PF('loadingAction').hide();"
+
+                styleClass="bank-primary"/>
+
+
+
+
+        <p:commandButton
+
+                value="Retour"
+
+                action="#{otpResetBean.stepBack}"
+
+                update="otpForm"
+
+                immediate="true"
+
+                styleClass="bank-secondary"/>
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+</p:panel>
+
+
+
+
+
+
+
+<!-- ================================================= -->
+<!-- ===== STEP 3 : CHANGEMENT MOT DE PASSE ========== -->
+<!-- ================================================= -->
+
+
+<p:panel rendered="#{otpResetBean.step eq 3}">
+
+
+
+
+
+
+<!-- ================= MOT DE PASSE ================= -->
+
+
+<h:panelGroup rendered="#{!otpResetBean.lockedAccount}">
+
+
+
+<div class="bank-card">
+
+
+
+
+
+    <div class="bank-icon">
+
+        <i class="fa fa-key"></i>
+
+    </div>
+
+
+
+
+
+    <div class="bank-title">
+
+
+        <h:outputText value="#{otpResetBean.step3Label}"/>
+
+
+    </div>
+
+
+
+    <p:messages id="messagesOtp2"
+                autoUpdate="true"
+                showDetail="true"
+                escape="false"/>
+
+
+    <div class="bank-description">
+
+
+        Votre identité a été vérifiée avec succès.
+        <br/>
+
+        Choisissez un nouveau mot de passe sécurisé.
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+<!-- ================= NOUVEAU PASSWORD ================= -->
+
+
+
+<div class="bank-field">
+
+
+<p:outputLabel value="Nouveau mot de passe"
+               for="newPwd"/>
+
+
+
+<div class="password-wrapper">
+
+
+
+<p:inputText id="newPwd"
+
+             value="#{otpResetBean.newPassword}"
+
+             type="#{otpResetBean.showNewPassword ? 'text' : 'password'}"/>
+
+
+
+
+
+<p:commandButton
+
+        id="toggleNewBtn"
+
+        icon="#{otpResetBean.showNewPassword ? 'fa fa-eye-slash' : 'fa fa-eye'}"
+
+        actionListener="#{otpResetBean.toggleNewPasswordVisibility}"
+
+        update="newPwd toggleNewBtn"
+
+        process="@this newPwd"/>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ================= CONFIRM PASSWORD ================= -->
+
+
+
+<div class="bank-field">
+
+
+<p:outputLabel value="Confirmation mot de passe"
+               for="confirmPwd"/>
+
+
+
+
+<div class="password-wrapper">
+
+
+
+<p:inputText id="confirmPwd"
+
+             value="#{otpResetBean.confirmPassword}"
+
+             type="#{otpResetBean.showConfirmPassword ? 'text' : 'password'}"/>
+
+
+
+
+
+
+<p:commandButton
+
+        id="toggleConfirmBtn"
+
+        icon="#{otpResetBean.showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'}"
+
+        actionListener="#{otpResetBean.toggleConfirmPasswordVisibility}"
+
+        update="confirmPwd toggleConfirmBtn"
+
+        process="@this confirmPwd"/>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="bank-actions">
+
+
+
+
+
+<p:commandButton
+
+        value="Changer mon mot de passe"
+
+        action="#{otpResetBean.changePassword}"
+
+        update="otpForm"
+
+        onstart="PF('loadingAction').show();"
+
+        oncomplete="PF('loadingAction').hide();"
+
+        styleClass="bank-primary"/>
+
+
+
+
+
+
+
+<p:commandButton
+
+        value="Retour connexion"
+
+        action="#{otpResetBean.goToLogin}"
+
+        ajax="false"
+
+        immediate="true"
+
+        styleClass="bank-secondary"/>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+</h:panelGroup>
+
+
+
+
+
+<!-- ================================================= -->
+<!-- ============== COMPTE BLOQUE ==================== -->
+<!-- ================================================= -->
+
+
+
+<h:panelGroup rendered="#{otpResetBean.lockedAccount}">
+
+
+
+<div class="bank-card">
+
+
+
+
+
+<div class="bank-icon">
+
+    <i class="fa fa-unlock"></i>
+
+</div>
+
+
+
+
+
+<div class="bank-title">
+
+Déblocage du compte
+
+</div>
+
+
+
+
+    <p:messages id="messagesOtp3"
+                autoUpdate="true"
+                showDetail="true"
+                escape="false"/>
+                
+
+
+<div class="bank-description">
+
+
+Votre identité a été vérifiée avec succès.
+
+
+<br/><br/>
+
+
+Vous pouvez maintenant réactiver votre accès.
+
+
+</div>
+
+
+
+
+
+
+
+<div class="bank-actions">
+
+
+
+
+
+<p:commandButton
+
+        value="Débloquer mon compte"
+
+        icon="ui-icon-unlocked"
+
+        action="#{otpResetBean.unlockAccount}"
+
+        update="otpForm"
+
+        onstart="PF('loadingAction').show();"
+
+        oncomplete="PF('loadingAction').hide();"
+
+        styleClass="bank-primary"/>
+
+
+
+
+
+
+<p:commandButton
+
+        value="Retour connexion"
+
+        action="#{otpResetBean.goToLogin}"
+
+        ajax="false"
+
+        immediate="true"
+
+        styleClass="bank-secondary"/>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+</h:panelGroup>
+
+
+
+
+
+</p:panel>
+
+<!-- ================================================= -->
+<!-- ================= FOOTER ======================== -->
+<!-- ================================================= -->
+
+
+<div style="
+        text-align:center;
+        margin-top:25px;
+        color:#777;
+        font-size:12px;">
+
+
+    <i class="fa fa-lock"></i>
+
+    Connexion sécurisée -
+    Vos informations sont protégées
+
+
+</div>
+
+
+
+
+
+</h:form>
+
+
+
+</div>
+
+
+</div>
+
+
+</h:body>
+
+
+</html>

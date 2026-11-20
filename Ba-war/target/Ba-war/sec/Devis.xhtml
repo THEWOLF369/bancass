@@ -1,0 +1,291 @@
+<ui:composition template="/sec/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="body">
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{devisBean.loadProposition}" />
+		</f:metadata>
+		<style type="text/css">
+.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+</style>
+
+		<style type="text/css">
+.dataInputNumber input {
+	width: 30px;
+	background-color: white;
+}
+
+.labelWidth {
+	width: 150px;
+}
+
+.ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+	{
+	background: 0 !important;
+	background-color: white !important;
+	box-shadow: none !important;
+}
+
+label {
+	color: black;
+}
+</style>
+
+		<h:body style=" border: none;"
+			rendered="#{!gestionProfil.souscriptionTD}">
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Accès non autorisé</li>
+			</ul>
+			<ul class="page_info">
+				<center>
+					<img src="../images/autorisation.jpg" height="15%" width="15%" />
+				</center>
+			</ul>
+		</h:body>
+		<h:body style=" border: none;"
+			rendered="#{gestionProfil.souscriptionTD}">
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Devis TD</li>
+				<li class="active">
+				
+		<img src="${facesContext.externalContext.requestContextPath}/images/right.png"	width="17" height="17" /></li>
+				<li class="active">Adhesion</li>
+			</ul>
+			<ul class="page_info">
+				<h:panelGroup id="DevisTD">
+
+					<h:form id="formDevis"	onkeypress="if (event.keyCode == 13) { return false; }">
+					<p:growl id="growl"  /> 
+					<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+						<h:panelGrid columns="3" columnClasses="labelWidth, ui-grid-col-3">
+							<label class="bold">Police : </label>
+							<h:selectOneMenu id="numpol" styleClass="form-control"	value="#{devisBean.numplc}"
+							disabled="#{devisBean.selectedProposition.notifie}">
+								<f:selectItems value="#{devisBean.listnumplc}" />
+								<p:ajax event="mouseup" update="datenaiss"	listener="#{devisBean.calc_date()}" />
+								<p:ajax event="change" update="tauxdeprime"	listener="#{devisBean.tauxdeprime()}" />
+								
+							</h:selectOneMenu>
+							<p:message for="numpol" />
+
+
+							<label class="bold"> Référence crédit </label>
+							<h:panelGrid columns="2"
+								columnClasses="labelWidth, ui-grid-col-3">
+								<h:inputText id="idref" styleClass="form-control" value="#{devisBean.refCredit}" />
+								<p:commandButton value="" process="@parent"
+									oncomplete='$("#loader_cont").fadeOut();' update="formDevis" id="btnRef"
+									style="height: 35px;width: 35px;  
+								background-image: url(${facesContext.externalContext.requestContextPath}/images/website.png)"
+									action="#{devisBean.rechercherRefCreditDepuisWS()}">
+								</p:commandButton>
+
+							</h:panelGrid>
+							<p:message for="idref " />
+
+
+							<label class="bold"> Identifiant client </label>
+							<h:panelGrid columns="2"
+								columnClasses="labelWidth, ui-grid-col-3">
+								<h:inputText id="idcin" styleClass="form-control"
+									value="#{clientBean.client.identifiant}" disabled="true" />
+								<p:commandButton value="Client" process="@this"
+									styleClass="orangeButton"
+									action="#{devisBean.navigateToClientPage()}" disabled="#{devisBean.selectedProposition.notifie}">
+								</p:commandButton>
+							</h:panelGrid>
+							<p:message for="idcin " />
+
+
+
+							<label class="bold"> Date de naissance </label>
+							<p:calendar id="datenaiss" styleClass="combo-style"
+								value="#{clientBean.client.datNaiss}" pattern="dd/MM/yyyy"
+								locale="fr" showButtonPanel="true" navigator="true"
+								required="true" maxdate="#{devisBean.mindate}" mindate="#{devisBean.maxdate}"
+								requiredMessage="La date de naissance est obligatoire."
+								readonly="#{devisBean.selectedProposition.notifie || devisBean.cod_societe.equals('002707PPM000')}">
+								
+								<p:ajax event="dateSelect" update="tauxdeprime"	listener="#{devisBean.calculAge()}" />
+							</p:calendar>
+							<p:message for="datenaiss" />
+							
+							
+							
+							
+
+							<label class="bold"> Date d'effet </label>
+							<p:calendar id="calEffDate" styleClass="combo-style" pattern="dd/MM/yyyy"
+								value="#{devisBean.dateFormat}"  showButtonPanel="false" 
+								mindate="#{devisBean.aujourdhui}" maxdate="#{devisBean.aujourdhui}"
+								required="true"  readonly="true" 
+							requiredMessage="La date d'effet est obligatoire."
+							validatorMessage="La date d'effet est obligatoire." >
+
+							</p:calendar>
+							<p:message for="calEffDate" />
+
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="7" columnClasses="labelWidth, ui-grid-col-3">
+							<label class="bold">Durée</label>
+
+							<p:inputNumber id="nbannee" styleClass="dataInputNumber"
+								value="#{devisBean.nbannee}"
+								validatorMessage="La durée ne doit pas être nulle"
+								requiredMessage="La durée est obligatoire" minValue="0"
+								maxValue="99" onclick="this.focus();this.select()"
+								readonly="#{devisBean.selectedProposition.notifie || devisBean.cod_societe.equals('002707PPM000') }">
+
+
+
+
+
+								<p:ajax event="blur" update="tauxdeprime , txtdatefin"
+									listener="#{devisBean.tauxdeprime()}" />
+							</p:inputNumber>
+							<label class="bold">Année(s) </label>
+
+
+
+							<p:inputNumber id="nbmois" value="#{devisBean.nbmois}"
+								styleClass="dataInputNumber" style="margin-left: 20px;"
+								validatorMessage="La durée ne doit pas être nulle" minValue="0"
+								maxValue="11" onclick="this.focus();this.select()"
+								requiredMessage="La durée est obligatoire"
+								readonly="#{devisBean.selectedProposition.notifie || devisBean.cod_societe.equals('002707PPM000')}">
+
+								<p:ajax event="blur" update="tauxdeprime , txtdatefin"
+									listener="#{devisBean.tauxdeprime()}" />
+							</p:inputNumber>
+
+							<label class="bold">Mois</label>
+							<p:message for="nbmois" />
+							<p:message for="nbannee" />
+
+
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="3" columnClasses="labelWidth, ui-grid-col-3">
+
+							<label class="bold">Franchise(m) </label>
+							<h:inputText id="txtfranchise" styleClass="form-control"
+								value="#{devisBean.franchise}" 
+								readonly="#{devisBean.selectedProposition.notifie 
+								|| devisBean.cod_societe.equals('002707PPM000')}">
+
+							</h:inputText>
+							<p:message for="txtfranchise" />
+
+							<label class="bold"> Date Fin </label>
+							<h:inputText styleClass="form-control" id="txtdatefin"
+								value="#{devisBean.datefin}" disabled="true">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:inputText>
+							<p:message for="txtdatefin" />
+
+							<label class="bold">capital Initial </label>
+							<p:inputNumber id="txtcapitalini" styleClass="form-control"
+								value="#{devisBean.capital}"
+								onclick="this.focus();this.select()" thousandSeparator=""
+								decimalSeparator="." decimalPlaces="3"
+								validatorMessage="capital différent de zéro ." required="true"
+								requiredMessage="capital est obligatoire" 
+								readonly="#{devisBean.selectedProposition.notifie || devisBean.cod_societe.equals('002707PPM000')}">
+								<f:validateLongRange minimum="1" />
+								<p:ajax event="blur" update="tauxdeprime"
+									listener="#{devisBean.tauxdeprime()}" />
+							</p:inputNumber>
+							<p:message for="txtcapitalini" />
+
+							<label class="bold"> Taux de Prime </label>
+							<h:inputText id="tauxdeprime" styleClass="form-control"
+								value="#{devisBean.tauxdeprime}" disabled="true">
+								<f:convertNumber pattern="#0.000" />
+							</h:inputText>
+							<p:message for="tauxdeprime" />
+
+
+							<label class="bold">Taux d'interet </label>
+							<p:inputNumber id="txttauxinteret" styleClass="form-control" thousandSeparator=""
+								decimalSeparator="." decimalPlaces="3"
+								value="#{devisBean.tauxinteret}" 
+								readonly="#{devisBean.selectedProposition.notifie || devisBean.cod_societe.equals('002707PPM000')}">
+
+							</p:inputNumber>
+							<p:message for="txttauxinteret" />
+
+							<h:outputLabel class="bold"
+								rendered="#{devisBean.profil.equals('TDST')}">Taux surprime </h:outputLabel>
+							<h:inputText id="txttauxsurprime" styleClass="form-control"
+								value="#{devisBean.tauxsurprime}"
+								rendered="#{devisBean.profil.equals('TDST')}">
+
+
+							</h:inputText>
+							<p:message for="txttauxsurprime"
+								rendered="#{devisBean.profil.equals('TDST')}" />
+
+
+							<h:outputLabel class="bold"
+								rendered="#{devisBean.profil.equals('TDST')}">Majoration </h:outputLabel>
+							<p:inputText id="txtmajoration" styleClass="form-control"
+								rendered="#{devisBean.profil.equals('TDST')}"
+								value="#{devisBean.majoration}" />
+							<p:message for="txtmajoration"
+								rendered="#{devisBean.profil.equals('TDST')}" />
+						</h:panelGrid>
+
+
+						<center>
+							<div class="form-actions">
+
+								<h:commandLink type="idcancel" action="#{devisBean.newDevis()}"
+									styleClass="btn btn-danger" value="Réinitialiser" />
+								<p:commandLink type="idTarifier" ajax="true"
+									action="#{devisBean.calculTarif()}" 
+									styleClass="btn btn-success" value="Tarifier" update="growl" />
+
+							</div>
+						</center>
+
+
+						<p:blockUI block="formDevis" trigger="btnRef">
+					        Chargement des données...<br />
+					        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+					    </p:blockUI>
+
+					</h:form>
+				</h:panelGroup>
+			</ul>
+
+
+		</h:body>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="decompte" pageWidth="795" pageHeight="1000" columnWidth="755" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34453616-969b-43a5-ab0b-1fd10c5f250d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.background.image.properties" value="true,true,1.0,10,-7,0,0,563,394"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="GROUPE-TEST"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="6384bd59-e9e7-414c-84e9-f6f9e08c8475">
+		<parameter name="ponum" class="java.lang.String"/>
+		<parameter name="annee" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[select x.mat, x.pr, x.nom, x.prenom, x.bor, sum(x.mnt) mnt, x.bul from (
+
+select p.wpol, p.w_mat mat, p.w_pr pr, a.adnom nom , a.adpnom prenom, p.w_mrp bor ,  p.w_mbr mnt, p.w_bulp bul, p.w_dat
+from princsin p inner join aderen a on
+to_number(p.wpol) = a.ponum
+and p.w_mat = substr(a.adpoma,11)
+where p.wpol = $P{ponum}  and  p.ds  = $P{annee}
+
+
+union all
+
+
+select p.wpol, p.w_mat mat, p.w_pr pr, a.adnom nom , a.adpnom prenom, p.w_mrp bor ,  p.w_mbr mnt, p.w_bulp bul, p.w_dat
+from compleme p inner join aderen a on
+to_number(p.wpol) = a.ponum
+and p.w_mat = substr(a.adpoma,11)
+where p.wpol = $P{ponum}  and  p.ds  = $P{annee}
+
+
+union all
+
+                 select g.w_plc wpol, g.w_mat mat , g.w_pr pr, a.adnom nom , a.adpnom prenom, to_number(g.w_nbo) bor, 0 mnt, to_number(g.w_bulp) bul, g.w_dat
+                 from gfneant g inner join aderen a on
+                 to_number(g.w_plc) = a.ponum
+                 and g.w_mat = substr(a.adpoma,11)
+                 where g.w_plc =   $P{ponum}  and
+                 g.w_dem = $P{annee}
+                 and g.w_rub = 'ZZZ'
+
+) X
+
+
+group by x.wpol, x.mat, x.pr, x.nom, x.prenom, x.bor, x.bul, x.w_dat
+order by x.mat, to_number(x.pr) asc]]>
+		</queryString>
+		<field name="MAT" class="java.lang.String"/>
+		<field name="PR" class="java.lang.String"/>
+		<field name="NOM" class="java.lang.String"/>
+		<field name="PRENOM" class="java.lang.String"/>
+		<field name="BOR" class="java.math.BigDecimal"/>
+		<field name="MNT" class="java.math.BigDecimal"/>
+		<field name="BUL" class="java.math.BigDecimal"/>
+		<variable name="sum" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{MNT}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="ponum" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="annee" class="java.lang.String"/>
+	<parameter name="img" class="java.io.InputStream"/>
+	<queryString>
+		<![CDATA[select tab.TD, p.ponum, LPAD(p.sucode,'4','0') sucode, p.ponomr, substr($P{annee},7,2)||'/'||substr($P{annee},5,2)||'/'||substr($P{annee},1,4) ladate,
+(pr.hrep - pr.htot )/1000 mnt , pr.htot/1000 totalremb, pr.hrep/1000 cumul
+from histdep pr inner join police p on
+to_number(pr.hnpol) = p.ponum
+
+
+inner join
+
+(
+select count(*) TD, pol  from (
+select mat, pol from (
+
+select p.w_mat mat, p.w_pr pr, to_number(p.w_mrp) bor, p.w_bulp bul,to_number(p.wpol) pol, p.w_dat
+from princsin p
+where p.wpol =  $P{ponum} and  p.ds  = $P{annee}
+
+
+union all
+
+
+select p.w_mat mat, p.w_pr pr, to_number(p.w_mrp) bor, p.w_bulp bul,to_number(p.wpol) pol, p.w_dat
+from compleme p
+where p.wpol =  $P{ponum} and  p.ds  = $P{annee}
+
+
+union all
+
+   select g.w_mat mat,  g.w_pr pr,  to_number(g.w_nbo) bor,  to_number(g.w_bulp) bul , to_number(g.w_plc) pol, g.w_dat
+   from gfneant g
+   where g.w_plc =   $P{ponum}  and
+   g.w_dem = $P{annee}
+   and g.w_rub = 'ZZZ'
+
+)
+group by mat, pr,  bul, pol, bor, w_dat
+) group by pol
+) tab  on to_number(pr.hnpol) = tab.pol
+
+
+
+where pr.hnpol =  $P{ponum} and  pr.hdats  = $P{annee}
+--group by p.ponum, p.sucode , p.ponomr,p.porept, tab.TD]]>
+	</queryString>
+	<field name="TD" class="java.math.BigDecimal"/>
+	<field name="PONUM" class="java.math.BigDecimal"/>
+	<field name="SUCODE" class="java.lang.String"/>
+	<field name="PONOMR" class="java.lang.String"/>
+	<field name="LADATE" class="java.lang.String"/>
+	<field name="MNT" class="java.math.BigDecimal"/>
+	<field name="TOTALREMB" class="java.math.BigDecimal"/>
+	<field name="CUMUL" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement x="192" y="10" width="264" height="20" uuid="4a15534a-e0d9-4449-ac64-ee737a335055"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true" pdfEncoding="Cp1256"/>
+				</textElement>
+				<text><![CDATA[جدول إرسال التعويضات عن المرض]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="30" width="33" height="20" uuid="1d8cf1a0-76fb-477c-8738-c35651873ec3"/>
+				<text><![CDATA[DATE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="10" y="0" width="87" height="50" uuid="6108e36a-34ac-4002-864a-9f3446d380d8"/>
+				<imageExpression><![CDATA[$P{img}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="192" y="30" width="264" height="20" uuid="2a235bc6-1343-423f-a206-b098d3ea71a3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BORDEREAU D'ENVOI DES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="50" width="327" height="20" uuid="409ac72b-aa2f-42c6-929b-3312584f4540"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DECOMPTES DE PRESTATIONS MALADIE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="60" width="56" height="20" uuid="71effd1e-42f3-4df1-b5a3-ee83d4c89d2e"/>
+				<textElement>
+					<font fontName="Arial" size="14" pdfEncoding="Cp1256"/>
+				</textElement>
+				<text><![CDATA[العقد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="80" width="56" height="20" uuid="096cd1c7-9f85-437f-acbb-405c51ce9471"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[CONTRAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="10" width="33" height="20" uuid="f08d6444-5a92-4b06-95d7-313a18489db4"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="false" pdfEncoding="Cp1256" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[تاريخ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="517" y="80" width="43" height="20" uuid="f492baec-c62a-4a0c-a7cd-4e14ab1eb9c4"/>
+				<text><![CDATA[REPORT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="560" y="30" width="100" height="20" uuid="002febf4-ce76-44bb-b8ec-01c612e194fe"/>
+				<textFieldExpression><![CDATA[$F{LADATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="80" width="71" height="20" uuid="eed08c5d-d10a-4926-be8d-8e014f4dab35"/>
+				<textFieldExpression><![CDATA[$F{SUCODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="80" width="232" height="20" uuid="75603b36-a71d-48ca-b91d-9a1da46bd836"/>
+				<textFieldExpression><![CDATA[$F{PONOMR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="517" y="60" width="43" height="20" uuid="29ecae3b-3bb1-4b4c-a949-0ebc676de0ae"/>
+				<textElement>
+					<font fontName="Arial" size="14" pdfEncoding="Cp1256"/>
+				</textElement>
+				<text><![CDATA[ترحيل]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="151" y="80" width="100" height="20" uuid="d41aae2b-b90e-47cd-bd82-cf696949b0d6"/>
+				<textFieldExpression><![CDATA[$F{PONUM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement x="571" y="80" width="100" height="20" uuid="b6875398-f61f-44de-a06b-a129be33c996"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="14" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="230" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 4" style="table 4" mode="Opaque" x="44" y="0" width="706" height="219" uuid="232e8c80-cc0b-445e-b712-28d5f4969888"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" uuid="ea518ab1-112a-42e8-af9c-388020915db4">
+						<datasetParameter name="ponum">
+							<datasetParameterExpression><![CDATA[$P{ponum}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="annee">
+							<datasetParameterExpression><![CDATA[$P{annee}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="d5a3b975-bcde-4d10-8878-a901a357e431">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="278c4287-6681-4188-b3ee-7463cb01d1dd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[ADHERENT]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="36" rowSpan="1"/>
+						<jr:detailCell style="table 4_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="8" y="0" width="72" height="20" uuid="30236a68-9e5d-487b-9eed-4470de87ca6e"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{MAT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="ff2c92bb-78b8-4936-9f16-b4c1eda3f12c">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="b3d31966-9e60-4f77-99be-4ffbde707d4a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[PREST]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="36" rowSpan="1"/>
+						<jr:detailCell style="table 4_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="20" uuid="47dcdfe9-b661-42f6-9c4f-34c774cac8e5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{PR}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="121" uuid="76d963e5-d453-41e6-b47d-743566f10dc1">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="c6bb8288-9ca8-4d74-9575-159aa8cceffe"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[NOM]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="36" rowSpan="1"/>
+						<jr:detailCell style="table 4_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="10" y="0" width="110" height="20" uuid="433a4175-218f-4209-8337-303cfa8af54d"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{NOM}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="122" uuid="f5203e1b-e267-414c-92dd-675fb05c2dcf">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="30" uuid="5a3f6b16-e5cf-4a31-9a2f-5fa7c81e4560"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[PRENOM]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="36" rowSpan="1"/>
+						<jr:detailCell style="table 4_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="12" y="0" width="110" height="20" uuid="9ea56d0c-0029-4990-b803-7763ed7d09b7"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{PRENOM}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="fbe4e2d3-5bfe-481c-84cd-06ef4ad1ec75">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="c0b56e70-778b-4835-b0e3-56bbd94c6e2f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[N° Bordereau]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="36" rowSpan="1"/>
+						<jr:detailCell style="table 4_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="10" y="0" width="40" height="20" uuid="f83bb013-d20b-4880-a0d9-d92f5b884ae8"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{BOR}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="91" uuid="92856bf7-24e8-400e-9e69-87d7e529f58c">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="cc403387-025d-42de-8783-3d52def42410"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[MONTANTS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="36" rowSpan="1">
+							<textField pattern="">
+								<reportElement x="29" y="0" width="61" height="30" uuid="5cb364b6-2784-4235-bccd-64107f0a09cc"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$V{sum}]]></textFieldExpression>
+							</textField>
+							<staticText>
+								<reportElement x="0" y="0" width="29" height="30" uuid="f252b43d-0600-4341-8b8f-7d8f53f2c6c9"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[S/T]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell style="table 4_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="16" y="0" width="74" height="20" uuid="f0a238d8-bfe5-4a59-979a-98f0c6875517"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{MNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="f47bdea5-5184-48dd-bd50-1d62a885b7cb">
+						<jr:columnHeader style="table" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="6ec7bfd1-07b6-4425-841b-3bafc8840c41"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[OBSERVATIONS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter height="36" rowSpan="1"/>
+						<jr:detailCell style="table 4_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="16" y="0" width="74" height="20" uuid="85b10d9d-b329-42de-8bc7-18570c61e8c5"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{BUL}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="643" y="0" width="39" height="20" uuid="afd83aca-3922-4e9a-a084-61c311430b1e"/>
+				<textElement>
+					<font fontName="Arial" size="14" pdfEncoding="Cp1256"/>
+				</textElement>
+				<text><![CDATA[صفحة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="643" y="21" width="39" height="20" uuid="3e9b5531-2371-4d65-b65f-1c090ca77a21"/>
+				<text><![CDATA[PAGE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="683" y="20" width="39" height="20" uuid="5d546cff-ebce-4a39-95af-d1f6b709f515"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="48" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="8" y="20" width="43" height="20" uuid="07228d83-250c-417b-b592-34e98d391983"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true" pdfEncoding="Cp1256"/>
+				</textElement>
+				<text><![CDATA[ND]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="51" y="20" width="67" height="20" uuid="3514f01f-f5dc-4b93-adde-45a27ec2062a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="156" y="0" width="140" height="20" uuid="5ba0f172-0446-45fe-be1e-6d945e1ceb0a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" pdfEncoding="Cp1256"/>
+				</textElement>
+				<text><![CDATA[مجموع التعويضات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="20" width="263" height="20" uuid="f43dd314-9315-42f8-8a8b-60d18a558e39"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DES REMBOURSEMENTS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="583" y="0" width="61" height="20" uuid="b3123d88-5c7b-4c57-aeb0-80d5e0219dac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" pdfEncoding="Cp1256"/>
+				</textElement>
+				<text><![CDATA[تراكم]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="582" y="20" width="62" height="20" uuid="f5a2996c-87db-4181-acfd-54d59cbdb30c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUMUL]]></text>
+			</staticText>
+			<textField pattern="#,##0.000">
+				<reportElement x="419" y="20" width="134" height="20" uuid="bd0963d0-43f9-4a71-adba-3ebda07db28a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTALREMB}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.000">
+				<reportElement x="653" y="20" width="90" height="20" uuid="ffc8f8f9-4312-4e64-a4bb-89a85e2097b7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUMUL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,104 @@
+<ui:composition
+    template="/sec/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+<h:body style=" border: none;" rendered="#{!gestionProfil.souscriptionAssistanceTls}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+    <h:body style=" border: none;" rendered="#{gestionProfil.souscriptionAssistanceTls}">
+        <div class="span12 no_space">
+
+            <div class="widget">
+                <header>
+                    <h3>Tarif</h3>
+                    <ul class="toggle_content">                         
+                        <li class="arrow"><a href="#">Toggle Content</a></li>
+                    </ul>
+                </header>
+                <section class="welly"> 
+
+                    <ul class="nav nav-tabs tab_styled_light">
+                       
+                      
+                    </ul>
+
+                    <div class="tab-content tab_content_light">
+                        <div  id="Tarif" class="tab-pane fade in active">
+                            <h:form id="formTariftd">
+                            <div>  
+                                    <h:panelGrid columns="8" cellpadding="1">
+                                        <p:outputLabel  value="Prime nette: " for="primenette"/>
+                                        <h:outputText id="primenette" styleClass="label label-info price"  value="#{assistanceVoiyageController.newAdhesion.mtPrime}"  >
+                                            <f:convertNumber pattern="#0.000" />
+                                        </h:outputText>   
+                                        
+                                        <p:outputLabel  value="Cout contrat: " for="cout"/>
+                                        <h:outputText id="cout" styleClass="label label-info price"  value="#{assistanceVoiyageController.newAdhesion.cout}"  >
+                                            <f:convertNumber pattern="#0.000" />
+                                        </h:outputText>
+                                        
+                                        <p:outputLabel  value="FGA: " for="fga"/>
+                                        <h:outputText id="fga" styleClass="label label-info price"  value="#{assistanceVoiyageController.newAdhesion.fga}"  >
+                                            <f:convertNumber pattern="#0.000" />
+                                        </h:outputText>
+                                        
+                                        <p:outputLabel  value="Prime globale: " for="primeglobal"/>
+                                        <h:outputText id="primeglobal" styleClass="label label-important price"  value="#{assistanceVoiyageController.newAdhesion.primetot}"  >
+                                            <f:convertNumber pattern="#0.000" />
+                                        </h:outputText>       
+                                    </h:panelGrid>
+                                </div>
+                              <div  class="form-actions">
+                              <p:messages  autoUpdate="true" showDetail="true"/>
+                              <p:commandLink  ajax="false" target="_blank"  type="idImprimer=" action= "#{tarifAssTlsBean.generateDevisAssistanceVoiyageTLS()}" id="generateDevisAssistanceVoiyage" update="formTariftd"  styleClass="btn btn-info"  value="Imprimer Devis" disabled="#{!assistanceVoiyageController.desabledGenerateNotice}" />
+                              <p:commandLink  type="idvaliderPrposition"  id="validerPrposition"  action= "#{tarifAssTlsBean.validerPropositionAssistanceTLS()}" update="generateNoticeAssistanceVoiyage,generateDevisAssistanceVoiyage,validerPrposition,generatequittance" styleClass="btn btn-success"  value="Valider Proposition" disabled="#{!assistanceVoiyageController.desabledGenerateNotice}"/>
+                              <p:commandLink ajax="false" target="_blank" id="generateNoticeAssistanceVoiyage" type="idImprimer=" action= "#{tarifAssTlsBean.generateNoticeAssistanceVoiyage()}" update="formTariftd,panel" styleClass="btn btn-danger"  value="Imprimer Contrat"  disabled="#{assistanceVoiyageController.desabledGenerateNotice}"/>
+                              <p:commandLink ajax="false" target="_blank" id="generatequittance" type="idImprimer=" action= "#{tarifAssTlsBean.ImprimerQuittanceTLS()}" update="formTariftd,panel" styleClass="btn btn-danger"  value="Imprimer quittance"  disabled="#{assistanceVoiyageController.desabledGenerateNotice}"/>
+                              </div> 
+                              
+                              
+                               <p:blockUI block="validerPrposition" trigger="validerPrposition" >
+					    Chargement...<br />
+					        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+					    </p:blockUI>
+					    
+					    
+					    <p:blockUI block="generateDevisAssistanceVoiyage" trigger="generateDevisAssistanceVoiyage" >
+					    Chargement...<br />
+					        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+					    </p:blockUI>
+                              
+                              
+                              
+                            </h:form>
+                            <h:form>
+                            
+                            
+                            
+                            <h:commandLink  action="#{tarifAssTlsBean.returnToDevisAssistanceTls()}"  value="Retour" >
+                             <img src="${facesContext.externalContext.requestContextPath}/images/back.png" width="25" height="25"/>
+                            
+                            </h:commandLink>
+                        </h:form>
+                        </div>  
+                        
+                    </div>       
+                </section> 
+            </div>  
+        </div> 
+        </h:body>                  
+    </ui:define>
+</ui:composition>

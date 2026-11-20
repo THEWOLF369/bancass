@@ -1,0 +1,216 @@
+
+
+
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+                     
+                
+
+    <ui:define name="body">
+    
+    
+       <ul class="breadcrumb br_styled no_space" style ="width: 1000px">                              
+                <li class="active">Souscription package BNA</li>
+              </ul> 
+              <ul class="page_info" style ="width: 1000px" >
+             
+
+<h:form id="formContrat" >
+
+ <p:tabView id="tabs" style="width:1000px" dynamic="true" activeIndex="#{packBean.tabindex}" >
+ 		<p:tab title="Général" >
+ 		<p:messages id="msgGeneral" autoUpdate="true"  showDetail="false"  style="padding-top:40px;width:100%" />
+ 						
+ 						<h:panelGrid id="panelGeneral" columns="3" columnClasses="labelWidth">
+ 												
+ 						<h:panelGrid columns="3" id="panelWs"
+								columnClasses="labelWidth">
+								
+								<p:outputLabel value="Num Décision :" for="txtnumdec" />
+ 						
+							
+		<p:inputText id="txtnumdec"   styleClass="form-control taillem" value="#{packBean.numDecision}"/> 
+		      <p:message id="msgnumdec" for="txtnumdec" />
+					
+					<p:outputLabel value="Numéro Détail Décision :" for="txtnumdetdec" />
+						<p:inputText id="txtnumdetdec"   styleClass="form-control taillem" value="#{packBean.numDetailDecision}"/>
+						<p:message id="msgnumdetdec" for="txtnumdetdec" />
+					
+						<p:commandButton value="" process="@parent" id="bAppelWs"
+									
+									style="height: 35px;width: 50px;  
+								background-image: url(${facesContext.externalContext.requestContextPath}/images/website.png)"
+									action="#{packBean.rechercherDepuisWSbna()}" update="formContrat">
+									
+								
+								</p:commandButton>
+					 <p:blockUI block="panelWs" trigger="bAppelWs">
+				        Veuillez patientez <br />
+				        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+				    </p:blockUI>
+						
+					
+					</h:panelGrid>	
+								
+					
+							<h:panelGrid columns="3"
+								columnClasses="labelWidth">
+								
+ 						
+							<p:outputLabel value="Capital:" for="txtcapital" />
+						<p:inputText id="txtcapital"   styleClass="form-control taillem" value="#{packBean.capital}"
+							 validatorMessage="Le capital doit être composé au minimum de 4 chiffres et inférieur ou égal à 700 MD" 
+							onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;" disabled="#{packBean.imprimer}"
+							required="true" requiredMessage="Il faut saisir le capital" readonly="true" >
+							<!-- <f:validateRegex pattern="[0-9]+" /> -->
+							<f:validateLength minimum="4" ></f:validateLength>
+							<f:validateDoubleRange maximum="700000.0"/>
+							
+							 </p:inputText>
+							 <p:message id="msgCapital" for="txtcapital" />
+							 
+							 <p:outputLabel value="Durée :"  />
+							
+							  <h:outputText id="nbannee" value="#{packBean.nbannee} mois" />
+							  <h:outputText id="nbjours" value="#{packBean.nbjours} jours" />
+							
+							
+							
+							  <p:outputLabel value="Date d'effet:" for="calEffDate" />
+							 <p:calendar id="calEffDate" styleClass="combo-style" pattern="dd/MM/yyyy"
+								value="#{packBean.dateEffet}"  showButtonPanel="true"  disabled="#{packBean.imprimer}"
+								 
+								required="true"   readonlyInput="true"
+							requiredMessage="La date d'effet est obligatoire."
+							validatorMessage="La date d'effet est obligatoire." >
+							<p:ajax event="dateSelect" update="nbannee,nbjours,calEchDate,calEffDate"  listener="#{packBean.calculDuree()}"   />
+							</p:calendar>
+							<p:message for="calEffDate" />
+							
+							
+							 <p:outputLabel value="Date d'echéance:" for="calEchDate" />
+							 <p:calendar id="calEchDate" styleClass="combo-style" pattern="dd/MM/yyyy"
+								value="#{packBean.dateEcheance}"  showButtonPanel="true"  disabled="#{packBean.imprimer}"
+								 mindate="#{packBean.dateEffet}"
+							
+								required="true"  readonlyInput="true"
+							requiredMessage="La date  d'echéance est obligatoire."
+							validatorMessage="La date  d'echéance est obligatoire." >
+							<p:ajax event="dateSelect"  update="nbannee,nbjours,calEffDate,calEchDate"  listener="#{packBean.calculDuree()}"   />
+							</p:calendar>
+							<p:message for="calEchDate" />
+                                <h:panelGrid rendered="!#{!login.utilisateur.profil.code.equals('BNAA') || !login.utilisateur.profil.code.equals('BNA')}">							
+                                <p:outputLabel value="Pack2:" for="txtpack2" />
+							<p:inputText id="txtpack2"   styleClass="form-control taillem" value="#{packBean.pack2}" disabled="#{packBean.imprimer}" required="true" >							
+							 </p:inputText>
+							</h:panelGrid>
+							</h:panelGrid>
+							</h:panelGrid>
+							<div class="form-actions">
+							<p:commandButton  value="Suivant"  ajax="false" disabled="#{!packBean.voir}"
+								styleClass="greenButton" actionListener="#{packBean.enregistrerGeneral()}">
+								
+								 <f:actionListener binding="#{packBean.onChangeTYpeIdentifiant()}" />
+								</p:commandButton>
+						</div>
+ 		 </p:tab>
+ 		 <p:tab title="Client" disabled="#{!packBean.ongletclient}">
+ 		 	<ui:include src="/sec/clientPack.xhtml"   />
+ 		 </p:tab>
+        <p:tab title="Produit" id="tabProduit"  disabled="#{!packBean.ongletProduit}">
+            <h:panelGrid columns="2" cellpadding="10">
+            		 <c:forEach items="#{packBean.listContenu}" var="l" >
+       				 	<p:outputLabel value="#{l.c.idprodconv.produit.libelleProduit}" rendered="#{l.c.idprodconv.produit!=null}" for="l#{l.c.idcontenu}" />
+                   		<p:selectBooleanCheckbox  id="l#{l.c.idcontenu}" value="#{l.checked}" rendered="#{l.c.idprodconv.produit!=null}" disabled="#{l.disabledCheckBox}"  styleClass="form-control">
+                             <p:ajax event="change" update="formContrat" listener="#{packBean.majContenu()}" />
+                                </p:selectBooleanCheckbox> 
+               		</c:forEach>
+            </h:panelGrid>
+           
+       
+        </p:tab>
+        <c:forEach items="#{packBean.onglets}" var="c" >
+         <p:tab title="#{c.c.libellecontenu}" rendered="#{c.checked}" disabled="#{c.disabled}">
+       				 	<ui:include src="/sec/#{c.c.url}.xhtml" />
+        </p:tab>
+	</c:forEach>
+	
+	 <p:tab title="Tarif" id="tabTarif"  disabled="#{!packBean.ongletTarif}" >
+            		
+            		<center>
+							<div class="form-actions">
+							<h:panelGrid  id="panelSave" columns="2">
+								<p:outputLabel value="Prime Nette Grêle:" for="primeGrele" rendered="#{packBean.checkedGrele}" />
+							 <h:outputText id="primeGrele" rendered="#{packBean.checkedGrele}" styleClass="label label-danger price"  value="#{packBean.tarifGrele.primeDouble}"  >
+							  <f:convertNumber maxFractionDigits="3" />
+                                        </h:outputText>
+							
+							<p:outputLabel value="Prime Nette Incendie:" for="primeInc" rendered="#{packBean.checkedIncendie}"/>
+							 <h:outputText id="primeInc" rendered="#{packBean.checkedIncendie}" styleClass="label label-danger price"  value="#{packBean.tarifIncendie.primeDouble}"  >
+							  <f:convertNumber maxFractionDigits="3" />
+                             </h:outputText>
+                             
+                             
+                               <p:outputLabel value="Prime Nette Incendie AL:" for="primeIncAl" rendered="#{packBean.checkedIncAl}"/>
+							 <h:outputText id="primeIncAl" rendered="#{packBean.checkedIncAl}" styleClass="label label-danger price"  value="#{packBean.tarifIncendie.primeDouble}"  >
+							  <f:convertNumber maxFractionDigits="3" />
+                             </h:outputText>
+                                        
+							    <p:outputLabel value=" "   rendered="#{!packBean.checkedTD}"/>
+							    <p:outputLabel value=" "   rendered="#{!packBean.checkedTD}"/>
+							    
+								
+								<p:outputLabel value="Prime TD:" for="primeTD"  rendered="#{packBean.checkedTD}"/>
+							    <h:outputText id="primeTD"  styleClass="label label-danger price"  value="#{packBean.primeglobal}" rendered="#{packBean.checkedTD}"  >
+							     <f:convertNumber  maxFractionDigits="3" />
+                                        </h:outputText>
+                                 <p:outputLabel value="Prime totale:" for="primetotale" />
+							    <h:outputText id="primetotale"  styleClass="label label-danger price"  value="#{packBean.primeTotale}"  >
+							     <f:convertNumber maxFractionDigits="3" />
+                                        </h:outputText>
+                                 
+                                 <p:commandLink  value="Calculer tarif"  rendered="#{!packBean.imprimer}" process="@this" styleClass="btn btn-danger" update="panelSave" action="#{packBean.tarifier()}"/>
+                                 
+                                 <p:commandLink  value="Enregistrer" rendered="#{packBean.save}" process="@this" styleClass="btn btn-success" update="formContrat" action="#{packBean.enregistrerPolice() }"/>
+									 </h:panelGrid>
+							
+							</div>
+						</center>
+            		
+        </p:tab>
+	
+	
+	 <p:tab title="Impression" id="tabImprime" rendered="#{packBean.imprimer}"  >
+	 <table border="1" style="padding-top: 40px">
+            		 	<c:forEach items="#{packBean.docs}" var="l" >
+            		 		<tr>
+            		 			<td>#{l}</td>
+            		 			<td><h:commandButton  immediate="true"  value="Imprimer"  action="#{packBean.imprimer(l)}">
+            		 			</h:commandButton> </td>
+            		 		</tr>
+            		 		
+            		 	</c:forEach>
+            		 	
+            	
+            		 </table>
+        </p:tab>
+        
+   </p:tabView>
+   
+
+	
+ <Font size="2" face="arial" color="#00539A">Source: <a href="http://www.star.com.tn//" target="_blank"><Font color="#0082C0">www.star.com.tn</Font></a></Font>
+ 
+ 	 
+ 
+</h:form>
+              
+              </ul>
+      
+    </ui:define>
+</ui:composition>

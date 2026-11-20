@@ -1,0 +1,171 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ul class="page_info" style="padding-top: 40px">
+
+<h:panelGroup id="formClient">
+				<p:messages id="messagesClient" showDetail="false" autoUpdate="true" closable="true" />
+					<h:panelGrid columns="3" 
+						columnClasses="labelWidth, ui-grid-col-3">
+
+						<p:outputLabel value="Type de document:" for="docType" />
+						<p:selectOneMenu value="#{packBean.client.typeDoc}" id="docType" disabled="#{packBean.imprimer}" >
+							<f:selectItem itemValue="CIN" itemLabel="CIN" />
+							<f:selectItem itemValue="Passport" itemLabel="Passport" />
+							<f:selectItem itemValue="CarteSejour" itemLabel="Carte Séjour"  />
+							<f:selectItem itemValue="MatFiscal" itemLabel="Registre de commerce"  />
+							<p:ajax event="itemSelect" partialSubmit="true" process="@this" update="formContrat" listener="#{packBean.onChangeTYpeIdentifiant()}"/>
+						</p:selectOneMenu>
+						<p:message for="docType"/>
+
+						<p:outputLabel value="N° Document" for="txtCin" />
+						<h:panelGrid columns="2">
+							<p:inputText value="#{packBean.client.identifiant}" id="txtCin" required="true" disabled="#{packBean.imprimer}" 
+						  validator="#{packBean.identificationValidator}" readonly="true" >
+						  </p:inputText>
+						</h:panelGrid>
+						<p:message for="txtCin" />
+						
+						<p:outputLabel value="N° Compte:" for="txtNcompte" />
+                        <h:panelGrid columns="2">
+							<p:inputText id="txtNcompte" styleClass="form-control" disabled="#{packBean.imprimer}" 
+							value="#{packBean.client.ncompte}"  required="true" readonly="#{packBean.verifcompte}"
+							requiredMessage="Le numero de compte est obligatoire">
+						
+							 </p:inputText>
+						</h:panelGrid>
+						<p:message for="txtNcompte" />
+
+						<p:outputLabel value="Nom:" for="txtNom" rendered="#{!packBean.societe}"/>
+						<p:outputLabel value="Raison social:" for="txtNom" rendered="#{packBean.societe}"/>
+						<p:inputText id="txtNom" styleClass="form-control" style="text-transform: uppercase" disabled="#{packBean.imprimer}" 
+							value="#{packBean.client.nomClient}" required="true"
+							requiredMessage="Le nom est obligatoire" readonly="true" >
+							</p:inputText>
+						<p:message for="txtNom" />
+
+						<p:outputLabel value="Prenom:" for="txtPrenom" rendered="#{!packBean.societe}" />
+						<p:inputText id="txtPrenom" styleClass="form-control" style="text-transform: uppercase" rendered="#{!packBean.societe}" disabled="#{packBean.imprimer}" 
+							value="#{packBean.client.prenomClient}" required="true"
+							requiredMessage="Le prenom est obligatoire" readonly="true" >
+														
+							</p:inputText>
+						<p:message for="txtPrenom" rendered="#{!packBean.societe}"  />
+
+						<p:outputLabel value="Date de naissance" for="txtBirthday" rendered="#{!packBean.societe}" />
+						
+						<p:calendar id="txtBirthday" styleClass="combo-style" rendered="#{!packBean.societe}"  disabled="true" 
+							showButtonPanel="false" pattern="dd/MM/yyyy" navigator="false" readonly="true" 
+							value="#{packBean.client.datNaiss}" required="true" yearRange="#{packBean.yearRange}" maxdate="#{packBean.minDateNaissance}"
+							requiredMessage="La date de naissance est obligatoire" >
+
+							</p:calendar>	
+						
+						<p:message for="txtBirthday" rendered="#{!packBean.societe}"  />
+											
+						
+						 <p:outputLabel value="Profession:" for="txtprofession" rendered="#{!packBean.societe}" />
+						<p:selectOneMenu disabled="#{packBean.imprimer}"  styleClass="form-control" rendered="#{!packBean.societe}" converter="#{packBean.professionConverter}" 
+						value="#{packBean.client.profession}" id="txtprofession" required="true" requiredMessage="La profession est obligatoire">
+							<p:ajax event="itemSelect" process="@this" partialSubmit="true" />
+						    <f:selectItem itemLabel="Selectionnez la profession..." value="#{null}" />
+							<f:selectItems value="#{packBean.professions}" var="profession" itemLabel="#{profession.libelleProfession}" itemValue="#{profession.idProfession.toString()}" />
+						</p:selectOneMenu>
+						<p:message for="txtprofession" rendered="#{!packBean.societe}"/>
+												
+						
+						
+							<p:outputLabel value="Sexe:" for="sexAssur" rendered="#{!packBean.societe}" />
+							<p:selectOneMenu id="sexAssur" rendered="#{!packBean.societe}" styleClass="form-control" value="#{packBean.client.sexe}" disabled="#{packBean.imprimer}" >
+							<f:selectItem itemLabel="Selectionnez le sexe..." value="#{null}" />
+							<f:selectItem itemLabel="F" itemValue="F" />
+							<f:selectItem itemLabel="M" itemValue="M" />
+						</p:selectOneMenu>
+						<p:message for="sexAssur" rendered="#{!packBean.societe}" />
+						<p:outputLabel value="N° Adresse" for="txtAdrNum" />
+						<p:inputText id="txtAdrNum" styleClass="form-control" disabled="#{packBean.imprimer}" 
+							value="#{packBean.client.numAdr}" />
+						<p:message for="txtAdrNum" />
+
+                        <p:outputLabel value="Type de voie: " for="txtVoie" />
+						<p:selectOneMenu styleClass="form-control"  required="true" requiredMessage="Le type voie est obligatoire" disabled="#{packBean.imprimer}" 
+							value="#{packBean.typeVoieCode}" id="txtVoie" >
+							<p:ajax event="itemSelect" process="@this" partialSubmit="true" listener="#{packBean.onSelectTypeVoie()}"   />
+							<f:selectItem itemLabel="Selectionnez type voie..." value="#{null}" noSelectionOption="true" />
+							<f:selectItems value="#{packBean.typeVoies}" var="typeVoie" itemLabel="#{typeVoie.libelle}" itemValue="#{typeVoie.code}" />
+						</p:selectOneMenu>
+						<p:message for="txtVoie" />
+						
+						<p:outputLabel value="Adresse:" for="txtAdr" />
+						<p:inputText id="txtAdr" styleClass="form-control" disabled="#{packBean.imprimer}" 
+							value="#{packBean.client.adrClient}" required="true"
+							requiredMessage="L'Adresse est obligatoire" />
+						<p:message for="txtAdr" />
+
+                      <p:outputLabel value="Gouvernorat: *" for="gouvernerat" />
+							<p:selectOneMenu id="gouvernerat" styleClass="form-control"   value="#{packBean.client.gouver}"  disabled="#{packBean.imprimer}"   
+						filter="true" filterMatchMode="contains" style="width:60px" >
+							 <p:ajax event="itemSelect" process="@this" listener="#{packBean.updateListCodePostalActionListener()}" update="txtZipCode,txtLocalite"   />
+							 <f:selectItem itemLabel="Selectionnez gouvernorat..." value="#{null}" />
+							 <f:selectItems value="#{packBean.allGouverneras}" />
+							
+						</p:selectOneMenu>
+
+							<p:message for="gouvernerat" />
+
+
+						<p:outputLabel value="Code postal: " for="txtZipCode" />
+							<p:selectOneMenu id="txtZipCode" styleClass="form-control"   value="#{packBean.selectedLocgouvCode}"    disabled="#{packBean.imprimer}" 
+								filter="true" filterMatchMode="contains" style="width:60px" required="true" requiredMessage="Le code postal est obligatoire"  >
+							 <p:ajax event="itemSelect" process="@this" partialSubmit="true"  listener="#{packBean.locgouvSelectListened()}" update="txtLocalite"   />
+							 <f:selectItem itemLabel="Selectionnez code postal..." value="#{null}" noSelectionOption="true" />
+							 <f:selectItems value="#{packBean.allCodePostalByGouvernera}" var="ojectCodePostal" 
+							 itemLabel="#{ojectCodePostal.codePosta} #{ojectCodePostal.localite}" itemValue="#{ojectCodePostal.code}"/>
+						</p:selectOneMenu>
+						
+						
+						
+						 
+						<p:message for="txtZipCode" />
+
+						<p:outputLabel value="Localite:" for="txtLocalite" />
+						<h:inputText id="txtLocalite" styleClass="form-control"  
+							value="#{packBean.client.localite}" disabled="true"
+							required="true"
+							requiredMessage="La localité est obligatoire"/>
+						<p:message for="txtLocalite" />
+
+
+						<p:outputLabel value="Telephone:" for="txtTelephone" />
+						<p:inputText id="txtTelephone" styleClass="form-control" value="#{packBean.client.tel}" required="true" disabled="#{packBean.imprimer}" 
+							validatorMessage="Le numéro de téléphone doit être composé au minimum de 8 chiffres" 
+							requiredMessage="Le numéro de téléphone portable est obligatoire" >
+							<f:validateRegex pattern="[0-9]+" />
+							<f:validateLength minimum="8" ></f:validateLength>
+							 </p:inputText>
+						<p:message for="txtTelephone" />
+						
+						<p:outputLabel value="E-mail:" for="txtMail" />
+						<p:inputText id="txtMail" disabled="#{packBean.imprimer}"  styleClass="form-control" value="#{packBean.client.mail}" validatorMessage="format de l'adresse email invalide" required="false"  >
+						
+						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:message for="txtMail" />
+						
+                      </h:panelGrid>
+						<div class="form-actions">
+							<p:commandButton  value="Suivant" disabled="#{packBean.imprimer}"   update="formContrat"
+								styleClass="greenButton" action="#{packBean.enregistrerClient()}"  >
+						<f:actionListener binding="#{packBean.calculAge()}" />
+								</p:commandButton>
+								
+						</div>
+				
+					    
+			</h:panelGroup>
+</ul>
+</ui:composition>

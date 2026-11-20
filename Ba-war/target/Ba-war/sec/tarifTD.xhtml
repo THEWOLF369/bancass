@@ -1,0 +1,92 @@
+<ui:composition
+    template="/sec/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+    
+     
+    
+ <h:body style=" border: none;" rendered="#{!gestionProfil.souscriptionTD}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+ <h:body style=" border: none;" rendered="#{gestionProfil.souscriptionTD}"> 
+        <div class="span12 no_space">
+
+            <div class="widget">
+                <header>
+                    <h3>Tarif</h3>
+                    <ul class="toggle_content">                         
+                        <li class="arrow"><a href="#">Toggle Content</a></li>
+                    </ul>
+                </header>
+                <section class="welly"> 
+
+                    <ul class="nav nav-tabs tab_styled_light">
+                        <li class="active in"><a href="#Tarif" data-toggle="tab">Tarif</a></li>
+                        <li><a href="#Analyse" data-toggle="tab" >Analyses Médicaux</a></li>
+                    </ul>
+
+                    <!--Tarif******************************************************************--> 
+                    <div class="tab-content tab_content_light">
+                        <div  id="Tarif" class="tab-pane fade in active">
+                            <h:form id="formTariftd">
+                                <div>  
+                                    <h:panelGrid columns="2" cellpadding="1">
+                                        <p:outputLabel  value="Prime globale: " for="primeglobal"/>
+                                        <h:outputText id="primeglobal" styleClass="label label-danger price"  value="#{tariftdBean.primeglobal}"  >
+                                            <f:convertNumber pattern="#0.000" />
+                                        </h:outputText>          
+                                    </h:panelGrid>
+                                </div>
+                                <p:messages  autoUpdate="true" showDetail="true"/>
+                                
+                                  <div  class="form-actions">
+								    <p:commandLink id="devis" ajax="false" target="_blank" type="idImprimer=" action= "#{tariftdBean.generateDevis()}" update=":formTariftd" styleClass="btn btn-info"  value="Imprimer Devis" disabled="#{devisBean.adhesion.idAdhesion != 0 and !devisBean.profil.equals('TDST')}" />
+                                    <p:commandLink  id="prop" type="idvaliderPrposition=" action= "#{tariftdBean.validerProposition()}" update="not,devis,prop" styleClass="btn btn-success"  value="Valider Proposition" disabled="#{devisBean.adhesion.idAdhesion != 0}" rendered="#{!devisBean.profil.equals('TDST') and !tariftdBean.utilisateur.agence.societe.codSociet.equals('002707PPM000')     }"/>
+                                    <p:commandLink id="enc"   type="idImprimer=" action= "#{tariftdBean.encaissement()}" update="not,devis,enc" styleClass="btn btn-danger"  value="Encaissement"  disabled="#{!devisBean.desabledGenerateNotice}" rendered="#{!devisBean.profil.equals('TDST') and tariftdBean.utilisateur.agence.societe.codSociet.equals('002707PPM000')}"/>
+                                    <p:commandLink id="not" ajax="false" target="_blank" type="idImprimer=" action= "#{tariftdBean.generateNotice()}" update=":formTariftd" styleClass="btn btn-danger"  value="Imprimer Notice"  disabled="#{devisBean.desabledGenerateNotice}" rendered="#{!devisBean.profil.equals('TDST')}"/>
+                                  
+                                </div> 
+                                
+                                
+                                
+                            </h:form>
+                        </div>  
+                        <!--Analyse******************************************************************--> 
+                        
+                        <div  id="Analyse" class="tab-pane fade" >
+                            <h:form id="formAnalyse">
+                                <div>             
+                                    <table>
+                                       <ui:repeat var="o" value="#{devisBean.lstAnalyse}" varStatus="status">
+	                                     <tr>
+		                                     <td>#{o.libelleAct}</td>
+                                         </tr>
+                                        </ui:repeat>
+                                     </table>
+                                </div>
+                                <div class="form-actions">
+                                
+                                    <p:commandLink type="idImprimer" ajax="false" target="_blank" action="#{tariftdBean.generateAnalyse()}" styleClass="btn btn-warning"  value="Imprimer Analyses"  />
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>       
+                </section> 
+            </div>  
+        </div>                   
+ </h:body>
+    </ui:define>
+</ui:composition>

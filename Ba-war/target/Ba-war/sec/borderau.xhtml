@@ -1,0 +1,125 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+
+<style type="text/css">
+		.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+</style>
+<!-- 
+<h:body style=" border: none;" rendered="#{!gestionProfil.bordereau}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Bordereau BNA</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+     style=" border: none;" rendered="#{gestionProfil.bordereau}"> -->
+ <h:body>
+      <ul class="breadcrumb br_styled no_space">                              
+                <li class="active">Bordereau BNA</li>
+      </ul> 
+              <ul class="page_info">             
+			   <h:panelGroup id="BordereauP">
+
+				<h:form id="formBordereau">
+
+                 <h:panelGrid columns="2" cellpadding="1">
+                     <h:outputLabel value="Société" styleClass="small-font" style="margin-top: 7px;"  rendered="#{!login.utilisateur.profil.code.equals('AS')}" />                           
+                            <h:selectOneMenu id ="hh" class="form-control" value="#{editbordereauBean.codeSociete}" rendered="#{!login.utilisateur.profil.code.equals('AS')}" >
+                              <f:selectItem itemLabel="Choisir une société..."  /> 
+							 <f:selectItems value="#{editbordereauBean.listSociete}" />
+						     
+						    </h:selectOneMenu>
+					</h:panelGrid>	
+					
+                  <h:panelGrid columns="2" cellpadding="1">
+                     <h:outputLabel value="Produit" styleClass="small-font" style="margin-top: 7px;" />                           
+                            <h:selectOneMenu id ="hj" class="form-control" value="#{editbordereauBean.produit}">
+                              <f:selectItem itemLabel="Choisir un produit..."  /> 
+							  <f:selectItems value="#{editbordereauBean.produits}" var="produits" itemLabel="#{produits.libelleProduit}" itemValue="#{produits.libelleProduit}"/>
+						      <p:ajax immediate="true" ajax="false" update="vv" />
+						    </h:selectOneMenu>
+					</h:panelGrid>	   
+					
+					
+					
+ 
+ <h:panelGrid columns="6" id="vv" >
+                   <h:outputLabel class="bold" value="Nature abonnement" id ="natab"  rendered="#{editbordereauBean.produit.equals('Assistance voyage')}" />
+                <p:selectOneMenu id="typeAbonnementMessage" styleClass="form-control" value="#{editbordereauBean.selectedTypeAbonnement}" converter="#{editbordereauBean.natureAbonnementConverter}" rendered="#{editbordereauBean.produit.equals('Assistance voyage')}"> 
+ 						<f:selectItems value="#{editbordereauBean.allTypeAbonnement}" var="typeAbonnement"  itemLabel="#{typeAbonnement.valTypeAbonnement}" itemValue="#{typeAbonnement.valTypeAbonnement}"/> 
+ 					</p:selectOneMenu> 
+ 					<p:message for="typeAbonnementMessage" rendered="#{editbordereauBean.produit.equals('Assistance voyage')}"/> 
+ 					
+ 					<h:outputLabel class="bold" value="Duree(jour)" id="duree" rendered="#{editbordereauBean.produit.equals('Assistance voyage')}" />
+ 				
+						<p:selectOneMenu id="dureeId" widgetVar="dureeId" styleClass="form-control" converter="#{editbordereauBean.dureConverter}" process="@this"  required="true" 
+ 						value="#{editbordereauBean.selectedDuree}" rendered="#{editbordereauBean.produit.equals('Assistance voyage')}"> 
+ 						<f:selectItems value="#{editbordereauBean.allDurees}" var="duree"  itemLabel="#{duree.valDuree}" itemValue="#{duree.valDuree}"/> 
+ 					</p:selectOneMenu> 
+						
+				 <p:message for="dureeId" rendered="#{editbordereauBean.produit.equals('Assistance voyage')}"/>
+						   <label class="bold"> Date debut </label>
+						<p:calendar id="datdeb" styleClass="combo-style"
+							value="#{editbordereauBean.datdeb}"  pattern="dd/MM/yyyy" navigator="true" 
+							showButtonPanel="true" required="true" maxdate="#{editbordereauBean.aujourdhui}"
+							requiredMessage="Vous devez saisir une date debut." >	
+								</p:calendar>
+								
+					<p:message for="datdeb" />
+					
+						<label class="bold"> Date de Fin </label>
+						<p:calendar id="datfin" styleClass="combo-style"
+							value="#{editbordereauBean.datefin}" pattern="dd/MM/yyyy"
+							showButtonPanel="true" 
+								 navigator="true" required="true" maxdate="#{editbordereauBean.aujourdhui}"
+							requiredMessage="Voud devez saisir une date Fin." >
+							
+								</p:calendar>
+							   <p:message for="datfin" />
+</h:panelGrid>
+
+						<div class="form-actions">
+
+							<h:commandLink type="idcancel" action="#{editbordereauBean.newBordereau()}"
+								styleClass="btn btn-danger" value="Annuler" />
+							<h:commandLink type="idImprimer"
+								action="#{editbordereauBean.imprimerBordereaubna()}" styleClass="btn btn-success"
+								value="Imprimer" target="_blank"/>
+
+						</div>
+</h:form>
+			</h:panelGroup>
+			 </ul>
+
+</h:body>
+
+
+</ui:define>
+</ui:composition>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16272965929380" configfile="/Ba-war/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="3634" id="pf1690798889516187" outlinks="pf1690798889516188 pf1690798889516189 pf1690798889516190 pf1690798889516191 pf1690798889516192 pf1690798889516193 pf1690798889516194 pf1690798889516195 pf1690798889516196 pf1690798889516197 pf1690798889516198 pf1690798889516199 pf1690798889516200 pf1690798889516201 pf1690798889516202 pf1690798889516203 pf1690798889516204 pf1690798889516205 pf1690798889516206 pf1690798889516207 pf1690798889516208 pf17181970547980 pf17446245101414 pf17461847021680 pf17461847021681 pf17714969749770 pf17733153094610 pf17745227067030 pf17746224718590 pf17746224718591" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/acceil.xhtml" x="338" y="178" id="pf1690798889516209" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf1690798889516188" path="/sec/acceil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="562" id="pf1690798889516210" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf1690798889516189" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/tarifTD.xhtml" x="338" y="946" id="pf1690798889516211" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf1690798889516190" path="/sec/tarifTD.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/TarifInc.xhtml" x="338" y="1330" id="pf1690798889516212" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf1690798889516191" path="/sec/TarifInc.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/Devis.xhtml" x="338" y="1714" id="pf1690798889516213" referenceLink="//@navigationRule.0/@navigationCase.24/@toViewId|" inlinks="pf1690798889516192 pf1690798889516205" path="/sec/Devis.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/client11.xhtml" x="338" y="2098" id="pf1690798889516214" referenceLink="//@navigationRule.0/@navigationCase.6/@toViewId|" inlinks="pf1690798889516193" path="/sec/client11.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/devis_Assistantvoyage.xhtml" x="338" y="2482" id="pf1690798889516215" referenceLink="//@navigationRule.0/@navigationCase.27/@toViewId|" inlinks="pf1690798889516194 pf1690798889516200 pf1690798889516201 pf1690798889516207" path="/sec/devis_Assistantvoyage.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/devisAvenirJeunesse.xhtml" x="338" y="2866" id="pf1690798889516216" referenceLink="//@navigationRule.0/@navigationCase.8/@toViewId|" inlinks="pf1690798889516195" path="/sec/devisAvenirJeunesse.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/devis_7ayya_v2.xhtml" x="338" y="3250" id="pf1690798889516217" referenceLink="//@navigationRule.0/@navigationCase.21/@toViewId|" inlinks="pf1690798889516196 pf1690798889516202" path="/sec/devis_7ayya_v2.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/versement_libre.xhtml" x="338" y="3634" id="pf1690798889516218" referenceLink="//@navigationRule.0/@navigationCase.10/@toViewId|" inlinks="pf1690798889516197" path="/sec/versement_libre.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/encaissement_terme.xhtml" x="338" y="4018" id="pf1690798889516219" referenceLink="//@navigationRule.0/@navigationCase.12/@toViewId|" inlinks="pf1690798889516198" path="/sec/encaissement_terme.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/EditionBordereau.xhtml" x="338" y="4402" id="pf1690798889516220" referenceLink="//@navigationRule.0/@navigationCase.16/@toViewId|" inlinks="pf1690798889516199" path="/sec/EditionBordereau.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/tarif7ayya.xhtml" x="338" y="4786" id="pf1690798889516221" referenceLink="//@navigationRule.0/@navigationCase.22/@toViewId|" inlinks="pf1690798889516203" path="/sec/tarif7ayya.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/DevisIncendie.xhtml" x="338" y="5170" id="pf1690798889516222" referenceLink="//@navigationRule.0/@navigationCase.26/@toViewId|" inlinks="pf1690798889516204 pf1690798889516206" path="/sec/DevisIncendie.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/mrh.xhtml" x="338" y="5554" id="pf1690798889516223" referenceLink="//@navigationRule.0/@navigationCase.28/@toViewId|" inlinks="pf1690798889516208" path="/sec/mrh.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/users.xhtml" x="338" y="5938" id="pf17181970548001" referenceLink="//@navigationRule.0/@navigationCase.17/@toViewId|" inlinks="pf17181970547980" path="/sec/users.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/download_fichier_prelevement.xhtml" x="338" y="6322" id="pf17446245101415" referenceLink="//@navigationRule.0/@navigationCase.15/@toViewId|" inlinks="pf17446245101414" path="/sec/prelevement_download_fichier_prelevement.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/upload_fichier_rejet.xhtml" x="338" y="6706" id="pf17461847021682" referenceLink="//@navigationRule.0/@navigationCase.13/@toViewId|" inlinks="pf17461847021680" path="/sec/prelevement_upload_fichier_rejet.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/download_fichier_rejet.xhtml" x="338" y="7090" id="pf17461847021683" referenceLink="//@navigationRule.0/@navigationCase.14/@toViewId|" inlinks="pf17461847021681" path="/sec/prelevement_download_fichier_rejet.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/consultation_versement_libre.xhtml" x="338" y="7474" id="pf17714969749771" referenceLink="//@navigationRule.0/@navigationCase.11/@toViewId|" inlinks="pf17714969749770" path="/sec/versement_libre_consultation.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/testWs.xhtml" x="338" y="7858" id="pf17733153094611" referenceLink="//@navigationRule.0/@navigationCase.26/@toViewId|" inlinks="pf17733153094610" path="/sec/testWs.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/users_societes.xhtml" x="338" y="8242" id="pf17745227067041" referenceLink="//@navigationRule.0/@navigationCase.18/@toViewId|" inlinks="pf17745227067030" path="/sec/users_societes.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/index.xhtml" x="338" y="8626" id="pf17746224718592" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf17746224718590" path="/sec/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sec/appConfig.xhtml" id="pf17746224718593" referenceLink="//@navigationRule.0/@navigationCase.26/@toViewId|" inlinks="pf17746224718591" path="/sec/appConfig.xhtml"/>
+  <links id="pf1690798889516188" target="pf1690798889516209" source="pf1690798889516187" outcome="success" redirect="true" fromaction="#{login.connexion()}"/>
+  <links id="pf1690798889516189" target="pf1690798889516210" source="pf1690798889516187" outcome="success" redirect="true" fromaction="#{login.deconnexion()}"/>
+  <links id="pf1690798889516190" target="pf1690798889516211" source="pf1690798889516187" outcome="success" redirect="true" fromaction="#{devisBean.calculTarif()}"/>
+  <links id="pf1690798889516191" target="pf1690798889516212" source="pf1690798889516187" outcome="success" redirect="true" fromaction="#{devisIncendieBean.calculTarif()}"/>
+  <links id="pf1690798889516192" target="pf1690798889516213" source="pf1690798889516187" outcome="success" redirect="true" fromaction="#{devisBean.newDevis()}"/>
+  <links id="pf1690798889516193" target="pf1690798889516214" source="pf1690798889516187" outcome="success" redirect="true" fromaction="#{devisBean.client()}"/>
+  <links id="pf1690798889516194" target="pf1690798889516215" source="pf1690798889516187" outcome="devis_Assistantvoyage" redirect="true"/>
+  <links id="pf1690798889516195" target="pf1690798889516216" source="pf1690798889516187" outcome="devisAvenirJeunesse" redirect="true"/>
+  <links id="pf1690798889516196" target="pf1690798889516217" source="pf1690798889516187" outcome="devis_7ayya" redirect="true"/>
+  <links id="pf1690798889516197" target="pf1690798889516218" source="pf1690798889516187" outcome="versement_libre" redirect="true"/>
+  <links id="pf1690798889516198" target="pf1690798889516219" source="pf1690798889516187" outcome="encaissement_terme" redirect="true"/>
+  <links id="pf1690798889516199" target="pf1690798889516220" source="pf1690798889516187" outcome="EditionBordereau" redirect="true"/>
+  <links id="pf1690798889516200" target="pf1690798889516215" source="pf1690798889516187" outcome="devisAssistantvoyage" redirect="true" fromaction="#{assistanceVoiyageController.returnToDevisAssistance()}"/>
+  <links id="pf1690798889516201" target="pf1690798889516215" source="pf1690798889516187" outcome="devisAssistantvoyage" redirect="true" fromaction="#{assistanceVoiyageController.navigateToDevisAssistanceVoiyage()}"/>
+  <links id="pf1690798889516202" target="pf1690798889516217" source="pf1690798889516187" outcome="devis_7ayya" redirect="true" fromaction="#{h7ayyaControllerV2.navigateTo7ayya()}"/>
+  <links id="pf1690798889516203" target="pf1690798889516221" source="pf1690798889516187" outcome="tarif7ayyaBean" redirect="true" fromaction="#{tarif7ayyaBean.navigateToTarif7ayyaBean()}"/>
+  <links id="pf1690798889516204" target="pf1690798889516222" source="pf1690798889516187" outcome="devisIncendieTD" redirect="true" fromaction="#{devisIncendieBean.navigateToDevisIncendie()}"/>
+  <links id="pf1690798889516205" target="pf1690798889516213" source="pf1690798889516187" outcome="true" redirect="true" fromaction="#{devisBean.navigateToDevisTd()}"/>
+  <links id="pf1690798889516206" target="pf1690798889516222" source="pf1690798889516187" outcome="devisIncendie" redirect="true" fromaction="#{tarifIncBean.returnToDevisInced()}"/>
+  <links id="pf1690798889516207" target="pf1690798889516215" source="pf1690798889516187" outcome="devisAssistantvoyage" redirect="true" fromaction="#{tariftdBean.returnToDevisAssistance()}"/>
+  <links id="pf1690798889516208" target="pf1690798889516223" source="pf1690798889516187" outcome="success" redirect="true" fromaction="#{mrhBean.newDevis()}"/>
+  <links id="pf17181970547980" target="pf17181970548001" source="pf1690798889516187" outcome="users" redirect="true"/>
+  <links id="pf17446245101414" target="pf17446245101415" source="pf1690798889516187" outcome="download_fichier_prelevement" redirect="true"/>
+  <links id="pf17461847021680" target="pf17461847021682" source="pf1690798889516187" outcome="upload_fichier_rejet" redirect="true"/>
+  <links id="pf17461847021681" target="pf17461847021683" source="pf1690798889516187" outcome="download_fichier_rejet" redirect="true"/>
+  <links id="pf17714969749770" target="pf17714969749771" source="pf1690798889516187" outcome="versement_libre_consultation" redirect="true"/>
+  <links id="pf17733153094610" target="pf17733153094611" source="pf1690798889516187" outcome="testWs" redirect="true"/>
+  <links id="pf17745227067030" target="pf17745227067041" source="pf1690798889516187" outcome="users_societes" redirect="true"/>
+  <links id="pf17746224718590" target="pf17746224718592" source="pf1690798889516187" outcome="echec" redirect="true" fromaction="#{login.connexion()}"/>
+  <links id="pf17746224718591" target="pf17746224718593" source="pf1690798889516187" outcome="appConfig" redirect="true"/>
+</pageflow:Pageflow>

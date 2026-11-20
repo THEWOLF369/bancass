@@ -1,0 +1,178 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+    <h:body style=" border: none;" rendered="#{!gestionProfil.ajoutAgence}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+ <h:body style=" border: none;" rendered="#{gestionProfil.ajoutAgence}">    
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Gestion des Agences</li>
+        </ul>
+        <ul class="page_info">
+            <h:form id="AgenceListForm">
+                <p:panel header="List des Agences">
+                    <p:dataTable id="datalist" value="#{agenceBean.allAgence}" var="item"
+                                 selectionMode="single" selection="#{agenceBean.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.codeAgence}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50">
+
+                        <p:ajax event="rowSelect" update="createButton viewButton editButton " />
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton "/>
+
+                        <p:column filterBy="#{item.codeAgence}" >
+                            <f:facet name="header">
+                                <h:outputText value="Code Agence"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codeAgence}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Libelle"/>
+                            </f:facet>
+                            <h:outputText value="#{item.libelle}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Societe"/>
+                            </f:facet>
+                            <h:outputText value="#{item.societe.raisonSoc}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="adresse"/>
+                            </f:facet>
+                            <h:outputText value="#{item.adresse}"/>
+                        </p:column>
+                        
+
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ajouter" actionListener="#{agenceBean.prepareCreate}" update=":AgenceCreateForm" oncomplete="PF('AgenceCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Voir" update=":AgenceViewForm" oncomplete="PF('AgenceViewDialog').show()" disabled="#{empty agenceBean.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Modifier" update=":AgenceEditForm" oncomplete="PF('AgenceEditDialog').show()" disabled="#{empty agenceBean.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <!-- Create Form -->
+
+            <p:dialog id="AgenceCreateDlg" widgetVar="AgenceCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Ajouter une Agence">
+                <h:form id="AgenceCreateForm">
+                 <center>
+                 <img src="../images/#{login.utilisateur.agence.societe.codSociet}.png"  height="120px" width="120px"  align="center"/>
+                <br/>
+                <br/>
+              </center>
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{agenceBean.selected != null}">
+                            <p:outputLabel value="Code Agence:" for="codeAgence" />
+                            <p:inputText id="codeAgence" value="#{agenceBean.selected.codeAgence}" title="Code Agence" required="true" requiredMessage="Le code d'agence est obligatoire!"/>
+                            <p:outputLabel value="Libelle:" for="libelle" />
+                            <p:inputText id="libelle" value="#{agenceBean.selected.libelle}" title="Libelle" />
+                           
+                            <p:outputLabel value="Adresse" for="adresse" />
+                            <p:inputText id="adresse" value="#{agenceBean.selected.adresse}" title="Adresse" />
+                            <p:outputLabel value="Telephone:" for="telephone" />
+                            <p:inputText id="telephone" value="#{agenceBean.selected.telephone}" title="telephone" />
+                            <p:outputLabel value="Fax:" for="fax" />
+                            <p:inputText id="fax" value="#{agenceBean.selected.fax}" title="fax" />
+                            <p:outputLabel value="Mail:" for="mail" />
+                            <p:inputText id="mail" value="#{agenceBean.selected.mail}" title="Mail" />
+                        </p:panelGrid>
+                        <p:commandButton actionListener="#{agenceBean.createNewAgence()}" value="Ajouter" ajax="true" update="growl,AgenceListForm" oncomplete="handleSubmit(args,'AgenceCreateDialog');"/>
+                        <p:commandButton value="Annuler" onclick="AgenceCreateDialog.hide()"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+            <!-- Edit Form --> 
+
+            <p:dialog id="AgenceEditDlg" widgetVar="AgenceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Modifier une agence">
+                <h:form id="AgenceEditForm">
+                 <center>
+                 <img src="../images/#{login.utilisateur.agence.societe.codSociet}.png"  height="120px" width="120px"  align="center"/>
+                <br/>
+                <br/>
+              </center>
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{agenceBean.selected != null}">
+                            <p:outputLabel value="Code Agence:" for="codeAgence" />
+                            <p:inputText id="codeAgence" value="#{agenceBean.selected.codeAgence}" title="Code Agence" required="true" requiredMessage="Le code d'agence est obligatoire!"/>
+                            <p:outputLabel value="Libelle:" for="libelle" />
+                            <p:inputText id="libelle" value="#{agenceBean.selected.libelle}" title="Libelle" />
+                           
+                            <p:outputLabel value="Adresse" for="adresse" />
+                            <p:inputText id="adresse" value="#{agenceBean.selected.adresse}" title="Adresse" />
+                            <p:outputLabel value="Telephone:" for="telephone" />
+                            <p:inputText id="telephone" value="#{agenceBean.selected.telephone}" title="telephone" />
+                            <p:outputLabel value="Fax:" for="fax" />
+                            <p:inputText id="fax" value="#{agenceBean.selected.fax}" title="fax" />
+                            <p:outputLabel value="Mail:" for="mail" />
+                            <p:inputText id="mail" value="#{agenceBean.selected.mail}" title="Mail" />
+                        </p:panelGrid>
+                        <p:commandButton actionListener="#{agenceBean.updateAgence()}" value="Modifier" ajax="true" update="AgenceListForm" oncomplete="handleSubmit(args, 'AgenceEditDialog');"/>
+                        <p:commandButton value="Annuler" onclick="AgenceEditDialog.hide()"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+            <!-- View Form --> 
+
+            <p:dialog id="AgenceViewDlg" widgetVar="AgenceViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Details Agence">
+                <h:form id="AgenceViewForm">
+                 <center>
+                 <img src="../images/#{login.utilisateur.agence.societe.codSociet}.png"  height="120px" width="120px"  align="center"/>
+                <br/>
+                <br/>
+              </center>
+                            <p:panelGrid columns="2" rendered="#{agenceBean.selected != null}">
+                                <h:outputText value="Code Agence:"/>
+                                <h:outputText value="#{agenceBean.selected.codeAgence}"/>
+                                <h:outputText value="Libelle:"/>
+                                <h:outputText value="#{agenceBean.selected.libelle}" />
+                                <h:outputText value="Societe:"/>
+                                <h:outputText value="#{agenceBean.selected.societe}" />
+                                <h:outputText value="Adresse:"/>
+                                <h:outputText value="#{agenceBean.selected.adresse}"/>
+                                <h:outputText value="Telephone:"/>
+                                <h:outputText value="#{agenceBean.selected.telephone}"/>
+                                <h:outputText value="Fax:"/>
+                                <h:outputText value="#{agenceBean.selected.fax}"/>
+                                <h:outputText value="Mail:"/>
+                                <h:outputText value="#{agenceBean.selected.mail}" />
+                            </p:panelGrid>
+                        <p:commandButton value="Fermer" onclick="AgenceViewDialog.hide()"/>
+                </h:form>
+            </p:dialog>
+        </ul>
+ </h:body>
+        <script>
+            function handleSubmit(args, dialog) {
+                var jqDialog = jQuery('#' + dialog);
+                if (args.validationFailed) {
+                    jqDialog.effect('shake', {times: 3}, 100);
+                } else {
+                    PF(dialog).hide();
+                }
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="jquery"></ui:define>
+    <ui:define name="jqueryui"></ui:define>
+</ui:composition>

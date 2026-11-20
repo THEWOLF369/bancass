@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="oracle" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/bancass_star</jta-data-source>
+ 		<class>com.star.Ba.model.Utilisateurs</class>
+ 		<class>com.star.Ba.model.Agence</class>
+ 		<class>com.star.Ba.model.Adherent</class>
+		<class>com.star.Ba.model.Adhesion</class>
+		<class>com.star.Ba.model.Amortissement</class>
+		<class>com.star.Ba.model.Beneficiaire</class>
+		<class>com.star.Ba.model.Client</class>
+		<class>com.star.Ba.model.Convention</class>
+		<class>com.star.Ba.model.GarantieVie</class>
+		<class>com.star.Ba.model.Locgouv</class>
+		<class>com.star.Ba.model.Police</class>
+		<class>com.star.Ba.model.PoliceCredit</class>
+		<class>com.star.Ba.model.Prodconv</class>
+		<class>com.star.Ba.model.Produit</class>
+		<class>com.star.Ba.model.Proposition</class>
+		<class>com.star.Ba.model.Quittance</class>
+		<class>com.star.Ba.model.Societe</class>
+		<class>com.star.Ba.model.Tariftd</class>
+		<class>com.star.Ba.model.TypeVoie</class>
+		<class>com.star.Ba.model.TypeAbonnement</class>
+		<class>com.star.Ba.model.Duree</class>
+		<class>com.star.Ba.model.TarifAssist</class>
+		<class>com.star.Ba.model.TarifIncendie</class>
+		<class>com.star.Ba.model.Profil</class>
+		<class>com.star.Ba.model.Pack</class>
+		<class>com.star.Ba.model.ProfessionClient</class>
+	    <class>com.star.Ba.model.Comgouv1</class>
+		<class>com.star.Ba.model.Tauxcomm</class>
+		<class>com.star.Ba.model.ComgouvMrh</class>
+		<class>com.star.Ba.model.DetailMrh</class>
+		<class>com.star.Ba.model.GarantieMrh</class>
+		<class>com.star.Ba.model.GarantieAvj</class>
+		<class>com.star.Ba.model.ParamGarantieAvj</class>
+		<class>com.star.Ba.model.NatureRisq</class>
+		<class>com.star.Ba.model.NiveauScolaire</class>
+		<class>com.star.Ba.model.Qualite</class>
+		<class>com.star.Ba.model.TarifMrh</class>
+		<class>com.star.Ba.model.TauxgarMrh</class>
+		<class>com.star.Ba.model.DetailAvj</class>
+		<class>com.star.Ba.model.Taxe</class>
+		<class>com.star.Ba.model.Menu</class>
+		<class>com.star.Ba.model.Contenu</class>
+		<class>com.star.Ba.model.Menucontenu</class>
+		<class>com.star.Ba.model.Gouvernorat</class>
+		<class>com.star.Ba.model.Delegation</class>
+		<class>com.star.Ba.model.TarifGreleDelegation</class>
+		<class>com.star.Ba.model.TarifGrele</class>
+		<class>com.star.Ba.model.Agrclasse</class>
+		<class>com.star.Ba.model.Agrnature</class>
+		<class>com.star.Ba.model.AgrclasseNature</class>
+		<class>com.star.Ba.model.TarifIncendieAgr</class>
+		<class>com.star.Ba.model.Parcelle</class>
+		<class>com.star.Ba.model.Tauxreduction</class>
+		<class>com.star.Ba.model.PrixHom</class>
+		<class>com.star.Ba.model.PackPolice</class>
+		 <class>com.star.Ba.model.PackPolicePK</class>
+		 <class>com.star.Ba.model.Speculation</class>
+		 <class>com.star.Ba.model.FractHayya</class>
+		 <class>com.star.Ba.model.CroissHayya</class>
+		 <class>com.star.Ba.model.TrancheHayya</class>
+		<class>com.star.Ba.model.DetailHayya</class>
+		<class>com.star.Ba.model.DetailsGarantieHayya</class>
+		
+		<class>com.star.Ba.model.DetailsEvolutionGarantieHayya</class>
+		<class>com.star.Ba.model.BenefHayyaDeces</class>
+		<class>com.star.Ba.model.BenefHayyaVie</class>
+		<class>com.star.Ba.model.ModePaiementHayya</class>
+		<class>com.star.Ba.model.TarifHayya</class>
+		<class>com.star.Ba.model.QuittanceTerme</class>
+		<class>com.star.Ba.model.QuittanceVersementLibre</class>
+		<class>com.star.Ba.model.QuittanceDetails</class>
+		<class>com.star.Ba.model.BilanFinancierHayya</class>
+		<class>com.star.Ba.model.DetailsEvolutionGarantieAVJ</class>
+		<class>com.star.Ba.model.PasswordHistory</class>
+		
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+            <property name="hibernate.archive.autodetection" value="class" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+			<property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver" />
+			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@(description=(address=(protocol=tcp)(host=pre-star-sc.star.net)(port=1521))(connect_data=(service_name=migration.star.net)))" />
+			<property name="hibernate.connection.username" value="bancassprod" />
+			<property name="hibernate.connection.password" value="aze#Ban" />
+			<property name="hibernate.id.new_generator_mappings" value="false" />
+			
+			<property name="hibernate.flushMode" value="FLUSH_AUTO" />
+
+		</properties>
+	</persistence-unit>
+</persistence>

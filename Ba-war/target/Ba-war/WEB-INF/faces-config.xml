@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+ <navigation-rule>
+  <navigation-case>
+   <from-action>#{login.connexion()}</from-action>
+   <from-outcome>success</from-outcome>
+   <to-view-id>/sec/acceil.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{login.deconnexion()}</from-action>
+   <from-outcome>success</from-outcome>
+   <to-view-id>/index.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{devisBean.calculTarif()}</from-action>
+   <from-outcome>success</from-outcome>
+   <to-view-id>/sec/tarifTD.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{devisIncendieBean.calculTarif()}</from-action>
+   <from-outcome>success</from-outcome>
+   <to-view-id>/sec/TarifInc.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{devisBean.newDevis()}</from-action>
+   <from-outcome>success</from-outcome>
+   <to-view-id>/sec/Devis.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{devisBean.client()}</from-action>
+   <from-outcome>success</from-outcome>
+   <to-view-id>/sec/client11.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>assistanceVoyage</from-outcome>
+   <to-view-id>/sec/devis_Assistantvoyage.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>devisAvenirJeunesse</from-outcome>
+   <to-view-id>/sec/devisAvenirJeunesse.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-action>#{assistanceVoiyageController.returnToDevisAssistance()}</from-action>
+   <from-outcome>devisAssistantvoyage</from-outcome>
+   <to-view-id>/sec/devis_Assistantvoyage.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{assistanceVoiyageController.navigateToDevisAssistanceVoiyage()}</from-action>
+   <from-outcome>devisAssistantvoyage</from-outcome>
+   <to-view-id>/sec/devis_Assistantvoyage.xhtml</to-view-id>
+   
+   <redirect/>
+  </navigation-case>
+  
+ 
+  <navigation-case>
+   <from-action>#{h7ayyaController.navigateTo7ayya()}</from-action>
+   <from-outcome>devis7ayya</from-outcome>
+   <to-view-id>/sec/devis_7ayya.xhtml</to-view-id>
+   
+   <redirect/>
+  </navigation-case>  
+  
+  
+  
+    <navigation-case>
+   <from-action>#{tarif7ayyaBean.navigateToTarif7ayyaBean()}</from-action>
+   <from-outcome>tarif7ayyaBean</from-outcome>
+   <to-view-id>/sec/tarif7ayya.xhtml</to-view-id>
+   
+   <redirect/>
+  </navigation-case>  
+  
+  <navigation-case>
+   <from-action>#{devisIncendieBean.navigateToDevisIncendie()}</from-action>
+   <from-outcome>devisIncendieTD</from-outcome>
+   <to-view-id>/sec/DevisIncendie.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-action>#{devisBean.navigateToDevisTd()}</from-action>
+   <from-outcome>true</from-outcome>
+   <to-view-id>/sec/Devis.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  
+  <navigation-case>
+   <from-action>#{tarifIncBean.returnToDevisInced()}</from-action>
+   <from-outcome>devisIncendie</from-outcome>
+   <to-view-id>/sec/DevisIncendie.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{tariftdBean.returnToDevisAssistance()}</from-action>
+   <from-outcome>devisAssistantvoyage</from-outcome>
+   <to-view-id>/sec/devis_Assistantvoyage.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-action>#{mrhBean.newDevis()}</from-action>
+   <from-outcome>success</from-outcome>
+   <to-view-id>/sec/mrh.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+ </navigation-rule>
+ <factory>
+  <exception-handler-factory>com.star.Ba.parametres.ViewExpiredExceptionExceptionHandlerFactory</exception-handler-factory>
+ </factory>
+</faces-config>

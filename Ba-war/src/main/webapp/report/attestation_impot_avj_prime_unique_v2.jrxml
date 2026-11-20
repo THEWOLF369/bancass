@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Contrat_hayaa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aa1f333b-9774-4dff-8b84-a06ed88ba9f9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="177"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="agence" class="java.lang.String"/>
+	<parameter name="contrat" class="java.lang.String"/>
+	<parameter name="effet" class="java.lang.String"/>
+	<parameter name="capital" class="java.lang.Double"/>
+	<parameter name="assure" class="java.lang.String"/>
+	<parameter name="adr_assure" class="java.lang.String"/>
+	<parameter name="naiss_assure" class="java.lang.String"/>
+	<parameter name="tel_assure" class="java.lang.String"/>
+	<parameter name="nom_benef" class="java.lang.String"/>
+	<parameter name="cin_benef" class="java.lang.String"/>
+	<parameter name="prime_tot" class="java.lang.Double"/>
+	<parameter name="prime_nette" class="java.math.BigDecimal"/>
+	<parameter name="prenom_benef" class="java.lang.String"/>
+	<parameter name="compte" class="java.lang.String"/>
+	<parameter name="cpt" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="adresseagence" class="java.lang.String"/>
+	<parameter name="mnt_lettre" class="java.lang.String"/>
+	<parameter name="primetot_pour_lettre" class="java.lang.Integer"/>
+	<parameter name="souscripteur" class="java.lang.String"/>
+	<parameter name="numplc" class="java.lang.String"/>
+	<parameter name="cin_sousc" class="java.lang.String"/>
+	<parameter name="somme" class="java.lang.Double"/>
+	<parameter name="du" class="java.lang.String"/>
+	<parameter name="id_adhesion" class="java.lang.Integer"/>
+	<parameter name="duree" class="java.lang.Integer"/>
+	<parameter name="date_contrat" class="java.lang.String"/>
+	<parameter name="num_adhesion" class="java.lang.String"/>
+	<parameter name="raison_soc" class="java.lang.String"/>
+	<parameter name="nom_complet" class="java.lang.String"/>
+	<parameter name="au" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select nvl(sum(nette),0) somme from (
+select qd.id_adhesion, qd.prime_nette_with_surprime nette, q.DATE_CREATION from QUITTANCE q inner join QUITTANCE_DETAILS qd on
+q.ID_QUITTANCE = qd.ID_QUITTANCE and q.id_adhesion = qd.id_adhesion
+where qd.type_quit = 'C'
+union all
+select qd.id_adhesion, qd.prime_nette nette,
+case
+ when qd.DATE_ENC is null then q.DATE_CREATION
+ else qd.DATE_ENC end as DATE_CREATION
+from QUITTANCE q inner join QUITTANCE_DETAILS qd on
+q.ID_QUITTANCE = qd.ID_QUITTANCE and q.id_adhesion = qd.id_adhesion
+where qd.type_quit in  'VL' and qd.etat = 'O'
+union all
+select qd.id_adhesion, qd.prime_nette nette, qd.DATE_ENC as DATE_CREATION
+from QUITTANCE_TERME qt inner join quittance_details qd on
+qd.ID_QUITTANCE = qt.ID_QUITTANCET
+and qd.ID_ADHESION = qt.ID_ADHESION
+where qd.type_quit = 'ET' and qd.etat = 'O' and qt.ETAT = 'O'
+union all
+select id_adhesion, PRIME_GBASE as nette, DATE_MVT_DU as annee from V_ADHESION_QUITTANCIER
+
+) q inner join adhesion a on
+a.id_adhesion = q.id_adhesion
+where a.id_adhesion = $P{id_adhesion}
+and TRUNC(q.date_creation)  BETWEEN to_date($P{du}, 'dd/MM/yyyy') AND to_date($P{au}, 'dd/MM/yyyy')]]>
+	</queryString>
+	<field name="somme" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="124" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement uuid="8b7782c4-b350-41cf-82a7-de2382ae12d9" x="10" y="10" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="6d298d67-c12a-4aa7-b466-9ec777a3109e" x="428" y="10" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="609" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="9f368d29-ebba-428d-aa53-aeb7a7d1ca11" x="1" y="16" width="555" height="27" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#F0F0F0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement uuid="01acd211-d771-414d-bb01-f198ec1d86ca" x="16" y="172" width="531" height="15"/>
+				<textElement markup="html">
+					<font fontName="Arial" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["La "+"<b>"+$P{raison_soc}.toUpperCase()+"</b>"+", "+$P{nom_complet}+", atteste par la présente que :"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="08da7e8e-66e7-4df4-a780-834090b3ef4e" x="43" y="199" width="51" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[M/Mme]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="435c3a5e-35e7-44ed-b4af-4fe86fd3b060" x="117" y="214" width="154" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cin_sousc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="45d31213-094b-4cbb-b365-556023fe4523" x="51" y="214" width="77" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Identifiant :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3e3a5013-5496-4be7-bdc7-796dab6db1c0" x="287" y="461" width="246" height="20"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["P/la "+$P{raison_soc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a3e43efb-c58e-453c-8296-47b4630c0c6f" x="1" y="16" width="554" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATTESTATION D’ASSURANCE VIE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ff9859f-3b72-4502-9b9f-0fc41e089358" x="120" y="74" width="188" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRAT D’ASSURANCE N° :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5b2b7e9f-73ae-4507-b33b-57bdc6a4a27e" x="309" y="74" width="185" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="15" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{num_adhesion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b4f60588-a0c2-4975-a543-e30d8da82f7b" x="271" y="94" width="184" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="15" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{souscripteur}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="45a0b2b4-61b6-4e7a-b627-124396e941a2" x="121" y="94" width="187" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Souscrit par :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="920ee0dc-1586-452a-89bd-27ec19411344" x="161" y="114" width="233" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Auprès de la STAR Assurances]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e2a107ad-b35a-4496-b384-ac3a12f3b23f" x="85" y="199" width="309" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{souscripteur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="78ca867a-6324-475d-9a9f-c49442ae9f17" x="43" y="380" width="496" height="24"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["à la source sur l’IRPP."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7a91ba68-02c9-4cd1-9314-5953c1177ece" x="43" y="242" width="496" height="23"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["a payé la somme de : <b>"+ new java.text.DecimalFormat("#,##0.000",java.text.DecimalFormatSymbols.getInstance(java.util.Locale.FRANCE)).format($F{somme}) +" dinars</b>, du <b><u>"+$P{du}+"</u></b> au <b><u>"+$P{au}+"</u></b>; "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8298a78d-8c61-4589-9e8e-c23bbd9e51b0" x="43" y="265" width="496" height="23"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["en couverture de sa prime d’assurance relative à son contrat d’assurance vie, cité ci-haut."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="82e4ba4e-c68f-4644-b53c-a3f6f9512463" x="43" y="288" width="496" height="23"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ce contrat est établi le <b>"+$P{date_contrat}+"</b>, pour une durée de <b>"+$P{duree}+" ans</b>."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0cc928ad-ebf2-4224-bc4a-988488fc7e58" x="43" y="311" width="496" height="23"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["La présente attestation est délivrée au souscripteur à la suite de sa demande, en vue de la"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3c7ea6ba-ebfa-4de3-b769-5a19f97e0aa0" x="43" y="334" width="496" height="23"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["présenter à son employeur ou à l’administration Fiscale du Ministère des Finances pour"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4fed87e6-0207-4e90-826b-55ca83cae510" x="43" y="357" width="496" height="23"/>
+				<textElement textAlignment="Justified" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["tenir compte de l’avantage fiscal prévu par l’article 39 du code de l’IRPP et de l’IS lors de la retenue"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7fb412da-0883-442f-b5e8-f744a5e8fe9d" x="16" y="515" width="496" height="24"/>
+				<textElement markup="none">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Je soussigné, ……………………………………….…………………………..…"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7234cbdc-df65-4f29-ab07-082969cb944e" x="16" y="539" width="496" height="24"/>
+				<textElement markup="none">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Confirme avoir reçu cette attestation le : …………………………"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a356fa56-1466-4bb4-81f3-f11362d53c0f" x="16" y="563" width="292" height="24"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Signature"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="896ddd1b-5b1f-4e4d-8fbb-485273832eb2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="435"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="81" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="588" splitType="Prevent">
+			<staticText>
+				<reportElement uuid="7c7ccbf7-ec3f-40bc-9503-3f91dd6d1a22" x="0" y="0" width="407" height="83"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMULAIRE DE DECLARATION DU RISQUE
+ASSURANCE GRELE ET/OU
+INCENDIE RECOLTES SUR PIEDS
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e69f7c9-bc8d-4e3b-9b6f-abdf7506fb32" x="78" y="83" width="226" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[(Etabli conformément à l’article 7 du code des assurances) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9fd6080e-1329-4e25-ba5f-b96b580679b8" x="42" y="505" width="407" height="83"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMULAIRE DE DECLARATION DU RISQUE
+ASSURANCE GRELE ET/OU
+INCENDIE RECOLTES SUR PIEDS
+]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="62" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

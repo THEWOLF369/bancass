@@ -1,0 +1,683 @@
+<ui:composition template="/sec/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="body">
+<f:metadata>
+			<f:event type="preRenderView" listener="#{avenirJeunesseController.loadProposition()}" />
+		</f:metadata>
+
+		<style type="text/css">
+.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+
+.greenButton {
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #5bb75b !important;
+	background-image: -moz-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462),
+		to(#51a351)) !important;
+	background-image: -webkit-linear-gradient(top, #62c462, #51a351)
+		!important;
+	background-image: -o-linear-gradient(top, #62c462, #51a351) !important;
+	background-image: linear-gradient(to bottom, #62c462, #51a351)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #51a351 #51a351 #387038 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+.redButton {
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #da4f49 !important;
+	background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b),
+		to(#bd362f)) !important;
+	background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f)
+		!important;
+	background-image: -o-linear-gradient(top, #ee5f5b, #bd362f) !important;
+	background-image: linear-gradient(to bottom, #ee5f5b, #bd362f)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #bd362f #bd362f #802420 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+</style>
+		<h:body style=" border: none;"
+			rendered="#{!gestionProfil.souscriptionAvenirJeunesse}">
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Accès non autorisé</li>
+			</ul>
+			<ul class="page_info">
+				<center>
+					<img src="../images/autorisation.jpg" height="15%" width="15%" />
+				</center>
+			</ul>
+		</h:body>
+
+		<h:body style=" border: none;"
+			rendered="#{gestionProfil.souscriptionAvenirJeunesse}">
+			<div class="span12 no_space">
+				<div class="widget">
+					<ul class="breadcrumb br_styled no_space">
+						<li class="active">Avenir jeunesse</li>
+						<li class="active"><img
+							src="${facesContext.externalContext.requestContextPath}/images/right.png"
+							width="17" height="17" /></li>
+						<li class="active">Adhesion</li>
+					</ul>
+					<ul class="page_info">
+
+
+
+						<h:form id="formAvj">
+
+							<p:growl id="growl" sticky="true" showDetail="true" />
+
+							<p:wizard
+								flowListener="#{avenirJeunesseController.onFlowProcess}" nextLabel="Suivant" backLabel="Précédent">
+								<p:tab id="personal" title="Contrat">
+									<p:panel header="Détails Contrat">
+										<p:messages />
+										<h:panelGrid id="gridContrat" columns="3" cellpadding="1">
+
+											<label class="bold">Police </label>
+											<h:selectOneMenu id="numpol" styleClass="form-control"
+												value="#{avenirJeunesseController.numplc}">
+												<f:selectItems
+													value="#{avenirJeunesseController.listnumplc}" />
+											</h:selectOneMenu>
+											<p:outputLabel />
+											<label class="bold"> Identifiant client </label>
+											<h:inputText id="idcin" styleClass="form-control"
+												required="true" value="#{clientBean.client.identifiant}"
+												disabled="true" />
+											<p:commandButton value="Client" process="@this"
+												styleClass="orangeButton" style="margin-top: -10px;"
+												action="#{avenirJeunesseController.navigateToClientPage()}">
+											</p:commandButton>
+
+
+											<p:outputLabel value="Date effet:" styleClass="small-font"
+												style="margin-top: 7px;" for="datDebut" />
+
+											<p:calendar
+												value="#{avenirJeunesseController.newAdhesion.datDebut}"
+												id="datDebut" required="true" pattern="dd/MM/yyyy" size="5"
+												mindate="#{avenirJeunesseController.aujourdhui}"
+												maxdate="#{avenirJeunesseController.maxdate}"
+												styleClass="small-font">
+												<p:ajax event="dateSelect"
+													update="tauxIntere,dateFin,dureeContract"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+											</p:calendar>
+
+
+											<h:outputLabel />
+
+
+
+											<p:outputLabel value="Date naissance Assuré:"
+												for="datNaissAdherent" styleClass="small-font"
+												style="margin-top: 7px;" />
+
+											<p:calendar
+												value="#{avenirJeunesseController.newAdherent.datNaiss}"
+												navigator="true"
+												maxdate="#{avenirJeunesseController.minageAssure}"
+												required="true" id="datNaissAdherent" pattern="dd/MM/yyyy"
+												size="5" styleClass="small-font">
+												<p:ajax event="dateSelect"
+													update="tauxIntere,dateFin,dureeContract"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+
+
+											</p:calendar>
+
+
+											<h:outputLabel />
+
+
+
+											<p:outputLabel value="Date naissance bénéficiaire:"
+												for="dateNaissBeneficiaire" styleClass="small-font"
+												style="margin-top: 7px;" />
+
+											<p:calendar
+												value="#{avenirJeunesseController.newBeneficiaire.dateNaiss}"
+												navigator="true" required="true"
+												maxdate="#{assistanceVoiyageController.toDays}"
+												mindate="#{avenirJeunesseController.newAdherent.datNaiss}"
+												id="dateNaissBeneficiaire" pattern="dd/MM/yyyy" size="5"
+												styleClass="small-font">
+
+												<p:ajax event="dateSelect"
+													update="tauxIntere,dateFin,dureeContract"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+
+											</p:calendar>
+
+
+											<h:outputLabel />
+
+
+											<p:outputLabel value="Bourse mensuelle:"
+												for="bourseMensuelle" styleClass="small-font"
+												style="margin-top: 7px;" />
+
+											<p:inputText
+												value="#{avenirJeunesseController.bourseMensuelle}"
+												id="bourseMensuelle" required="true"
+												validatorMessage="La bourse doit etre comprise entre 100 et 5000 dt">
+												<f:validateDoubleRange minimum="100" maximum="5000" />
+											</p:inputText>
+											<h:outputLabel />
+
+											<h:outputLabel value="Age de service bourse:"
+												styleClass="small-font" style="margin-top: 7px;" />
+											<p:selectOneMenu id="ageServiceBourse"
+												styleClass="form-control"
+												value="#{avenirJeunesseController.selectedAgeServiceBourse}"
+												converter="#{avenirJeunesseController.ageServiceBoursesConverter}">
+												<f:selectItems
+													value="#{avenirJeunesseController.allAgeServiceBourses}"
+													var="ageServiceBourse"
+													itemLabel="#{ageServiceBourse.ageServiceBourse.toString()}"
+													itemValue="#{ageServiceBourse.toString()}" />
+												<p:ajax event="valueChange"
+													update="tauxIntere,dateFin,dureeContract"
+													listener="#{avenirJeunesseController.updateTauxInteretActionListener()}" />
+											</p:selectOneMenu>
+
+
+											<h:outputLabel />
+
+
+											<h:outputLabel value="Durée de service bourse"
+												styleClass="small-font" style="margin-top: 7px;" />
+
+											<p:selectOneMenu id="dureServiceBourse"
+												styleClass="form-control"
+												converter="#{avenirJeunesseController.dureServiceBourseConverter}"
+												value="#{avenirJeunesseController.selectedDureServiceBourse}">
+												<f:selectItems
+													value="#{avenirJeunesseController.allDureServiceBourses}"
+													var="dureServiceBourse"
+													itemLabel="#{dureServiceBourse.dure.toString()}"
+													itemValue="#{dureServiceBourse.toString()}" />
+
+											</p:selectOneMenu>
+
+											<h:outputLabel />
+
+											<h:outputLabel value="Date Fin:" styleClass="small-font"
+												style="margin-top: 7px;" />
+
+											<p:calendar id="dateFin" disabled="true"
+												value="#{avenirJeunesseController.newAdhesion.datFin}"
+												pattern="dd/MM/yyyy" size="5" styleClass="small-font" />
+
+
+											<h:outputLabel />
+
+											<label class="bold">Fractionnement : </label>
+
+											<p:selectOneMenu id="fractionnementId"
+												styleClass="form-control"
+												value="#{avenirJeunesseController.fractionnement}">
+												<f:selectItems
+													value="#{avenirJeunesseController.allFractionnements}"
+													var="fractionnement" itemLabel="#{fractionnement.libelle}"
+													itemValue="#{fractionnement.idFrc}" />
+											</p:selectOneMenu>
+											<h:outputLabel />
+											<label class="bold">Taux evolution Prime</label>
+											<p:selectOneMenu id="tauxEvolutionPrimeId"
+												styleClass="form-control"
+												value="#{avenirJeunesseController.tauxCroissancePrimes}">
+												<f:selectItems
+													value="#{avenirJeunesseController.allTauxCroissancePrimes}"
+													var="tauxCroissancePrime"
+													itemLabel="#{tauxCroissancePrime.tauxPrime.toString()}"
+													itemValue="#{tauxCroissancePrime.tauxPrime}" />
+
+											</p:selectOneMenu>
+											<h:outputLabel />
+
+											<h:outputLabel value="Taux d'intérêt:"
+												styleClass="small-font" style="margin-top: 7px;" />
+
+											<h:inputText id="tauxIntere"
+												value="#{avenirJeunesseController.selectedTauxInteret}"
+												widgetVar="tauxIntere" disabled="true" />
+											<h:outputLabel />
+
+											<h:outputLabel value="Durée contrat:" styleClass="small-font"
+												style="margin-top: 7px;" for="dureeContract" />
+
+											<h:inputText id="dureeContract" required="true"
+												value="#{avenirJeunesseController.dureeContract}"
+												widgetVar="tauxIntere" disabled="true">
+											</h:inputText>
+											<h:outputLabel />
+										</h:panelGrid>
+
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="address" title="Garantie">
+									<p:panel header="Garanties Complémentaires">
+										<p:messages />
+										<h:panelGrid columns="2" cellpadding="1">
+											<h:outputText value="Frais d'inscription annuel: "
+												styleClass="small-font" />
+											<p:inputText
+												value="#{avenirJeunesseController.fraisInscriptionAnnuel}" />
+
+											<h:outputText value="Rente Monsuelle en cas deces: "
+												styleClass="small-font" />
+											<p:inputText
+												value="#{avenirJeunesseController.renteMonsuelleEnCasDeces}" />
+
+
+										</h:panelGrid>
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="contact" title="Assuré">
+									<p:panel header="Détails Assuré">
+										<p:messages />
+										<h:panelGrid columns="2" cellpadding="1" id="gridass">
+											<p:outputLabel value="Type de document:" for="docType" />
+											
+											<h:panelGroup>
+												<p:selectOneMenu
+													value="#{avenirJeunesseController.newAdherent.typeDoc}"
+													id="docType">
+													<f:selectItem itemValue="CIN" itemLabel="CIN" />
+													<f:selectItem itemValue="Passport" itemLabel="Passport" />
+													<f:selectItem itemValue="CarteSejour"
+														itemLabel="Carte Séjour" />
+												</p:selectOneMenu>
+												<p:commandButton value="Réinitialiser" update="gridass"
+													 process="@this" styleClass="redButton" style="margin-left:120px;margin-top:-25px;"
+													oncomplete='$("#loader_cont").fadeOut();'
+													actionListener="#{avenirJeunesseController.reinitialiserAdherent()}" />
+											</h:panelGroup>
+											
+											<p:outputLabel value="Identifiant:" for="identifiant" />
+											<p:inputText id="identifiant"
+												value="#{avenirJeunesseController.newAdherent.identifiant}" />
+											<p:outputLabel value="Nom:" for="nomAssu" />
+											<p:inputText id="nomAssu"
+												value="#{avenirJeunesseController.newAdherent.nomAdherent}" />
+											<p:outputLabel value="Prénom:" for="prenomAuss" />
+											<p:inputText id="prenomAuss"
+												value="#{avenirJeunesseController.newAdherent.prenomAdherent}" />
+											<p:outputLabel value="Date de naissance:" for="naissAssu" />
+											<p:calendar id="naissAssu" pattern="dd/MM/yyyy"
+												value="#{avenirJeunesseController.newAdherent.datNaiss}" />
+											<p:outputLabel value="Sexe:" for="sexAssur" />
+											<h:selectOneMenu id="sexAssur" styleClass="form-control"
+												value="#{avenirJeunesseController.newAdherent.sexe}">
+												<f:selectItem itemLabel="F" itemValue="Feminin" />
+												<f:selectItem itemLabel="M" itemValue="Masculin" />
+											</h:selectOneMenu>
+
+											<p:outputLabel value="N° Adresse" for="txtAdrNum" />
+											<p:inputNumber id="txtAdrNum" styleClass="form-control"
+												value="#{avenirJeunesseController.newAdherent.numAdr}"
+												required="false" thousandSeparator="" decimalPlaces="0" />
+
+
+											<p:outputLabel value="Type de voie:" for="txtVoie" />
+											<p:selectOneMenu styleClass="form-control"
+												value="#{avenirJeunesseController.newAdherent.typeVoie}"
+												id="txtVoie">
+												<f:selectItem itemLabel="Selectionnez voie..."
+													value="#{null}" />
+												<f:selectItems value="#{avenirJeunesseController.typeVoies}"
+													var="typeVoie" />
+											</p:selectOneMenu>
+
+
+											<p:outputLabel value="Adresse:" for="adresseAssur" />
+											<p:inputText id="adresseAssur"
+												value="#{avenirJeunesseController.newAdherent.adresse}" />
+
+
+											<p:outputLabel value="Gouvernorat:" for="gouvernerat" />
+											<p:selectOneMenu id="gouvernerat" styleClass="form-control"
+												value="#{avenirJeunesseController.newAdherent.gouver}"
+												filter="true" filterMatchMode="contains" style="width:60px">
+
+												<p:ajax event="itemSelect" process="@this"
+													listener="#{avenirJeunesseController.updateListCodePostalActionListener()}"
+													update="txtZipCode" />
+												<f:selectItem itemLabel="Selectionnez gouvernorat..."
+													value="#{null}" />
+												<f:selectItems
+													value="#{avenirJeunesseController.allGouverneras}" />
+
+											</p:selectOneMenu>
+
+
+											<p:outputLabel value="Code postale:" for="txtZipCode" />
+											<p:selectOneMenu id="txtZipCode" styleClass="form-control"
+												value="#{avenirJeunesseController.selectedLocgouv}"
+												filter="true" filterMatchMode="contains" style="width:60px">
+
+												<p:ajax event="itemSelect" process="@this"
+													listener="#{avenirJeunesseController.locgouvSelectListened}"
+													update="txtLocalite" />
+												<f:selectItem itemLabel="Selectionnez code postal..."
+													value="#{null}" />
+												<f:selectItems
+													value="#{avenirJeunesseController.allCodePostalByGouvernera}"
+													var="ojectCodePostal"
+													itemLabel="#{ojectCodePostal.codePosta} #{ojectCodePostal.localite}" />
+
+											</p:selectOneMenu>
+
+
+
+											<p:outputLabel value="Localite:" for="txtLocalite" />
+											<h:inputText id="txtLocalite" styleClass="form-control"
+												value="#{avenirJeunesseController.newAdherent.localite}"
+												disabled="true"
+												requiredMessage="La localité est obligatoire" />
+
+
+											<p:outputLabel value="Téléphone:" for="telAssur" />
+											<p:inputText id="telAssur"
+												value="#{avenirJeunesseController.newAdherent.tel}" />
+											<p:outputLabel value="Profession:" />
+
+											<p:selectOneMenu styleClass="form-control"
+												converter="#{avenirJeunesseController.professionConverter}"
+												value="#{avenirJeunesseController.newAdherent.profession}"
+												id="txtprofession">
+												<f:selectItem itemLabel="Selectionnez Profession..."
+													value="#{null}" />
+												<f:selectItems
+													value="#{avenirJeunesseController.allProfessions}"
+													var="profession"
+													itemLabel="#{profession.libelleProfession}"
+													itemValue="#{profession.idProfession.toString()}" />
+											</p:selectOneMenu>
+
+
+										</h:panelGrid>
+
+									</p:panel>
+								</p:tab>
+
+								<p:tab id="confirm" title="Bénéficiaire">
+									<p:panel header="Détails Bénéficiaire">
+										<p:messages />
+										<h:panelGrid id="confirmation" columns="2" cellpadding="1">
+
+											<p:outputLabel value="Nom:" for="nomBenef" />
+											<p:inputText id="nomBenef"
+												value="#{avenirJeunesseController.newBeneficiaire.nom}" />
+											<p:outputLabel value="Prénom:" for="raisonSoc" />
+											<p:inputText id="raisonSoc"
+												value="#{avenirJeunesseController.newBeneficiaire.prenom}" />
+											<p:outputLabel value="Date de naissance:" for="dateNaiss" />
+											<p:calendar id="dateNaiss" pattern="dd/MM/yyyy"
+												value="#{avenirJeunesseController.newBeneficiaire.dateNaiss}"></p:calendar>
+											<p:outputLabel value="Sexe:" for="sex" />
+											<h:selectOneMenu id="sex" styleClass="form-control"
+												required="true"
+												value="#{avenirJeunesseController.newBeneficiaire.sexe}">
+												<f:selectItem itemLabel="F" itemValue="Feminin" />
+												<f:selectItem itemLabel="M" itemValue="Masculin" />
+											</h:selectOneMenu>
+											<p:outputLabel value="Adresse:" for="adresse" />
+											<p:inputText id="adresse"
+												value="#{avenirJeunesseController.newBeneficiaire.adresse}" />
+
+
+
+
+
+										</h:panelGrid>
+
+
+									</p:panel>
+								</p:tab>
+
+
+								<p:tab id="tarif" title="Tarif">
+									<p:panel header="Tarif">
+
+										<label class="bold" style="color: black;"><u>Garantie
+												de Base:</u></label>
+										<h:panelGrid columns="6"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Prime Nette Epargne" for="prEpargne" />
+
+											<h:outputText id="prEpargne"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.basePrimeNetteEpargne}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+											<p:outputLabel value="Prime Nette Décès" for="prDeces"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="prDeces"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.prime_Nette_Deces_base}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Total" for="total"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="total" styleClass="label label-info price"
+												value="#{avenirJeunesseController.total_base}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+
+										</h:panelGrid>
+
+
+										<br />
+
+										<label class="bold" style="color: black;"><u>Garanties
+												Complémentaires:</u></label>
+										<label class="bold" style="color: Green;">Frais
+											d'inscription:</label>
+										<h:panelGrid columns="6"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Prime Nette Epargne" for="prEpargneFr" />
+
+											<h:outputText id="prEpargneFr"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.prime_Nette_Epargne_Inscription}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Prime Nette Décès" for="prDecesFr"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="prDecesFr"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.prime_Nette_Deces_Inscription}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Total" for="totalins"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="totalins"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.total_inscription}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+
+										</h:panelGrid>
+
+										<br />
+
+										<label class="bold" style="color: Green;">Rente Décès:</label>
+										<h:panelGrid columns="6"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Prime Nette Epargne" for="prEpargneRd" />
+
+											<h:outputText id="prEpargneRd"
+												styleClass="label label-info price" value="0">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Prime Nette Décès" for="prDecesRd"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="prDecesRd"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.prime_Nette_Deces_Rente}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+
+											<p:outputLabel value="Total" for="totalrente"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="totalrente"
+												styleClass="label label-info price"
+												value="#{avenirJeunesseController.total_rente}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+
+										</h:panelGrid>
+
+
+
+
+
+
+										<br />
+
+										<label class="bold" style="color: black;"><u>Prime
+												total:</u></label>
+
+										<h:panelGrid columns="6"
+											columnClasses="labelWidth, ui-grid-col-3">
+
+											<p:outputLabel value="Prime nette total" for="totalnette" />
+
+											<h:outputText id="totalnette"
+												styleClass="label label-important price"
+												value="#{avenirJeunesseController.total_nette}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+											<p:outputLabel value="Frais du contrat" for="frais"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="frais"
+												styleClass="label label-important price"
+												value="#{avenirJeunesseController.fraisContrat}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+											<p:outputLabel value="Prime totale" for="primeTotale"
+												style="margin-left: 40px;" />
+
+											<h:outputText id="primeTotale"
+												styleClass="label label-important price"
+												value="#{avenirJeunesseController.prime_totale}">
+												<f:convertNumber pattern="#0.000" />
+											</h:outputText>
+
+
+										</h:panelGrid>
+
+
+
+										<center>
+
+											<div class="form-actions">
+												<p:messages autoUpdate="true" showDetail="true" />
+
+												<p:commandLink style="color: #fff !important;" ajax="false"
+													target="_blank" type="idImprimer="
+													action="#{avenirJeunesseController.generateDevisAvenirJeunesse()}"
+													id="generateDevisAvj" styleClass="btn btn-info"
+													value="Imprimer Devis"
+													disabled="#{!avenirJeunesseController.desabledGenerateNotice}" />
+
+												<p:commandLink style="color: #fff !important;"
+													type="idvaliderPrposition" id="validerPrposition"
+													action="#{avenirJeunesseController.validerPrposition()}"
+													styleClass="btn btn-success" value="Valider Proposition"
+													disabled="#{!avenirJeunesseController.desabledGenerateNotice}"
+													update="generateDevisAvj,validerPrposition,generateNoticeAvj" />
+
+												<p:commandLink style="color: #fff !important;" ajax="false"
+													target="_blank" id="generateNoticeAvj" type="idImprimer="
+													action="#{avenirJeunesseController.imprimerNoticeAvj()}"
+													styleClass="btn btn-danger" value="Imprimer Notice"
+													disabled="#{avenirJeunesseController.desabledGenerateNotice}" />
+											</div>
+										</center>
+
+
+									</p:panel>
+								</p:tab>
+
+
+							</p:wizard>
+
+						</h:form>
+
+
+
+
+
+
+					</ul>
+				</div>
+			</div>
+		</h:body>
+	</ui:define>
+</ui:composition>

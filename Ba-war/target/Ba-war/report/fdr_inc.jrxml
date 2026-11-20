@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="30bcdb83-e134-4388-9f0e-386b31e7a084">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="societe" class="java.lang.String"/>
+	<parameter name="capital" class="java.lang.String"/>
+	<parameter name="dateEffet" class="java.lang.String"/>
+	<parameter name="datefin" class="java.lang.String"/>
+	<parameter name="duree" class="java.lang.String"/>
+	<parameter name="nomclt" class="java.lang.String"/>
+	<parameter name="prenomclt" class="java.lang.String"/>
+	<parameter name="identifiant" class="java.lang.String"/>
+	<parameter name="telclt" class="java.lang.String"/>
+	<parameter name="mailclt" class="java.lang.String"/>
+	<parameter name="adrclt" class="java.lang.String"/>
+	<parameter name="vilclt" class="java.lang.String"/>
+	<parameter name="cpclt" class="java.lang.String"/>
+	<parameter name="gouvclt" class="java.lang.String"/>
+	<parameter name="adrrisque" class="java.lang.String"/>
+	<parameter name="vilrisque" class="java.lang.String"/>
+	<parameter name="cprisque" class="java.lang.String"/>
+	<parameter name="gouvrisque" class="java.lang.String"/>
+	<parameter name="ville_agence" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="star" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="328" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7ba60897-e92c-4b49-8cf3-46d6f1641f35" x="128" y="57" width="322" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMULAIRE DE DECLARATION DE RISQUE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="515161e9-e70a-49e6-9293-6cc85506cec3" x="128" y="76" width="309" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASSURANCE  INCENDIE  «  HABITATION »]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="24ea6c51-32ee-4e75-b957-3532566a2d82" x="10" y="98" width="543" height="115"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[
+     Le présent formulaire établit en vertu de l’article 7, alinéa 2 du code des assurances fait partie intégrante du contrat. Il doit être soigneusement rempli et signé par l’assuré / l’adhérent. Les déclarations qui y sont consignées serviront de base à l’établissement du contrat.
+Toute réticence ou fausse déclaration intentionnelle de la part de l’assuré se rapportant aux indications portées sur le formulaire entraine la nullité du contrat conformément aux dispositions de l’article 8 du code des assurances
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2f0669c8-1506-4b0f-a9a7-01b05d53601c" x="-1" y="213" width="243" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[I. OBJET DE LA GARANTIE :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a2d0a1b-b84b-4fd9-bb50-4f84dc2fb382" x="1" y="233" width="555" height="47"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[    L'assurance Incendie Habitation, objet du présent FDR, garantira tous types d'habitation construits et couverts en dur. La garantie ne portera que sur les biens immeubles à l'exclusion de tous les biens meubles ou toute responsabilité. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d6c315e9-5768-4421-926a-8951d289903f" x="3" y="289" width="550" height="36"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[    Le capital assuré et la durée du contrat correspondront aux stipulations expressément indiquées dans les conditions particulières du présent contrat.]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="73c99d10-5300-464e-88e5-4e628b5bb896" x="2" y="1" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="125f83c5-3912-4aac-ae78-47611c3ac65b" x="428" y="1" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="259" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1b9fea62-f6f9-40a7-afec-d4520e65d4d8" x="-1" y="233" width="72" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ville : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="26c42a0b-5396-4dd1-9b52-6807099369bb" x="71" y="233" width="144" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vilrisque}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b4d6152f-445b-4289-92e1-3fa5f58544db" x="262" y="234" width="81" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cprisque}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b7d11d72-1e2d-4b6e-ab79-db2f639414e7" x="383" y="232" width="77" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Gouvernorat :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="5984a07e-270a-4370-a17c-bd7c6d8754ee" x="460" y="232" width="96" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{gouvrisque}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="040465ec-044b-45d6-8274-b0c9afe70064" x="115" y="213" width="428" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{adrrisque}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="24aedff1-5061-403d-bc0f-74b339eafb20" x="1" y="212" width="114" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Adresse du risque : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="91e32e76-ef41-4e45-994a-32b73eaccdd5" x="-1" y="192" width="72" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ville : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="aa644847-cbd0-4d00-89af-12a1ced3e0f6" x="72" y="192" width="129" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vilclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="45ce360b-c6a1-411e-a38e-ec6881f1f94b" x="215" y="192" width="27" height="21"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[CP : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="583bad1e-d612-410b-95e1-4a98df05a259" x="243" y="192" width="69" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cpclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b05b53fb-6058-45bc-8eed-115f6b499f1f" x="312" y="193" width="77" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Gouvernorat :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a78ff051-6f3e-4cc2-990e-a1f6df911a36" x="389" y="192" width="130" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{gouvclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="0b3bda80-2e5b-4cb4-b988-68ede5b232d6" x="0" y="172" width="71" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Adresse : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="10a09674-f1a4-46ca-84de-6e89b941bb0b" x="74" y="173" width="441" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{adrclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ac36f710-ff8d-4189-a88f-ebbec68cd04c" x="215" y="152" width="24" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tél : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="06e8c282-1f2e-4094-b3ba-86f4c9ca6b5a" x="74" y="153" width="100" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{identifiant}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="cda1e0e1-2719-469d-83c5-c438e362a78f" x="240" y="153" width="72" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{telclt}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6d34cc6c-8634-4833-b764-431e39fa945f" x="389" y="152" width="164" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mailclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8d858a39-314e-42b2-acbf-774c5506889a" x="312" y="153" width="39" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Mail :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="615bd938-479d-43b4-b8d1-e338cf5b32a1" x="-1" y="152" width="75" height="20"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[N° de la CIN : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3fe33167-55b3-46a2-a4c4-587cdeedd144" x="312" y="132" width="56" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Prénom :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="12900d9e-e6ff-42e7-ad93-afa2868ae5c3" x="74" y="132" width="238" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomclt}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e7988764-ff92-499a-801a-7e3a4fa2135e" x="389" y="132" width="165" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prenomclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="348e6143-ae88-4c4b-bf5f-4bcec0073568" x="1" y="132" width="73" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nom : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8cd45112-7835-48d6-868e-f39990cb2674" x="2" y="99" width="282" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[II. IDENTIFICATION DE L’ADHESION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec010eb3-1f40-48d7-8fab-5cbbe00607cd" x="1" y="63" width="117" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Date d'effet :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="99d92885-93b0-4aeb-a174-a518a8f9878e" x="133" y="63" width="154" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateEffet}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="641b9526-ab56-4e97-8b77-04f63f4e9d6c" x="301" y="63" width="159" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Date d'expiration:             ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="20de7dfe-b0b0-4298-923f-90849119abcb" x="465" y="63" width="91" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datefin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f64dab9f-b6fd-4540-9aaf-8eabdbfa3ca8" x="2" y="43" width="116" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Montant du Prêt :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="fa94f712-b4fb-4830-a15c-95f24574a075" x="133" y="43" width="154" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{capital}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5b172a67-34ff-4693-abe7-30c8445cd7f8" x="301" y="43" width="159" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Durée de remboursement :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7e58c9b5-9ef9-4057-9f25-97fc18435795" x="460" y="43" width="96" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{duree}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a285b1a4-2e30-4c9a-95f0-bed5f5031a1a" x="2" y="23" width="126" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Organisme Prêteur  :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="785568c9-a4f7-4d9e-a8a5-6d25533038fe" x="133" y="23" width="154" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{societe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6a7cfe36-04e3-4862-b2d2-3f34a62cba33" x="2" y="3" width="177" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[II. IDENTIFICATION DU PRET :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f35a1e66-ecd2-4e06-906a-5fd05931f341" x="215" y="232" width="47" height="22"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[CP : ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="134" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3c65d1c4-8b1d-4dec-8ac1-e9594335ee1e" x="3" y="20" width="535" height="41"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[   Il est convenu que l’organisme prêteur ne sera bénéficiaire que du montant dû par l’assuré au moment du sinistre, le restant du capital garanti sera remboursé à ce dernier ou à ses ayants droit.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d7035d99-3b05-416f-9b78-2a83a37d6b94" x="165" y="74" width="36" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Fait à, ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="97700269-888e-448d-96d7-b3b1a9a82112" x="365" y="74" width="170" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9b3769a3-2586-4e04-9cd2-747dd76b68d2" x="201" y="74" width="135" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ville_agence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d81e2e53-fa53-43ed-8623-56ccbdcccc4b" x="343" y="74" width="22" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[,Le]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16c39d6c-86da-4e41-9846-0c2c4949652d" x="2" y="0" width="227" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[IV. BENEFICIAIRES :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f39e22bb-af3c-4147-bd97-30ec7aa2be52" x="365" y="110" width="173" height="20"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Signature de l’adhérent  ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

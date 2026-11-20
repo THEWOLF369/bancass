@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://services.agricole.saeb.soap.ws.bna.com/" name="IDecisionCreditsAgr" targetNamespace="http://services.agricole.saeb.soap.ws.bna.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.agricole.saeb.soap.ws.bna.com/" elementFormDefault="unqualified" targetNamespace="http://services.agricole.saeb.soap.ws.bna.com/" version="1.0">
+
+  <xs:element name="getDecisionCreditAgr" type="tns:getDecisionCreditAgr"/>
+
+  <xs:element name="getDecisionCreditAgrResponse" type="tns:getDecisionCreditAgrResponse"/>
+
+  <xs:complexType name="getDecisionCreditAgr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="numDecision" type="xs:string"/>
+      <xs:element minOccurs="0" name="numDetailDecision" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getDecisionCreditAgrResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:decisionAgr"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="decisionAgr">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="agriculteur" type="tns:agriculteur"/>
+      <xs:element minOccurs="0" name="code_category" type="xs:string"/>
+      <xs:element minOccurs="0" name="date_annulation" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="date_decision" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="date_saisie_decision" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="details_decision" type="tns:detailDecAgri"/>
+      <xs:element minOccurs="0" name="montant" type="xs:long"/>
+      <xs:element minOccurs="0" name="num_compte" type="xs:string"/>
+      <xs:element minOccurs="0" name="num_decision" type="xs:string"/>
+      <xs:element minOccurs="0" name="num_matricule_user" type="xs:string"/>
+      <xs:element minOccurs="0" name="num_perm_agricole" type="xs:string"/>
+      <xs:element minOccurs="0" name="type_annulation" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="agriculteur">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="addresse" type="tns:adresse"/>
+      <xs:element minOccurs="0" name="date_naissance" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="lib_naissance" type="xs:string"/>
+      <xs:element minOccurs="0" name="mail" type="xs:string"/>
+      <xs:element minOccurs="0" name="nom" type="xs:string"/>
+      <xs:element minOccurs="0" name="numSeqPers" type="xs:long"/>
+      <xs:element minOccurs="0" name="num_piece" type="xs:string"/>
+      <xs:element minOccurs="0" name="num_tel" type="xs:string"/>
+      <xs:element minOccurs="0" name="prenom" type="xs:string"/>
+      <xs:element minOccurs="0" name="sex" type="xs:string"/>
+      <xs:element minOccurs="0" name="type_piece" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="adresse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cite" type="xs:string"/>
+      <xs:element minOccurs="0" name="code_postale" type="xs:string"/>
+      <xs:element name="gouvernerat" type="xs:int"/>
+      <xs:element minOccurs="0" name="immeuble" type="xs:string"/>
+      <xs:element minOccurs="0" name="pays" type="xs:string"/>
+      <xs:element minOccurs="0" name="rue" type="xs:string"/>
+      <xs:element minOccurs="0" name="ville" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="detailDecAgri">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codFngDetagr" type="xs:string"/>
+      <xs:element minOccurs="0" name="code_produit_speculation" type="xs:long"/>
+      <xs:element minOccurs="0" name="date_contrat" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="date_derniere_ech" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="date_premiere_ech" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="duree" type="xs:long"/>
+      <xs:element minOccurs="0" name="error" type="xs:string"/>
+      <xs:element minOccurs="0" name="montant" type="xs:long"/>
+      <xs:element minOccurs="0" name="numDetailAgr" type="xs:string"/>
+      <xs:element minOccurs="0" name="speculation" type="xs:string"/>
+      <xs:element minOccurs="0" name="terme" type="xs:string"/>
+      <xs:element name="type_credit" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getDecisionCreditAgrResponse">
+    <wsdl:part element="ns1:getDecisionCreditAgrResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDecisionCreditAgr">
+    <wsdl:part element="ns1:getDecisionCreditAgr" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IDecisionCreditsAgr">
+    <wsdl:operation name="getDecisionCreditAgr">
+      <wsdl:input message="ns1:getDecisionCreditAgr" name="getDecisionCreditAgr">
+    </wsdl:input>
+      <wsdl:output message="ns1:getDecisionCreditAgrResponse" name="getDecisionCreditAgrResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

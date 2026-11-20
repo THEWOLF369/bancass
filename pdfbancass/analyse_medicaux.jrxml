@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="analyse_medicaux" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f58b273-b11a-4cea-9924-93bc2973c950">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nom_adherent" class="java.lang.String"/>
+	<parameter name="age" class="java.lang.Integer"/>
+	<parameter name="capital" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[100]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cin" class="java.lang.String"/>
+	<parameter name="prenom_adherent" class="java.lang.String"/>
+	<parameter name="date_naiss" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="star" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT LIBELLE_ACT
+FROM DETAIL_ACT
+JOIN PARAM_ACT ON PARAM_ACT.NUM_ACT = DETAIL_ACT.NUM_ACT
+WHERE $P{age} BETWEEN PARAM_ACT.AGE_MIN AND PARAM_ACT.AGE_MAX
+AND $P{capital} BETWEEN PARAM_ACT.CAPITAL_MIN AND PARAM_ACT.CAPITAL_MAX]]>
+	</queryString>
+	<field name="LIBELLE_ACT" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="261" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="72df917b-6485-4fbb-8a96-b408f3ac9d08" x="15" y="160" width="111" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom de l'assuré   :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b569c11-6d8f-4619-a97d-81bc15123600" x="15" y="199" width="66" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.I.N         :  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d751694f-6ad5-45ce-a3d3-e4cf6be5af25" x="136" y="199" width="187" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b1485807-6daa-4b87-b544-a1f2baafdf3e" x="136" y="160" width="243" height="20"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nom_adherent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2d21d8e0-dc80-4cf8-9bf0-633e422c0c44" x="15" y="179" width="66" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prenom   :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f64c1155-8ff2-44ed-b848-fb722c5d0c5e" x="136" y="179" width="286" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prenom_adherent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="771d3844-bb1c-47d9-8120-ebc69c29e185" x="105" y="110" width="321" height="25"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  ACTES ET ANALYSES MEDICAUX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c09c10cb-80b4-4380-a575-434d2281dba2" x="15" y="219" width="121" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date de naissance  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="8e5d5387-524a-4410-bcf0-6c0aa99149d2" x="136" y="219" width="243" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date_naiss} + " ( " + $P{age} + "ans )"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9e391377-f5a2-4c3e-864f-ce2b7c5680fd" x="15" y="239" width="88" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capital	:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7e53f2b8-480f-443a-a969-b47a52ef9d99" x="136" y="239" width="196" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{capital} + " DT"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="ce87cac7-27d5-4aee-b148-497b62615082" x="426" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="9ceda552-6f68-427f-99df-581ab03afda7" x="0" y="0" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b50f39f4-5300-46f0-a955-e01311518862" x="15" y="0" width="317" height="20"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Liste des Actes & Analyses demandés:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement uuid="407f7a98-5616-4d86-8f5d-8e70290bc535" stretchType="RelativeToBandHeight" x="27" y="3" width="525" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LIBELLE_ACT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="93" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="15c41934-e8a5-413d-bc77-897e17e6bbcb" x="422" y="21" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="12768a87-4048-4e87-bdc7-8f89e39896d5" x="404" y="21" width="13" height="20"/>
+				<textElement/>
+				<text><![CDATA[Le]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

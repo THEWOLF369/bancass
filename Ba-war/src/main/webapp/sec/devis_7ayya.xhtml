@@ -1,0 +1,297 @@
+<ui:composition template="/sec/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="body">
+
+
+		<style type="text/css">
+.orangeButton {
+	background: 0 !important;
+	color: #fff !important;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+	background-color: #faa732 !important;
+	background-image: -moz-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450),
+		to(#f89406)) !important;
+	background-image: -webkit-linear-gradient(top, #fbb450, #f89406)
+		!important;
+	background-image: -o-linear-gradient(top, #fbb450, #f89406) !important;
+	background-image: linear-gradient(to bottom, #fbb450, #f89406)
+		!important;
+	background-repeat: repeat-x !important;
+	border-color: #f89406 #f89406 #ad6704 !important;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25)
+		!important;
+}
+</style>
+		<h:body style=" border: none;"
+			rendered="#{!gestionProfil.souscription7ayya}">
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Accès non autorisé</li>
+			</ul>
+			<ul class="page_info">
+				<center>
+					<img src="../images/autorisation.jpg" height="15%" width="15%" />
+				</center>
+			</ul>
+		</h:body>
+
+		<h:body style=" border: none;"
+			rendered="#{gestionProfil.souscription7ayya}">
+
+
+			<ul class="breadcrumb br_styled no_space">
+				<li class="active">Epargne Retraite 'INVESTI'</li>
+				<li class="active"><img
+					src="${facesContext.externalContext.requestContextPath}/images/right.png"
+					width="17" height="17" /></li>
+				<li class="active">Adhesion</li>
+			</ul>
+
+			<ul class="page_info">
+				<h:form id="formDevis">
+
+					<p:growl id="growl" />
+					 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+					<h:panelGrid columns="3" id="assistanceDevis">
+
+
+						<label class="bold">Police : </label>
+						<p:selectOneMenu id="policeMessage" styleClass="form-control"
+							converter="#{h7ayyaController.policeConverter}"
+							required="true"
+							value="#{h7ayyaController.newAdhesion.police}">
+							<f:selectItems
+								value="#{h7ayyaController.allPoliseByCodeAndConvention}"
+								var="police" itemLabel="#{police.libelle}"
+								itemValue="#{police.NPolice}" />
+						</p:selectOneMenu>
+						<p:message for="policeMessage" />
+
+						<label class="bold"> Identifiant client : </label>
+						<h:panelGroup>
+							<h:inputText id="idcin" styleClass="form-control" required=""
+								value="#{clientBean.client.identifiant}" disabled="true" />
+							<p:commandButton value="Client" process="@this" ajax="true"
+								styleClass="orangeButton" style="margin-top: -10px;"
+								action="#{h7ayyaController.navigateToClientPage()}">
+							</p:commandButton>
+						</h:panelGroup>
+						<p:message for="idcin" />
+						
+						
+
+						
+						
+						<h:outputLabel value="Age assuré :"
+							styleClass="small-font" style="margin-top: 7px;" />
+
+						<p:inputText
+							value="#{h7ayyaController.ageAssure}"
+							id="ageAssure" widgetVar="ageAssure"
+							disabled="true" required="true"
+							requiredMessage="Age assuré est obligatoire"
+							>
+							
+
+						</p:inputText>
+
+						<p:message for="ageAssure" />
+						
+						
+						
+						<h:outputLabel value="Date d'effet :" styleClass="combo-style"
+							style="margin-top: 7px;" />
+
+						<p:calendar widgetVar="datEffet" pattern="dd/MM/yyyy" size="5"
+							id="datEffet" rendered="true" required="true"
+							requiredMessage="Date d'effet est obligatoire"
+							value="#{h7ayyaController.effDate}"
+							mindate="#{h7ayyaController.aujourdhui}"
+							showButtonPanel="true">
+
+
+
+						</p:calendar>
+						
+						<p:message for="datEffet" />
+						
+						
+						
+						<label class="bold">Durée du contrat (année) :</label>
+						
+						<p:inputNumber id="duree"    styleClass="dataInputNumber"
+							value="#{h7ayyaController.duree}"  required="true"
+							validatorMessage="La durée ne doit pas être nulle" 
+							requiredMessage="La durée est obligatoire"
+							minValue="0" maxValue="99"
+							 >
+							<f:validateLongRange minimum="1" />  
+						</p:inputNumber>
+						
+						<p:message for="duree" />
+						
+						
+						
+						<label class="bold">Contribution de base : </label>
+						<p:inputNumber id="contrib" styleClass="form-control"
+							value="#{h7ayyaController.contrib}"  
+								thousandSeparator="" decimalSeparator="." decimalPlaces="3"
+							validatorMessage="Contribution de base différent de zéro ." required="true"
+							requiredMessage="Contribution de base est obligatoire"
+							 >
+							<f:validateLongRange minimum="1" />
+						</p:inputNumber>
+						<p:message for="contrib" />
+						
+						
+						
+                       <label class="bold">Fractionnement de la prime : </label>
+						
+					   <p:selectOneMenu value="#{h7ayyaController.frac}" id="frac" required="true"
+					   requiredMessage="Fractionnement de la prime est obligatoire">
+					       <f:selectItem itemLabel="Selectionnez..." itemValue="" noSelectionOption="true" />
+						    <f:selectItem itemValue="1" itemLabel="Annuel" />
+							<f:selectItem itemValue="2" itemLabel="Semestriel" />
+							<f:selectItem itemValue="3" itemLabel="Trimestriel" />
+							<f:selectItem itemValue="4" itemLabel="Mensuel" />
+							<f:selectItem itemValue="5" itemLabel="PRIME UNIQUE" />
+							 
+						</p:selectOneMenu>
+                       <p:message for="frac" />
+                       
+                       
+                       
+                       <label class="bold">Croissance Versements : </label>
+						
+					   <p:selectOneMenu value="#{h7ayyaController.crois}" id="crois" required="true"
+					   requiredMessage="Croissance Versements est obligatoire">
+					       <f:selectItem itemLabel="Selectionnez..." itemValue="" noSelectionOption="true" />
+						    <f:selectItem itemValue="1" itemLabel="0%" />
+							<f:selectItem itemValue="2" itemLabel="1%" />
+							<f:selectItem itemValue="3" itemLabel="2%" />
+							<f:selectItem itemValue="4" itemLabel="3%" />
+							<f:selectItem itemValue="5" itemLabel="4%" />
+							<f:selectItem itemValue="6" itemLabel="5%" />
+							<f:selectItem itemValue="7" itemLabel="6%" />
+							<f:selectItem itemValue="8" itemLabel="7%" />
+							<f:selectItem itemValue="9" itemLabel="8%" />
+							<f:selectItem itemValue="10" itemLabel="9%" />
+							<f:selectItem itemValue="11" itemLabel="10%" />
+							<f:selectItem itemValue="12" itemLabel="15%" />
+							<f:selectItem itemValue="13" itemLabel="20%" />
+							<f:selectItem itemValue="14" itemLabel="25%" />
+							 
+						</p:selectOneMenu>
+                       <p:message for="crois" />
+                       
+                       
+                       
+                        <label class="bold">Tranche de revenu annuel : </label>
+						
+					   <p:selectOneMenu value="#{h7ayyaController.tranche}" id="tranche" required="true"
+					   requiredMessage="Tranche de revenu annuel est obligatoire">
+					       <f:selectItem itemLabel="Selectionnez..." itemValue="" noSelectionOption="true" />
+						    <f:selectItem itemValue="1" itemLabel="0 - 5000" />
+							<f:selectItem itemValue="2" itemLabel="5001 - 20000" />
+							<f:selectItem itemValue="3" itemLabel="20001 - 30000" />
+							<f:selectItem itemValue="4" itemLabel="30001 - 50000" />
+							<f:selectItem itemValue="5" itemLabel="+ 50000" />
+							
+							 
+						</p:selectOneMenu>
+                       <p:message for="tranche" />
+                       
+                       
+                       
+                      
+                       
+                       
+                       
+                       
+                       
+                       
+                       
+                       <h:outputLabel value="Garantie epargne : " styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						 
+							<p:selectBooleanCheckbox id="epargne" value="#{h7ayyaController.epargne}" 
+							disabled="true" />
+
+						 
+
+						<p:message for="epargne" />
+						
+						
+						<h:outputLabel value="Contre assurance Décès : " styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						<p:selectBooleanCheckbox id="deces" value="#{h7ayyaController.assurance_deces}" 
+							disabled="true" />
+
+						 
+
+						<p:message for="deces" />
+						
+						
+						
+						<h:outputLabel value="Contre assurance IAD : " styleClass="small-font"
+							style="margin-top: 7px;" />
+
+						<p:selectBooleanCheckbox id="iad" value="#{h7ayyaController.iad}" 
+							disabled="true" />
+
+						 
+						<p:message for="iad" />
+                        
+
+
+
+					</h:panelGrid>
+					<center>
+						<div class="form-actions">
+							<p:commandLink value="Réinitialiser" styleClass="btn btn-danger"
+								update="assistanceDevis" ajax="true"
+								actionListener="#{assistanceVoiyageController.initialisationClientAndAdhesion()}" />
+
+
+
+							<p:commandLink type="idTarifier" ajax="true"
+								action="#{h7ayyaController.calculTarif()}"
+								styleClass="btn btn-success" update="growl" value="Tarifier" 
+								
+								process="@parent" id="btnTarifier"
+								oncomplete='$("#loader_cont").fadeOut();'
+								/>
+
+
+							 
+
+
+						</div>
+
+
+					</center>
+					
+					
+					
+					<p:blockUI block="formDevis" trigger="btnTarifier">
+					        Chargement des données...<br />
+					        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+					    </p:blockUI>
+
+				</h:form>
+
+
+
+			</ul>
+		</h:body>
+	</ui:define>
+</ui:composition>

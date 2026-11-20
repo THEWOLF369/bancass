@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TLSgarbisness" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4bbaa5e2-a1c3-4c3f-9e7d-cc69ef561746">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="214" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="311dd63a-c2c1-41cb-8d13-25017881e0a5" x="399" y="62" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais réels]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="223029f9-a631-4654-8e0e-1cda198bc5d2" x="261" y="18" width="1" height="192"/>
+			</line>
+			<staticText>
+				<reportElement uuid="8377a9bf-d597-4380-ba74-79634d310f83" x="262" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Souscription]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="740a50d7-1479-4c97-8535-4660d9b3d09b" x="12" y="17" width="520" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="0842b694-1f44-4483-9280-458d22e70a9a" x="296" y="144" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="0370b397-649a-4105-997a-a10a41cbcecc" x="10" y="40" width="522" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="957546cf-95ef-45a2-81be-2d0709ad96f3" x="10" y="40" width="131" height="20"/>
+				<box>
+					<pen lineColor="#000000"/>
+					<topPen lineColor="#000000"/>
+					<leftPen lineColor="#000000"/>
+					<bottomPen lineColor="#000000"/>
+					<rightPen lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas d’atteinte corporelle]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="ba0d1069-4ba6-493b-87e0-977c0c11729e" x="11" y="18" width="1" height="23"/>
+			</line>
+			<staticText>
+				<reportElement uuid="a33b503a-bf13-4712-af44-958b481b41f5" x="296" y="81" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b0da31ed-02d7-45d5-938e-4100e42fb585" x="12" y="64" width="145" height="18"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Transfert / Rapatriement]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1aba5c13-12d3-4aef-bad1-337fbdbfc948" x="531" y="60" width="1" height="150"/>
+			</line>
+			<staticText>
+				<reportElement uuid="e194325c-045a-4f56-85e2-5a1997052c86" x="41" y="19" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Garanties]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="173f5494-a6dc-4af7-81b8-e0003e20dfce" x="386" y="19" width="1" height="195"/>
+			</line>
+			<staticText>
+				<reportElement uuid="27a2efdd-d776-46b0-b2d1-a852bd240ee9" x="296" y="62" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cf374f97-7dd2-4927-bdec-a167b31c71bf" x="399" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Limites]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="a4a6526b-936f-40c9-bd55-36c101463e50" x="10" y="167" width="522" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="cbd00ae2-2289-421e-8a09-189d43e0505e" x="298" y="104" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="49449cc0-590e-45a8-9e70-8850dfdb5bb4" x="12" y="104" width="520" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e3e9e7b7-44e1-4f21-b4b8-dfb7159674ba" x="10" y="188" width="520" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="9e7a56a9-ab0f-486d-b8fb-61efd640238c" x="16" y="84" width="245" height="16"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Présence d'un proche en cas d'hospitalisation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="168d0115-ccc8-4f22-818c-411acc8f2a64" x="16" y="105" width="245" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des frais d’hébergement du proche]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0d608c5b-62d7-4752-a524-35863b8d6dc8" x="12" y="81" width="520" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="210d0946-7977-43da-88e3-5daf876bf6f7" x="16" y="126" width="516" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="7336870c-bc78-4d39-8b75-317a9fa3867f" x="16" y="127" width="226" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais de prolongation de séjour de l'assuré]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="17f05c18-1c0d-4d3f-ac7b-085d19d38d63" x="11" y="145" width="519" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="4510e1e6-6c9f-470e-b8bb-d5114dc463f2" x="298" y="127" width="44" height="17"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e6ad7988-5c5b-4701-ac3d-349b06518727" x="399" y="85" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais réels]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="99c97e47-a99e-4eb7-90d9-e9cc15bcc615" x="399" y="105" width="100" height="19"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[100 €/nuit ; 7 nuits]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d6ee278-20af-4f10-9450-460a037af185" x="399" y="127" width="100" height="17"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[100 €/nuit ;10 nuits]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1d790b34-617e-4368-8d95-c482f57cbf89" x="16" y="147" width="104" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais médicaux]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="49dfab3c-3fbc-473f-b816-ec80a0701b28" x="399" y="148" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[40 000 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="26331a49-eee6-483f-8882-8d6b784d0cb1" x="16" y="168" width="104" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais dentaires d’urgence]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="77bd97b2-c8e8-4599-9fa2-30f06c02137e" x="16" y="189" width="147" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Avance sur frais d’hospitalisation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74b021fa-b755-43f8-b1bd-789066de28d9" x="298" y="166" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="68db06ad-895c-4d16-be6f-25ce54d398c8" x="399" y="168" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[150 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d269545d-7690-439b-a38b-eea646658f68" x="298" y="190" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="1a49debf-3f9c-4425-b119-15a8e0c2037b" x="11" y="60" width="1" height="154"/>
+			</line>
+			<line>
+				<reportElement uuid="878e25a2-7e21-4c2f-973f-76a22dbfcb7b" x="532" y="18" width="1" height="23"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="309" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="f45b8917-56ae-46bd-b10f-9a6227fbee72" x="13" y="1" width="517" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="2239177c-c558-4f0a-a1bb-e5fa7c347983" x="20" y="4" width="101" height="17"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de décès]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="e5bf4f0f-44be-4b21-b3bb-d8596f5ab04a" x="13" y="41" width="515" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="fafdacd0-5ffd-4a63-92c2-4e66ab8685a6" x="296" y="21" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="921e511b-7134-4892-9187-62c35790558f" x="17" y="41" width="244" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas d’hospitalisation ou de décès d’un membre de la famille]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cff40067-e891-4eca-a2ee-3a296888dc22" x="20" y="61" width="126" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Retour anticipé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="71e2e197-5791-47c9-bd0a-0054aa503d47" x="298" y="61" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d7265d85-53be-4802-be38-bcf42ffbbec4" x="387" y="61" width="143" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[1 billet Aller/Retour]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="dcd9fbd3-3fed-4d21-b686-f22e5283ddf2" x="13" y="81" width="516" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="07682d42-115a-498b-8033-0f0995fa85e7" x="19" y="81" width="173" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de poursuites judiciaires]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d8aab2a8-91aa-4958-bb32-3958048118fd" x="21" y="101" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Avance de la caution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4766f75d-bb12-4d25-943c-4007601455bf" x="21" y="121" width="208" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des honoraires d'avocat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d65bf6cf-2153-4087-821b-50ad7aecf621" x="296" y="101" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d99e984e-c9c4-4d76-bc4c-81a3a67cb734" x="296" y="121" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="3857f70b-23cf-4bc9-9dd7-75ee17096ed8" x="12" y="141" width="517" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="b67a987d-028f-4939-8ceb-1f9bbbcf624d" x="15" y="141" width="230" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de perte ou de vol d’effets personnels]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f4e64362-7de2-469a-abed-e0b39f7d7741" x="411" y="101" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[5.000 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dff59c0a-dc23-449a-926b-8d2d2f0f44d8" x="411" y="121" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[1.000 €]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9d63de68-74ff-4c1b-b698-8dcb078e86aa" x="16" y="121" width="514" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="7ffa2d3d-65a0-4711-8e9f-12edf80564cf" x="15" y="161" width="206" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Acheminement de dossiers]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6df3cbb4-ffa4-45b5-bfd8-f14be0b80161" x="296" y="161" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a9fe438b-775a-4372-87d9-d768601d0f5c" x="15" y="181" width="225" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Acheminement de médicaments]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="75c87fc0-c131-4fdc-a0c4-83bf90c82236" x="298" y="181" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b8cb5698-cdb9-4f61-87f4-198017c97141" x="16" y="202" width="245" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Acheminement de lunettes, de lentilles ou de prothèses auditives]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fc41e5ed-8625-4502-88cb-3b3f0b1edbcd" x="298" y="201" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="86f2aea3-2eff-483d-8324-4ef1b3eeb273" x="13" y="222" width="516" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="63418dac-e450-40ec-92d9-994fe2cf480d" x="20" y="222" width="187" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de vol ou de perte de documents]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d503097e-8072-44f9-bafe-0af463b08bae" x="15" y="242" width="227" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Assistance aux démarches administratives]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="86907814-a364-45f1-a087-f6b82b04eceb" x="298" y="242" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ab5e209b-5ddd-46d9-bf0f-0a5a9e3cbcf5" x="16" y="262" width="224" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des coûts de réfection du passeport]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a75e0e35-7769-441f-82dd-db9fd1010ca1" x="298" y="262" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9f03f046-38ce-4076-b922-3c8356982948" x="16" y="282" width="226" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Avance de frais sur place]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1d7ece4e-0557-40de-9a77-4b8da75e663a" x="298" y="282" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d0055c73-d527-410e-9c69-4959e1145149" x="430" y="282" width="88" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2. 000 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="864e629f-572b-47a3-8903-10bec2c73cf0" x="10" y="41" width="127" height="0"/>
+				<textElement/>
+				<text><![CDATA[Rapatriement de corps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f61afa6e-1dcf-470f-8dc0-3903656ce77d" x="430" y="262" width="81" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[200 €]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="d7703048-8869-46fd-aa01-9a34a0890e92" x="530" y="21" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement uuid="f228024a-5dab-4a0b-ba44-1897eb097376" x="12" y="21" width="1" height="288"/>
+			</line>
+			<staticText>
+				<reportElement uuid="038152c7-4359-4974-92d5-a59524dec9d2" x="18" y="21" width="144" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rapatriement de corps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5798cfe2-19cc-4f48-ae6d-db5184f63ef9" x="411" y="21" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Frais réels]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="d59421c8-186f-43c7-a634-5f71325510a9" x="529" y="61" width="1" height="248"/>
+			</line>
+			<line>
+				<reportElement uuid="2d4aa769-fd74-465e-bc38-b11b398362bf" x="386" y="4" width="1" height="305"/>
+			</line>
+			<line>
+				<reportElement uuid="d5dd51bd-ddb6-47f7-bddf-a722b3124e58" x="261" y="21" width="1" height="288"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="180" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="504e54a4-43d8-41a5-8160-24ea5c47737c" x="16" y="0" width="169" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de retard d’avion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b286d752-dcd9-4a9a-bfad-302afb95b2c1" x="18" y="21" width="282" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des frais d’hébergement et de repas imprévus]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="d8758055-db68-44f4-a25d-2742092d20d4" x="16" y="41" width="514" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="afa96b51-4436-4109-a121-4fb61411698d" x="16" y="82" width="514" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="466568a6-d641-4566-b4b5-e1b08090e7e9" x="16" y="123" width="514" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="5e84cd23-224e-40d5-8738-8ed7b010da5b" x="16" y="41" width="245" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[En cas de retard de livraison de bagages]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="370ce53e-1c99-4347-a172-ee266fd5bcce" x="298" y="21" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0e1859a5-69d4-4031-b04a-1b0d8c1e1189" x="430" y="21" width="81" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2. 000 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2342f567-b23d-40fa-a202-e1af333c4e20" x="16" y="61" width="282" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="afac042a-de36-437a-97f0-d43a152ea367" x="20" y="62" width="258" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge des achats d'urgence]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f29073c2-a5b4-4377-8016-d114e03b91f9" x="298" y="61" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d9136d4a-0320-4aba-a13d-65980a6b2651" x="430" y="62" width="81" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2. 000 €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="43e997f3-9234-4256-90a9-63ee90ad96c5" x="19" y="86" width="202" height="16"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[En cas de perte, vol ou détérioration des bagages]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="12781e93-9f54-45f2-a786-360425da6c23" x="22" y="103" width="228" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Prise en charge de la valeur de remboursement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="043e62c0-dc1a-4daa-8c7a-94f87d2fba7b" x="298" y="103" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="980381b6-80c3-494e-8d07-8639be1909d1" x="432" y="103" width="79" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[750  €]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6247f6ce-a2ee-4dca-a235-fceb2aec6afb" x="20" y="123" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Annulation de voyage]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8ba79cc3-1631-43a0-a710-ff9ffe57de02" x="21" y="143" width="264" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Remboursement des frais non récupérables]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5884329a-3755-414a-a5e0-3c82e35b5a37" x="298" y="143" width="44" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Oui      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c89c9b10-5536-4379-90bd-267711fad582" x="436" y="143" width="75" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[2.000  €]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="bc5a63ea-e0c8-44db-99f8-802c759edc3a" x="530" y="1" width="1" height="162"/>
+			</line>
+			<line>
+				<reportElement uuid="230e7874-6055-4f16-a5d7-699332b4f63f" x="14" y="1" width="2" height="162"/>
+			</line>
+			<line>
+				<reportElement uuid="fcfecce5-dca1-4368-afad-38f592164f8f" x="16" y="163" width="513" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="d07e4767-7ac8-4613-b203-621e3700a246" x="263" y="0" width="1" height="164"/>
+			</line>
+			<rectangle>
+				<reportElement uuid="9139e2ef-8544-4765-adb9-47fe1f621d7d" x="17" y="1" width="514" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="0d28558d-acf9-4018-8d88-ae068b19522f" x="386" y="1" width="1" height="162"/>
+			</line>
+			<staticText>
+				<reportElement uuid="e22c380a-c41b-417a-9aac-3846a2f36895" x="13" y="1" width="228" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[En cas de retard d’avion]]></text>
+			</staticText>
+		</band>
+		<band height="50"/>
+	</detail>
+</jasperReport>

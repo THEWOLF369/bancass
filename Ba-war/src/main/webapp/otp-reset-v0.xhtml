@@ -1,0 +1,525 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+
+    <meta charset="UTF-8" />
+    <title>Réinitialisation mot de passe</title>
+
+    <link rel="stylesheet" type="text/css" href="css/demo1.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+    <link rel="shortcut icon" href="images/favicon.ico"/> 
+
+    <style>
+
+        .button {
+            width: 60%;
+            margin: 10px auto;
+            display: block;
+            background: rgb(12, 82, 50);
+            color: white;
+            border: 1px solid rgb(12, 82, 50);
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .ui-inputfield {
+            width: 95% !important;
+        }
+
+        .center {
+            text-align: center;
+        }
+        
+		.password-wrapper {
+		    position: relative;
+		    display: flex;
+		    align-items: center;
+		    gap: 5px;
+		}
+		
+		.password-wrapper .ui-inputfield {
+		    flex: 1;
+		}
+
+    </style>
+
+    <!-- ===================================== -->
+    <!-- MODERN CARD - style unique et partagé   -->
+    <!-- par toutes les étapes (1, 2, 3, lock)   -->
+    <!-- ===================================== -->
+    <style>
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .modern-card {
+        max-width: 420px;
+        margin: 30px auto;
+        padding: 30px;
+        border-radius: 14px;
+        background: #ffffff;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        text-align: center;
+        border-top: 5px solid #0c5232;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modern-icon {
+        font-size: 42px;
+        color: #0c5232;
+        margin-bottom: 10px;
+    }
+
+    .modern-card h2 {
+        margin: 10px 0;
+        color: #0c5232;
+        font-size: 22px;
+    }
+
+    .modern-subtitle {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .modern-text {
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 25px;
+    }
+
+    .modern-field {
+        text-align: left;
+        margin-bottom: 18px;
+    }
+
+    .modern-field label,
+    .modern-field .ui-outputlabel {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #0c5232;
+        margin-bottom: 6px;
+    }
+
+    .modern-card .ui-inputfield {
+        border-radius: 8px !important;
+        border: 1px solid #d7ded9 !important;
+        padding: 10px 12px !important;
+        box-sizing: border-box !important;
+        transition: border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .modern-card .ui-inputfield:focus {
+        border-color: #0c5232 !important;
+        box-shadow: 0 0 0 2px rgba(12,82,50,0.15) !important;
+        outline: none !important;
+    }
+
+    .modern-card .password-wrapper {
+        margin: 0;
+    }
+
+    .modern-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .modern-btn-primary {
+        background: #0c5232 !important;
+        color: white !important;
+        border: none !important;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .modern-btn-primary:hover {
+        background: #0a3f26 !important;
+    }
+
+    .modern-btn-secondary {
+        background: transparent !important;
+        color: #0c5232 !important;
+        border: 1px solid #0c5232 !important;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .modern-btn-secondary:hover {
+        background: #f3f7f5 !important;
+    }
+
+    </style>
+    
+    <style>
+    
+    .otp-loading{
+    width:330px;
+    padding:35px;
+    background:#fff;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.pulse{
+    color:#0c5232;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);opacity:1;}
+    50%{transform:scale(1.15);opacity:.6;}
+    100%{transform:scale(1);opacity:1;}
+}
+    
+    </style>
+
+</h:head>
+
+<f:metadata>
+    <f:viewParam name="mode" value="#{otpResetBean.mode}" />
+</f:metadata>
+
+<h:body>
+
+<div class="container">
+
+    <header>
+        <img src="images/star2018.png" height="130" width="230"/>
+
+        <h:panelGroup rendered="#{login.alyssaLogoPresent}">
+            <img src="images/logoALYSSA.png" height="130" width="230"/>
+        </h:panelGroup>
+
+        <br/>
+    </header>
+
+    <section>
+
+        <div id="container_demo">
+            <div id="wrapper">
+            
+            <div id="login" >
+
+                <h:form id="otpForm">
+                
+                
+    <!-- Blocage du formulaire pendant le traitement -->
+<p:blockUI block="otpForm" widgetVar="loadingBlock">
+
+    <div class="otp-loading">
+
+        <i class="fa fa-envelope fa-4x pulse"></i>
+
+        <h3>Envoi de votre code OTP</h3>
+
+        <p>
+             Votre demande est en cours de traitement.
+            Merci de patienter...
+        </p>
+
+    </div>
+
+</p:blockUI>
+
+
+
+<p:blockUI block="otpForm" widgetVar="loadingAction">
+
+    <div class="otp-loading">
+
+        <i class="fa fa-envelope fa-4x pulse"></i>
+
+
+        <p>
+             Votre demande est en cours de traitement.
+            Merci de patienter...
+        </p>
+
+    </div>
+
+</p:blockUI>
+
+                
+                        <!-- TITLE DYNAMIQUE -->
+                        <h1>
+                            <h:outputText value="#{otpResetBean.flowType.label}"/>
+                        </h1>
+
+                        <!-- MESSAGES -->
+                        <p:growl autoUpdate="true"/>
+                        <p:messages autoUpdate="true" showDetail="true" escape="false"/>                       
+
+                    <!-- STEPS -->
+                       <p:steps activeIndex="#{otpResetBean.step - 1}">
+                            <p:menuitem value="Login"/>
+                            <p:menuitem value="OTP"/>
+                            <p:menuitem value="#{otpResetBean.step3Label}"/>
+                        </p:steps>
+
+                    <br/><br/>
+
+                        <!-- ================= STEP 1 ================= -->
+                    <p:panel rendered="#{otpResetBean.step eq 1}" header="Identification">
+
+                        <div class="modern-card">
+
+                            <div class="modern-icon">
+                                <i class="fa fa-user-circle"></i>
+                            </div>
+
+                            <h2>Identification</h2>
+
+                            <p class="modern-subtitle">
+                                Entrez votre identifiant pour recevoir un code de vérification.
+                            </p>
+
+                            <p class="modern-text">
+                                Un code à usage unique vous sera envoyé par email.
+                            </p>
+
+                            <div class="modern-field">
+                                <p:outputLabel value="Login" for="login"/>
+                                <p:inputText id="login"
+                                             value="#{otpResetBean.login}"
+                                             required="true"
+                                             style="width:100%"/>
+                            </div>
+
+                            <div class="modern-actions">
+
+                                <p:commandButton id="btnSendOtp"
+                                                 value="Envoyer OTP"
+                                                 action="#{otpResetBean.sendOtp}"
+                                                 update="otpForm"
+                                                 onstart="PF('loadingBlock').show();"
+                                                 oncomplete="PF('loadingBlock').hide();"
+                                                 styleClass="modern-btn-primary"/>
+
+                                <p:commandButton value="Retour à la connexion"
+                                                 action="#{otpResetBean.goToLogin}"
+                                                 immediate="true"
+                                                 ajax="false"
+                                                 process="@this"
+                                                 styleClass="modern-btn-secondary"/>
+
+                            </div>
+
+                        </div>
+
+                    </p:panel>
+
+                        <!-- ================= STEP 2 ================= -->
+                        <p:panel rendered="#{otpResetBean.step eq 2}" header="Validation OTP">
+
+                            <div class="modern-card">
+
+                                <div class="modern-icon">
+                                    <i class="fa fa-envelope-open-o"></i>
+                                </div>
+
+                                <h2>Vérification OTP</h2>
+
+                                <p class="modern-subtitle">
+                                    Un code a été envoyé à votre adresse email.
+                                </p>
+
+                                <p class="modern-text">
+                                    Saisissez le code à 6 chiffres reçu pour continuer.
+                                </p>
+
+                                <div class="modern-field">
+                                    <p:outputLabel value="Code OTP" for="otp"/>
+                                    <p:inputText id="otp"
+                                                 value="#{otpResetBean.otp}"
+                                                 maxlength="6"
+                                                 required="true"
+                                                 style="width:100%"/>
+                                </div>
+
+                                <div class="modern-actions">
+
+                                    <p:commandButton value="Valider OTP"
+                                                     action="#{otpResetBean.validateOtp}"
+                                                     onstart="PF('loadingAction').show();"
+                                                     oncomplete="PF('loadingAction').hide();"
+                                                     update="otpForm"
+                                                     styleClass="modern-btn-primary"/>
+
+                                    <p:commandButton value="Retour"
+                                                     action="#{otpResetBean.stepBack}"
+                                                     update="otpForm"
+                                                     immediate="true"
+                                                     styleClass="modern-btn-secondary"/>
+
+                                </div>
+
+                            </div>
+
+                        </p:panel>
+
+                        <!-- ================= STEP 3 ================= -->
+						<p:panel rendered="#{otpResetBean.step eq 3}" header="#{otpResetBean.step3Label}">
+						
+						    <!-- ===================================== -->
+						    <!-- FORGOT PASSWORD / EXPIRED PASSWORD -->
+						    <!-- ===================================== -->
+						<h:panelGroup rendered="#{!otpResetBean.lockedAccount}">
+
+						    <div class="modern-card">
+
+						        <div class="modern-icon">
+						            <i class="fa fa-key"></i>
+						        </div>
+
+						        <h2>
+						            <h:outputText value="#{otpResetBean.step3Label}"/>
+						        </h2>
+
+						        <p class="modern-subtitle">
+						            Votre identité a été vérifiée avec succès via le code OTP.
+						        </p>
+
+						        <p class="modern-text">
+						            Choisissez un nouveau mot de passe sécurisé pour votre compte.
+						        </p>
+
+						        <!-- ================= NEW PASSWORD ================= -->
+						        <div class="modern-field">
+						            <p:outputLabel value="Nouveau mot de passe" for="newPwd"/>
+
+						            <div class="password-wrapper">
+
+						                <p:inputText id="newPwd"
+						                             value="#{otpResetBean.newPassword}"
+						                             type="#{otpResetBean.showNewPassword ? 'text' : 'password'}"
+						                             style="width:100%" />
+
+						                <p:commandButton icon="#{otpResetBean.showNewPassword ? 'fa fa-eye-slash' : 'fa fa-eye'}"
+						                                 actionListener="#{otpResetBean.toggleNewPasswordVisibility}"
+						                                 update="newPwd toggleNewBtn"
+						                                 process="@this newPwd"
+						                                 id="toggleNewBtn"/>
+						            </div>
+						        </div>
+
+						        <!-- ================= CONFIRM PASSWORD ================= -->
+						        <div class="modern-field">
+						            <p:outputLabel value="Confirmation" for="confirmPwd"/>
+
+						            <div class="password-wrapper">
+
+						                <p:inputText id="confirmPwd"
+						                             value="#{otpResetBean.confirmPassword}"
+						                             type="#{otpResetBean.showConfirmPassword ? 'text' : 'password'}"
+						                             style="width:100%" />
+
+						                <p:commandButton icon="#{otpResetBean.showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'}"
+						                                 actionListener="#{otpResetBean.toggleConfirmPasswordVisibility}"
+						                                 update="confirmPwd toggleConfirmBtn"
+						                                 process="@this confirmPwd"
+						                                 id="toggleConfirmBtn"/>
+						            </div>
+						        </div>
+
+						        <div class="modern-actions">
+
+						            <p:commandButton value="Changer mot de passe"
+						                             action="#{otpResetBean.changePassword}"
+						                             onstart="PF('loadingAction').show();"
+                                                     oncomplete="PF('loadingAction').hide();"
+						                             update="otpForm"
+						                             styleClass="modern-btn-primary"/>
+
+						            <p:commandButton value="Retour connexion"
+						                             action="#{otpResetBean.goToLogin}"
+						                             immediate="true"
+						                             ajax="false"
+						                             styleClass="modern-btn-secondary"/>
+
+						        </div>
+
+						    </div>
+
+						</h:panelGroup>
+						
+						
+						<!-- ===================================== -->
+						<!-- LOCKED ACCOUNT - UI MODERNE -->
+						<!-- ===================================== -->
+						<h:panelGroup rendered="#{otpResetBean.lockedAccount}">
+						
+						    <div class="modern-card">
+						
+						        <!-- ICON -->
+						        <div class="modern-icon">
+						            <i class="fa fa-unlock-alt"></i>
+						        </div>
+						
+						        <!-- TITLE -->
+						        <h2>Déblocage du compte</h2>
+						
+						        <!-- TEXT -->
+						        <p class="modern-subtitle">
+						            Votre identité a été vérifiée avec succès via le code OTP.
+						        </p>
+						
+						        <p class="modern-text">
+						            Vous pouvez maintenant réactiver l'accès à votre compte.
+						        </p>
+						
+						        <!-- ACTIONS -->
+						        <div class="modern-actions">
+						
+						            <p:commandButton
+						                    value="Débloquer mon compte"
+						                    icon="ui-icon-unlocked"
+						                    action="#{otpResetBean.unlockAccount}"
+						                    onstart="PF('loadingAction').show();"
+                                            oncomplete="PF('loadingAction').hide();"
+						                    update="otpForm"
+						                    styleClass="modern-btn-primary"/>
+						
+						            <p:commandButton
+						                    value="Retour connexion"
+						                    action="#{otpResetBean.goToLogin}"
+						                    immediate="true"
+						                    ajax="false"
+						                    styleClass="modern-btn-secondary"/>
+						
+						        </div>
+						
+						    </div>
+						
+						</h:panelGroup>				                     
+						
+						</p:panel>
+
+                    </h:form>
+                
+               </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+</h:body>
+</html>

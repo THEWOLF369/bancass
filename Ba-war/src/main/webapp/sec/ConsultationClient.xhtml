@@ -1,0 +1,379 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+
+
+        <style type="text/css">
+            .ui-fieldset-legend {
+                width: auto;
+                line-height: 0;
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+
+            .ui-datepicker-trigger {
+                top: -5px;
+                margin-left: 3px;
+            }
+
+            .ui-inputtext {
+                width: 100px;
+            }
+
+            .ui-inputfield.hasDatepicker {
+                width: 75px;
+            }
+
+            .ui-grid-responsive {
+                border: 0;
+            }
+
+            .NPolice-label {
+                width: 128px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .NPolice-input {
+                width: 150px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .Calendar-label {
+                width: 90px;
+                padding-right: 0 !important;
+            }
+
+            .CIN-label {
+                padding-right: 0 !important;
+                padding-left: 15px !important;
+                width: 50px;
+            }
+
+            .calendar-width {
+                width: 200px;
+            }
+
+            .etat-select {
+                width: 93px;
+            }
+
+            @media ( max-width : 980px) {
+                .ui-grid .ui-grid-row {
+                    display: block;
+                }
+                .ui-panelgrid .ui-panelgrid-cell {
+                    float: none;
+                }
+                .ui-inputtext {
+                    width: 90%;
+                }
+                .ui-inputfield.hasDatepicker {
+                    width: 90%;
+                }
+                .etat-select {
+                    width: 90%;
+                }
+            }
+
+            .ui-panelgrid-cell label {
+                color: black;
+            }
+
+            .panel-label-col-width {
+                width: 130px;
+            }
+
+            .transparent .ui-panelgrid-content {
+                background: transparent !important;
+            }
+
+            .ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+            {
+                background: 0 !important;
+                background-color: white !important;
+                box-shadow: none !important;
+            }
+
+            .small-font {
+                font-size: 12px;
+                line-height: 12px;
+            }
+
+            .row1 {
+                background: 0;
+                background-color: #f3f3f3;
+            }
+
+            .row2 {
+                background: 0;
+                background-color: #d9f2e6;
+            }
+
+            .ui-datatable.table th {
+                background: url('../img/bg/bg_vert.png');
+                color: white;
+            }
+
+            .table th {
+                font-weight: 100;
+            }
+        </style>
+
+
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Consultation des Clients</li>
+        </ul>
+        <ul class="page_info">
+            <h:form id="form">
+            
+             <p:panelGrid columns="5" layout="grid" columnClasses="alabel, dateCol, alabel, dateCol"
+                             styleClass="transparent"> 
+            
+             <p:outputLabel for="numsoc" value="Société:" 
+ rendered="#{login.utilisateur.profil.code.equals('IST') || login.utilisateur.profil.code.equals('AST') || 
+    login.utilisateur.profil.code.equals('TDST')  ||  login.utilisateur.profil.code.equals('VST')  ||  
+    login.utilisateur.profil.code.equals('ASI') || 
+    login.utilisateur.profil.code.equals('HST') || login.utilisateur.profil.code.equals('HQST')
+    || login.utilisateur.profil.code.equals('MSTA')}"/> 
+     <p:selectOneMenu id="numsoc" styleClass="form-control" value="#{consultationBean.codeSociete}"     filter="true" filterMatchMode="contains"
+          style="width:60px"  rendered="#{login.utilisateur.profil.code.equals('IST') || login.utilisateur.profil.code.equals('AST') || 
+    login.utilisateur.profil.code.equals('TDST')  ||  login.utilisateur.profil.code.equals('VST')  ||  
+    login.utilisateur.profil.code.equals('ASI') ||
+    login.utilisateur.profil.code.equals('HST') || login.utilisateur.profil.code.equals('HQST')
+    || login.utilisateur.profil.code.equals('MSTA')}">
+							 
+							 <f:selectItem itemLabel="Choisir une société.."  /> 
+							<f:selectItems value="#{consultationBean.listSociete}" />
+							 
+							  <p:ajax listener="#{consultationBean.Chercher}" update="form" ajax="true"  />
+							  
+						</p:selectOneMenu>
+						
+						
+						 </p:panelGrid>
+						 
+						 <br/>
+						 
+                <p:dataTable var="consultation" reflow="true" id="dataTable"
+                             rowStyleClass="#{(rowIndex mod 2) eq 0 ? 'row1' : 'row2'}"
+                             styleClass="table" rowIndexVar="rowIndex"
+                             value="#{consultationBean.clients}" rows="10" paginator="true"
+                             rowsPerPageTemplate="10,20,30,40,50">
+
+                   <f:facet name="header">
+                        <p:panelGrid columns="8" layout="grid"
+                                     styleClass="transparent">
+                                     
+                                                        
+                            <h:outputLabel value="Identifiant" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:inputText onkeyup="filterTable(this, 'identifiantFilter')" size="5"
+                                         style="background: 0; background-color: white!important"
+                                         styleClass="small-font" />
+                                          
+                             
+                            <h:outputLabel value="Date de naissance" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:calendar widgetVar="filterDateNaiss" pattern="yyyy-MM-dd" size="5"
+                                        styleClass="small-font">
+
+                                <p:ajax event="dateSelect"
+                                        onstart="filterTableDateNaiss('dateNaissFilter')"></p:ajax>
+                                <p:ajax event="keyup"
+                                        onstart="filterTableDateNaiss('dateNaissFilter')"></p:ajax>
+                            </p:calendar>
+
+                                                        
+                            <h:outputLabel value="N Compte" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:inputText onkeyup="filterTable(this, 'CompteFilter')" size="5"
+                                         style="background: 0; background-color: white!important"
+                                         styleClass="small-font" />
+                                         
+                           <h:outputLabel value="Nom" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:inputText onkeyup="filterTable(this, 'NomFilter')" size="5"
+                                         style="background: 0; background-color: white!important"
+                                         styleClass="small-font" />
+                                         
+                           <h:outputLabel value="Prenom" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:inputText onkeyup="filterTable(this, 'PrenomFilter')" size="5"
+                                         style="background: 0; background-color: white!important"
+                                         styleClass="small-font" />
+                                         
+                            <h:outputLabel value="Date creation:" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:calendar widgetVar="filterDate" pattern="yyyy-MM-dd" size="5"
+                                        styleClass="small-font">
+
+                                <p:ajax event="dateSelect"
+                                        onstart="filterTableDate('dateCreaFilter')"></p:ajax>
+                                <p:ajax event="keyup"
+                                        onstart="filterTableDate('dateCreaFilter')"></p:ajax>
+                            </p:calendar>
+                            
+                             
+                        </p:panelGrid>
+                    </f:facet>
+
+                    <p:column style="width:30px">
+                        <p:rowToggler />
+                    </p:column>
+
+   
+                    
+
+                                       
+                   <p:column headerText="Identifiant" filterStyleClass="identifiantFilter"
+                              filterBy="#{consultation.identifiant}"  
+                              filterStyle="display: none"  >
+                        <h:outputLabel value="#{consultation.identifiant}"/>
+                    </p:column>
+
+                    <p:column headerText="N Compte" filterStyleClass="CompteFilter"
+                              filterBy="#{consultation.ncompte}"
+                              filterStyle="display: none" >
+                        <h:outputLabel value="#{consultation.ncompte}" />
+                    </p:column>
+                    
+                   
+                    
+					<p:column headerText="Date de naissance" filterStyleClass="dateNaissFilter"
+                              filterBy="#{consultation.datNaiss}" filterStyle="display: none">
+                        <h:outputLabel value="#{consultation.datNaiss}" />
+                    </p:column>                    
+
+                    <p:column headerText="Nom"
+                              filterStyleClass="NomFilter"
+                              filterBy="#{consultation.nomClient}" filterStyle="display: none">
+                        <h:outputLabel value="#{consultation.nomClient}" />
+                    </p:column>
+                    
+                    <p:column headerText="Prenom"
+                              filterStyleClass="PrenomFilter"
+                              filterBy="#{consultation.prenomClient}" filterStyle="display: none">
+                        <h:outputLabel value="#{consultation.prenomClient}" />
+                    </p:column>
+
+                    <p:column headerText="Date Création" filterStyleClass="dateCreaFilter"
+                              filterBy="#{consultation.datCreation}" filterStyle="display: none">
+                        <h:outputLabel value="#{consultation.datCreation}" />
+                    </p:column>
+
+                    
+                    <p:rowExpansion>
+                        <p:panelGrid columns="4" layout="grid"
+                                     columnClasses="ui-grid-col-2, ui-grid-col-5, ui-grid-col-2, ui-grid-col-5">
+
+                            <p:outputLabel value="Type Document:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.typeDoc}" />
+                            
+                            <p:outputLabel value="Identifiant:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.identifiant}" />
+
+                            <p:outputLabel value="Nom:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.nomClient}" />
+
+                            <p:outputLabel value="Prenom:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.prenomClient}" />
+
+                            <p:outputLabel value="Date de naissance:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.datNaiss}" />
+
+                            <p:outputLabel value="Date Création:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.datCreation}" />
+
+                            <p:outputLabel value="N Compte:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.ncompte}" />
+
+                            <p:outputLabel value="Prfession:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.profession.libelleProfession}" />
+
+                            <p:outputLabel value="Téléphone:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.tel}" />
+
+                            <p:outputLabel value="E-Mail:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.mail}" />
+
+                            <p:outputLabel value="N Adresse:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.numAdr}" />
+
+                            <p:outputLabel value="Type voie:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.typeVoie.libelle}" />
+
+                            <p:outputLabel value="Adresse:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.adrClient}" />
+
+                            <p:outputLabel value="Code Postal:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.codeP}" />
+
+                            <p:outputLabel value="Localité:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.localite}" />
+
+                            <p:outputLabel value="Gouvernorat:" style="font-weight: bold;" />
+                            <p:outputLabel value="#{consultation.gouver}" />
+
+                         </p:panelGrid>
+                    </p:rowExpansion>
+                </p:dataTable>
+
+
+ <p:blockUI block="dataTable" trigger="dataTable">
+        Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+     <p:blockUI block="dataTable" trigger="numsoc" >
+    Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+            </h:form>
+        </ul>
+
+        <script>
+            function filterTable(input, className) {
+                console.log(input);
+                filterInput = $("." + className);
+                filterInput.val(input.value);
+                filterInput.trigger("keyup");
+            }
+
+            function filterTableDate(className) {
+                dateValue = PF('filterDate').input.val();
+                filterInput = $("." + className);
+                filterInput.val(dateValue);
+                filterInput.trigger("keyup");
+            }
+            
+            function filterTableDateNaiss(className) {
+                dateValue = PF('filterDateNaiss').input.val();
+                filterInput = $("." + className);
+                filterInput.val(dateValue);
+                filterInput.trigger("keyup");
+            }
+
+            function filterEtat(className, etat) {
+                filterInput = $("." + className);
+                etat = etat.options[etat.selectedIndex].value;
+                if (etat === 'a') {
+                    etat = "";
+                }
+                filterInput.val(etat);
+                filterInput.trigger("keyup");
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="jquery">
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Contrat_hayaa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aa1f333b-9774-4dff-8b84-a06ed88ba9f9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="387"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset" uuid="c0ae1723-b96c-4a72-ae35-81ca00033ff2">
+		<field name="nom" class="java.lang.String"/>
+		<field name="prenom" class="java.lang.String"/>
+		<field name="cin" class="java.lang.String"/>
+		<field name="lien" class="java.lang.String"/>
+		<field name="quote" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="agence" class="java.lang.String"/>
+	<parameter name="contrat" class="java.lang.String"/>
+	<parameter name="effet" class="java.lang.String"/>
+	<parameter name="duree" class="java.lang.String"/>
+	<parameter name="echeance" class="java.lang.String"/>
+	<parameter name="capital" class="java.lang.String"/>
+	<parameter name="souscr" class="java.lang.String"/>
+	<parameter name="adr_souscr" class="java.lang.String"/>
+	<parameter name="id_souscr" class="java.lang.String"/>
+	<parameter name="assure" class="java.lang.String"/>
+	<parameter name="adr_assure" class="java.lang.String"/>
+	<parameter name="id_assure" class="java.lang.String"/>
+	<parameter name="naiss_assure" class="java.lang.String"/>
+	<parameter name="sexe_assure" class="java.lang.String"/>
+	<parameter name="tel_assure" class="java.lang.String"/>
+	<parameter name="prf_assure" class="java.lang.String"/>
+	<parameter name="nom_benef" class="java.lang.String"/>
+	<parameter name="cin_benef" class="java.lang.String"/>
+	<parameter name="parente" class="java.lang.String"/>
+	<parameter name="poucent_cap" class="java.lang.String"/>
+	<parameter name="datasource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="datasvie" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="652" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="436b95e4-3149-48fa-9fb0-a5a96f27958a" x="0" y="581" width="555" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="8b7782c4-b350-41cf-82a7-de2382ae12d9" x="10" y="10" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="6d298d67-c12a-4aa7-b466-9ec777a3109e" x="428" y="10" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="64ef12b7-825e-4349-b40b-86a77b201f7b" x="0" y="113" width="280" height="57"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Branche d’assurance:                   Assurance vie                                                         Produit :                                                Epargne
+Convention:                                                                                                                           Code Agence:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d35ad166-5aaa-44d0-b7c6-6b9049c8875f" x="278" y="113" width="277" height="57"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="true" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<text><![CDATA[فرع التأمين :                 التأمين على الحياة                                  المنتج:                    ادخـــــــــار حــيّــة                     اتفاقية:                                                 العقد  عدد:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="858f5b9c-9464-44d3-a703-b3ec1b686cdd" x="179" y="154" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[رمز النيابة :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a07b1d8f-d638-4c3a-9a8f-5bf52c2642a8" x="300" y="154" width="100" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contrat N° :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="23c7cc99-5bf0-4797-8ad5-9e94cb7357b5" x="137" y="179" width="282" height="44"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conditions Particulières
+شروط خاصة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="60e3c56f-5e87-4a83-820c-bba1837373ea" x="1" y="234" width="555" height="41"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[       Sur la proposition du souscripteur et sur la foi des déclarations faites par l’assuré incluses dans la demande de souscription pour servir de base au présent contrat, la STAR s’oblige, suivant les conditions générales et particulières du contrat « Epargne   حيّة» et moyennant le versement des primes indiquées ci-dessous à leurs échéances et fréquences indiquées, à payer les prestations mentionnées au bénéficiaire désigné.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f3737055-13c0-4f30-822a-fb76233133ab" x="1" y="286" width="555" height="32"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[بناءا على اقتراح المكتتب واعتبار صحة تصريحات المؤمن له المضمنة بمطبوعة مطلب الاكتتاب والتي تم اعتمادها كأساس لإبرام العقد، يتعهد المؤمن طبقا للشروط العامة والخاصة لعقد التأمين " ادخـــــــــار حيّة" وبشرط دفع الأقساط المذكورة أسفله في آجالها وتجزئتها المحددة، بدفع المستحقات المؤمنة للمستفيد المعين.
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="2d9b374a-d4c5-45a8-a560-66b3ed2052c9" x="1" y="329" width="555" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6adf8785-ceba-4010-bec4-87aeb8ea0218" x="1" y="359" width="555" height="20"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="bca875b9-4dc8-4b12-abf2-ad5cbe9399eb" x="137" y="329" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement uuid="f6e170ec-1ba8-4988-a9de-56e56b967725" x="279" y="329" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement uuid="18d5036a-77ed-4a0a-8086-2d226996c1a4" x="419" y="329" width="1" height="50"/>
+			</line>
+			<staticText>
+				<reportElement uuid="2e77dfe3-c0f4-4bb1-be21-ba2b19252414" x="21" y="329" width="100" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'effet
+تاريخ سريان العقد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5f31bf65-a054-45f1-ae3c-5c827be519c7" x="159" y="329" width="100" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée du contrat
+مدة العقد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9ffc54bf-139b-4c13-9503-b42bcb8f63eb" x="440" y="329" width="100" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Capital Cible
+رأس المال الهدف]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9b877c93-5a07-41d9-b201-49fc80660e24" x="301" y="329" width="100" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'échéance
+تاريخ حلول الأجل
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="258e9af0-8b9f-441a-ad23-96267fb655b9" x="1" y="384" width="555" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="ee867186-8b19-4d9d-b823-a76ef0e4f557" x="449" y="384" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المكتتب:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="000a511d-f314-4056-a7b2-7fe75a15e432" x="11" y="384" width="148" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[I. Souscripteur :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d2beb8e5-1691-4f8a-a739-a691fce9bfb9" x="11" y="414" width="126" height="43"/>
+				<textElement/>
+				<text><![CDATA[Souscripteur :	             Adresse du souscripteur :                    Identifiant du souscripteur :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dfd40e5d-a8fe-4252-93f8-3492c6a544af" x="401" y="414" width="148" height="55"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[المكتتب:        	عنوان المكتتب:                         المعرف الوحيد للمكتتب:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="a5cd4d3c-13c5-47f6-9e45-45c916f66bb7" x="1" y="469" width="555" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="51123a5d-f55f-4a7f-867e-ed6f10e2e3ee" x="11" y="469" width="100" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[II. Assuré ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bb953872-049f-4b84-88e7-8adaeb60bf93" x="449" y="469" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المؤمن له:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e57c7ebe-8cf6-4b63-aa9a-5fe59f0e568b" x="8" y="582" width="127" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[III .Bénéficiaires ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1f736a62-c31e-4e9a-acf5-db569b7ac4f4" x="446" y="582" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المستفيدون]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cb34d27a-0650-4719-bd5c-cb38ac35534c" x="7" y="494" width="75" height="15"/>
+				<textElement/>
+				<text><![CDATA[Assuré :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2b89da92-d189-4868-a72a-97070aafc255" x="7" y="509" width="75" height="15"/>
+				<textElement/>
+				<text><![CDATA[Adresse:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4b3810b6-0f6e-4732-8000-f16bc039ccbd" x="7" y="524" width="75" height="15"/>
+				<textElement/>
+				<text><![CDATA[Identifiant :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c30743f3-0d7b-4f91-85bd-669b1838d118" x="7" y="539" width="94" height="15"/>
+				<textElement/>
+				<text><![CDATA[Date de naissance: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fc3a007f-2934-4fe5-9169-baa16421bc0f" x="7" y="554" width="68" height="15"/>
+				<textElement/>
+				<text><![CDATA[Profession :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="32ac3416-ab22-4321-873d-a15d476916c4" x="303" y="539" width="33" height="15"/>
+				<textElement/>
+				<text><![CDATA[Sexe:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="180050c4-2a8d-48fe-a9f4-f3fa0b263585" x="303" y="554" width="60" height="15"/>
+				<textElement/>
+				<text><![CDATA[Téléphone:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74d5a394-a531-4179-8885-749dd0e207f8" x="463" y="494" width="82" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[المؤمن له :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="60b80394-12b4-4cb0-9751-09a158547e66" x="418" y="509" width="127" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[عنوان المؤمن  له:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2276938f-a781-4e54-b2f0-a9180a2f4b04" x="381" y="524" width="164" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[المعرف الوحيد للمؤمن له :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f267e5ff-f8c1-4c0f-9c6a-e8b50a89e8f4" x="463" y="539" width="82" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[الجنس:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e3d26780-864a-47d9-bff3-0fc43cc19448" x="463" y="554" width="82" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[الهاتف:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8fdc2071-413c-4759-89db-95a02193ffcd" x="190" y="539" width="100" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<text><![CDATA[تاريخ الولادة: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="70ea3449-93f3-478b-8e53-687f906a0ad1" x="189" y="554" width="100" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[مهنة المؤمن له:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="9e6c2bba-65d7-4d4a-95c1-5116845f8cfc" x="0" y="622" width="554" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="99318edb-ee68-4061-bd5a-f338d480103e" x="0" y="607" width="554" height="15" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="8c9da70a-3ae6-4847-af02-3db77f6beda8" x="9" y="607" width="148" height="17"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[En cas de vie de l’assuré :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e801483-4d6a-45e9-90e1-9c6310565b94" x="323" y="607" width="224" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<text><![CDATA[ في صورة بقاء المؤمن له على قيد الحياة:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6466f9e8-f998-476c-a3b4-cf0fcc77f25f" x="136" y="622" width="1" height="30"/>
+			</line>
+			<line>
+				<reportElement uuid="b48227ec-3e51-4823-b5dc-40e138feab50" x="278" y="622" width="1" height="30"/>
+			</line>
+			<line>
+				<reportElement uuid="b7ac15c6-20cf-4913-b164-b1ec1dd36ee4" x="418" y="622" width="1" height="30"/>
+			</line>
+			<staticText>
+				<reportElement uuid="e777569c-98a2-4c12-adf9-d066db77b378" x="0" y="623" width="135" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="9"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<text><![CDATA[
+Nom prénom bénéficiaire
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a5b0d2ed-13b3-4258-94d0-bfb7db62b669" x="178" y="636" width="65" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[ب.ت.و
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="48767da3-6d6e-4911-95b2-f3abe5dabcc2" x="19" y="639" width="100" height="12"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[اسم و لقب المستفيد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c9310bd-5636-4fb9-8178-92a9f0cd93ad" x="189" y="623" width="43" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[CIN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c7c8d4a7-b42a-49b8-b990-3df2b5299c8d" x="300" y="623" width="100" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Lien de parenté]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="86484674-0e14-4b06-93a0-8ac54ed4d687" x="300" y="637" width="100" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[صلة القرابة]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="206ebad4-08c6-410e-9292-f71e52c728ad" x="438" y="624" width="100" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[% du capital/Montant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df0676a6-1e75-48f8-a7f5-47b7cf75a927" x="412" y="638" width="137" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[النسبة من رأس المال/المبلغ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7d83c172-a48e-47c5-80ee-7eb8c709cade" x="75" y="152" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{agence}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="16b04608-9d28-4745-8338-e89de014097a" x="401" y="154" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{contrat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3d40558c-ba25-446d-aafa-1b569764b27c" x="19" y="359" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{effet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c1258925-79ae-40b7-992e-5197d7958e84" x="157" y="359" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{duree}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b9025d5c-feb6-4441-950b-a85ea19a4eb1" x="303" y="359" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{echeance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="58a8b3e1-8e48-4233-a544-ab49862dc765" x="445" y="359" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{capital}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7807ef3a-15d9-460c-b9e2-00e6ae3c5494" x="138" y="413" width="259" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{souscr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="59390ac8-26d2-4077-b6c3-8cfb39ec03b8" x="138" y="426" width="259" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{adr_souscr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="06e38911-194b-440d-b5b5-ca9bee9d2e65" x="138" y="439" width="259" height="14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{id_souscr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8304bf12-e173-45d6-8937-2efb3055406f" x="111" y="494" width="334" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{assure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ab554010-f0ec-40f8-a875-9fa605af512e" x="90" y="509" width="322" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{adr_assure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a1b38f1e-a61e-40f0-8a69-722343201617" x="168" y="524" width="168" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{id_assure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8b74e2e7-5ec6-4f3d-a08c-e88835245ef9" x="101" y="539" width="103" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{naiss_assure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="72cd34f6-dcae-4f8e-afb1-f705ac266d1d" x="352" y="539" width="111" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{sexe_assure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="19a341bd-f2c5-47aa-8c63-1f0614061b97" x="367" y="554" width="100" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{tel_assure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b2ecda25-4a65-4987-8a8f-5e9caf6ca99e" x="75" y="554" width="114" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{prf_assure}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="b26e4981-fcfe-4fbd-afce-428f5c42a1a5" x="0" y="1" width="554" height="20"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="5df33223-ee6f-4943-8cfb-f4a3e3334430" x="418" y="1" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement uuid="dcfcf325-704a-40f7-be42-2a363872770c" x="278" y="1" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement uuid="c5b7998d-6de7-4697-8d0b-88450480b85b" x="136" y="1" width="1" height="20"/>
+			</line>
+			<subreport>
+				<reportElement uuid="a4323014-ae7e-4428-8b3a-b58f1dc1fda8" x="1" y="25" width="554" height="25"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA["C:/pdfbancass/Contrat_hayaa_benefic.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement uuid="1b9a63ca-3b6c-4b5d-b6f2-8cbbc21d8ab1" x="1" y="2" width="134" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{nom_benef}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b17f2521-670f-45e5-977d-4126bcc233c7" x="138" y="3" width="140" height="17"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{cin_benef}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8385ca40-e75e-4221-8076-eca623f47eab" x="280" y="3" width="138" height="16"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{parente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e231aea-bb2e-48af-9c30-bdd56256dae1" x="420" y="4" width="127" height="17"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{poucent_cap}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="40">
+			<subreport>
+				<reportElement uuid="d345c124-9145-483b-9e0b-7aab71d27b3e" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="0" width="553" height="37"/>
+				<subreportParameter name="star"/>
+				<subreportParameter name="imagesociete"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA["C:\\pdfbancass\\Contrat_hayaa_header.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement uuid="def023b1-f302-4651-ba65-1f3d63b05085" x="1" y="0" width="553" height="50"/>
+				<subreportParameter name="imagesociete">
+					<subreportParameterExpression><![CDATA[$P{imagesociete}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="star">
+					<subreportParameterExpression><![CDATA[$P{star}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="contrat">
+					<subreportParameterExpression><![CDATA[$P{contrat}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="agence">
+					<subreportParameterExpression><![CDATA[$P{agence}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="datasource">
+					<subreportParameterExpression><![CDATA[$P{datasource}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA["C:\\pdfbancass\\Contrat_hayaa_evol_gar.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4f871be2-9312-4108-85a0-be6207480345" x="431" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="b538f3aa-c4db-4c66-8bc9-ed693db9c516" x="511" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

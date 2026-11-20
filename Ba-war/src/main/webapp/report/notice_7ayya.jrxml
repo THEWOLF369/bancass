@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Contrat_hayaa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aa1f333b-9774-4dff-8b84-a06ed88ba9f9">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="291"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="agence" class="java.lang.String"/>
+	<parameter name="contrat" class="java.lang.String"/>
+	<parameter name="effet" class="java.lang.String"/>
+	<parameter name="capital" class="java.lang.Double"/>
+	<parameter name="assure" class="java.lang.String"/>
+	<parameter name="adr_assure" class="java.lang.String"/>
+	<parameter name="naiss_assure" class="java.lang.String"/>
+	<parameter name="tel_assure" class="java.lang.String"/>
+	<parameter name="nom_benef" class="java.lang.String"/>
+	<parameter name="cin_benef" class="java.lang.String"/>
+	<parameter name="prime_tot" class="java.lang.String"/>
+	<parameter name="prime_nette" class="java.math.BigDecimal"/>
+	<parameter name="prenom_benef" class="java.lang.String"/>
+	<parameter name="compte" class="java.lang.String"/>
+	<parameter name="cpt" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="adresseagence" class="java.lang.String"/>
+	<parameter name="mnt_lettre" class="java.lang.String"/>
+	<parameter name="primetot_pour_lettre" class="java.lang.Integer"/>
+	<parameter name="nom_complet" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="124" splitType="Stretch">
+			<image scaleImage="RetainShape">
+				<reportElement uuid="8b7782c4-b350-41cf-82a7-de2382ae12d9" x="10" y="10" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<image scaleImage="RetainShape">
+				<reportElement uuid="6d298d67-c12a-4aa7-b466-9ec777a3109e" x="428" y="10" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="410" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="2d9b374a-d4c5-45a8-a560-66b3ed2052c9" x="10" y="74" width="537" height="253"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="6c096409-dde7-4977-bcef-503048279d22" x="16" y="85" width="28" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Nom]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="7918adf2-0036-4f4b-8f71-54f1a131267c" x="75" y="85" width="180" height="15"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + $P{nom_benef}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8aac1895-a964-4bf0-880f-8842e0bc1c24" x="265" y="85" width="43" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Prénom]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="5af9fb75-7c6d-44bb-9b35-0a56791df5c4" x="333" y="85" width="204" height="15"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + $P{prenom_benef}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a3e43efb-c58e-453c-8296-47b4630c0c6f" x="1" y="16" width="554" height="44"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Autorisation de prélèvement
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="08da7e8e-66e7-4df4-a780-834090b3ef4e" x="16" y="114" width="28" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CIN]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="435c3a5e-35e7-44ed-b4af-4fe86fd3b060" x="75" y="114" width="154" height="15"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + $P{cin_benef}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4aea9031-a003-4253-b7a6-a854ad9a47cf" x="265" y="114" width="60" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Compte N°]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="93ad459c-009f-4be9-bfa8-082bdc3d621a" x="334" y="114" width="203" height="15"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + ($P{compte} != null? $P{compte}:"")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="45d31213-094b-4cbb-b365-556023fe4523" x="16" y="143" width="49" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Adresse]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="84a24d7b-09b0-494c-83ae-5ed0c45ace81" x="75" y="143" width="309" height="15"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + $P{adr_assure}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e86ae86e-84ae-4b5c-8cd7-e4b0f5adc87d" x="394" y="143" width="77" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Code Postal]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d01ad53b-884b-4036-a000-4325a7fa831c" x="482" y="143" width="65" height="15"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + $P{cpt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cc225a61-deb2-4eb5-b69f-c7b2f427a57f" x="16" y="169" width="49" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mobile]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6e83a8c9-f399-4a07-b6c2-bab83a0c8580" x="75" y="169" width="154" height="15"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + $P{tel_assure}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="849a1f35-3b82-4583-82a5-c40119c57f77" x="248" y="169" width="77" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="1f290440-2794-449e-a54e-7945cd1d241f" x="334" y="169" width="203" height="15"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + ($P{email} != null? $P{email}:"")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5533d912-6e9e-44b0-b79b-84709d4185e9" x="16" y="199" width="55" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[J'autorise la]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="bd8947e4-faae-4259-af7a-450b02dcf602" x="70" y="199" width="165" height="15"/>
+				<textElement markup="html">
+					<font fontName="Arial" isBold="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["la "+$P{nom_complet}+","]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="961d9397-3446-45d0-abe5-1f1ff6e020b8" x="233" y="199" width="46" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Agence]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="0507913b-45ed-4b69-9715-d03875949ab0" x="277" y="199" width="184" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{adresseagence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="75297c37-661c-4956-998c-3426f8ec3e7b" x="461" y="199" width="77" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[à prélever, sur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c1da3535-e837-483d-bff6-7a812438215a" x="16" y="224" width="173" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[mon compte cité en haut, la somme de]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement uuid="20a95312-df4b-4500-b38c-76e14198f230" x="198" y="224" width="339" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prime_tot} + " (TND)"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="0593c6f5-6cfb-4046-ab95-1fc4dc240ff6" x="16" y="273" width="521" height="15"/>
+				<textElement>
+					<font fontName="Arial" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[en règlement de la prime d’assurance indiquée ci-dessus suite au contrat d’assurance.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c6ae2b1e-d742-4543-ade9-5c7c21f33592" x="277" y="378" width="246" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Signature du Titulaire du compte]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="eba8d60b-bbc3-448a-aa16-100d5c0363b5" x="16" y="249" width="522" height="15"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["( " + $P{mnt_lettre} + " )"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="35c7d0da-1b52-4799-b3dc-e156a8f31df8" positionType="Float" x="207" y="337" width="360" height="38"/>
+				<textElement>
+					<font fontName="Serif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["  Fait à : " + $P{adresseagence} + ",     Le : " +new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4f871be2-9312-4108-85a0-be6207480345" x="431" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" sur"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="b538f3aa-c4db-4c66-8bc9-ed693db9c516" x="511" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,155 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+		<ul class="page_info" style="padding-top: 40px">
+					<p:growl autoUpdate="true" />
+				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+					<h:panelGrid columns="2" id="panelinfo" 
+						columnClasses="labelWidth, ui-grid-col-3">
+						
+						 <p:outputLabel value="Produit Speculation :"  />
+						  <h:outputText value = "#{packBean.prodspeculation}" />
+						 
+					    <h:panelGrid rendered="!#{!login.utilisateur.profil.code.equals('BNAA') || !login.utilisateur.profil.code.equals('BNA')}">							
+						  
+						   <p:outputLabel value="Speculation:" />
+						    <h:outputText value = "#{packBean.speculation}" />
+						    
+						    </h:panelGrid>
+						    
+						     <p:outputLabel value="Speculation detail :"  />
+						  <h:outputText value = "#{packBean.speculationDetail}" />
+						  
+						    <h:panelGrid rendered="!#{!login.utilisateur.profil.code.equals('BNAA') || !login.utilisateur.profil.code.equals('BNA')}">						
+						  
+						    
+						    <p:outputLabel value="Nature:" for="cbxNature" />
+						    <p:inputText id="cbxNature"  value="#{packBean.selectedNature}"
+									 required="true" requiredMessage="Il faut remplir les champs"/>
+						    </h:panelGrid>
+						     
+		  <h:panelGrid rendered="!#{!login.utilisateur.profil.code.equals('BNAA') || !login.utilisateur.profil.code.equals('BNA')}">						
+								    
+						 <p:outputLabel value="Classe:" for="cbxClasse" />
+						   <p:inputText id="cbxClasse"   value="#{packBean.selectedClasse}"
+									 required="true" requiredMessage="Il faut remplir les champs"/>
+					</h:panelGrid>
+						
+						 <p:outputLabel value="Zone:" for="cbxZone" />
+						<p:selectOneMenu  styleClass="combo-style taillexl" filter="true" filterMatchMode="contains" disabled="#{packBean.bZone and packBean.imprimer}" value="#{packBean.selectedZone}" id="cbxZone" required="true" requiredMessage="Il faut sélectionner la zone">
+						    <f:selectItem itemLabel="Sélectionnez la zone de récolte" value="#{null}" />
+							<f:selectItems value="#{packBean.listTarifGrele}" var="zone" itemLabel="#{zone.zone}" itemValue="#{zone.idtarif.toString()}" />
+							<p:ajax event="itemSelect"  process="@this" update="formContrat:tabs:panelParcelles" listener="#{packBean.onChangeZone()}"/>
+						</p:selectOneMenu>
+											
+							 </h:panelGrid>
+					
+						
+			<h:panelGroup id="panelParcelles">
+			
+			<p:commandButton value="Ajouter une parcelle"  disabled="#{packBean.imprimer}"  process="@this,panelinfo,formContrat:tabs:panelinfo,panelParcelles"  update="formContrat:tabs:panelinfo,panelParcelles" action="#{packBean.ajouterParcelle()}"/>
+							<p:commandButton  value="Suivant" disabled="#{packBean.imprimer}"   update="formContrat"
+								styleClass="greenButton" process="@this,panelParcelles"  action="#{packBean.enregistrerGreleIncendie()}"></p:commandButton>
+			<div>
+		<div>
+			<div>
+				<div>
+					<div>
+						
+						<table class="table100 ver1 " style="margin-top: 20px">
+							<thead>
+								<tr>
+									<th >Titre de Propriété</th>
+									<th >Nature de récolte</th>
+									<th>Délegation</th>
+									
+									<th >Prix unitaire/DT</th>
+										
+									<th >Superficie/Ha</th>
+									
+								    <th >Localité</th>
+									
+									<h:panelGroup rendered="#{packBean.bpieds}">
+										<th >Nombre total pieds</th>
+										<th > </th>
+									</h:panelGroup>
+		
+						
+								</tr>
+							</thead>
+					
+							<tbody>
+								<c:forEach items="#{packBean.listParcelle}" var="p">
+								<tr>		
+									<td><p:inputText styleClass="form-control tailletab"  placeholder="n°propriété" value="#{p.numTitreFoncier}"
+									  requiredMessage="Il faut remplir le titre de proprieté"/></td>
+									<td>
+													
+										<h:panelGroup rendered="#{!packBean.bprixHom}">			
+									<p:inputText styleClass="form-control tailletab3" readonly="#{!packBean.bprixHom}" placeholder="Nature Récolte" value="#{p.variete}"
+									 required="true" requiredMessage="Il faut remplir la nature de récolte"/>
+									 </h:panelGroup>	
+																			
+									
+									<p:selectOneMenu disabled="#{packBean.imprimer}"   rendered="#{packBean.bprixHom}" autoWidth="false" styleClass="form-control tailles"
+										filter="true" filterMatchMode="contains"    value="#{p.variete}" required="true" requiredMessage="Il faut sélectionner " >
+										<p:ajax event="itemSelect"  process="@this" update="idprixUnitaire#{p.index}" listener="#{packBean.onChangeVariete(p)}"/>
+									    <f:selectItem itemLabel="Sélectionnez la nature récolte" value="#{null}" />
+										<f:selectItems value="#{packBean.listPrixHom}"  var="prix" itemLabel="#{prix.libelle}"  itemValue="#{prix.libelle}" />
+									</p:selectOneMenu>
+								
+									</td>
+									<td><p:selectOneMenu  disabled="#{packBean.imprimer}" autoWidth="false" styleClass="form-control tailles"
+										filter="true" filterMatchMode="contains"    value="#{p.iddelegation}"  required="true" requiredMessage="Il faut sélectionner la delegation">
+									    <f:selectItem itemLabel="Sélectionnez la délégation" value="#{null}" />
+										<f:selectItems value="#{packBean.listDelegation}" var="delegation" itemLabel="#{delegation.libelledelegation}"
+										 itemValue="#{delegation.iddelegation}" />
+									</p:selectOneMenu></td>
+									<td>
+									
+									<p:inputText id="idprixUnitaire#{p.index}" disabled="#{packBean.imprimer}" placeholder="prix" readonly="#{packBean.bprixHom2}" required="true" requiredMessage="Il faut remplir le prix" styleClass="form-control tailletab" value="#{p.prixUnitaire}" validatorMessage="Le prix unitaire est incorrecte" onkeypress="if((event.which &lt; 48 &amp;&amp; event.which == 110 &amp;&amp; event.which == 188) || event.which &gt; 57) return false;" >
+											<f:validateDoubleRange minimum="0"/>
+										</p:inputText>
+										
+									
+										</td>									
+									<h:panelGroup >
+									<td>
+									<p:inputText disabled="#{packBean.imprimer}"   styleClass="form-control tailletab" value="#{p.superficie}" required="true" requiredMessage="Il faut remplir la surface" placeholder="superficie/Ha" validatorMessage="La superficie minimale est #{packBean.nature.minsupha}" onkeypress="if((event.which &lt; 48 &amp;&amp; event.which == 110 &amp;&amp; event.which == 188) || event.which &gt; 57) return false;">
+										
+											<f:validateDoubleRange minimum="#{packBean.nature.minsupha}"/>
+										</p:inputText>
+									</td>
+									</h:panelGroup>
+									
+									<td>
+						<p:inputText styleClass="form-control tailletab" placeholder="localite" value="#{p.localite}"/></td>
+						
+						
+							<h:panelGroup rendered="#{packBean.bpieds}">
+									<td><p:inputText disabled="#{packBean.imprimer}"   styleClass="form-control tailletab" placeholder="nbr pieds" value="#{p.nbrPied}" validatorMessage="Le nombre minimal de nombre de pied est #{packBean.nature.minnbrpied}" onkeypress="if( (event.which &lt; 48 || event.which &gt; 57) ) return false;" >
+											<f:validateDoubleRange minimum="#{packBean.nature.minnbrpied}"/>
+										</p:inputText></td>
+									</h:panelGroup>
+									
+									<td> <p:commandLink action="#{packBean.supprimerParcelle(p)}" update="panelParcelles" process="@this,panelParcelles" styleClass="delete_icon" >
+                                </p:commandLink></td>
+								</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+			</h:panelGroup>
+		</ul>
+   
+</ui:composition>

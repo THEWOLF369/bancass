@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="devis_ba" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bb882962-6e6a-4fd6-97eb-5006dcd69f1f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numplc" class="java.lang.String"/>
+	<parameter name="prenomclt" class="java.lang.String"/>
+	<parameter name="nomclt" class="java.lang.String"/>
+	<parameter name="identifiant" class="java.lang.String"/>
+	<parameter name="datNais" class="java.lang.String"/>
+	<parameter name="effDate" class="java.lang.String"/>
+	<parameter name="datefin" class="java.lang.String"/>
+	<parameter name="duree" class="java.lang.String"/>
+	<parameter name="tauxdeprime" class="java.lang.String"/>
+	<parameter name="primeglobal" class="java.lang.String"/>
+	<parameter name="ville_agence" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="type_contrat" class="java.lang.String"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="nbrpersonne" class="java.lang.String"/>
+	<parameter name="numprop" class="java.lang.String"/>
+	<parameter name="libpolice" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="157" splitType="Stretch">
+			<image>
+				<reportElement uuid="01ce5b8f-e89e-41f4-bd5f-82528696a7df" x="0" y="2" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="95d0fce8-a059-491c-a4fd-3a098c4026d0" x="140" y="99" width="279" height="36"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEVIS ASSISTANCE AUX PERSONNES EN VOYAGE ]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="1657854b-8f8b-4fec-a9f8-74a86a822bb4" x="428" y="2" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="c5b53558-4d32-4b9b-be8b-33f928ed5fd5" x="194" y="135" width="45" height="19">
+					<printWhenExpression><![CDATA[!$P{numplc}.equals( "" )]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Police :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="09c39ba9-177b-4963-aff4-32e368da0302" x="239" y="135" width="116" height="19" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font size="10" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numplc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="200" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1a066aea-165a-4787-a01d-825702f1f571" x="7" y="54" width="76" height="20"/>
+				<textElement markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a781bdce-3cc9-4882-b1ca-0ff026f042e2" x="93" y="54" width="201" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c2362d6b-be3f-47d5-96aa-76544ea7d90b" x="306" y="54" width="54" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prenom :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="0cb661d1-94d2-4e43-b5c8-75733ea2e3a1" x="360" y="54" width="181" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{prenomclt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="43fc0a03-d882-465c-bccc-e5b5aa9beeb3" x="7" y="74" width="76" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identifiant  :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2588ef16-8915-41a6-9787-786814bdb4d3" x="93" y="74" width="125" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{identifiant}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d97a32ad-542e-4625-bf57-d8abae0d3fb9" x="7" y="94" width="86" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'effet :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="fb1e6f35-6a44-4616-88de-28a2b363bfc6" x="93" y="94" width="123" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{effDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="9a1d384c-1088-41b7-baf0-e49c8d3336d4" x="306" y="74" width="52" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d7f7c2cb-79e8-4606-85ee-c64ef5830be6" x="360" y="74" width="33" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{duree}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ac3b304c-c4a3-40aa-a1f8-6b0585db0db8" x="306" y="94" width="52" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Fin :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7e5a0cd3-4fba-4c7e-867a-92d2bf24f727" x="363" y="94" width="100" height="20"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datefin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="df804bec-5d29-4b3c-ad90-b59e45b23851" x="306" y="148" width="113" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime globale :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="128fa2d5-32e2-4c2c-8711-85ddb417ddd4" x="419" y="148" width="122" height="20"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{primeglobal}]]></textFieldExpression>
+			</textField>
+			<elementGroup/>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="43a898f1-48e3-4e04-8abd-0e9cbeea583d" x="93" y="114" width="123" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{type_contrat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="85d70e13-2907-4ecf-8a61-4291594efc21" x="7" y="114" width="86" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type de contrat :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="90bee5f0-2f16-4db3-9237-f4abbb9ea73f" x="307" y="168" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[(En dinars)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e428d576-08bc-4c90-bfa4-f92c1519025b" x="392" y="74" width="36" height="20"/>
+				<textElement/>
+				<text><![CDATA[jours]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bae1f695-49b8-4a1a-9d21-c95a6c391fe5" x="306" y="114" width="122" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre de personnes:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d8324ce2-fb33-428c-b96d-89334d0ab649" x="431" y="114" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{nbrpersonne}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b5b82b41-7110-465a-b0ef-0e18e1714846" x="188" y="17" width="75" height="20"/>
+				<textElement/>
+				<text><![CDATA[N° Proposition:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="157f8d14-dddc-4c1f-bdb1-d1d01696ff98" x="263" y="17" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{numprop}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="225" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="6a61eb93-9bce-4e23-978c-e8bdc64fc6e4" x="455" y="90" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5dd79c81-8cc2-4371-b41a-1b282d897bb6" x="433" y="90" width="22" height="20"/>
+				<textElement/>
+				<text><![CDATA[,Le]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c0482e7f-b94e-40d4-b83c-7d3c142fd87a" x="340" y="90" width="91" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{ville_agence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e219763b-6740-4376-81be-16d1e2f0c334" x="311" y="90" width="31" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fait à ]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

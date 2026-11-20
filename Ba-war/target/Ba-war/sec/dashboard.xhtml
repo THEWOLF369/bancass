@@ -1,0 +1,312 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                                                                >
+
+    <ui:define name="body">
+    
+       <ul class="breadcrumb br_styled no_space">                              
+                <li class="active">Dashboard</li>
+              </ul> 
+              <ul class="page_info">
+             
+
+<h:form id="form">
+    <p:growl id="growl" showDetail="true" />
+    
+   
+    <h:panelGrid columns="2" columnClasses="left,right" >
+    
+     <p:panel id="dataPanelpie"  >
+    
+        <p:chart type="pie" model="#{chartView2.pieModel1}" style="width:700px;height:400px" styleClass="medium-Pie">
+            
+        </p:chart>
+     </p:panel>      
+     
+    
+      
+    </h:panelGrid>
+    
+   
+   <br/><br/>
+        
+      
+        
+        <h:panelGrid columns="8"  cellpadding="8"  >
+        
+        
+        <p:outputLabel for="date" value="mois/année:" rendered="#{login.utilisateur.profil.code.equals('BNA')}" /> 
+        
+        
+         <p:inputText size="20"   id="date" value="#{chartView2.month_year}" style="width: 70px !important;" rendered="#{login.utilisateur.profil.code.equals('BNA')}" >
+                   
+         </p:inputText>
+          
+
+<script src="../js/jquery-ui.min.js"></script>
+<script src="../js/jquery.mtz.monthpicker.js"></script>
+<script>
+$('#form\\:date').monthpicker();
+</script>
+       
+          <p:outputLabel for="numpol" value="Agence:"  rendered="#{login.utilisateur.profil.code.equals('BNA')}" /> 
+        <p:selectOneMenu id="numpol" styleClass="form-control" value="#{chartView2.codeAgence}"  filter="true" filterMatchMode="contains"
+        rendered="#{login.utilisateur.profil.code.equals('BNA')}"  
+         disabled="#{chartView2.vrais}">
+							<f:selectItems value="#{chartView2.listAgence}" />
+						</p:selectOneMenu>
+												
+						
+						 <h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5" 
+         rendered="#{login.utilisateur.profil.code.equals('BNA')}">
+        <h:outputText value="Toutes les agences" />
+        <p:selectBooleanCheckbox value="#{chartView2.vrais}" id="chbox">
+          <p:ajax update="numpol"  />
+        </p:selectBooleanCheckbox>
+
+        
+     
+        
+    </h:panelGrid>
+    </h:panelGrid>
+    
+ 
+
+ <br/>
+
+ <br/>
+         
+  
+  
+  <h:panelGrid columns="7" cellpadding="5" >
+ 
+ 
+ <p:outputLabel for="id_date1" value="Du:" />
+
+ <p:calendar id="id_date1" value="#{chartView2.date1}"
+						showOn="button" popupIconOnly="false" pattern="dd/MM/yyyy"
+						locale="en" required="true" requiredMessage="La date début est obligatoire"
+						>
+						
+					</p:calendar>
+ <p:message for="id_date1" />
+ 
+ 
+  <p:outputLabel for="id_date2" value="Au:" />
+ 
+ <p:calendar id="id_date2" value="#{chartView2.date2}" showOn="button"
+						mindate="#{chartView2.date1}" popupIconOnly="false"
+						pattern="dd/MM/yyyy" locale="en" required="true"
+						  requiredMessage="La date fin est obligatoire">
+
+					</p:calendar>
+ <p:message for="id_date2" />
+ 
+
+    <p:commandLink  action="#{chartView2.click}" update="export_stat,tbl_stat" ajax="true" id="ok_stat">   
+                                      
+				
+						
+			  <img src="../img/search.jpg" width="32" height="32"/>
+						
+		<!-- <img src="${facesContext.externalContext.requestContextPath}/images/research.png" width="32" height="32"/>-->
+						
+							 
+					</p:commandLink>
+ 
+ 
+  </h:panelGrid>  
+  
+
+   <p:panel id="export_stat"  rendered="#{ login.utilisateur.profil.code.equals('BNA')||login.utilisateur.profil.code.equals('BNAA')}">  
+
+ <p:dataTable id="tbl_stat" var="stat" value="#{chartView2.produitStats}"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" rows="10" style="margin-bottom:20px">
+                 
+             
+             <f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage value="../images/excel.png" width="24"/>
+                <p:dataExporter type="xls" target="tbl_stat" fileName="statistiques" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage value="../images/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="tbl_stat" fileName="statistiques"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage value="../images/csv.png" width="24"/>
+                <p:dataExporter type="csv" target="tbl_stat" fileName="statistiques" />
+            </h:commandLink>
+ 
+            
+        </f:facet>
+  
+  
+   		<p:column   >
+            <f:facet name="header">
+                <h:outputText value="Code Agence"  />
+            </f:facet>
+            <h:outputText value="#{stat.codeagence}"  />
+        </p:column>     
+  
+  
+  <!--  <p:column  >
+            <f:facet name="header">
+                <h:outputText value="Id pack" />
+            </f:facet>
+            <h:outputText value="#{stat.id_pack}" />
+        </p:column> --> 
+         <p:column  >
+            <f:facet name="header">
+                <h:outputText value="Date Opération" />
+            </f:facet>
+            <h:outputText value="#{stat.dateop}" />
+        </p:column> 
+        
+          <p:column  >
+            <f:facet name="header">
+                <h:outputText value="N°Compte" />
+            </f:facet>
+            <h:outputText value="#{stat.ncompte}" />
+        </p:column> 
+        
+        <p:column >
+            <f:facet name="header">
+                <h:outputText value="Produit" />
+            </f:facet>
+            <h:outputText value="#{stat.produit}" />
+        </p:column>   
+        
+         <p:column >
+            <f:facet name="header">
+                <h:outputText value="N°Quittance" />
+            </f:facet>
+            <h:outputText value="#{stat.numquit}" />
+        </p:column> 
+        
+          <p:column >
+            <f:facet name="header">
+                <h:outputText value="n°Adhesion" />
+            </f:facet>
+            <h:outputText value="#{stat.contrat}" />
+        </p:column>   
+        
+        
+          <p:column >
+            <f:facet name="header">
+                <h:outputText value="Prime" />
+            </f:facet>
+            <h:outputText value="#{stat.mtprime}" >
+            <f:convertNumber pattern="#0.000" /></h:outputText>
+        </p:column>   
+        
+               
+          <p:column >
+            <f:facet name="header">
+                <h:outputText value="Commission" />
+            </f:facet>
+            <h:outputText value="#{stat.commission}" >
+            <f:convertNumber pattern="#0.000" /></h:outputText>
+        </p:column> 
+             
+          <p:column >
+            <f:facet name="header">
+                <h:outputText value="Retenu à la source" />
+            </f:facet>
+            <h:outputText value="#{stat.rtsource}" >
+            <f:convertNumber pattern="#0.000" /></h:outputText>
+        </p:column> 
+        
+          <p:column  >
+            <f:facet name="header">
+                <h:outputText value="Id Bordereau" />
+            </f:facet>
+            <h:outputText value="#{stat.id_bordereau}" />
+        </p:column> 
+   </p:dataTable>
+   
+   
+<h:panelGrid id="panel" columns="5" border="1">
+ 
+     <h:column>
+   <h:outputText value="Total "  />   
+    
+    </h:column>
+   <h:column>
+   <h:outputText value="Prime : "  />   
+    <h:outputText value="#{chartView2.totalA}" styleClass="label label-warning price" >
+       <f:convertNumber pattern="#0.000" /></h:outputText> 
+    </h:column>
+    
+    <h:column>
+     <h:outputText value="Commision : " />
+     <h:outputText value="#{chartView2.totalB}" styleClass="label label-info price">
+       <f:convertNumber pattern="#0.000" /></h:outputText>
+    </h:column>
+   
+   
+   <h:column>
+   <h:outputText value="Retenu à la source : " />
+    <h:outputText value="#{chartView2.totalC}" styleClass="label label-success price" >
+       <f:convertNumber pattern="#0.000" /></h:outputText>
+   </h:column>
+   
+   <h:column>
+    <h:outputText value="Total Bordereau  : " />
+     <h:outputText value="#{chartView2.totalBordereau}" styleClass="label label-inverse price" >
+       <f:convertNumber pattern="#0.000" /></h:outputText>
+   </h:column>
+   
+</h:panelGrid>
+  </p:panel>
+  
+ 
+  
+  
+    
+      <p:blockUI block="tbl_stat" trigger="tbl_stat">
+        Chargement<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+    
+     <p:blockUI block="form" trigger="ok_stat">
+        Chargement<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+    
+     <p:blockUI block="form" trigger="date">
+        Chargement<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+     <p:blockUI block="form" trigger="chbox">
+        Chargement<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+    
+    
+    
+  <p:blockUI block="form" trigger="numpol">
+        Chargement<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+     
+ 
+</h:form>
+             
+              
+              
+              </ul>
+    </ui:define>
+</ui:composition>

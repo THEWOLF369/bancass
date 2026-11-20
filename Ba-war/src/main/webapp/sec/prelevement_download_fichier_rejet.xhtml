@@ -1,0 +1,257 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+
+
+<style type="text/css">
+    .loading-icon {
+       font-size: 3rem;
+       color: var(--primary-color);
+       
+        content: url("../img/loaders/page_loader.gif");
+    }
+    
+    .ui-widget-overlay {
+   
+    
+}
+</style>
+
+
+<style type="text/css">
+    .ui-filter-column .ui-column-customfilter .custom-filter {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+
+</style>
+
+        <style type="text/css">
+            .ui-fieldset-legend {
+                width: auto;
+                line-height: 0;
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+
+            .ui-datepicker-trigger {
+                top: -5px;
+                margin-left: 3px;
+            }
+
+            .ui-inputtext {
+                width: 100px;
+            }
+
+            .ui-inputfield.hasDatepicker {
+                width: 75px;
+            }
+
+            .ui-grid-responsive {
+                border: 0;
+            }
+
+            .NPolice-label {
+                width: 128px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .NPolice-input {
+                width: 150px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .Calendar-label {
+                width: 90px;
+                padding-right: 0 !important;
+            }
+
+            .CIN-label {
+                padding-right: 0 !important;
+                padding-left: 15px !important;
+                width: 50px;
+            }
+
+            .calendar-width {
+                width: 200px;
+            }
+
+            .etat-select {
+                width: 160px;
+            }
+
+            @media ( max-width : 980px) {
+                .ui-grid .ui-grid-row {
+                    display: block;
+                }
+                .ui-panelgrid .ui-panelgrid-cell {
+                    float: none;
+                }
+                .ui-inputtext {
+                    width: 90%;
+                }
+                .ui-inputfield.hasDatepicker {
+                    width: 90%;
+                }
+                .etat-select {
+                    width: 90%;
+                }
+            }
+
+            .ui-panelgrid-cell label {
+                color: black;
+            }
+
+            .panel-label-col-width {
+                width: 130px;
+            }
+
+            .transparent .ui-panelgrid-content {
+                background: transparent !important;
+            }
+
+            .ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+            {
+                background: 0 !important;
+                background-color: white !important;
+                box-shadow: none !important;
+            }
+
+            .small-font {
+                font-size: 12px;
+                line-height: 12px;
+            }
+
+            .row1 {
+                background: 0;
+                background-color: #f3f3f3;
+            }
+
+            .row2 {
+                background: 0;
+                background-color: #d9f2e6;
+            }
+
+            .ui-datatable.table th {
+                background: url('../img/bg/bg_vert.png');
+                color: white;
+            }
+
+            .table th {
+                font-weight: 100;
+            }
+        </style>
+
+
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Télécharger le fichier de rejet</li>
+        </ul>
+        <ul class="page_info">
+        
+        
+<h:form id="ftpDownloadForm">
+    <p:messages id="messages" showDetail="true" closable="true" />
+    
+        <!-- BlockUI pour bloquer pendant le traitement -->
+    <p:blockUI block="ftpDownloadForm" trigger="refreshBtn numsoc">
+        <i class="pi pi-spinner pi-spin" style="font-size: 3em; color: #007ad9;" />
+        <h:outputText value="Chargement..." style="display:block; margin-top:10px;" />
+    </p:blockUI>
+    
+    <p:blockUI block="ftpDownloadForm" widgetVar="blocker">
+    <i class="pi pi-spinner pi-spin" style="font-size: 3em; color: #dc3545;" />
+    <h:outputText value="Veuillez patienter..." style="display:block; margin-top:10px;" />
+</p:blockUI>
+
+
+
+
+
+
+<p:panelGrid columns="8" layout="grid" styleClass="transparent" rendered="#{login.utilisateur.profil.code.equals('ASI')}">
+
+   <p:outputLabel for="numsoc" value="Société:" 
+		  rendered="#{login.utilisateur.profil.code.equals('ASI')}"/> 
+     <p:selectOneMenu id="numsoc" styleClass="form-control" value="#{prelevementDownloadRejet.codeSociete}"     
+     filter="true" filterMatchMode="contains"
+          style="width:60px" 
+		      rendered="#{login.utilisateur.profil.code.equals('ASI')}">
+							 
+	 <f:selectItems value="#{prelevementDownloadRejet.listSociete}" />
+	 <p:ajax listener="#{prelevementDownloadRejet.onSocieteChange}" update="fileTable messages"/>
+							 
+	 </p:selectOneMenu>
+	  <br/>   <br/>   
+	 
+	 </p:panelGrid>
+	 
+	 
+
+
+
+
+    <p:commandButton id="refreshBtn" value="🔍 Recherche"
+                     action="#{prelevementDownloadRejet.loadFtpFileList}"
+                     update="fileTable messages"
+                     
+                     style="margin-bottom:15px;" />
+
+    <p:dataTable id="fileTable"
+                 value="#{prelevementDownloadRejet.ftpFiles}"
+                 var="fichier"
+                 filteredValue="#{prelevementDownloadRejet.filteredFiles}"
+                 paginator="true"
+                 rows="10"
+                 rowKey="#{fichier}"
+                 emptyMessage="Aucun fichier trouvé.">
+
+        <p:column headerText="Nom du fichier"
+                  filterBy="#{fichier}" 
+                  filterMatchMode="contains">
+            #{fichier}
+        </p:column>
+
+        <p:column headerText="⬇️ Télécharger">
+            <p:commandButton id="downloadBtn" value="Télécharger"
+                             icon="fa fa-download"
+                             action="#{prelevementDownloadRejet.downloadFile(fichier)}"
+                             ajax="false" />
+        </p:column>
+        
+        <p:column headerText="🗑️ Supprimer">
+            <p:commandButton id="deleteBtn" icon="fa fa-trash"
+                             value="Supprimer"
+                             action="#{prelevementDownloadRejet.deleteFile(fichier)}"
+                             update="ftpDownloadForm:fileTable ftpDownloadForm:messages"
+                             process="@this"
+                             onclick="return confirm('Supprimer ce fichier ?');" 
+                             onstart="PF('blocker').show();" 
+                 oncomplete="PF('blocker').hide();"/>
+        </p:column>
+        
+    </p:dataTable>
+</h:form>
+
+        
+        
+        
+        
+      </ul>      
+        
+  </ui:define>      
+        
+        
+        
+
+    <ui:define name="jquery">
+    </ui:define>
+</ui:composition>        

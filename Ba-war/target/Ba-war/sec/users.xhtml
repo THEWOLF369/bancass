@@ -1,0 +1,276 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+     <h:body style=" border: none;" rendered="#{!gestionProfil.ajoutUser}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+ <h:body style=" border: none;" rendered="#{gestionProfil.ajoutUser}"> 
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Gestion des Utilisateurs</li>
+        </ul>
+        <ul class="page_info">
+            <h:form id="UtilisateursListForm">
+                <p:panel header="Liste des utilisateurs">
+                    <p:dataTable id="datalist" value="#{userBean.allUsers}" var="item"
+                                 selectionMode="single" selection="#{userBean.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idUtilisateurs}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50">
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton "/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton "/>
+                            <p:column filterBy="#{item.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.prenom}" >
+                            <f:facet name="header">
+                                <h:outputText value="Prenom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prenom}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.login}" >
+                            <f:facet name="header">
+                                <h:outputText value="Login"/>
+                            </f:facet>
+                            <h:outputText value="#{item.login}"/>
+                        </p:column>
+                         
+                        
+                       <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Situation"/>
+                            </f:facet>
+                            <h:outputText value="#{item.situationUser.situationName}"/>
+                        </p:column>
+                        
+                        
+                        <p:column filterBy="#{item.agence.codeAgence}" >
+                            <f:facet name="header">
+                                <h:outputText value="Code Agence"/>
+                            </f:facet>
+                             <h:outputText value="#{item.agence.codeAgence}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ajouter" action="#{userBean.prepareCreate()}" update=":UtilisateursCreateForm" oncomplete="PF('UtilisateursCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Voir" update=":UtilisateursViewForm" oncomplete="PF('UtilisateursViewDialog').show()" disabled="#{empty userBean.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Modifier" update=":UtilisateursEditForm" oncomplete="PF('UtilisateursEditDialog').show()" disabled="#{empty userBean.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+                  <p:blockUI block="datalist" trigger="datalist" >
+    Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+            </h:form>
+            <!-- Create Dialog --> 
+            <p:dialog id="UtilisateursCreateDlg" widgetVar="UtilisateursCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Ajouter utilisateur">
+              <center>
+                 <img src="../images/#{login.imageSociete}.png"  height="120px" width="120px"  align="center"/>
+                <br/>
+                <br/>
+              </center>
+                <h:form id="UtilisateursCreateForm">
+                     <h:panelGroup id="display">
+                        <h:panelGrid columns="2" columnClasses="labelWidth, ui-grid-col-3" >
+                         <p:outputLabel value="Nom" for="nom" />
+                            <p:inputText id="nom" value="#{userBean.selected.nom}" title="Nom"  />
+                            <p:outputLabel value="Prenom" for="prenom" />
+                            <p:inputText id="prenom" value="#{userBean.selected.prenom}" title="Prenom"  />
+                            <p:outputLabel value="Mail" for="mail" />
+                            <p:inputText id="mail" value="#{userBean.selected.mail}" title="Mail"  />
+                            <p:outputLabel value="Login" for="login" />
+                            <p:inputText id="login" value="#{userBean.selected.login}" title="Login" />
+                            <p:outputLabel value="Mot de passe" for="password" />
+                            <p:password id="password" value="#{userBean.selected.password}" title="Mot de passe"  />
+                           
+                            
+                            <p:outputLabel value="Profil" for="idprofil" />
+                            <p:selectOneMenu id="idprofil" value="#{userBean.selectedIdProfil}"   rendered="true">
+                                <f:selectItems value="#{userBean.listProfile}"
+                                               var="profile"
+                                               itemValue="#{profile.idProfil}" itemLabel="#{profile.libelle}" />
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Agence" for="idAgence" rendered="#{userBean.listAgentRender}" />
+                            
+                            <p:selectOneMenu id="idAgence" value="#{userBean.selectedIdAgence}"   rendered="#{userBean.listAgentRender}" >
+                                <f:selectItems value="#{userBean.allAgence}"
+                                               var="agence"
+                                               itemValue="#{agence.idAgence}" itemLabel="#{agence.libelle}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Societe" for="idSociete" rendered="#{userBean.listSocieteRender}"/>
+                            
+                            <p:selectOneMenu id="idSociete" value="#{userBean.selectedCodSociet}"   rendered="#{userBean.listSocieteRender}" >
+                                <f:selectItems value="#{userBean.allSocietes}"
+                                               var="societe"
+                                               itemValue="#{societe.codSociet}" itemLabel="#{societe.raisonSoc}"/>
+                            </p:selectOneMenu>
+                              <p:outputLabel/>
+                        </h:panelGrid>
+                        <p:messages ></p:messages>
+                        <p:commandButton action="#{userBean.create()}" value="Ajouter" ajax="true" update="growl,display" oncomplete="handleSubmit(args,'UtilisateursCreateDialog', args.valide);"/>
+                        <p:commandButton value="Annuler" onclick="UtilisateursCreateDialog.hide()" ajax="true" />
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+            <!-- Edit Dialog --> 
+            <p:dialog id="UtilisateursEditDlg" widgetVar="UtilisateursEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Modifier utilisateur" >
+               <center>
+                 <img src="../images/#{login.imageSociete}.png"  height="120px" width="120px"  align="center"/>
+                <br/>
+                <br/>
+                </center>
+                <h:form id="UtilisateursEditForm">
+                    <h:panelGroup id="display">
+                        <h:panelGrid columns="2" rendered="#{userBean.selected != null}">
+                           
+                             <p:outputLabel value="Nom" for="nom" />
+                            <p:inputText id="nom" value="#{userBean.selected.nom}" title="Nom"  />
+                            <p:outputLabel value="Prenom" for="prenom" />
+                            <p:inputText id="prenom" value="#{userBean.selected.prenom}" title="Prenom"  />
+                            <p:outputLabel value="Mail" for="mail" />
+                            <p:inputText id="mail" value="#{userBean.selected.mail}" title="Mail"  />
+                            
+                            
+                           <p:outputLabel value="Profil:" for="editIdprofil" />
+                            <p:selectOneMenu id="editIdprofil" value="#{userBean.selected.profil}"   converter="#{userBean.profilConverter}" rendered="true">
+                                <f:selectItems value="#{userBean.listProfile}"
+                                               var="profile"
+                                               itemValue="#{profile.code}" itemLabel="#{profile.libelle}" />
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Agence:" for="editIdAgence" rendered="#{userBean.listAgentRender}" />
+                            
+                            <p:selectOneMenu id="editIdAgence" value="#{userBean.selected.agence}"   rendered="#{userBean.listAgentRender}" >
+                                <f:selectItems value="#{userBean.allAgence}"
+                                               var="agence"
+                                               itemValue="#{agence}" itemLabel="#{agence.libelle}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Societe:" for="editIdSociete" rendered="#{userBean.listSocieteRender}"/>
+                            
+                            <p:selectOneMenu id="editIdSociete" value="#{userBean.selectedSociete}"  converter="#{userBean.societeConverter}" rendered="#{userBean.listSocieteRender}" >
+                                <f:selectItems value="#{userBean.allSocietes}"
+                                               var="societe"
+                                               itemValue="#{societe}" itemLabel="#{societe.raisonSoc}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Login:" for="login" />
+                            <p:inputText id="login" value="#{userBean.selected.login}" title="Login" />
+                            <p:outputLabel value="Mot de passe:" for="password" />
+                            <p:inputText id="password" value="#{userBean.selected.decryptedPassword}" title="Mot de passe" readonly="true" />
+                             <p:outputLabel value="Nouveau mot de passe:" for="nouveauPassword" />
+                            <p:inputText id="nouveauPassword" value="#{userBean.selected.newPassword}" title="Mot de passe" />
+                            
+                                <p:outputLabel value="Situation Actuel(#{userBean.selected.situationUser.situationName}):" for="situation" />
+                            
+                            <p:selectOneMenu id="situation" value="#{userBean.selected.situationUserToSave}" converter="#{userBean.situationConverter}"  >
+                             <f:selectItem itemValue="" itemLabel="selectionner nouvelle situation"/> 
+                                <f:selectItems value="#{userBean.situationUserList}"
+                                               var="situation"
+                                               itemValue="#{situation.situationName}" itemLabel="#{situation.situationName}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel for="console" value="Réinitialiser nombre tentative(#{userBean.selected.nbrTentative}):" />
+                       <p:selectOneRadio id="console" value="#{userBean.initialiseTentative}">
+                          <f:selectItem itemLabel="Oui" itemValue="true" />
+                                <f:selectItem itemLabel="Non" itemValue="false" />
+                          
+                     </p:selectOneRadio>
+                        </h:panelGrid>
+     
+                        <center>                        
+                        
+                        <p:commandButton actionListener="#{userBean.updateUser()}" value="Modifier" update="UtilisateursListForm,growl" oncomplete="handleSubmit2(args, 'UtilisateursEditDialog');"/>
+                         <p:spacer width="20"></p:spacer>
+                        <p:commandButton value="Annuler" ajax="true" onclick="UtilisateursEditDialog.hide()"/>
+                        </center>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+            <!-- View Dialog --> 
+            <p:dialog id="UtilisateursViewDlg" widgetVar="UtilisateursViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Voir utilisateur">
+               <center>
+                 <img src="../images/#{login.imageSociete}.png"  height="120px" width="120px"  align="center"/>
+                <br/>
+                <br/>
+                </center>
+               
+                <h:form id="UtilisateursViewForm">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{userBean.selected != null}">
+                         <h:outputText value="Nom"/>
+                            <h:outputText value="#{userBean.selected.nom}" />
+                            <h:outputText value="Prénom"/>
+                            <h:outputText value="#{userBean.selected.prenom}" />
+                            <h:outputText value="Mail"/>
+                            <h:outputText value="#{userBean.selected.mail}" />
+                                                       
+                            <h:outputText value="Login"/>
+                            <h:outputText value="#{userBean.selected.login}" />
+                            <h:outputText value="Mot de passe:"/>
+                            <h:outputText value="#{userBean.selected.decryptedPassword}" />
+                           
+                            <h:outputText value="Profil:"/>
+                            <h:outputText value="#{userBean.selected.profil.libelle}" />
+                            <h:outputText value="Situation:"/>
+                            <h:outputText value="#{userBean.selected.situationUser.situationName}"/>
+                            <h:outputText value="Agence:"/>
+                            <h:outputText value="#{userBean.selected.agence.libelle}"/>
+                            <h:outputText value="Connecté:"/>
+                            <h:outputText value="#{userBean.selected.connecte}" />
+                            <h:outputText value="Nombre de Tentative:"/>
+                             <h:outputText value="#{userBean.selected.nbrTentative}"/>
+                            
+                            
+                        </p:panelGrid>
+                        <p:commandButton ajax="true" value="Fermer" onclick="UtilisateursViewDialog.hide()"/>
+                    </h:panelGroup>         
+    
+                </h:form>
+            </p:dialog>
+
+        </ul>
+</h:body>
+        <script>
+            function handleSubmit(args, dialog, valid) {
+                var jqDialog = jQuery('#' + dialog);
+                if (args.validationFailed || !valid) {
+                    jqDialog.effect('shake', {times: 3}, 100);
+                } else {
+                    PF(dialog).hide();
+                    location.reload();
+                }
+            }
+        </script>
+           <script>
+            function handleSubmit2(args, dialog) {
+                var jqDialog = jQuery('#' + dialog);
+                if (args.validationFailed) {
+                    jqDialog.effect('shake', {times: 3}, 100);
+                } else {
+                    PF(dialog).hide();
+                }
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="jquery"></ui:define>
+    <ui:define name="jqueryui"></ui:define>
+</ui:composition>

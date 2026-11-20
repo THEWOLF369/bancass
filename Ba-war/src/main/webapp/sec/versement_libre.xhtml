@@ -1,0 +1,787 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+
+
+<style type="text/css">
+    .loading-icon {
+       font-size: 3rem;
+       color: var(--primary-color);
+       
+        content: url("../img/loaders/page_loader.gif");
+    }
+    
+    .ui-widget-overlay {
+   
+    
+}
+</style>
+
+
+<style type="text/css">
+    .ui-filter-column .ui-column-customfilter .custom-filter {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+
+</style>
+
+        <style type="text/css">
+            .ui-fieldset-legend {
+                width: auto;
+                line-height: 0;
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+
+            .ui-datepicker-trigger {
+                top: -5px;
+                margin-left: 3px;
+            }
+
+            .ui-inputtext {
+                width: 100px;
+            }
+
+            .ui-inputfield.hasDatepicker {
+                width: 75px;
+            }
+
+            .ui-grid-responsive {
+                border: 0;
+            }
+
+            .NPolice-label {
+                width: 128px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .NPolice-input {
+                width: 150px;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
+            }
+
+            .Calendar-label {
+                width: 90px;
+                padding-right: 0 !important;
+            }
+
+            .CIN-label {
+                padding-right: 0 !important;
+                padding-left: 15px !important;
+                width: 50px;
+            }
+
+            .calendar-width {
+                width: 200px;
+            }
+
+            .etat-select {
+                width: 160px;
+            }
+
+            @media ( max-width : 980px) {
+                .ui-grid .ui-grid-row {
+                    display: block;
+                }
+                .ui-panelgrid .ui-panelgrid-cell {
+                    float: none;
+                }
+                .ui-inputtext {
+                    width: 90%;
+                }
+                .ui-inputfield.hasDatepicker {
+                    width: 90%;
+                }
+                .etat-select {
+                    width: 90%;
+                }
+            }
+
+            .ui-panelgrid-cell label {
+                color: black;
+            }
+
+            .panel-label-col-width {
+                width: 130px;
+            }
+
+            .transparent .ui-panelgrid-content {
+                background: transparent !important;
+            }
+
+            .ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+            {
+                background: 0 !important;
+                background-color: white !important;
+                box-shadow: none !important;
+            }
+
+            .small-font {
+                font-size: 12px;
+                line-height: 12px;
+            }
+
+            .row1 {
+                background: 0;
+                background-color: #f3f3f3;
+            }
+
+            .row2 {
+                background: 0;
+                background-color: #d9f2e6;
+            }
+
+            .ui-datatable.table th {
+                background: url('../img/bg/bg_vert.png');
+                color: white;
+            }
+
+            .table th {
+                font-weight: 100;
+            }
+        </style>
+
+
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Versement Libre</li>
+        </ul>
+        <ul class="page_info">
+        
+        
+        
+
+
+    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+
+    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" 
+    resizable="false" showHeader="false">
+        <div class="p-text-center">
+            <i class="pi pi-spin pi-spinner loading-icon" aria-hidden="true"></i>
+        </div>
+    </p:dialog>
+        
+        
+        <p:messages  autoUpdate="true" showDetail="true" closable="true"/>
+         <p:growl id="message" showDetail="true"/>
+        
+            <h:form id="form">
+			
+
+			
+			  <p:panelGrid columns="8" layout="grid"
+                                     styleClass="transparent">
+                                     
+                            <h:outputLabel value="Produit:" styleClass="small-font" 
+							 rendered="#{!login.utilisateur.profil.code.equals('IST') and
+    !login.utilisateur.profil.code.equals('TDST') and !login.utilisateur.profil.code.equals('VST') and 
+    !login.utilisateur.profil.code.equals('AST') and !login.utilisateur.profil.code.equals('VTST')}"
+                                           style="margin-top: 7px;" />                           
+                            <h:selectOneMenu class="etat-select" onchange="filterEtat('policeFilter', this)" 
+							 rendered="#{!login.utilisateur.profil.code.equals('IST') and
+    !login.utilisateur.profil.code.equals('TDST') and !login.utilisateur.profil.code.equals('VST') and 
+    !login.utilisateur.profil.code.equals('AST') and !login.utilisateur.profil.code.equals('VTST')}"
+    value="#{versementLibreBean.libelleProduit}">
+                              <f:selectItem itemLabel="Choisir un produit..."  /> 
+							   <f:selectItems value="#{versementLibreBean.produits}" var="produits" itemLabel="#{produits.libelleProduit}" itemValue="#{produits.libelleProduit}"/>
+						    </h:selectOneMenu>
+						    
+						    <br/>
+                            
+                            <h:outputLabel value="Contrat N°:" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:inputText   size="5"
+                                         style="background: 0; background-color: white!important"
+                                         styleClass="small-font" 
+                                         value="#{versementLibreBean.nadhesion}"/>
+                                         
+                                         
+                            <br/>             
+                                          
+                             <h:outputLabel value="Identifiant Client:" styleClass="small-font"
+                                           style="margin-top: 7px;" />
+                            <p:inputText 
+                                         styleClass="small-font" 
+                                         value="#{versementLibreBean.cin}"/>
+
+                            
+                            
+                            
+                            
+                            
+                            
+                           
+
+                            
+                            
+                            <p:outputLabel for="numsoc" value="Société:" 
+							  rendered="#{login.utilisateur.profil.code.equals('IST') || login.utilisateur.profil.code.equals('AST') || 
+    login.utilisateur.profil.code.equals('TDST')  ||  login.utilisateur.profil.code.equals('VST')  ||  
+    login.utilisateur.profil.code.equals('ASI')  ||  login.utilisateur.profil.code.equals('VTST')}"/> 
+     <p:selectOneMenu id="numsoc" styleClass="form-control" value="#{versementLibreBean.codeSociete}"     filter="true" filterMatchMode="contains"
+          style="width:60px" 
+		     rendered="#{login.utilisateur.profil.code.equals('IST') || login.utilisateur.profil.code.equals('AST') || 
+    login.utilisateur.profil.code.equals('TDST')  ||  login.utilisateur.profil.code.equals('VST')  ||  
+    login.utilisateur.profil.code.equals('ASI')  ||  login.utilisateur.profil.code.equals('VTST')}">
+							 
+							<f:selectItems value="#{versementLibreBean.listSociete}" />
+							 
+						</p:selectOneMenu>
+                            
+                            
+                            
+                            <h:outputLabel value="Code agence:" styleClass="small-font"
+                                           style="margin-top: 7px;" rendered="#{login.utilisateur.profil.code.equals('AST') || login.utilisateur.profil.code.equals('AS')}"/>
+                            <p:inputText onkeyup="filterTable(this, 'agenceFilter')" size="5"
+                                         style="background: 0; background-color: white!important"
+                                         styleClass="small-font" rendered="#{login.utilisateur.profil.code.equals('AST') || login.utilisateur.profil.code.equals('AS')}"/>
+                           
+                        </p:panelGrid>
+                        
+ 
+ 			 <p:panelGrid columns="8" layout="grid" columnClasses="alabel, dateCol, alabel, dateCol"
+                             styleClass="transparent">
+
+     
+                  
+
+Date création
+Du: 
+<p:calendar id="startDate" value="#{versementLibreBean.from}" showOn="button"
+    popupIconOnly="false" pattern ="dd/MM/yyyy" locale="en"
+    required="false" requiredMessage="bbb"
+    label="#{ui['calendar.start']}">
+    <p:ajax event="dateSelect" update="endDate" />
+</p:calendar>
+ 
+Au:
+<p:calendar id="endDate" value="#{versementLibreBean.to}" showOn="button"
+    mindate="#{versementLibreBean.from}" popupIconOnly="false" pattern="dd/MM/yyyy"
+    locale="en" required="false" label="#{ui['calendar.end']}"
+    requiredMessage="bbb">
+    
+</p:calendar>
+
+                   
+                    
+                    <p:commandLink  action="#{versementLibreBean.Chercher}" update="form" ajax="true" id="searchBtn" >
+                     <img src="${facesContext.externalContext.requestContextPath}/images/research.png" width="32" height="32"/>
+                    </p:commandLink>
+                    
+                    
+                    
+                </p:panelGrid>                       
+                        
+                        
+                <h:commandLink   >
+                     <img src="${facesContext.externalContext.requestContextPath}/images/icon/excel.png" width="32" height="32"/>
+                      <p:dataExporter type="xls" target="dataTable" fileName="Versement-libre" />
+                    </h:commandLink>
+ 				<h:commandLink   >
+                     <img src="${facesContext.externalContext.requestContextPath}/images/icon/pdf.png" width="32" height="32"/>
+                      <p:dataExporter type="pdf" target="dataTable" fileName="Versement-libre" />
+                    </h:commandLink>
+				 <h:commandLink   >
+                     <img src="${facesContext.externalContext.requestContextPath}/images/icon/csv.png" width="32" height="32"/>
+                      <p:dataExporter type="csv" target="dataTable" fileName="Versement-libre" />
+                    </h:commandLink>
+ 
+  				<h:commandLink   >
+  	                   <img src="${facesContext.externalContext.requestContextPath}/images/icon/xml.png" width="32" height="32"/>
+                      <p:dataExporter type="xml" target="dataTable" fileName="Versement-libre" />
+                    </h:commandLink>
+                    
+                
+                
+                
+                
+                <p:growl id="growl"/>
+                    
+                <p:dataTable var="consultation" reflow="true" id="dataTable" widgetVar="customersTable"
+                             rowStyleClass="#{(rowIndex mod 2) eq 0 ? 'row1' : 'row2'}"
+                             styleClass="table" rowIndexVar="rowIndex"
+                             value="#{versementLibreBean.adhesions}" paginator="true" rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             scrollable="true" scrollWidth="800" 
+                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                  rowExpandMode="single" >
+					
+                 <p:ajax event="rowToggle" listener="#{versementLibreBean.onRowToggle}" update="form:growl"/>
+
+                    <p:column style="width:10px" exportable="false">
+                        <p:rowToggler />
+                    </p:column>
+
+
+
+            <p:column  headerText="Produit" filterMatchMode="exact"  filterStyleClass="policeFilter"
+                      filterBy="#{consultation.police.codProdui.libelleProduit}" style="width:100px;">
+                <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" style="width:20px;" >
+                        <f:selectItem itemLabel="Tous..." itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{encaissementTermeBean.produits}" var="produits" itemLabel="#{produits.libelleProduit}" itemValue="#{produits.libelleProduit}"/>
+                    </p:selectOneMenu>
+                </f:facet>
+
+               
+                <h:outputText  value="#{consultation.police.codProdui.libelleProduit}" visible="true"/>
+            </p:column>
+            
+                    
+                   <p:column headerText="Contrat N°" filterStyleClass="adhesionFilter" style="width:100px;"
+                              filterBy="#{consultation.nadhesion}"
+                              >
+                        <h:outputLabel value="#{consultation.nadhesion}" visible="true"/>
+                    </p:column>
+                    
+                    
+
+                    <p:column headerText="Code Agence" filterStyleClass="agenceFilter" style="width:90px;"
+                              filterBy="#{consultation.utilisateur.agence.codeAgence}"
+                              filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('AST') || login.utilisateur.profil.code.equals('AS')}">
+                        <h:outputLabel value="#{consultation.utilisateur.agence.codeAgence}" rendered="#{login.utilisateur.profil.code.equals('AST') || login.utilisateur.profil.code.equals('AS')}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Identifiant Client" filterStyleClass="cinFilter" style="width:90px;"
+                              filterBy="#{consultation.client.identifiant}"
+                              >
+                        <h:outputLabel value="#{consultation.client.identifiant}" />
+                    </p:column>
+
+                   
+                    
+
+                    
+                    <p:column headerText="Montant Prime (TND)" style="width:90px;">
+                        <h:outputLabel value="#{consultation.mtPrime+consultation.taxe+consultation.cout}">
+                        <f:convertNumber pattern="#0.000" />
+							</h:outputLabel>
+                    </p:column>
+      
+                    
+
+
+			<p:column  headerText="Etat" filterMatchMode="exact"  filterStyleClass="etatFilter"
+                      filterBy="#{consultation.etat}" style="width:50px;">
+                <f:facet name="filter">
+                    <p:selectOneMenu onchange="PF('customersTable').filter()" style="width: 100px;" >
+                        <f:selectItem itemLabel="Tous..." itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItem itemValue="V" itemLabel="En Vigeur" />
+							<f:selectItem itemValue="E" itemLabel="éteint" />
+							<f:selectItem itemValue="A" itemLabel="Annulé" />
+							<f:selectItem itemValue="N" itemLabel="Non validé" />
+                    </p:selectOneMenu>
+                </f:facet>
+
+               
+                <h:outputText  value="#{consultation.etat}" visible="true"/>
+            </p:column>
+            
+                   
+                    <p:column headerText="Date Creation" style="width:90px;"
+                              filterStyleClass="dateCreaFilter" sortBy="#{consultation.datcreation}"
+                              filterBy="#{consultation.datcreation}" filterStyle="display: none" >
+                        <h:outputLabel value="#{consultation.datcreation}" />
+                    </p:column>
+                    
+                    
+               
+                    
+                    
+                    
+
+                     
+                     
+                     
+           <p:column headerText="Encaissement" style="width:80px;text-align: center"
+                       filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('G') || login.utilisateur.profil.code.equals('AA')}">
+
+                <p:commandButton icon="fa fa-fw fa-money" update=":form:manage-product-content"
+                                 oncomplete="PF('manageProductDialog').show()"
+                                  disabled="#{!consultation.etat.equals('V')}"
+                                 styleClass="edit-button rounded-button ui-button-success" process="@this">
+                    <f:setPropertyActionListener value="#{consultation}" target="#{versementLibreBean.selectedAdhesion}"/>
+                    <p:resetInput target=":form:manage-product-content-bis"/>
+                </p:commandButton>
+                
+               
+                
+            </p:column>
+                    
+                    <p:rowExpansion>
+                        <p:panelGrid columns="4" layout="grid"  columnClasses="ui-grid-col-2, ui-grid-col-5, ui-grid-col-2, ui-grid-col-5">
+
+                            <p:outputLabel value="Numero Police:" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.police.NPolice}" />
+                            
+                            <p:outputLabel value="N° adhesion:" style="font-weight: bold;" />
+							<p:outputLabel value="#{consultation.nadhesion}" />
+
+                            <p:outputLabel value="Client:" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.client.nomClient} #{consultation.client.prenomClient}" />
+
+                            <p:outputLabel value="Capital:" style="font-weight: bold;" 
+                            rendered="#{!consultation.police.codProdui.libelleProduit.equals('Assistance voyage') 
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('TLSAssistV')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('7ayya')}"/>
+                            <p:outputLabel value="#{consultation.capital}" 
+                            rendered="#{!consultation.police.codProdui.libelleProduit.equals('Assistance voyage') 
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('TLSAssistV')
+                            &amp;&amp; !consultation.police.codProdui.libelleProduit.equals('7ayya')}"/>
+
+                            <p:outputLabel value="Date debut" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.datDebut}" />
+
+                            <p:outputLabel value="Date Fin" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.datFin}" />
+
+                            <p:outputLabel value="Duree" style="font-weight: bold;" rendered="#{!consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')
+                            &amp;&amp; !login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}"/>
+                            <p:outputLabel value="#{consultation.duree}" rendered="#{!consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')
+                            &amp;&amp; !login.utilisateur.profil.code.equals('BNAA') || login.utilisateur.profil.code.equals('BNA')}"/>
+
+                            <p:outputLabel value="Adresse du risque:" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+                            <p:outputLabel value="#{consultation.adresse}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+
+                            <p:outputLabel value="Code Postal du risque:" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+                            <p:outputLabel value="#{consultation.codeP}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+
+                            <p:outputLabel value="Localité du risque:" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+                            <p:outputLabel value="#{consultation.localite}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+
+                            <p:outputLabel value="Gouvernorat du risque:" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+                            <p:outputLabel value="#{consultation.gouver}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Incendie')}"/>
+
+                            <p:outputLabel value="Etat" style="font-weight: bold;"/>
+                            <p:outputLabel value="#{consultation.etat}" />
+
+                            <p:outputLabel value="Taux Prime" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.tauxPrime}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                                                                               
+                            <p:outputLabel value="Taux SPRIM" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.tauxSprim}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+
+                            <p:outputLabel value="Majoration" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.majoration}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+
+                            <p:outputLabel value="Taux Inter" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.tauxInter}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+
+                            <p:outputLabel value="Franchise" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+                            <p:outputLabel value="#{consultation.franchise}" rendered="#{consultation.police.codProdui.libelleProduit.equals('TD')}"/>
+
+                            
+                            <p:outputLabel value="Montant Prime (sans Surprime):" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />
+							<p:outputLabel value="Montant Prime:" style="font-weight: bold;" rendered="#{!consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />
+							<p:outputLabel value="#{consultation.mtPrime+consultation.taxe+consultation.cout}" >
+							<f:convertNumber pattern="#0.000" />
+							</p:outputLabel>
+							
+							<p:outputLabel value="Fractionnement" style="font-weight: bold;"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('7ayya')}" />
+							<p:outputLabel value="Annuel"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('7ayya')
+								and consultation.fraPolice == '1'}" />
+							<p:outputLabel value="Semestriel"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('7ayya')
+								and consultation.fraPolice == '2'}" />
+							<p:outputLabel value="Trimestriel"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('7ayya')
+								and consultation.fraPolice == '3'}" />
+							<p:outputLabel value="Mensuel"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('7ayya')
+								and consultation.fraPolice == '4'}" />
+							<p:outputLabel value="Prime Unique"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('7ayya')
+								and consultation.fraPolice == '5'}" />
+							
+							<p:outputLabel value="Prime nette:" style="font-weight: bold;" 
+							rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}"/>
+							<p:outputLabel
+								value="#{consultation.mtPrime}"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}">
+								<f:convertNumber pattern="#0.000" />
+							</p:outputLabel>
+							
+							<p:outputLabel value="Taxe:" style="font-weight: bold;" 
+							rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}"/>
+							<p:outputLabel
+								value="#{consultation.taxe}"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}">
+								<f:convertNumber pattern="#0.000" />
+							</p:outputLabel>
+							
+							<p:outputLabel value="Frais du contrat:" style="font-weight: bold;" 
+							rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}"/>
+							<p:outputLabel
+								value="#{consultation.cout}"
+								rendered="#{consultation.police.codProdui.libelleProduit.equals('MultiRisque Habitation')}">
+								<f:convertNumber pattern="#0.000" />
+							</p:outputLabel>
+
+                            <p:outputLabel value="Type Contrat" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage')}"/>
+                            <p:outputLabel value="#{consultation.typeAbonnement.valTypeAbonnement}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage')}"/>
+                            
+                            <p:outputLabel value="Destination" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') ||
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            <p:outputLabel value="#{consultation.destination}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            
+                            <p:outputLabel value="Personne à prévenir" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            <p:outputLabel value="#{consultation.personnePrv}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            
+                            <p:outputLabel value="téléphone" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            <p:outputLabel value="#{consultation.telphone}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Assistance voyage') || 
+                            consultation.police.codProdui.libelleProduit.equals('TLSAssistV')}"/>
+                            
+                            <p:outputLabel value="Bourse mensuelle" style="font-weight: bold;" rendered="#{consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')}"/>
+                            <p:outputLabel value="#{consultation.detailAvj.mtBourse}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')}"/>
+							
+							<p:outputLabel value="Age de service bourse"	style="font-weight: bold;"	rendered="#{consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')}" />
+							<p:outputLabel value="#{consultation.detailAvj.ageServiceBourse}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')}"/>
+
+                            <p:outputLabel value="Durée de service bourse"	style="font-weight: bold;"	rendered="#{consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')}" />
+							<p:outputLabel value="#{consultation.detailAvj.dureeBourse}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')}"/>
+                            
+                            <p:outputLabel value="Fractionnement"	style="font-weight: bold;"	rendered="#{consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')}" />
+							<p:outputLabel value="#{consultation.fraPolice}" rendered="#{consultation.police.codProdui.libelleProduit.equals('Avenirjeunesse')}"/>
+                            
+							<p:outputLabel value="Surprime"	style="font-weight: bold;"	rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}" />
+							<p:outputLabel value="#{consultation.detailAvj.surprime}" rendered="#{consultation.police.codProdui.libelleProduit.equals('UNIVERSITY')}"/>
+
+                        </p:panelGrid>
+                        
+                        <p:dataTable id="modelsTable" value="#{versementLibreBean.qtcVlList}" var="model"
+                         widgetVar="qtcTable"
+                             rows="5"
+                     paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     rowsPerPageTemplate="5,10,20,50"
+                             scrollable="true"  >
+                        
+                        
+                        
+                        <p:column headerText="N° quittance" style="width:100px;"
+                        >
+                            <h:outputText value="#{model.quittance.numquit}"/>
+                        </p:column>
+                        <p:column headerText="Agence" style="width:80px;">
+                            <h:outputText value="#{model.detail.agence.codeAgence}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Date d'opération" style="width:100px;">
+                            <h:outputText value="#{model.quittance.DATE_CREATION}"/>
+                        </p:column>
+                        <p:column headerText="Prime nette" style="width:100px;">
+                            <p:outputLabel value="#{model.detail.primenette}" >
+                            <f:convertNumber pattern="#0.000" /> </p:outputLabel>                          
+                        </p:column>
+                        <p:column headerText="Frais" style="width:100px;">
+                            <p:outputLabel value="#{model.quittance.frais}">
+                            <f:convertNumber pattern="#0.000" /> </p:outputLabel>      
+                        </p:column>
+                        <p:column headerText="Taxes" style="width:100px;">
+                            <p:outputLabel value="#{model.quittance.taxe}">
+                            <f:convertNumber pattern="#0.000" /> </p:outputLabel>      
+                        </p:column>
+                        <p:column headerText="FGA" style="width:100px;">
+                            <p:outputLabel value="#{model.quittance.fga}">
+                            <f:convertNumber pattern="#0.000" /> </p:outputLabel>      
+                        </p:column>
+                        <p:column headerText="Prime totale" style="width:100px;">
+                            <p:outputLabel value="#{model.detail.primetot}">
+                            <f:convertNumber pattern="#0.000" /> </p:outputLabel>      
+                        </p:column>
+                        
+                        <p:column headerText="Encaissée" style="width:100px;"
+                        >
+                        
+                            <p:outputLabel value="#{model.detail.etat}"/>
+                               
+                        </p:column>
+                        
+                        
+                         <p:column headerText="Encaissement" style="width:80px;text-align: center"
+                       filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('G') || login.utilisateur.profil.code.equals('AA')}">
+
+
+                        
+                        <p:commandButton   action="#{versementLibreBean.EncaissementQuittance(consultation, model)}" 
+					 update="form:dataTable:#{versementLibreBean.rowIndex}:modelsTable message"
+					styleClass="p-mr-2" icon="fa fa-fw fa-money" disabled="#{model.detail.etat.equals('O')}">
+					            <p:confirm header="Confirmation" message="Effectuer l'encaissement?" 
+					            icon="pi pi-exclamation-triangle"/>
+					        </p:commandButton>    
+                        
+                        
+                    </p:column>
+                    
+                    
+                    
+                
+                    
+                        
+                        
+                       <p:column headerText="QTC" style="width:40px;text-align: center"
+                       filterStyle="display: none" rendered="#{login.utilisateur.profil.code.equals('G') || login.utilisateur.profil.code.equals('AA')}">
+
+                        <p:commandLink title="QTC" ajax="false"  disabled="#{model.detail.etat.equals('N')}"
+                                       action="#{versementLibreBean.printQTC(consultation, model)}" target="_blank">
+                            <i class="fa fa-fw fa-print"></i>
+                        </p:commandLink>
+                    </p:column>
+                        
+                        
+                    </p:dataTable>
+                        
+                    </p:rowExpansion>
+                </p:dataTable>
+                
+                
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+                
+                
+        <p:dialog header="Contrat n°: #{versementLibreBean.selectedAdhesion.nadhesion}" showEffect="fade" modal="true"
+                  widgetVar="manageProductDialog" responsive="true" id="manage-product-content" width="650">
+            <p:outputPanel  id="manage-product-content-bis">
+                <p:outputPanel >
+                    
+                    <p class="ui-widget">
+                    </p>
+                    
+					<p class="ui-widget">
+                        Veuillez saisir une contribution exceptionnelle.
+                    </p>
+                    
+                    <p class="ui-widget">
+                    </p>
+                    
+                    <div class="p-field">
+                        <p:outputLabel for="contrib">Contribution Exceptionnelle: </p:outputLabel>
+                        
+                      
+                    
+                        <p:inputNumber id="contrib" styleClass="form-control"
+							value="#{versementLibreBean.contrib}"  
+								thousandSeparator="" decimalSeparator="." decimalPlaces="3" 
+							validatorMessage="La Contribution Exceptionnelle doit être différente de zéro ." 
+							requiredMessage="La Contribution Exceptionnelle est obligatoire"
+							 >
+							
+						</p:inputNumber>
+						<p:message for="contrib" />
+						<p:messages  autoUpdate="true" showDetail="true" closable="true"/>
+         				<p:growl id="messages" showDetail="true"/>
+                    </div>
+                     
+                     
+                     
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <f:facet name="footer">
+                <p:commandLink value="Valider" icon="pi pi-check" actionListener="#{versementLibreBean.ValiderContrat()}"
+                                 update="manage-product-content-bis valider enc validerQuit form:dataTable" 
+                                 process="manage-product-content-bis @this"
+                                 styleClass="btn btn-success" id="valider"  style="color:#ffffff"
+                                 disabled="#{versementLibreBean.disabledValidationAdhesion}" />
+                                 
+                <p:commandLink id="enc"   type="idEnc=" actionListener= "#{versementLibreBean.Encaissement()}" 
+                              update="manage-product-content-bis valider enc validerQuit" process="manage-product-content-bis @this"
+                              styleClass="btn btn-danger"  value="Encaissement"   style="color:#ffffff"
+                              disabled="#{versementLibreBean.disabledValidationEncaissement}" />  
+                              
+                              
+                  <p:commandLink  type="idvaliderQuit"  id="validerQuit"  action= "#{versementLibreBean.imprimer_quit()}" 
+                              update="form"  ajax="false" target="_blank" style="color:#ffffff"
+                              styleClass="btn btn-success"  value="Imprimer la Quittance" 
+                              disabled="#{versementLibreBean.disabledImprimQuittance}"
+                              process="@this"/>                             
+                                 
+                
+            </f:facet>
+        </p:dialog>
+                
+                
+                
+
+                
+            
+
+
+
+ <p:blockUI block="dataTable" trigger="dataTable">
+        Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+
+
+
+ <p:blockUI block="form:dataTable:modelsTable" trigger="form:dataTable:modelsTable">
+        Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+    
+    <p:blockUI block="dataTable" trigger="searchBtn" >
+    Chargement...<br />
+        <p:graphicImage value="../img/loaders/page_loader.gif"/>
+    </p:blockUI>
+            </h:form>
+        </ul>
+
+        <script>
+            function filterTable(input, className) {
+                console.log(input);
+                filterInput = $("." + className);
+                filterInput.val(input.value);
+                filterInput.trigger("keyup");
+            }
+
+            function filterTableDate(className) {
+                dateValue = PF('filterDate').input.val();
+                filterInput = $("." + className);
+                filterInput.val(dateValue);
+                filterInput.trigger("keyup");
+            }
+
+            function filtrerGlobal() {
+                filterEtat('etatFilter', document.getElementById('form:idSelectionEtat'));
+                
+            }
+           
+            
+            function filterEtat(className, etat) {
+                filterInput = $("." + className);
+                etat = etat.options[etat.selectedIndex].value;
+                if (etat === 'a') {
+                    etat = "";
+                }
+                filterInput.val(etat);
+                filterInput.trigger("keyup");
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="jquery">
+    </ui:define>
+</ui:composition>

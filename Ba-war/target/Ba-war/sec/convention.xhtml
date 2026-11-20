@@ -1,0 +1,145 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+        <style>
+            .ui-inputfield.hasDatepicker {
+                width: 75px;
+            }
+
+            .addConvention.ui-panelgrid>*>tr,
+            .addConvention.ui-panelgrid>*>tr>td {
+                border: none;
+            }
+        </style>
+ <h:body style=" border: none;" rendered="#{!gestionProfil.ajoutConvention}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+ <h:body style=" border: none;" rendered="#{gestionProfil.ajoutConvention}">
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Gestion des Conventions</li>
+        </ul>
+        <ul class="page_info">
+            <h:form id="AddConventionForm">
+                <p:panelGrid columns="2" styleClass="addConvention" id="panel" >
+                    <p:outputLabel value="Societe:" for="societe" />
+                    <p:selectOneMenu id="societe" value="#{conventionBean.convention.societe}" disabled="#{conventionBean.updateConvention}" converter="#{conventionBean.societeConverter}" >
+                        <f:selectItems value="#{conventionBean.allSocietes}"
+                                       var="societe"
+                                       itemValue="#{societe.codSociet}" itemLabel="#{societe.raisonSoc}  " />
+                                        
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel value="Date Debut:" for="datDebut" />
+                    <p:calendar id="datDebut" pattern="yyyy-MM-dd"  value="#{conventionBean.convention.dateDebut}" disabled="#{conventionBean.updateConvention}"/>
+
+                    <p:outputLabel value="Date Fin:" for="datFin" />
+                    <p:calendar id="datFin" pattern="yyyy-MM-dd"  value="#{conventionBean.convention.dateFin}" />
+
+                    <p:outputLabel value="Date Signature:" for="datSig"   />
+                    <p:calendar id="datSig" pattern="yyyy-MM-dd"  value="#{conventionBean.convention.dateSignature}" disabled="#{conventionBean.updateConvention}"/>
+
+                    <p:outputLabel value="Produits:" for="pickList" />                
+                    <p:pickList id="pickList" value="#{conventionBean.produitPickList}" 
+                                var="produit" 
+                                itemLabel="#{produit.libelleProduit}" 
+                                itemValue="#{produit}" 
+                                converter="produit"
+                                />
+
+                    <p:outputPanel/>
+                    
+                </p:panelGrid>
+                 <center>
+                <h:panelGrid columns="3">
+                    <p:commandButton value="Réinitialiser" action="#{conventionBean.renitialiserConvention}" update="AddConventionForm,growl"/>
+                   <p:outputLabel style="width:200px"></p:outputLabel>
+                     <p:commandButton value="Enregistrer" action="#{conventionBean.createOrUpdate}" update="AddConventionForm, growl"/>
+                    
+                      
+               </h:panelGrid>
+</center>
+                <p:panel header="Liste des Convention">
+                    <p:dataTable value="#{conventionBean.conventions}" var="convention">
+                        <p:ajax event="rowToggle" listener="#{conventionBean.loadConvention}" update="prod" />  
+
+
+                        <p:column style="width:30px">
+                            <p:rowToggler />
+                        </p:column>
+
+                       
+
+                        <p:column headerText="Societe">
+                            <p:outputLabel value="#{convention.societe.raisonSoc}"/>
+                        </p:column>
+
+                        <p:column headerText="Date Debut">
+                            <p:outputLabel value="#{convention.dateDebut}"/>
+                        </p:column>
+
+                        <p:column headerText="Date Fin">
+                            <p:outputLabel value="#{convention.dateFin}" />
+                        </p:column>
+
+                        <p:column headerText="Date Signature">
+                            <p:outputLabel value="#{convention.dateSignature}"/>
+                        </p:column>
+                         <p:column headerText="Dernières mises à jour">
+                            <p:outputLabel value="#{convention.datedernieMiseAjour}"/>
+                        </p:column>
+                         <p:column headerText="Logo">
+                          <center>
+                            <img src="../images/#{convention.societe.codSociet}.png"  height="150px" width="150px"  align="center"/>
+                            </center>
+                        </p:column>
+                        <p:column >
+                        <center>
+                        <p:commandLink action="#{conventionBean.updateConventionActionListener()}" update=":AddConventionForm:panel">
+					     
+					      <f:setPropertyActionListener value="#{convention}" target="#{conventionBean.selectedConvention}"/>
+                                 <img src="${facesContext.externalContext.requestContextPath}/images/edit.png" width="17" height="17"/>
+					     
+					     
+					     </p:commandLink>
+                        </center>
+                        </p:column>
+                        <p:rowExpansion>
+                            <h5>Liste des Produits:</h5>
+                            <p:repeat value="#{conventionBean.prodconvs}" var="prodconv" size="#{conventionBean.prodconvs.size()}" offset="" step="1" varStatus="stats" id="prod">
+                                #{prodconv.produit.codeProduit} - #{prodconv.produit.libelleProduit} <br/>
+                            </p:repeat>
+                        </p:rowExpansion>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ul>
+</h:body>
+        <script>
+            function handleSubmit(args, dialog) {
+                var jqDialog = jQuery('#' + dialog);
+                if (args.validationFailed) {
+                    jqDialog.effect('shake', {times: 3}, 100);
+                } else {
+                    PF(dialog).hide();
+                }
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="jquery"></ui:define>
+    <ui:define name="jqueryui"></ui:define>
+</ui:composition>

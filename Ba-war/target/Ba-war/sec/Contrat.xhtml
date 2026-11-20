@@ -1,0 +1,286 @@
+<ui:composition template="/sec/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+    <h:body style=" border: none;" rendered="#{!gestionProfil.ajoutContrat}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+ <h:body style=" border: none;" rendered="#{gestionProfil.ajoutContrat}"> 
+        <ul class="breadcrumb br_styled no_space">
+            <li class="active">Gestion des Contrats</li>
+        </ul>
+        <ul class="page_info">
+            <h:form id="ContratListForm">
+                <p:panel header="Liste des Contrats">
+                    <p:dataTable id="datalist" value="#{contratBean.items}" var="item"
+                                 selectionMode="single" selection="#{contratBean.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.NPolice}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50">
+
+                        <p:ajax event="rowSelect" update="createButton viewButton editButton deleteButton garantieButton" />
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton garantieButton"/>
+
+                        <p:column filterBy="#{item.NPolice}" >
+                            <f:facet name="header">
+                                <h:outputText value="Numero de Police"/>
+                            </f:facet>
+                            <h:outputText value="#{item.NPolice}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date debut"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datDeb}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date fin"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datFin}"/>
+                        </p:column>
+                         
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Etat Police"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etaPolice}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="age limite"/>
+                            </f:facet>
+                            <h:outputText value="#{item.agelimit}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ajouter" actionListener="#{contratBean.prepareCreate}" update=":ContratCreateForm" oncomplete="PF('ContratCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Voir" update=":ContratViewForm" oncomplete="PF('ContratViewDialog').show()" disabled="#{empty contratBean.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Modifier" update=":ContratEditForm" oncomplete="PF('ContratEditDialog').show()" disabled="#{empty contratBean.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Supprimer" actionListener="#{contratBean.destroy}" update=":growl,datalist" disabled="#{empty contratBean.selected}"/>
+                            
+                            <p:commandButton id="garantieButton" icon="ui-icon-plus"  value="Garantie"  update="ContratGarForm" oncomplete="PF('ContratGarDialog').show()" disabled="#{empty contratBean.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <!-- Create Form -->
+
+            <p:dialog id="ContratCreateDlg" widgetVar="ContratCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Ajouter un Contrat">
+                <h:form id="ContratCreateForm">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="numero de police:" for="nPolice" />
+                            <p:inputText id="nPolice" value="#{contratBean.selected.NPolice}" title="numero de police" required="true" requiredMessage="Le numero de police est obligatoire"/>
+                            <p:outputLabel value="num convention:" for="convention" />
+                            <p:inputText id="convention" value="#{contratBean.selected.convention}" title="num convention" />
+                            <p:outputLabel value="Date effet:" for="datDeb" />
+                            <p:inputText id="datDeb" value="#{contratBean.selected.datDeb}" title="Date effet" />
+                            <p:outputLabel value="Mode Payement:" for="modePaye" />
+                            <p:inputText id="modePaye" value="#{contratBean.selected.modePaye}" title="Mode Payement" />
+                            <p:outputLabel value="age limite:" for="agelimit" />
+                            <p:inputText id="agelimit" value="#{contratBean.selected.agelimit}" title="age limite" />
+                            <p:outputLabel value="Tx commission:" for="txCom" />
+                            <p:inputText id="txCom" value="#{contratBean.selected.txCom}" title="Tx commission" />
+                            
+                            
+                            
+                            <p:outputLabel value="Taux de prime:" for="txpr" />
+                            <p:selectOneRadio id="txpr">
+                                <f:selectItem itemLabel="Unique" itemValue="unique" /> <p:inputText id="txpri" value="#{contratBean.selected.tauxPrime}" />
+                                <f:selectItem itemLabel="Variable" itemValue="variable" />
+                                <h:selectOneMenu styleClass="form-control" id="console"  required="false" value="#{contratBean.selected.tauxPrime}" >
+                                                <f:selectItem  itemLabel="variable par durée et age" itemValue="dur" />
+                                                <f:selectItem itemLabel="variable par age" itemValue="age" />
+                                                <f:selectItem itemLabel="variable par capital" itemValue="cap" />
+                                </h:selectOneMenu>
+                            </p:selectOneRadio>
+        
+                           <p:outputLabel value="Taux de prime:" for="txprime" />
+                            <p:selectOneRadio id="txprime" value="#{contratBean.selected.typeTx}">
+                                <f:selectItem itemLabel="Global" itemValue="Global" />
+                                <f:selectItem itemLabel="Annuel" itemValue="Annuel" />
+                            </p:selectOneRadio>
+                             
+                        </p:panelGrid>
+                        <p:commandButton actionListener="#{contratBean.create}" value="Ajouter" update="display,:ContratListForm:datalist,:growl" oncomplete="handleSubmit(args,'ContratCreateDialog');"/>
+                        <p:commandButton value="Annuler" onclick="ContratCreateDialog.hide()"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+            <!-- Edit Form --> 
+
+            <p:dialog id="ContratEditDlg" widgetVar="ContratEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Modifier un Contrat">
+                <h:form id="ContratEditForm">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{contratBean.selected != null}">
+                            <p:outputLabel value="numero de police:" for="nPolice" />
+                            <p:inputText id="nPolice" value="#{contratBean.selected.NPolice}" title="numero de police" required="true" requiredMessage="Le numero de police est obligatoire"/>
+                            <p:outputLabel value="num convention:" for="convention" />
+                            <p:inputText id="convention" value="#{contratBean.selected.convention}" title="num convention" />
+                            <p:outputLabel value="Date effet:" for="datDeb" />
+                            <p:inputText id="datDeb" value="#{contratBean.selected.datDeb}" title="Date effet" />
+                            <p:outputLabel value="Mode Payement:" for="modePaye" />
+                            <p:inputText id="modePaye" value="#{contratBean.selected.modePaye}" title="Mode Payement" />
+                            <p:outputLabel value="age limite:" for="agelimit" />
+                            <p:inputText id="agelimit" value="#{contratBean.selected.agelimit}" title="age limite" />
+                            <p:outputLabel value="Tx commission:" for="txCom" />
+                            <p:inputText id="txCom" value="#{contratBean.selected.txCom}" title="Tx commission" />
+                            
+                            
+                            
+                            <p:outputLabel value="Taux de prime:" for="txpr" />
+                            <p:selectOneRadio id="txpr">
+                                <f:selectItem itemLabel="Unique" itemValue="unique" /> <p:inputText id="txpri" value="#{contratBean.selected.tauxPrime}" />
+                                <f:selectItem itemLabel="Variable" itemValue="variable" />
+                                <h:selectOneMenu styleClass="form-control" id="console"  required="false" value="#{contratBean.selected.tauxPrime}" >
+                                                <f:selectItem  itemLabel="variable par durée et age" itemValue="dur" />
+                                                <f:selectItem itemLabel="variable par age" itemValue="age" />
+                                                <f:selectItem itemLabel="variable par capital" itemValue="cap" />
+                                </h:selectOneMenu>
+                            </p:selectOneRadio>
+        
+                           <p:outputLabel value="Taux de prime:" for="txprime" />
+                            <p:selectOneRadio id="txprime" value="#{contratBean.selected.typeTx}">
+                                <f:selectItem itemLabel="Global" itemValue="Global" />
+                                <f:selectItem itemLabel="Annuel" itemValue="Annuel" />
+                            </p:selectOneRadio>
+                        </p:panelGrid>
+                        <p:commandButton actionListener="#{contratBean.update}" value="Modifier" update="display,:ContratListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ContratEditDialog');"/>
+                        <p:commandButton value="Annuler" onclick="ContratEditDialog.hide()"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+            <!-- View Form --> 
+
+            <p:dialog id="ContratViewDlg" widgetVar="ContratViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Details Contrat">
+                <h:form id="ContratViewForm">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{contratBean.selected != null}">
+                            
+                            <h:outputText value="numero de police:" />
+                            <h:outputText  value="#{contratBean.selected.NPolice}" title="numero de police" />
+                            <h:outputText value="num convention:" />
+                            <h:outputText value="#{contratBean.selected.convention.idConvention}" title="num convention" />
+                            <h:outputText value="Date effet:" />
+                            <h:outputText  value="#{contratBean.selected.datDeb}" title="Date effet" />
+                            <h:outputText value="Mode Payement:" />
+                            <h:outputText  value="#{contratBean.selected.modePaye}" title="Mode Payement" />
+                            <h:outputText value="age limite:" />
+                            <h:outputText value="#{contratBean.selected.agelimit}" title="age limite" />
+                            <h:outputText value="Tx commission:"  />
+                            <h:outputText  value="#{contratBean.selected.txCom}" title="Tx commission" />
+                            <h:outputText value="Taux de prime:" />
+                            <h:outputText   value="variable par durée et age" />
+                            <h:outputText value="Taux de prime:"/>
+                            <h:outputText  value="Global"/>
+                                                            
+                        </p:panelGrid>
+                        <p:commandButton value="Fermer" onclick="ContratViewDialog.hide()"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+            
+              <!-- Garantie Form --> 
+
+            <p:dialog id="ContratGarDlg" widgetVar="ContratGarDialog" modal="true" resizable="false" appendTo="@(body)" header="Details Garanties">
+                <h:form id="ContratGarForm">
+                    <h:panelGroup id="display">
+                         <p:panelGrid columns="2" rendered="#{contratBean.selected != null}">
+                                
+                                <p:outputLabel value="Garantie de Base:"  />
+                                <p:outputLabel value="Décès"  />
+                                <p:outputLabel value="Exclusions Garantie de Base:"  />
+                                <h:panelGroup>
+                                <h:panelGrid columns="2">
+                                <p:selectBooleanCheckbox    value=""  id="sui"  />
+                                <h:outputLabel class="bold"   value="Suicide"  />
+                                <p:selectBooleanCheckbox    value=""  id="Gr"  />
+                                <h:outputLabel class="bold"   value="Guerre"  />
+                                <p:selectBooleanCheckbox    value=""  id="av"  />
+                                <h:outputLabel class="bold"   value="Aviation"  />
+                                <p:selectBooleanCheckbox    value=""  id="mort"  />
+                                <h:outputLabel class="bold"   value="Meurtre par le bénéficiaire"  />
+                                <p:selectBooleanCheckbox    value=""  id="sport"  />
+                                <h:outputLabel class="bold"   value="Sports dangereux"  />
+                                <p:selectBooleanCheckbox    value=""  id="absorp"  />
+                                <h:outputLabel class="bold"   value="Absorption de drogue"  />
+                                </h:panelGrid>
+                                </h:panelGroup>
+                                
+                                <p:outputLabel value="Garantie Complémentaires"  />
+                                <h:panelGroup>
+                                <h:panelGrid columns="2">
+                                <p:selectBooleanCheckbox    value=""  id="inval"  />
+                                <h:outputLabel class="bold"   value="Invalidité"  />
+                                <p:selectBooleanCheckbox    value=""  id="invtotp"  />
+                                <h:outputLabel class="bold"   value="Invalidité totale et permanente"  />
+                                <p:selectBooleanCheckbox    value=""  id="invtotd"  />
+                                <h:outputLabel class="bold"   value="Invalidité totale et definitive"  />
+                                <p:selectBooleanCheckbox    value=""  id="invtota"  />
+                                <h:outputLabel class="bold"   value="Invalidité totale absolue et definitive"  />
+                                </h:panelGrid>
+                                </h:panelGroup>
+                                <p:outputLabel value="Exclusions Garantie Complémentaires:"  />
+                                <h:panelGroup>
+                                <h:panelGrid columns="2">
+                                <p:selectBooleanCheckbox    value=""  id="acte"  />
+                                <h:outputLabel class="bold"   value="Acte Intentionnels de l'assuré"  />
+                                <p:selectBooleanCheckbox    value=""  id="part"  />
+                                <h:outputLabel class="bold"   value="Participation à une crime ou rixe"  />
+                                <p:selectBooleanCheckbox    value=""  id="ray"  />
+                                <h:outputLabel class="bold"   value="Rayonnement atomique"  />
+                                <p:selectBooleanCheckbox    value=""  id="sp"  />
+                                <h:outputLabel class="bold"   value="Sport"  />
+                                <p:selectBooleanCheckbox    value=""  id="usa"  />
+                                <h:outputLabel class="bold"   value="Usage des stupéfiants"  />
+                                <p:selectBooleanCheckbox    value=""  id="tent"  />
+                                <h:outputLabel class="bold"   value="Suiside ou tentative"  />
+                                <p:selectBooleanCheckbox    value=""  id="ivr"  />
+                                <h:outputLabel class="bold"   value="Ivresse"  />
+                                </h:panelGrid>
+                                </h:panelGroup>       
+                           
+                        </p:panelGrid>
+                        <p:commandButton  value="Ajouter" />
+                        <p:commandButton value="Annuler" onclick="ContratGarDialog.hide()"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+            
+        </ul>
+</h:body>
+        <script>
+            function handleSubmit(args, dialog) {
+                var jqDialog = jQuery('#' + dialog);
+                if (args.validationFailed) {
+                    jqDialog.effect('shake', {times: 3}, 100);
+                } else {
+                    PF(dialog).hide();
+                }
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="jquery"></ui:define>
+    <ui:define name="jqueryui"></ui:define>
+</ui:composition>

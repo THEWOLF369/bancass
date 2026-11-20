@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="avenir_jeunesse" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53893f16-4f91-4e10-90c8-e42d6bfe0c88">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="693"/>
+	<parameter name="Datedeff" class="java.lang.String"/>
+	<parameter name="Duree" class="java.lang.String"/>
+	<parameter name="Datech" class="java.lang.String"/>
+	<parameter name="Souscripteur" class="java.lang.String"/>
+	<parameter name="Adrsouscripteur" class="java.lang.String"/>
+	<parameter name="Cinsouscripteur" class="java.lang.String"/>
+	<parameter name="Assure" class="java.lang.String"/>
+	<parameter name="Adrassure" class="java.lang.String"/>
+	<parameter name="Cinassure" class="java.lang.String"/>
+	<parameter name="Datnaiassure" class="java.lang.String"/>
+	<parameter name="Prfassure" class="java.lang.String"/>
+	<parameter name="Sexassure" class="java.lang.String"/>
+	<parameter name="Telassure" class="java.lang.String"/>
+	<parameter name="Beneficiaire" class="java.lang.String"/>
+	<parameter name="Adrbenef" class="java.lang.String"/>
+	<parameter name="Datnaisbenef" class="java.lang.String"/>
+	<parameter name="Sexbenef" class="java.lang.String"/>
+	<parameter name="codagc" class="java.lang.String"/>
+	<parameter name="Mntbourse" class="java.lang.String"/>
+	<parameter name="Agesevice" class="java.lang.String"/>
+	<parameter name="Durservice" class="java.lang.String"/>
+	<parameter name="Dateservice" class="java.lang.String"/>
+	<parameter name="Prmnetepargne" class="java.lang.String"/>
+	<parameter name="Prmnetdeces" class="java.lang.String"/>
+	<parameter name="FraisinscON" class="java.lang.String"/>
+	<parameter name="Mtfrais" class="java.lang.String"/>
+	<parameter name="Mtrente" class="java.lang.String"/>
+	<parameter name="Mtpepargnfrais" class="java.lang.String"/>
+	<parameter name="Mtpdecfrais" class="java.lang.String"/>
+	<parameter name="Mtrentedeces" class="java.lang.String"/>
+	<parameter name="RenteON" class="java.lang.String"/>
+	<parameter name="Totprmnet" class="java.lang.String"/>
+	<parameter name="frais" class="java.lang.String"/>
+	<parameter name="Prmtot" class="java.lang.String"/>
+	<parameter name="PrmEpargneb" class="java.lang.String"/>
+	<parameter name="PrmDecb" class="java.lang.String"/>
+	<parameter name="Fractionnement" class="java.lang.String"/>
+	<parameter name="tauxevol" class="java.lang.String"/>
+	<parameter name="DerEch" class="java.lang.String"/>
+	<parameter name="taux" class="java.lang.String"/>
+	<parameter name="ville_agence" class="java.lang.String"/>
+	<parameter name="numplc" class="java.lang.String"/>
+	<parameter name="star" class="java.lang.String"/>
+	<parameter name="imagesociete" class="java.lang.String"/>
+	<parameter name="datasource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="report" class="java.lang.String"/>
+	<parameter name="contrat" class="java.lang.String"/>
+	<parameter name="Date_ech_prime" class="java.lang.String"/>
+	<parameter name="raison_soc" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="215" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="934234c7-3e36-4cd5-bf3e-2110b6914e01" x="0" y="103" width="238" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branche d’assurance:	Assurance vie             ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ce421ca2-4e64-47ee-bbcf-a280a66b0509" x="0" y="123" width="238" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produit :	UNIVERSITY  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="19529bf7-e6c1-44f4-b805-309371c3af2e" x="0" y="143" width="74" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Convention :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b6fd4ead-cc26-4b5a-aa98-07fcd5969aca" x="1" y="162" width="81" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code Agence :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6e83d4a2-c1bb-4d22-891f-b3960261f4ab" x="131" y="186" width="254" height="28"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conditions Particulières]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4abf8219-ab44-4c53-991b-1c3780cd2a59" x="82" y="162" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{codagc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c5175c3f-270e-49a3-bc2f-17e6dacd652c" x="366" y="163" width="62" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contrat N°:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ab559b81-ac1d-47f0-9e0c-dc6fdc1a48b1" x="431" y="163" width="118" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{contrat}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="4a7d75ef-0562-4902-9bd4-1499f1e721f6" x="10" y="3" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{star}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement uuid="b2ec5f2d-fb9d-46ea-9e5e-a7dd1e3f0c87" x="426" y="3" width="127" height="97"/>
+				<imageExpression><![CDATA[$P{imagesociete}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="111">
+			<staticText>
+				<reportElement uuid="ac48a94a-0c87-432d-af9f-810b7fadcc39" x="1" y="3" width="552" height="50"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[    Sur la proposition du souscripteur et sur la foi des déclarations faites par l’assuré pour servir de base au présent contrat, la STAR s’oblige, suivant les conditions générales et particulières du contrat « Avenir Jeunesse »  et moyennant le versement des primes indiquées ci-dessous à leurs échéances et fréquences indiquées, à payer les prestations mentionnées au bénéficiaire désigné.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="74230e59-a014-4a52-8fc4-078892a0190f" x="63" y="58" width="372" height="24"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="6a1e634d-1372-42ae-965e-186e84e76a17" x="63" y="82" width="372" height="20"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="cb267209-2b97-429c-939a-d8dac6116e9b" x="187" y="58" width="1" height="44"/>
+			</line>
+			<staticText>
+				<reportElement uuid="02b5862f-8c30-490e-87e5-0c2c8466ca55" x="70" y="60" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'effet]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09c42940-4fb3-4fa5-81b9-2b13b0efe146" x="199" y="60" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée du Contrat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="75d22ef2-e0e5-4c8d-b9a6-c703abcb9f4a" x="327" y="60" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date d'échéance]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="882955ea-b334-493e-864d-6c9ce8281f36" x="70" y="83" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{Datedeff}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="25f180d4-fdde-4ea3-b2af-07eb66797028" x="199" y="83" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{Duree}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c0e501f7-bfc3-4de3-b636-99f2904d8322" x="327" y="83" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{Datech}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="6b5fbda0-2320-45cc-9734-06ed70e7c14c" x="314" y="58" width="1" height="44"/>
+			</line>
+		</band>
+		<band height="105">
+			<textField>
+				<reportElement uuid="a5e132f8-780a-41e3-a067-90ec45472882" x="145" y="56" width="404" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Adrsouscripteur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b0843bc5-80e3-4363-9318-22c9c85abd86" x="74" y="35" width="475" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Souscripteur}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5ea08c55-019f-4440-9288-83cc439c524c" x="145" y="77" width="150" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Cinsouscripteur}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="3b8bb4ae-c67c-4e1b-9e5b-90851100679b" x="3" y="35" width="71" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Souscripteur : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9b1a69ba-03fd-421b-b2d6-8e167135b716" x="3" y="56" width="141" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adresse du souscripteur : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a7040413-2a69-43c1-a734-3c9e877c6bdc" x="3" y="77" width="141" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identifiant du souscripteur :	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1323e41a-005c-4d14-9e8d-0213f65d7363" mode="Opaque" x="0" y="3" width="554" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ I. Souscripteur :                                                                      ]]></text>
+			</staticText>
+		</band>
+		<band height="145">
+			<staticText>
+				<reportElement uuid="b953afe4-d165-4957-b646-b0993d41c3b3" x="2" y="34" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Assuré :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0b762b72-87de-491f-b134-339afdb56c1f" x="2" y="55" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adresse :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e639f161-f375-4b22-9ab8-fe7e42a9bd5a" x="2" y="75" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Identifiant :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4593a750-2daf-483d-846c-c3b0b0871464" x="2" y="95" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date de naissance :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eef5fb5c-2c59-4f1e-b6f8-8619569494f3" x="2" y="115" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profession :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c6fcaf71-85ba-49ec-afea-648e31d5eb64" x="263" y="92" width="36" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexe :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4fa60d31-34eb-4f82-add1-7e616d407170" x="263" y="112" width="64" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telephone  :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="321e59ae-123f-427c-8993-065a44beceb4" x="102" y="115" width="159" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Prfassure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="84e9a267-b1ce-4d13-af20-3ce70cce1c23" x="102" y="75" width="159" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Cinassure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="40177853-216b-445e-b296-c4251d9a59c3" x="102" y="95" width="159" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Datnaiassure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7058b380-7c5a-4661-9148-1e4bbf86db87" x="102" y="55" width="448" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Adrassure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="81cac365-e72e-42c0-b893-c5f04df909d9" x="102" y="34" width="448" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Assure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="30e43d5f-8eb1-448a-a67c-f47e3fea259c" x="327" y="112" width="155" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Telassure}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="78bb0cef-9423-41ad-8039-e4a8da31fe01" x="327" y="92" width="155" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Sexassure}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="eb66601e-873a-454d-8c3d-e859f3f67767" mode="Opaque" x="2" y="4" width="554" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ II. Assuré :                                                                      ]]></text>
+			</staticText>
+		</band>
+		<band height="184">
+			<staticText>
+				<reportElement uuid="950cfa4c-7f54-45e3-86c2-30a2707d9733" mode="Opaque" x="2" y="4" width="553" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ III. Bénéficiaire:                                                                      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0576f0ca-7c17-4e65-b415-c626c483d8d8" x="1" y="60" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bénéficiaire:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="65c6c017-e8af-4b58-9086-0e4993da326d" x="2" y="79" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adresse :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a16283fb-7e38-4298-b6c3-b0381c79213e" x="2" y="98" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date de naissance :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="113ebf74-d6da-4815-b87d-fc6a5ed467cd" x="263" y="95" width="36" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexe :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="72c3fb94-3c08-4e1e-a6aa-93f26617d502" x="101" y="60" width="441" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Beneficiaire}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="83818fbd-6570-465c-9769-8d9e7ffb56c5" x="101" y="78" width="441" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Adrbenef}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9a2739f9-5c79-40de-a46e-af452db13172" x="299" y="95" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Sexbenef}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0a4b6e38-2843-4b2a-8fbd-edacb23c5b1e" x="101" y="98" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Datnaisbenef}]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement uuid="80f09e43-a560-47f1-9df6-6f701d788d13" x="0" y="179" width="100" height="1"/>
+			</break>
+			<staticText>
+				<reportElement uuid="9665746d-b214-4388-8149-d706736a5484" x="1" y="36" width="261" height="24"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bénéficiaire en Cas de Vie :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="680ea9be-74b6-4916-a43a-98f10702983b" x="1" y="129" width="261" height="24"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bénéficiaire en Cas de Décès :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="69381ffe-7e00-41bc-b9df-0cf4532e211d" x="2" y="153" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Le Souscripteur :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="2b7f56e0-9ec7-40d6-9c32-d113efc9b8f3" x="102" y="153" width="440" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Souscripteur}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="442">
+			<staticText>
+				<reportElement uuid="b50ee7d4-f98b-487b-85b3-8ea46cb8c03a" mode="Opaque" x="2" y="17" width="552" height="25" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ IV. Garanties et Primes:                                                                      ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="a4a49f32-5d4b-4861-8b1d-5acdb613fe64" x="2" y="42" width="552" height="24"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="c93e03ef-f5a3-456d-975e-9fccf68c009a" x="9" y="42" width="130" height="24"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Garantie de base :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6ef23f50-41b8-4493-a741-7105f223d1c0" x="132" y="42" width="110" height="24"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Bourse d'étude]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement uuid="839fc1b4-38db-490c-8d3f-9157c8ef957c" x="2" y="66" width="552" height="26"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="b053d390-c054-404b-ac2a-4904cb8f7813" x="73" y="66" width="1" height="52"/>
+			</line>
+			<line>
+				<reportElement uuid="7e929265-0aa3-4705-afec-4875b4df8a2b" x="461" y="66" width="1" height="51"/>
+			</line>
+			<line>
+				<reportElement uuid="7f30b812-e022-42e4-95f2-efe4ef97b479" x="169" y="67" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement uuid="f389286d-2981-43b0-bbfc-dd28fdf7eae0" x="262" y="67" width="1" height="50"/>
+			</line>
+			<staticText>
+				<reportElement uuid="91a0e8af-76bc-41d4-9195-dbfc79e32b83" x="4" y="67" width="69" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bourse Cible ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4f550eb3-5a3a-4738-95fc-f5e5c4f51347" x="75" y="66" width="95" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Age de service de la Bourse ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="53a1f97b-a1a3-42d3-9004-eefa8d213671" x="170" y="66" width="93" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Durée de service de la bourse]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="edd07889-a96a-4c05-9744-ca3952d2b6ca" x="263" y="66" width="96" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date de service de la 1ère Bourse]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4f41e81d-44e8-4087-bca9-cd28930ca4be" x="461" y="67" width="93" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Décès]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="6c3f2be2-0e14-4ec8-8993-a778d9275c7c" x="358" y="66" width="1" height="51"/>
+			</line>
+			<staticText>
+				<reportElement uuid="b9d7ff2d-bf9a-431e-bdd7-4d51fbe0c59d" x="359" y="67" width="102" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Epargne]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="16544b91-75a6-4275-af81-fee45f302ea5" x="3" y="117" width="552" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="e6f0e987-6f15-4367-a92f-ef002d100742" x="2" y="92" width="1" height="145"/>
+			</line>
+			<textField>
+				<reportElement uuid="06955c76-9b25-42a7-b0fb-e97810a1df79" x="4" y="95" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Mntbourse}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c9b8142d-7a65-49b9-ae93-060599a57902" x="76" y="95" width="90" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Agesevice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e1ee9237-aa62-422d-aa22-baa890de2751" x="171" y="95" width="91" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Durservice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="eddce873-bdb3-46a5-8ac5-0f989b36f86a" x="263" y="95" width="95" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Dateservice}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="54a4ca7b-f365-4b46-a9bd-d146968202cf" x="8" y="118" width="432" height="27"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Garanties Complémentaires :                  ]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="90a87089-94b6-4f74-a0ed-2d2432415a87" x="3" y="177" width="551" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="027179a3-1828-428c-9cf5-88cc15f203d7" x="2" y="145" width="553" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="04c5176d-2178-452b-8ed1-58bb75fe5bb5" x="4" y="178" width="165" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Rente annuelle cible]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="657903b1-db32-4e8a-8412-ec5f21b89bdc" x="3" y="206" width="552" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="89ff67fb-b69e-4fd2-8c0a-7284e442563e" x="171" y="146" width="91" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Souscription   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="facf9c1d-fc39-47c8-944a-4e6d5c945cfc" x="262" y="146" width="91" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Montant Rente ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8d941891-d74f-4dbd-b4d6-4ce02a92fb8c" x="353" y="145" width="104" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Epargne]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e1b992fc-2e4d-412f-b83a-f32b210cad25" x="458" y="146" width="95" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Décès]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="254a2fe4-9be1-4cec-8b12-7f6f80fe5e8f" x="171" y="145" width="1" height="92"/>
+			</line>
+			<line>
+				<reportElement uuid="a43a58f5-7b88-4cb7-b23f-fae6d89b9702" x="261" y="146" width="1" height="91"/>
+			</line>
+			<line>
+				<reportElement uuid="e17d4d9f-2a4b-409e-a2e9-560b1a741a68" x="352" y="145" width="1" height="92"/>
+			</line>
+			<line>
+				<reportElement uuid="965efcf2-9bd4-46af-ac67-88fdaee02f0b" x="458" y="146" width="1" height="92"/>
+			</line>
+			<line>
+				<reportElement uuid="53d67509-6e02-419d-9371-1ff81d2e1f02" x="554" y="92" width="1" height="145"/>
+			</line>
+			<line>
+				<reportElement uuid="5dc2a29a-8a67-473c-a576-0f57885f2bac" x="2" y="237" width="553" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="63bc518e-5e13-4fc7-9839-13859f77341b" x="4" y="207" width="167" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Rente Immédiate T. Décès ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="dc5310b6-a406-4062-9f4a-725513aeac40" x="173" y="182" width="88" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{FraisinscON}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="de7b649d-9443-4378-a927-a076a9c8d591" x="268" y="182" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($P{Mtfrais} != null ) ? $P{Mtfrais} : "0.000 TND"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6cee4d90-fd83-42d8-96ca-a128bac912d5" x="356" y="182" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($P{Mtpepargnfrais} != null ) ? $P{Mtpepargnfrais} : "0.000 TND"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7e1a7416-3f06-4adf-a3c6-0278eedadb97" x="460" y="182" width="93" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($P{Mtpdecfrais} != null ) ? $P{Mtpdecfrais} : "0.000 TND"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d5e9a97c-0b9e-4f19-baf1-5b9407819d76" x="268" y="210" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($P{Mtrente} != null ) ? $P{Mtrente} : "0.000 TND"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="6f9573be-62a7-43f5-86bc-bb287e803e5f" x="460" y="212" width="95" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($P{Mtrentedeces} != null ) ? $P{Mtrentedeces} : "0.000 TND"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ed740f46-1d32-4aa5-a4c3-b96314ac3a28" x="173" y="210" width="91" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{RenteON}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="23c9abd1-cf5e-472e-b124-c9a127fba43d" x="2" y="301" width="553" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="9c7c1fac-fbbb-42e1-aeb1-1e26f0374375" x="232" y="272" width="1" height="58"/>
+			</line>
+			<line>
+				<reportElement uuid="e50d3e64-6fd7-4375-9c8f-ade37fcd8536" x="364" y="272" width="1" height="58"/>
+			</line>
+			<line>
+				<reportElement uuid="78d0902c-b048-456f-82bf-d20aa00aaf5a" x="113" y="272" width="1" height="58"/>
+			</line>
+			<line>
+				<reportElement uuid="7715083f-46df-4a41-81bb-32e2c1549af3" x="456" y="272" width="1" height="58"/>
+			</line>
+			<staticText>
+				<reportElement uuid="7302e872-517b-4d6b-b0c3-b6d98381089f" x="3" y="272" width="110" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Epargne]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7bed13b2-e315-4a27-8949-ca8f3e338365" x="114" y="272" width="118" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime nette Décès]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6297abb3-48c1-4fec-b745-9d6b11fb5e66" x="233" y="272" width="131" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Prime nette]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5fc30095-53c4-449f-962b-c68a5a7e2728" x="365" y="272" width="93" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e9b6e14-738c-4017-807b-8a285875e55d" x="457" y="272" width="97" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prime Totale
+TTC
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="263b117c-e57f-4d1b-a01c-db401efdef8e" x="4" y="302" width="109" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Prmnetepargne}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0c7e3f8d-905d-4ce3-a32d-176355e1e849" x="114" y="302" width="118" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Prmnetdeces}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="02574b3f-1cca-4008-a41f-dd78856d9e03" x="233" y="302" width="131" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Totprmnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="76c277c2-9ec9-43be-a780-898875296940" x="365" y="302" width="91" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{frais}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="db76277a-edb7-49a4-8f78-53ff16f5196f" x="457" y="302" width="96" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Prmtot}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="38a993ea-9c1b-49b0-abb2-03d23ae679ec" x="364" y="95" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrmEpargneb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ad786590-d3e1-46e9-b165-4014706fe4d2" x="464" y="95" width="89" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PrmDecb}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="450a65d6-3dc9-4b07-a079-febd394ce4f7" x="2" y="356" width="554" height="62"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="8344ce03-d0c9-4b0f-83cb-d92418750bc9" x="2" y="388" width="554" height="2"/>
+			</line>
+			<line>
+				<reportElement uuid="13aaf46b-5f95-4a36-83d4-145c54a5aece" x="117" y="356" width="1" height="62"/>
+			</line>
+			<line>
+				<reportElement uuid="0f69c554-883b-4bb2-95a2-417429e852b3" x="260" y="356" width="1" height="62"/>
+			</line>
+			<staticText>
+				<reportElement uuid="b84b36cd-b9fe-4fa9-8282-9a447f6191c8" x="3" y="356" width="114" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fractionnement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="67d8d14f-013d-4fde-97b7-c66571062ab6" x="3" y="390" width="114" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Echéance de prime]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f32fbc02-4693-4c3c-967a-fbd2638d1d18" x="118" y="356" width="142" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Fractionnement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3d64c8de-5be3-460f-afd9-24ddfd9ee8b0" x="118" y="390" width="142" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Date_ech_prime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="11264e66-05ba-4055-aa93-377499df9dc3" x="421" y="356" width="135" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{tauxevol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e9c3d632-b7e1-4c92-99c2-8518fffd1a9d" x="421" y="390" width="135" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{DerEch}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="04aafae2-d652-4a9c-824d-d4528f4d785f" x="419" y="356" width="1" height="61"/>
+			</line>
+			<staticText>
+				<reportElement uuid="bcc33bfb-1c03-4d7e-9fa1-bf1957560a4c" x="263" y="356" width="156" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Taux d’évolution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4750a623-b009-414b-b823-75e87263ce81" x="262" y="390" width="157" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dernière Echéance]]></text>
+			</staticText>
+			<frame>
+				<reportElement uuid="83f1a6f0-50fc-4b2b-a621-704371fc0126" x="2" y="272" width="553" height="58"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+			</frame>
+			<break>
+				<reportElement uuid="a8536a8e-baeb-4601-a1bb-9e20d0ed9da5" x="0" y="432" width="100" height="1"/>
+			</break>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement uuid="91cb9437-e74d-4943-a172-2f957196e084" x="-15" y="0" width="585" height="50"/>
+				<subreportParameter name="raison_soc">
+					<subreportParameterExpression><![CDATA[$P{raison_soc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagesociete">
+					<subreportParameterExpression><![CDATA[$P{imagesociete}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="star">
+					<subreportParameterExpression><![CDATA[$P{star}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ville_agence">
+					<subreportParameterExpression><![CDATA[$P{ville_agence}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="datasource">
+					<subreportParameterExpression><![CDATA[$P{datasource}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{report}+"Adhesion_avj_evol_gar_v3.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement uuid="c6deae53-5ec1-4337-a5af-dfb14f903f80" x="422" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" sur"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="62ccaf41-c6bb-4698-9364-095958f7cad4" x="502" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

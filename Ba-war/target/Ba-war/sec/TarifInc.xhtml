@@ -1,0 +1,92 @@
+<ui:composition
+    template="/sec/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="body">
+ <h:body style=" border: none;" rendered="#{!gestionProfil.souscriptionIncendie}" >
+    <ul class="breadcrumb br_styled no_space">
+            <li class="active">Accès non autorisé</li>
+        </ul>
+        <ul class="page_info">
+         <center>
+         <img src="../images/autorisation.jpg"  height="15%" width="15%"/>
+         </center>
+    </ul>
+    </h:body>
+ <h:body style=" border: none;" rendered="#{gestionProfil.souscriptionIncendie}">  
+        <div class="span12 no_space">
+
+            <div class="widget">
+                <header>
+                    <h3>Tarif</h3>
+                    <ul class="toggle_content">                         
+                        <li class="arrow"><a href="#">Toggle Content</a></li>
+                    </ul>
+                </header>
+                <section class="welly"> 
+
+                    <ul class="nav nav-tabs tab_styled_light">
+                        <li class="active in"><a href="#Tarif" data-toggle="tab">Tarif</a></li>
+                        
+                    </ul>
+
+                    <!--Tarif******************************************************************--> 
+                    <div class="tab-content tab_content_light">
+                        <div  id="Tarif" class="tab-pane fade in active">
+                            <h:form id="formTarifinc">
+                                <div>  
+                                    <h:panelGrid columns="10" cellpadding="1">
+                                        <p:outputLabel  value="Prime nette: " for="primeglobal"/>
+                                        <h:outputText id="primeglobal" styleClass="label label-danger price"  value="#{tarifIncBean.primeglobal}"  >
+                                            <f:convertNumber pattern="#0.000" />
+                                        </h:outputText>
+                                        <h:outputText/><h:outputText/>
+                                        <p:outputLabel value="Taxe: " for="txtTax"/>
+                                                    <h:outputText styleClass="label label-info price" id="txtTax" value="#{tarifIncBean.taxe}" >
+                                                        <f:convertNumber pattern="#0.000" />
+                                                    </h:outputText>
+                                        <h:outputText/><h:outputText/>            
+                                       <p:outputLabel value="Prime globale: " for="txttot"/>
+                                                    <h:outputText styleClass="label label-danger price" id="txttot" value="#{tarifIncBean.primetot}" >
+                                                        <f:convertNumber pattern="#0.000" />
+                                                    </h:outputText>
+                                                              
+                                    </h:panelGrid>
+                                </div>
+                                <p:messages  autoUpdate="true" showDetail="true"/>
+                                 
+                                <div  class="form-actions">
+                                					
+						           
+								    <p:commandLink  id="devis" ajax="false" target="_blank" type="idImprimer=" action= "#{tarifIncBean.generateDevis()}" update=":formTarifinc" styleClass="btn btn-info"  value="Imprimer Devis"  disabled="#{!devisIncendieBean.desabledGenerateNoticeIncendie}"/>
+                                    <p:commandLink  id="prop" type="idvaliderPrposition=" action= "#{tarifIncBean.validerProposition()}" update="not,fdr,devis,prop" styleClass="btn btn-success"  value="Valider Proposition" disabled="#{!devisIncendieBean.desabledGenerateNoticeIncendie}" rendered="#{!devisIncendieBean.cod_societe.equals('002707PPM000')}" />
+                                    <p:commandLink id="enc"    type="idImprimer=" action= "#{tarifIncBean.encaissement()}" update="formTarifinc" styleClass="btn btn-danger"  value="Encaissement"  disabled="#{!devisIncendieBean.desabledEncaiss}"  rendered="#{devisIncendieBean.cod_societe.equals('002707PPM000')}"/>
+                                    <p:commandLink id="fdr" ajax="false" target="_blank" type="idImprimer=" action= "#{tarifIncBean.generateFDR()}" update="formTarifinc" styleClass="btn btn-danger"  value="Imprimer FDR"  disabled="#{devisIncendieBean.desabledGenerateNoticeIncendie}"/>
+                                    <p:commandLink id="not" ajax="false" target="_blank" type="idImprimer=" action= "#{tarifIncBean.generateNotice()}" update="formTarifinc" styleClass="btn btn-danger"  value="Imprimer Notice" disabled="#{devisIncendieBean.desabledGenerateNoticeIncendie}"/>
+
+                                </div>
+                                
+                               
+					    	
+                                </h:form>
+                                <h:form>
+                                 <h:commandLink  action="#{tarifIncBean.returnToDevisInced()}"  value="Retour" >
+                             <img src="${facesContext.externalContext.requestContextPath}/images/back.png" width="25" height="25"/>
+                            
+                            </h:commandLink> 
+                            </h:form>
+                            
+                        </div>  
+                       
+                    </div>       
+                </section> 
+            </div>  
+        </div> 
+        </h:body>                  
+    </ui:define>
+</ui:composition>
