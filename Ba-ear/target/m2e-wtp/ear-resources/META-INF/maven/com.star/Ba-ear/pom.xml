@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>Ba</artifactId>
+		<groupId>com.star</groupId>
+		<version>1.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.star</groupId>
+	<artifactId>Ba-ear</artifactId>
+	<packaging>ear</packaging>
+	<name>Ba EAR Module</name>
+	<version>${application.version}</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.star</groupId>
+			<artifactId>Ba-war</artifactId>
+			<type>war</type>
+			<version>${application.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.star</groupId>
+			<artifactId>Baws-war</artifactId>
+			<type>war</type>
+			<version>${application.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.star</groupId>
+			<artifactId>Ba-ejb</artifactId>
+			<type>ejb</type>
+			<version>${application.version}</version>
+		</dependency>
+
+		<!-- **************************************************************** -->
+		<!-- ***********************Common Dependencies********************** -->
+		<!-- **************************************************************** -->
+
+
+	</dependencies>
+
+	<build>
+		<finalName>Ba</finalName>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<filtering>true</filtering>
+					<finalName>${project.build.finalName}-${project.version}</finalName>
+					<modules>
+						<webModule>
+							<groupId>com.star</groupId>
+							<artifactId>Ba-war</artifactId>
+							<contextRoot>/Ba</contextRoot>
+							<bundleFileName>Ba-war.war</bundleFileName>
+						</webModule>
+						<webModule>
+							<groupId>com.star</groupId>
+							<artifactId>Baws-war</artifactId>
+							<contextRoot>/Baws</contextRoot>
+							<bundleFileName>Baws-war.war</bundleFileName>
+						</webModule>
+						<ejbModule>
+							<groupId>com.star</groupId>
+							<artifactId>Ba-ejb</artifactId>
+							<bundleFileName>Ba-ejb.jar</bundleFileName>
+						</ejbModule>
+					</modules>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<configuration>
+					<filename>${project.build.finalName}-${application.version}.${project.packaging}</filename>
+				</configuration>
+				<executions>
+					<execution>
+						<phase></phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
